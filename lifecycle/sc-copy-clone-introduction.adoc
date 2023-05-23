@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-introduction.html 
+keywords: tr4667, 4667, overview, introduction 
+summary: 'Le soluzioni NetApp per l"ottimizzazione della gestione del ciclo di vita SAP sono integrate nei database SAP HANA e negli strumenti di gestione del ciclo di vita, combinando una protezione dei dati efficiente e integrata con l"applicazione con il provisioning flessibile dei sistemi di test SAP, come mostrato nella figura seguente.' 
+---
+= TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer, NetApp
+
+Nel dinamico ambiente di business di oggi, le aziende devono fornire innovazione continua e reagire rapidamente ai mercati in continua evoluzione. In queste circostanze competitive, le aziende che implementano una maggiore flessibilità nei propri processi di lavoro possono adattarsi alle esigenze del mercato in modo più efficace.
+
+Le mutevoli esigenze di mercato influiscono anche sugli ambienti SAP di un'azienda, in modo da richiedere integrazioni, modifiche e aggiornamenti regolari. I reparti IT devono implementare queste modifiche con meno risorse e in periodi di tempo più brevi. Ridurre al minimo i rischi durante l'implementazione di tali modifiche richiede test e formazione completi, che richiedono sistemi SAP aggiuntivi con dati effettivi provenienti dalla produzione.
+
+Gli approcci tradizionali di gestione del ciclo di vita SAP per il provisioning di questi sistemi si basano principalmente su processi manuali. Questi processi manuali sono spesso soggetti a errori e richiedono molto tempo, ritardando l'innovazione e la risposta ai requisiti di business.
+
+Le soluzioni NetApp per l'ottimizzazione della gestione del ciclo di vita SAP sono integrate nei database SAP HANA e negli strumenti di gestione del ciclo di vita, combinando una protezione dei dati efficiente e integrata con l'applicazione con il provisioning flessibile dei sistemi di test SAP, come mostrato nella figura seguente.
+
+image:sc-copy-clone-image1.png["Errore: Immagine grafica mancante"]
+
+
+
+== Operazioni di backup Snapshot integrate nell'applicazione
+
+La capacità di creare backup NetApp Snapshot coerenti con l'applicazione sul layer di storage è la base per le operazioni di copia del sistema e di cloni del sistema descritte in questo documento. I backup Snapshot basati sullo storage vengono creati utilizzando il plug-in NetApp SnapCenter per SAP HANA e le interfacce fornite dal database SAP HANA. SnapCenter registra i backup Snapshot nel catalogo di backup SAP HANA in modo che possano essere utilizzati per il ripristino e il ripristino, nonché per le operazioni di cloning.
+
+
+
+== Backup off-site e/o replica dei dati di disaster recovery
+
+I backup Snapshot coerenti con l'applicazione possono essere replicati sul layer di storage in un sito di backup off-site o in un sito di disaster recovery controllato da SnapCenter. La replica si basa sulle modifiche dei blocchi ed è quindi efficiente in termini di spazio e larghezza di banda.
+
+
+
+== Utilizza qualsiasi backup Snapshot per le operazioni di copia o clonazione del sistema SAP
+
+La tecnologia NetApp e l'integrazione del software consentono di utilizzare qualsiasi backup Snapshot di un sistema di origine per un'operazione di copia o clonazione del sistema SAP. Questo backup Snapshot può essere selezionato dallo stesso storage utilizzato per i sistemi di produzione SAP, dallo storage utilizzato per i backup off-site o dallo storage del sito di disaster recovery. Questa flessibilità consente di separare i sistemi di sviluppo e test dalla produzione, se necessario, e copre altri scenari, come il test del disaster recovery nel sito di disaster recovery.
+
+
+
+== Automazione con integrazione
+
+Esistono diversi scenari e casi di utilizzo per il provisioning dei sistemi di test SAP, oltre a requisiti diversi per il livello di automazione. I prodotti software NetApp per SAP si integrano nei prodotti SAP per la gestione del ciclo di vita e dei database per supportare diversi scenari e livelli di automazione.
+
+NetApp SnapCenter con il plug-in per SAP HANA viene utilizzato per eseguire il provisioning dei volumi di storage richiesti in base a un backup Snapshot coerente con l'applicazione e per eseguire tutte le operazioni di host e database necessarie fino a un database SAP HANA avviato. A seconda del caso d'utilizzo, potrebbero essere necessarie la copia del sistema SAP, la clonazione del sistema, il refresh del sistema o ulteriori operazioni manuali, come la post-elaborazione SAP. Ulteriori dettagli sono illustrati nella sezione successiva.
+
+È possibile eseguire un provisioning end-to-end completamente automatizzato dei sistemi di test SAP utilizzando SAP Landscape Management (lama). NetApp Storage Services Connector si integra in SAP lama e fornisce le operazioni necessarie per SAP lama a livello di storage. Ulteriori informazioni sono disponibili all'indirizzo https://www.netapp.com/us/media/tr-4018.pdf["Integrazione dei sistemi NetApp ONTAP con la gestione del panorama SAP"^].
+
+link:sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html["Pagina successiva: Scenari di copia, aggiornamento e clonazione del sistema SAP."]

@@ -1,0 +1,15 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_data_protection_overview.html 
+keywords:  
+summary:  
+---
+= Panoramica sulla protezione dei dati
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+

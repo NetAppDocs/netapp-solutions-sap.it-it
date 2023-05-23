@@ -1,0 +1,105 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-sap-hana-database-snapshot-backups.html 
+keywords: Snapshot, policy, schedule, on-demand, UI, API 
+summary: 'Con il servizio SnapCenter, i backup del database vengono in genere eseguiti utilizzando le pianificazioni definite all"interno delle policy. È inoltre possibile eseguire backup di database on-demand utilizzando l"interfaccia utente del servizio SnapCenter o le API REST.' 
+---
+= Backup Snapshot del database SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html["Precedente: Configurazione di backup di volumi non dati globali."]
+
+Con il servizio SnapCenter, i backup del database vengono in genere eseguiti utilizzando le pianificazioni definite all'interno delle policy. È inoltre possibile eseguire backup di database on-demand utilizzando l'interfaccia utente del servizio SnapCenter o le API REST.
+
+
+
+== Identificare i backup dei dati del servizio SnapCenter in SAP HANA Studio
+
+Nel menu di scelta rapida della vista sistemi SAP HANA, selezionare View backups (Visualizza backup) per aprire la panoramica del backup.
+
+image:saphana-backup-anf-image46.png["Errore: Immagine grafica mancante"]
+
+La panoramica del backup mostra un elenco di backup creati utilizzando il servizio SnapCenter. La figura seguente mostra i backup disponibili ed evidenzia il backup più recente.
+
+image:saphana-backup-anf-image47.png["Errore: Immagine grafica mancante"]
+
+Quando si esegue un backup utilizzando le copie Snapshot dello storage per un sistema SAP HANA MDC, viene creata una copia Snapshot del volume di dati. Questo volume di dati contiene i dati del database di sistema e i dati di tutti i database tenant. Per riflettere questa architettura fisica, SAP HANA esegue internamente un backup combinato del database di sistema e di tutti i database tenant ogni volta che il servizio SnapCenter attiva un backup Snapshot. Ciò comporta più voci di backup separate nel catalogo di backup SAP HANA: Una per il database di sistema e una per ogni database tenant.
+
+
+NOTE: Per i sistemi a container singolo SAP HANA, il volume di database contiene solo il singolo database e c'è una sola voce nel catalogo di backup di SAP HANA.
+
+Nel catalogo di backup SAP HANA, il nome del backup del servizio SnapCenter viene memorizzato nel campo Commento e nel campo ID backup esterno (EBID). Le seguenti figure mostrano il database di sistema e il database tenant PR1. Entrambe le figure evidenziano il nome di backup del servizio SnapCenter memorizzato nel campo Commento e NEL campo EBID.
+
+image:saphana-backup-anf-image48.png["Errore: Immagine grafica mancante"]
+
+image:saphana-backup-anf-image49.png["Errore: Immagine grafica mancante"]
+
+
+NOTE: Il servizio SnapCenter è consapevole solo dei propri backup. I backup aggiuntivi creati, ad esempio, con SAP HANA Studio, sono visibili nel catalogo SAP HANA, ma non nel servizio SnapCenter.
+
+
+
+== Identificare i backup del servizio SnapCenter sul volume Azure NetApp Files
+
+Lo stesso nome, utilizzato come nome di backup nel servizio SnapCenter, viene utilizzato anche come nome di backup Snapshot sul volume Azure NetApp Files. La figura seguente mostra il portale Azure e i backup Snapshot per il volume di dati del database.
+
+image:saphana-backup-anf-image50.png["Errore: Immagine grafica mancante"]
+
+
+
+== Elencare i backup dei volumi non dati
+
+Nella vista di backup del sistema HANA, selezionare volumi non dati per visualizzare l'elenco dei backup per il volume non dati, come mostrato nella figura seguente.
+
+image:saphana-backup-anf-image51.png["Errore: Immagine grafica mancante"]
+
+Sul volume Azure NetApp Files per HANA shared, le copie Snapshot hanno lo stesso nome del servizio SnapCenter.
+
+image:saphana-backup-anf-image52.png["Errore: Immagine grafica mancante"]
+
+
+
+== Backup del database on-demand
+
+Per creare un backup del database on-demand, attenersi alla seguente procedura:
+
+. Nella vista sistemi SAP HANA, selezionare Backup on-Demand nel menu di scelta rapida. È inoltre possibile selezionare Data Volume (Volume dati) o non Data Volume (Volume non dati). Per il backup del database, selezionare Data Volume (Volume dati).
++
+image:saphana-backup-anf-image53.png["Errore: Immagine grafica mancante"]
+
+. Nella finestra di dialogo on-Demand Backup (Backup su richiesta), selezionare Policy (criterio): None (Nessuno) o uno dei criteri assegnati al sistema HANA.
++
+Se si seleziona policy None, è possibile definire una conservazione specifica da utilizzare per questo backup specifico. Se si seleziona un criterio assegnato al sistema HANA, viene applicata la stessa conservazione a questo backup utilizzata per i backup pianificati che utilizzano questo criterio.
+
++
+Nell'esempio seguente, viene selezionato il criterio esistente.
+
++
+image:saphana-backup-anf-image54.png["Errore: Immagine grafica mancante"]
+
++
+image:saphana-backup-anf-image55.png["Errore: Immagine grafica mancante"]
+
+. Per avviare il flusso di lavoro di backup, fare clic su Create Backup (Crea backup).
++
+Viene visualizzata una schermata con l'ID lavoro dell'operazione di backup.
+
+. Per aprire la schermata dei dettagli del lavoro, fare clic sull'ID del lavoro.
++
+image:saphana-backup-anf-image56.png["Errore: Immagine grafica mancante"]
+
++
+Job Monitor visualizza le diverse fasi del flusso di lavoro, il runtime delle operazioni e il runtime totale dell'operazione. Nell'esempio seguente, l'operazione di backup richiede 19 secondi.
+
++
+image:saphana-backup-anf-image57.png["Errore: Immagine grafica mancante"]
+
+
+
+link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Avanti: Backup basati su file e controllo dell'integrità dei blocchi."]

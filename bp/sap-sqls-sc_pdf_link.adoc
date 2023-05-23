@@ -1,0 +1,15 @@
+---
+sidebar: sidebar 
+permalink: bp/sap-sqls-sc_pdf_link.html 
+keywords: tr-4467, pdf, sap, microsoft, recovery, disaster, dr, snap creator 
+summary: 'Questo documento fornisce a clienti e partner le Best practice per l"implementazione di NetApp ONTAP a supporto delle soluzioni SAP in esecuzione in un ambiente Windows.' 
+---
+= TR-4467: SAP con Microsoft SQL Server su Windows - Best practice con NetApp ONTAP e SnapCenter
+:allow-uri-read: 
+
+
+Marco Schoen, NetApp
+
+Questo documento fornisce a clienti e partner le Best practice per l'implementazione di NetApp ONTAP a supporto delle soluzioni SAP in esecuzione in un ambiente Windows.
+
+link:https://www.netapp.com/media/16865-tr-4467.pdf["https://www.netapp.com/media/16865-tr-4467.pdf"]

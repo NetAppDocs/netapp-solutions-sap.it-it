@@ -1,0 +1,20 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana-fas-nfs_infrastructure_setup_and_configuration_overview.html 
+keywords: sap, hana, nfs, fas, inftastructure, setup, configuration 
+summary: 'Le seguenti sezioni forniscono le linee guida per la configurazione e la configurazione dell"infrastruttura SAP HANA.' 
+---
+= Panoramica
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-fas-nfs_storage_sizing.html["Precedente: Dimensionamento dello storage."]
+
+Le seguenti sezioni forniscono le linee guida per la configurazione e la configurazione dell'infrastruttura SAP HANA.
+
+link:saphana-fas-nfs_network_setup.html["Avanti: Configurazione di rete."]

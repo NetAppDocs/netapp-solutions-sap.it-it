@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-overview.html 
+keywords: tr4959, 4959, overview, introduction 
+summary: 'Questo report tecnico fornisce le Best practice per la protezione dei dati SAP HANA su Azure NetApp Files (ANF) con NetApp BlueXP Cloud Backup for Applications (CBA). Il documento tratta i concetti di CBA, le Best practice di configurazione e le descrizioni dei flussi di lavoro delle operazioni per le operazioni di backup, ripristino e recovery.' 
+---
+= TR-4959: SAP HANA su ANF - Backup e recovery con Cloud Backup per le applicazioni
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer, NetApp
+
+[role="lead"]
+Questo report tecnico fornisce le Best practice per la protezione dei dati SAP HANA su Azure NetApp Files (ANF) con NetApp BlueXP Cloud Backup for Applications (CBA). Il documento tratta i concetti di CBA, le Best practice di configurazione e le descrizioni dei flussi di lavoro delle operazioni per le operazioni di backup, ripristino e recovery.
+
+Le aziende oggi richiedono una disponibilità continua e ininterrotta per le proprie applicazioni SAP. Si aspettano livelli di performance costanti di fronte a volumi di dati in costante aumento e attività di manutenzione ordinaria, come i backup di sistema. L'esecuzione di backup dei database SAP è un'attività critica e può avere un impatto significativo sulle performance del sistema SAP di produzione.
+
+Le finestre di backup si riducono mentre la quantità di dati da sottoporre a backup aumenta. Pertanto, è difficile trovare un momento in cui è possibile eseguire backup con un effetto minimo sui processi di business. Il tempo necessario per ripristinare e ripristinare i sistemi SAP è un problema perché i downtime per i sistemi di produzione SAP e non in produzione devono essere ridotti al minimo per ridurre i costi per l'azienda.
+
+link:anf-cba-backup-and-recovery-using-azure-netapp-files.html["Avanti: Backup e ripristino con Azure NetApp Files."]

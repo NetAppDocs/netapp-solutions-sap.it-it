@@ -1,0 +1,105 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html 
+keywords: configuration, assign policy, non-data volume, cba topology view, azure portal 
+summary: In questa sezione viene descritto come eseguire operazioni di backup basate su Snapshot di volumi non dati. 
+---
+= Operazioni di backup basate su Snapshot di volumi non dati
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-file-based-backup-operations-of-the-hana-database.html["Precedente: Operazioni di backup basate su file del database HANA."]
+
+[role="lead"]
+Come discusso in precedenza, CBA supporta le operazioni di backup di volumi non dati. I volumi non di dati sono volumi che appartengono a un sistema SAP HANA specifico, ad esempio `/hana/shared` O volumi di application server SAP, come `/usr/sap/SID` oppure `sapmnt/SID`.
+
+
+
+== Configurazione
+
+. Nella vista della dashboard CBA, selezionare Manage System (Gestisci sistema) – Add non-Data Volume (Aggiungi volume non dati).
++
+image:anf-cba-image57.png["Schermata del passaggio in fase di completamento."]
+
+. Inserire le informazioni relative ai volumi non dati.
++
+Selezionare l'ambiente di lavoro e l'account NetApp utilizzati per i volumi ANF del sistema HANA. Selezionare i volumi. Nel nostro esempio: `PR1_shared`.
+
++
+image:anf-cba-image58.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+== Assegnare la policy
+
+Per attivare i backup pianificati, è necessario assegnare i criteri di backup.
+
+. Accedere a *Assign policy* > *non-Data Volume*.
++
+image:anf-cba-image59.png["Schermata del passaggio in fase di completamento."]
+
+. Fare clic su *Assegna*.
++
+image:anf-cba-image60.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+== Creazione di backup on-demand di volumi non dati
+
+Per creare un backup del database on-demand, attenersi alla seguente procedura:
+
+. Nella vista della dashboard di CBA, selezionare Backup on-Demand – Volume dati nel menu di scelta rapida.
++
+image:anf-cba-image61.png["Schermata del passaggio in fase di completamento."]
+
+. Nella finestra di dialogo on-Demand Backup (Backup su richiesta), selezionare *Policy-based* (basato su policy) o *One Time* (una volta).
++
+** Con Policy-based, il backup on-demand viene trattato allo stesso modo dei backup pianificati per quanto riguarda la conservazione e la configurazione pre e post-script.
+** Una volta, è possibile definire una conservazione specifica, un nome di backup specifico e specifici pre- e post-script.
++
+Nel nostro esempio, abbiamo selezionato policy-based e dobbiamo selezionare policy e conservazione come passaggio successivo.
+
++
+image:anf-cba-image62.png["Schermata del passaggio in fase di completamento."]
+
++
+Nella vista Job Monitoring, è possibile visualizzare le diverse fasi del flusso di lavoro, il runtime delle fasi e il runtime totale dell'operazione. Nel nostro esempio, l'operazione di backup ha richiesto 47 secondi.
+
++
+image:anf-cba-image63.png["Schermata della vista Job Monitoring."]
+
+
+
+
+
+
+
+== Esaminare le informazioni di backup Snapshot nella vista topologia CBA
+
+Nel menu di scelta rapida della vista dashboard di CBA, selezionare *View Topology* (Visualizza topologia) per aprire la panoramica del backup.
+
+La panoramica del backup mostra l'elenco dei backup creati utilizzando CBA.
+
+
+NOTE: Il nome del backup utilizza il formato definito nel criterio di backup. La stessa convenzione di denominazione viene utilizzata anche per il nome Snapshot sul volume ANF.
+
+image:anf-cba-image64.png["Schermata del passaggio in fase di completamento."]
+
+
+
+== Esaminare le informazioni di backup di Snapshot nel portale Azure
+
+Il nome utilizzato come nome di backup in CBA viene utilizzato anche come nome di backup Snapshot sul volume ANF. La figura seguente mostra il portale Azure e i backup Snapshot per il volume non di dati `pr1-shared`.
+
+image:anf-cba-image65.png["Schermata del passaggio in fase di completamento."]
+
+link:anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html["Avanti: Operazioni di backup basate su Snapshot di volumi globali non di dati."]

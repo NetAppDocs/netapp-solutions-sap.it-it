@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_break_and_delete_replication_peering.html 
+keywords: break, delete, replication, peering, disaster, failover, target, volumes 
+summary: 'In caso di failover di emergenza, i volumi di destinazione devono essere interrotti in modo che l"host di destinazione possa montare i volumi per le operazioni di lettura e scrittura.' 
+---
+= Interrompere ed eliminare il peering delle repliche
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_prepare_the_target_host_01.html["Precedente: Preparare l'host di destinazione."]
+
+In caso di failover di emergenza, i volumi di destinazione devono essere interrotti in modo che l'host di destinazione possa montare i volumi per le operazioni di lettura e scrittura.
+
+
+NOTE: Per il volume di dati HANA, è necessario ripristinare il volume all'ultimo backup di snapshot HANA creato con AzAcSnap. Questa operazione di revert del volume non è possibile se l'ultimo snapshot di replica è contrassegnato come occupato a causa del peering della replica. Pertanto, è necessario eliminare anche il peering delle repliche.
+
+Le due schermate successive mostrano l'operazione di peering break e delete per il volume di dati HANA. Le stesse operazioni devono essere eseguite anche per il backup del log e per il volume condiviso HANA.
+
+image:saphana-dr-anf_image27.png["Errore: Immagine grafica mancante"]
+
+image:saphana-dr-anf_image28.png["Errore: Immagine grafica mancante"]
+
+Poiché il peering delle repliche è stato eliminato, è possibile ripristinare il volume all'ultimo backup di snapshot HANA. Se il peering non viene cancellato, la selezione del volume di revert non è selezionabile e non è selezionabile. Le due schermate seguenti mostrano l'operazione di ripristino del volume.
+
+image:saphana-dr-anf_image29.png["Errore: Immagine grafica mancante"]
+
+image:saphana-dr-anf_image30.png["Errore: Immagine grafica mancante"]
+
+Dopo l'operazione di revert del volume, il volume di dati si basa sul backup di snapshot HANA coerente e può ora essere utilizzato per eseguire operazioni di ripristino in avanti.
+
+
+NOTE: Se è stato utilizzato un pool di capacità con un livello di performance basso, i volumi devono ora essere spostati in un pool di capacità in grado di fornire le performance richieste.
+
+link:saphana-dr-anf_mount_the_volumes_at_the_target_host.html["Avanti: Montare i volumi sull'host di destinazione."]

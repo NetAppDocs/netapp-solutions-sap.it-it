@@ -1,0 +1,106 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html 
+keywords: configuration, database, backups, MDC 
+summary: In questa sezione vengono descritte le procedure di configurazione per un sistema single-tenant SAP HANA MDC host singolo PR1. I passaggi sono identici per un sistema MDC con tenant multipli. Le differenze per un sistema a singolo container o a più host si riflettono nei passi di configurazione corrispondenti. 
+---
+= Configurazione di backup dei backup del database SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-snapcenter-service-snapshot-backup-configuration-overview.html["Precedente: Panoramica della configurazione del backup Snapshot del servizio SnapCenter."]
+
+In questa sezione vengono descritte le procedure di configurazione per un sistema single-tenant SAP HANA MDC host singolo PR1. I passaggi sono identici per un sistema MDC con tenant multipli. Le differenze per un sistema a singolo container o a più host si riflettono nei passi di configurazione corrispondenti.
+
+
+
+== Utente di backup SAP HANA
+
+NetApp consiglia di configurare un utente di database dedicato nel database HANA per eseguire le operazioni di backup con il servizio SnapCenter. Durante la configurazione del sistema HANA nel servizio SnapCenter, per questo utente di backup viene configurata una chiave di archivio utente del database HANA, utilizzata per comunicare con il sistema HANA.
+
+La figura seguente mostra una schermata di SAP HANA Studio attraverso la quale è possibile creare l'utente di backup.
+
+
+NOTE: I privilegi richiesti sono stati modificati in SAP HANA 2.0 SPS5 release: Sono richiesti l'amministratore del backup, la lettura del catalogo, l'amministratore del backup del database e l'operatore di ripristino del database. Per le versioni precedenti, sono sufficienti l'amministratore del backup e la lettura del catalogo.
+
+Per un sistema SAP HANA MDC, con uno o più tenant, è necessario creare l'utente nel database di sistema, poiché tutti i comandi di backup per il sistema e i database tenant vengono eseguiti utilizzando il database di sistema.
+
+image:saphana-backup-anf-image19.png["Errore: Immagine grafica mancante"]
+
+
+
+== Configurazione del sistema SAP HANA nel servizio SnapCenter
+
+Per configurare il sistema SAP HANA PR1 nel servizio SnapCenter, attenersi alla seguente procedura:
+
+. Accedere a SAP HANA Systems e fare clic su Add (Aggiungi).
+. Nella schermata System Details (Dettagli sistema), selezionare il tipo di sistema, HANA Single Container (contenitore singolo HANA) o Multitenant Database Container (contenitore database multi-tenant). Fornire il SID del sistema HANA e inserire il testo desiderato come nome di sistema.
+. Per aggiungere una chiave di memorizzazione utente del database HANA, fare clic su Add Keys (Aggiungi chiavi).
++
+image:saphana-backup-anf-image20.png["Errore: Immagine grafica mancante"]
+
+. Inserire le informazioni per la configurazione della chiave di memorizzazione utente per il database HANA. È possibile specificare un nome qualsiasi come nome della chiave.
++
+I dettagli del sistema includono l'indirizzo IP e la porta per comunicare con il database di sistema utilizzando il client hdbsql. In una configurazione single-tenant SAP HANA MDC, porta `3<instanceNo>13` È la porta standard per l'accesso SQL al database di sistema. Per una configurazione di container singolo SAP HANA, porta `3<instanceNo>15` È la porta standard per l'accesso SQL all'Index Server e deve essere utilizzata nella configurazione. Per una configurazione di più host SAP HANA, è necessario configurare le chiavi dell'archivio utente per tutti gli host. Il servizio SnapCenter tenta di connettersi al database utilizzando ciascuna delle chiavi fornite e può quindi funzionare indipendentemente dal failover di un servizio SAP HANA su un host diverso.
+
++
+Specificare il nome utente e la password dell'utente del database nel database di sistema precedentemente configurato. SnapCenter crea automaticamente una chiave di archivio utente utilizzando queste informazioni e la utilizza per comunicare con il database HANA.
+
+. Per continuare, fare clic su Aggiungi.
++
+image:saphana-backup-anf-image21.png["Errore: Immagine grafica mancante"]
+
+. Per procedere con la configurazione del footprint dello storage, fare clic su Continue (continua).
++
+image:saphana-backup-anf-image22.png["Errore: Immagine grafica mancante"]
+
+. Inserire le informazioni relative ai volumi di storage del sistema HANA.
++
+Selezionare l'ambiente di lavoro e l'account NetApp utilizzati per i volumi Azure NetApp Files del sistema HANA. Selezionare il volume di dati del sistema HANA, ad esempio `PR1_data_mnt00001`.
+
++
+Per un sistema SAP HANA con host multipli, è necessario selezionare i volumi di dati di tutti gli host HANA appartenenti al sistema.
+
++
+image:saphana-backup-anf-image23.png["Errore: Immagine grafica mancante"]
+
++
+image:saphana-backup-anf-image24.png["Errore: Immagine grafica mancante"]
+
+. Fare clic su continua.
++
+image:saphana-backup-anf-image25.png["Errore: Immagine grafica mancante"]
+
+. Per aggiungere il sistema HANA, fare clic su Add (Aggiungi).
++
+image:saphana-backup-anf-image26.png["Errore: Immagine grafica mancante"]
+
+. Per continuare con la configurazione della protezione, fare clic su Procedi.
++
+image:saphana-backup-anf-image27.png["Errore: Immagine grafica mancante"]
+
++
+La schermata visualizza tutti i criteri configurati nel servizio SnapCenter.
+
++
+image:saphana-backup-anf-image28.png["Errore: Immagine grafica mancante"]
+
+. Selezionare i criteri che si desidera assegnare. Ad esempio, le policy `SnapshotEvery4h` e. `BlockIntegrityCheckEverySunday` che sono stati creati in precedenza sono selezionati.
+. Per assegnare i criteri al sistema HANA, fare clic su Proteggi.
++
+image:saphana-backup-anf-image29.png["Errore: Immagine grafica mancante"]
+
++
+La schermata di panoramica dei sistemi HANA mostra il sistema HANA e i criteri assegnati.
+
++
+image:saphana-backup-anf-image30.png["Errore: Immagine grafica mancante"]
+
+
+
+link:saphana-backup-anf-backup-configuration-of-sap-hana-non-data-volumes.html["Pagina successiva: Configurazione di backup dei volumi non dati SAP HANA."]

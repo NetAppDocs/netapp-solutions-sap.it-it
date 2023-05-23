@@ -1,0 +1,212 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-restore-and-recovery-from-snapshot-backup.html 
+keywords: restore, recovery, operation, system database 
+summary: In questa sezione viene descritto come eseguire il ripristino e il ripristino da un backup Snapshot. 
+---
+= Ripristino e ripristino dal backup Snapshot
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html["Precedente: Operazioni di backup basate su Snapshot di volumi globali non dati."]
+
+[role="lead"]
+La sezione seguente descrive i flussi di lavoro di ripristino e ripristino per un sistema single-tenant HANA MDC a host singolo. Vengono evidenziate le differenze per un sistema a più host. Gli esempi mostrano SAP HANA Studio come uno strumento per eseguire il ripristino manuale. Per le operazioni di recovery è inoltre possibile utilizzare istruzioni SAP HANA Cockpit o HANA SQL.
+
+Per ripristinare e ripristinare un sistema single-tenant SAP HANA MDC utilizzando SAP HANA Studio e Cloud Backup for Applications, attenersi alla seguente procedura:
+
+. Preparare il processo di ripristino con SAP HANA Studio:
++
+.. Selezionare *Recover System Database* (Ripristina database di sistema) e confermare la chiusura del sistema SAP HANA.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
++
+Viene visualizzato l'elenco dei backup dei dati.
+
+.. Selezionare il backup appropriato per visualizzare l'ID del backup esterno.
+
+
+. Smontare i volumi di dati HANA.
+. Eseguire il processo di ripristino con Cloud Backup per le applicazioni:
++
+.. Nella vista Backup, selezionare il backup che corrisponde all'ID di backup esterno o al campo dei commenti di SAP HANA Studio.
+.. Per avviare l'operazione di ripristino, selezionare *Restore* nel menu di scelta rapida.
+
+
+. Montare i volumi di dati HANA.
+. Eseguire il processo di ripristino del database di sistema con SAP HANA Studio:
++
+.. Fare clic su *Refresh* (Aggiorna) dall'elenco dei backup e selezionare il backup disponibile per il ripristino (indicato da un'icona verde).
+.. Avviare l'operazione di ripristino.
++
+Al termine dell'operazione di ripristino, viene avviato il database di sistema.
+
+
+
+. Eseguire il processo di ripristino del database tenant con SAP HANA Studio:
++
+.. Selezionare *Recover tenant Database* (Ripristina database tenant) e selezionare il tenant da ripristinare.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
+
+
+. Viene visualizzato un elenco di backup dei dati. Poiché il volume di dati è già stato ripristinato, il backup del tenant indica come disponibile (in verde).
++
+.. Selezionare il backup e avviare il processo di ripristino. Al termine del processo di ripristino, il database del tenant viene avviato automaticamente.
+
+
+
+
+Viene visualizzato un elenco di backup dei dati. Poiché il volume di dati è già stato ripristinato, il backup del tenant indica come disponibile (in verde). Selezionare il backup e avviare il processo di ripristino. Al termine del processo di ripristino, il database del tenant viene avviato automaticamente.
+
+La seguente procedura descrive le operazioni di ripristino e ripristino del sistema HANA PR1.
+
+
+
+== Preparare l'operazione di ripristino e ripristino
+
+. Per avviare il ripristino del database di sistema in SAP HANA Studio, andare a *Backup and Recovery* > *Recover System Database*.
++
+image:anf-cba-image79.png["Schermata del passaggio in fase di completamento."]
+
++
+image:anf-cba-image80.png["Schermata del passaggio in fase di completamento."]
+
+. Selezionare il tipo di ripristino e fare clic su *Avanti*.
++
+image:anf-cba-image81.png["Schermata del passaggio in fase di completamento."]
+
+. Fornire la posizione del catalogo di backup e fare clic su *Avanti*.
++
+image:anf-cba-image82.png["Schermata del passaggio in fase di completamento."]
+
+. Viene visualizzato un elenco dei backup disponibili in base al contenuto del catalogo di backup HANA. Scegliere il backup richiesto e annotare l'ID del backup esterno, ad esempio il backup più recente.
++
+image:anf-cba-image83.png["Schermata del passaggio in fase di completamento."]
+
+. Smontare tutti i volumi di dati.
++
+....
+umount /hana/data/PR1/mnt00001
+....
++
+
+NOTE: Per un sistema host multiplo SAP HANA, è necessario smontare tutti i volumi di dati su ciascun host.
+
+
+
+
+
+== Ripristinare il database HANA
+
+. Per avviare l'operazione di ripristino, nella vista Backup, selezionare il backup, che viene visualizzato anche in HANA Studio, quindi selezionare Restore (Ripristina) nel menu di scelta rapida.
++
+image:anf-cba-image84.png["Schermata del passaggio in fase di completamento."]
+
+. Nella fase successiva, è possibile fornire script pre e post per l'operazione di ripristino.
++
+image:anf-cba-image85.png["Schermata del passaggio in fase di completamento."]
+
++
+Il registro processi di Cloud Backup for Applications mostra lo stato di avanzamento dell'operazione di ripristino.
+
++
+image:anf-cba-image86.png["Schermata del passaggio in fase di completamento."]
+
+. Attendere il completamento del processo di ripristino e montare il volume di dati.
++
+....
+mount /hana/data/SP1/mnt00001
+....
++
+
+NOTE: Per un sistema host multiplo SAP HANA, è necessario montare tutti i volumi di dati su ciascun host.
+
+
+
+
+
+== Ripristinare il database di sistema
+
+. Per aggiornare l'elenco dei backup disponibili, accedere a SAP HANA Studio e fare clic su Refresh (Aggiorna). Il backup ripristinato con Cloud Backup for Applications viene visualizzato con un'icona verde nell'elenco dei backup. Selezionare il backup e fare clic su Next (Avanti).
++
+image:anf-cba-image87.png["Schermata del passaggio in fase di completamento."]
+
+. Fornire la posizione dei backup del registro. Fare clic su *Avanti*.
++
+image:anf-cba-image88.png["Schermata del passaggio in fase di completamento."]
+
+. Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su *Avanti*.
++
+image:anf-cba-image89.png["Schermata del passaggio in fase di completamento."]
+
+. Rivedere le impostazioni di ripristino e fare clic su *fine*.
++
+image:anf-cba-image90.png["Schermata del passaggio in fase di completamento."]
+
+. Viene avviato il processo di ripristino. Attendere il completamento del ripristino del database di sistema.
++
+image:anf-cba-image91.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+== Ripristinare il database tenant
+
+. In SAP HANA Studio, selezionare la voce relativa al database di sistema e andare a *Backup and Recovery* > *Recover tenant Database*.
++
+image:anf-cba-image92.png["Schermata del passaggio in fase di completamento."]
+
+. Selezionare il tenant da ripristinare e fare clic su *Avanti*.
++
+image:anf-cba-image93.png["Schermata del passaggio in fase di completamento."]
+
+. Specificare il tipo di ripristino e fare clic su Next (Avanti).
++
+image:anf-cba-image94.png["Schermata del passaggio in fase di completamento."]
+
+. Confermare la posizione del catalogo di backup e fare clic su *Avanti*.
++
+image:anf-cba-image95.png["Schermata del passaggio in fase di completamento."]
+
+. Verificare che il database del tenant sia offline. Fare clic su OK per continuare.
++
+image:anf-cba-image96.png["Schermata del passaggio in fase di completamento."]
+
++
+Poiché il ripristino del volume di dati si è verificato prima del ripristino del database di sistema, il backup del tenant è immediatamente disponibile.
+
+. Selezionare il backup evidenziato in verde e fare clic su *Avanti*.
++
+image:anf-cba-image97.png["Schermata del passaggio in fase di completamento."]
+
+. Confermare la posizione di backup del registro e fare clic su *Avanti*.
++
+image:anf-cba-image98.png["Schermata del passaggio in fase di completamento."]
+
+. Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione *Use Delta backups* (Usa backup delta) non sia selezionata. Fare clic su *Avanti*.
++
+image:anf-cba-image99.png["Schermata del passaggio in fase di completamento."]
+
+. Esaminare le impostazioni di ripristino e avviare il processo di ripristino del database tenant facendo clic su *fine*.
++
+image:anf-cba-image100.png["Schermata del passaggio in fase di completamento."]
+
+. Attendere il completamento del ripristino e l'avvio del database tenant.
++
+image:anf-cba-image101.png["Schermata del passaggio in fase di completamento."]
+
++
+Il sistema SAP HANA è operativo.
+
++
+
+NOTE: Per un sistema SAP HANA MDC con più tenant, è necessario ripetere i passaggi da 16 a 25 per ciascun tenant.
+
+
+
+link:anf-cba-backup-operations-with-hana-system-replication.html["Avanti: Operazioni di backup con la replica di sistema HANA."]

@@ -1,0 +1,22 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_fas_fc_sap_hana_storage_connector_api.html 
+keywords: sap, hana, storage, connector, api, fas, fc 
+summary: Un connettore di storage è richiesto solo in ambienti con più host dotati di funzionalità di failover. 
+---
+= API di SAP HANA storage Connector
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_fas_fc_storage_controller_setup.html["Precedente: Configurazione dello storage controller."]
+
+Un connettore di storage è richiesto solo in ambienti con più host dotati di funzionalità di failover. In configurazioni con più host, SAP HANA offre funzionalità ad alta disponibilità in modo che un host di database SAP HANA possa eseguire il failover su un host in standby. In questo caso, l'host di standby accede e utilizza i LUN dell'host guasto. Il connettore di storage viene utilizzato per garantire l'accesso attivo a una partizione di storage da parte di un solo host di database alla volta.
+
+Nelle configurazioni di host multipli SAP HANA con storage NetApp, viene utilizzato il connettore di storage standard fornito da SAP. La "SAP HANA FC Storage Connector Admin Guide" è disponibile come allegato a. https://service.sap.com/sap/support/notes/1900823["Nota SAP 1900823"^].
+
+link:saphana_fas_fc_host_setup.html["Avanti: Configurazione dell'host."]

@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-netapp-sap-lama-integration-using-ansible.html 
+keywords: integration, lama, ansible, 
+summary: 'L"approccio all"integrazione utilizza il provisioning personalizzato e gli hook operativi di SAP lama combinati con i playbook Ansible per la gestione dello storage NetApp. La figura seguente mostra una panoramica di alto livello della configurazione dal lato lama e dei componenti corrispondenti dell"implementazione dell"esempio.' 
+---
+= Integrazione di NetApp SAP lama con Ansible
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html["Precedente: Casi di utilizzo per l'aggiornamento, la copia e la clonazione del sistema."]
+
+[role="lead"]
+L'approccio all'integrazione utilizza il provisioning personalizzato e gli hook operativi di SAP lama combinati con i playbook Ansible per la gestione dello storage NetApp. La figura seguente mostra una panoramica di alto livello della configurazione dal lato lama e dei componenti corrispondenti dell'implementazione dell'esempio.
+
+image:lama-ansible-image6.png["Si tratta di un'immagine piuttosto complessa con tre caselle denominate SAP lama, Ansible Control Node e storage NetApp. Ciascuna casella contiene le rispettive fasi di processo che si svolgono a ciascun livello."]
+
+Un host centrale che agisce come nodo di controllo Ansible viene utilizzato per eseguire le richieste da SAP lama e per attivare le operazioni di storage NetApp utilizzando i playbook Ansible. I componenti dell'agente host SAP devono essere installati su questo host in modo che l'host possa essere utilizzato come gateway di comunicazione per SAP lama.
+
+In lama Automation Studio, viene definito un provider registrato presso l'agente host SAP dell'host Ansible. Un file di configurazione dell'agente host punta a uno script shell chiamato da SAP lama con un insieme di parametri della riga di comando, a seconda dell'operazione richiesta.
+
+All'interno di lama Automation Studio, vengono definiti il provisioning personalizzato e un hook personalizzato per eseguire le operazioni di cloning dello storage durante il provisioning e anche durante le operazioni di cleanup quando il sistema viene deprovisioning. Lo script della shell sul nodo di controllo Ansible esegue quindi i corrispondenti playbook Ansible, che attivano le operazioni Snapshot e FlexClone, nonché l'eliminazione dei cloni con il flusso di lavoro di deprovisioning.
+
+Ulteriori informazioni sui moduli Ansible di NetApp e sulle definizioni dei provider lama sono disponibili all'indirizzo:
+
+* https://www.ansible.com/integrations/infrastructure/netapp["Moduli NetApp Ansible"^]
+* https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/bf6b3e43340a4cbcb0c0f3089715c068.html["Documentazione SAP lama – definizioni dei provider"^]
+
+
+link:lama-ansible-example-implementation.html["Segue: Implementazione di esempio."]

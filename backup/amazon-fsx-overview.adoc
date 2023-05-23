@@ -1,0 +1,24 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-overview.html 
+keywords: tr4926, 4926, introduction, overview 
+summary: Questo report tecnico fornisce le Best practice per la protezione dei dati SAP HANA su Amazon FSX per NetApp ONTAP e NetApp SnapCenter. Questo documento tratta i concetti di SnapCenter, i consigli di configurazione e i flussi di lavoro operativi, tra cui configurazione, operazioni di backup, e operazioni di ripristino e recovery. 
+---
+= TR-4926: SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer, NetApp
+
+Questo report tecnico fornisce le Best practice per la protezione dei dati SAP HANA su Amazon FSX per NetApp ONTAP e NetApp SnapCenter. Questo documento tratta i concetti di SnapCenter, i consigli di configurazione e i flussi di lavoro operativi, tra cui configurazione, operazioni di backup, e operazioni di ripristino e recovery.
+
+Le aziende oggi richiedono una disponibilità continua e ininterrotta per le proprie applicazioni SAP. Si aspettano livelli di performance costanti di fronte a volumi di dati in continua crescita e alla necessità di attività di manutenzione ordinaria, come i backup di sistema. L'esecuzione di backup dei database SAP è un'attività critica e può avere un impatto significativo sulle performance del sistema SAP di produzione.
+
+Le finestre di backup si riducono mentre la quantità di dati da sottoporre a backup aumenta. Pertanto, è difficile trovare un momento in cui è possibile eseguire backup con un effetto minimo sui processi di business. Il tempo necessario per ripristinare e ripristinare i sistemi SAP è un problema perché i downtime per i sistemi di produzione SAP e non in produzione devono essere ridotti al minimo per ridurre i costi per l'azienda.
+
+link:amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html["Avanti: Backup e ripristino con Amazon FSX per ONTAP."]

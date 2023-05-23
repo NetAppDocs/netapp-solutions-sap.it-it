@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html 
+keywords: configuration, options, cross, region, replication, sap, hana, azure 
+summary: La figura seguente mostra le relazioni di replica del volume per un sistema SAP HANA che utilizza la replica interregionale ANF. 
+---
+= Opzioni di configurazione per la replica interregionale con SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Precedente: REPLICA interregionale CON SAP HANA."]
+
+La figura seguente mostra le relazioni di replica del volume per un sistema SAP HANA che utilizza la replica interregionale ANF. Con la replica interregionale ANF, i dati HANA e il volume condiviso HANA devono essere replicati. Se viene replicato solo il volume di dati HANA, i valori RPO tipici rientrano nell'intervallo di un giorno. Se sono richiesti valori RPO inferiori, è necessario replicare anche i backup del registro HANA per il forward recovery.
+
+
+NOTE: Il termine "backup del log" utilizzato in questo documento include il backup del log e il backup del catalogo di backup HANA. Il catalogo di backup HANA è necessario per eseguire le operazioni di ripristino in avanti.
+
+
+NOTE: La seguente descrizione e la configurazione di laboratorio si concentrano sul database HANA. Altri file condivisi, ad esempio la directory di trasporto SAP, vengono protetti e replicati allo stesso modo del volume condiviso HANA.
+
+Per abilitare il ripristino del punto di salvataggio HANA o il ripristino in avanti utilizzando i backup del log, è necessario creare backup Snapshot dei dati coerenti con l'applicazione nel sito primario per il volume di dati HANA. Ciò può essere fatto ad esempio con lo strumento di backup ANF AzAcSnap (vedere anche https://docs.microsoft.com/en-us/azure/azure-netapp-files/azacsnap-introduction["Che cos'è lo strumento Snapshot coerente delle applicazioni Azure per Azure NetApp Files | documenti Microsoft"^]). I backup Snapshot creati nel sito primario vengono quindi replicati nel sito di DR.
+
+In caso di failover di emergenza, la relazione di replica deve essere interrotta, i volumi devono essere montati sul server di produzione DR e il database HANA deve essere ripristinato, nell'ultimo punto di salvataggio HANA o con il ripristino in avanti utilizzando i backup dei log replicati. Il capitolo link:saphana-dr-anf_disaster_recovery_failover_overview.html["Failover del disaster recovery"], descrive i passaggi richiesti.
+
+La seguente figura illustra le opzioni di configurazione HANA per la replica tra regioni.
+
+image:saphana-dr-anf_image6.png["Errore: Immagine grafica mancante"]
+
+Con la versione corrente di Cross-Region Replication, è possibile selezionare solo pianificazioni fisse e l'utente non può definire il tempo effettivo di aggiornamento della replica. I programmi disponibili sono giornalieri, orari e ogni 10 minuti. Utilizzando queste opzioni di pianificazione, due diverse configurazioni hanno senso a seconda dei requisiti RPO: Replica del volume di dati senza replica del backup del log e replica del backup del log con pianificazioni diverse, orarie o ogni 10 minuti. Il RPO più basso raggiungibile è di circa 20 minuti. La seguente tabella riassume le opzioni di configurazione e i valori RPO e RTO risultanti.
+
+|===
+|  | Replica del volume di dati | Replica dei volumi di backup dei dati e dei log | Replica dei volumi di backup dei dati e dei log 
+
+
+| Volume di dati di pianificazione CRR | Ogni giorno | Ogni giorno | Ogni giorno 
+
+
+| Volume di backup del registro di pianificazione CRR | n/a. | Ogni ora | 10 min 
+
+
+| RPO max | +24 ore + programma Snapshot (ad esempio, 6 ore)+ | 1 ora | 2 x 10 min 
+
+
+| RTO massimo | Definito principalmente dal tempo di avvio di HANA | +tempo di avvio HANA + tempo di ripristino+ | +tempo di avvio HANA + tempo di ripristino+ 
+
+
+| Recupero in avanti | NA | +registri per le ultime 24 ore + programma Snapshot (ad esempio, 6 ore)+ | +registri per le ultime 24 ore + programma Snapshot (ad esempio, 6 ore)+ 
+|===
+link:saphana-dr-anf_requirements_and_best_practices.html["Avanti: Requisiti e Best practice."]

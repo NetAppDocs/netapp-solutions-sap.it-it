@@ -1,0 +1,120 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html 
+keywords: global non-data, configuration, assign policy, azure portal 
+summary: In questa sezione viene descritto come creare operazioni di backup basate su Snapshot di volumi globali non di dati. 
+---
+= Operazioni di backup basate su Snapshot di volumi globali non di dati
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html["Precedente: Operazioni di backup basate su Snapshot di volumi non dati."]
+
+[role="lead"]
+In CBA, i volumi non dati globali sono volumi non assegnati a un sistema HANA specifico. Ad esempio, la directory di trasporto SAP `/usr/sap/trans` o un repository software.
+
+
+
+== Configurazione
+
+Per configurare la protezione dei dati per un volume non di dati, attenersi alla seguente procedura.
+
+. Fare clic su *Add HANA System* (Aggiungi sistema HANA) e selezionare *Global non-Data Volumes* (volumi non dati globali) come *System Type* (tipo di sistema).
++
+image:anf-cba-image66.png["Schermata del passaggio in fase di completamento."]
+
+. Fornire un nome e un SID o un elenco di SID a scopo informativo. È inoltre necessario selezionare un host plug-in. Può trattarsi di qualsiasi host plug-in del proprio ambiente.
++
+image:anf-cba-image67.png["Schermata del passaggio in fase di completamento."]
+
+. Fare clic su *Add Storage* (Aggiungi storage) per configurare l'impatto dello storage del volume globale non di dati.
++
+image:anf-cba-image68.png["Schermata del passaggio in fase di completamento."]
+
+. Inserire le informazioni relative ai volumi non dati globali.
++
+image:anf-cba-image69.png["Schermata del passaggio in fase di completamento."]
+
+. I volumi non dati globali sono elencati nello stesso modo di un sistema HANA nella dashboard di CBA.
++
+image:anf-cba-image70.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+== Assegnare la policy
+
+Per attivare i backup pianificati, è necessario assegnare il criterio di backup.
+
+. Accedere a *Assign Policy*.
++
+image:anf-cba-image71.png["Schermata del passaggio in fase di completamento."]
+
+. Fare clic su *Assegna*.
++
+image:anf-cba-image72.png["Schermata del passaggio in fase di completamento."]
+
+. Il criterio viene assegnato al volume non di dati.
++
+image:anf-cba-image73.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+== Creazione di backup on-demand di volumi globali non di dati
+
+Per creare un backup del database on-demand, attenersi alla seguente procedura:
+
+. Nella vista dashboard di CBA, selezionare *Backup on-Demand* nel menu di scelta rapida.
++
+image:anf-cba-image74.png["Schermata del passaggio in fase di completamento."]
+
+. Nella finestra di dialogo *Backup su richiesta*, selezionare *basato su policy* o *una volta*.
++
+** Con *Policy-based*, il backup on-demand viene trattato allo stesso modo dei backup pianificati per quanto riguarda la conservazione e la configurazione pre e post-script.
+** Con *una sola volta*, è possibile definire una conservazione specifica, un nome di backup specifico e specifici pre- e post-script.
++
+Nel nostro esempio, abbiamo selezionato Policy-based e quindi dobbiamo selezionare la policy e la conservazione nel passaggio successivo.
+
++
+image:anf-cba-image75.png["Schermata del passaggio in fase di completamento."]
+
++
+Nella vista *Job Monitoring*, è possibile visualizzare le diverse fasi del flusso di lavoro, il runtime delle fasi e il runtime totale dell'operazione. Nel nostro esempio, l'operazione di backup ha richiesto 41 secondi.
+
++
+image:anf-cba-image76.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+
+
+== Esaminare le informazioni di backup Snapshot nella vista topologia CBA
+
+Nel menu di scelta rapida della vista dashboard di CBA, selezionare *View Topology* (Visualizza topologia) per aprire la panoramica del backup.
+
+La panoramica del backup mostra l'elenco dei backup creati utilizzando CBA.
+
+
+NOTE: Il nome del backup utilizza il formato definito nel criterio di backup. La stessa convenzione di denominazione viene utilizzata anche per il nome Snapshot sul volume ANF.
+
+image:anf-cba-image77.png["Schermata del passaggio in fase di completamento."]
+
+
+
+== Esaminare le informazioni di backup di Snapshot nel portale Azure
+
+Lo stesso nome utilizzato come nome di backup in CBA viene utilizzato anche come nome di backup Snapshot sul volume ANF. La figura seguente mostra il portale Azure e i backup Snapshot per il volume globale non dati `software`.
+
+image:anf-cba-image78.png["Schermata del passaggio in fase di completamento."]
+
+link:anf-cba-restore-and-recovery-from-snapshot-backup.html["Successivo: Ripristino e ripristino dal backup Snapshot."]

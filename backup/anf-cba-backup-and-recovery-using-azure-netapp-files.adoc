@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-backup-and-recovery-using-azure-netapp-files.html 
+keywords: runtime, backup, recovery, restore, recover 
+summary: 'È possibile utilizzare la tecnologia Snapshot di Azure NetApp Files (ANF) per creare backup del database in pochi secondi. Il tempo necessario per creare una copia Snapshot è indipendente dalle dimensioni del database, in quanto una copia Snapshot non sposta alcun blocco di dati fisico sulla piattaforma di storage. Inoltre, l"utilizzo della tecnologia Snapshot non ha alcun effetto sulle performance del sistema SAP attivo.' 
+---
+= Backup e ripristino con Azure NetApp Files
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-overview.html["Precedente: Panoramica."]
+
+[role="lead"]
+È possibile utilizzare la tecnologia Snapshot di Azure NetApp Files (ANF) per creare backup del database in pochi secondi. Il tempo necessario per creare una copia Snapshot è indipendente dalle dimensioni del database, in quanto una copia Snapshot non sposta alcun blocco di dati fisico sulla piattaforma di storage. Inoltre, l'utilizzo della tecnologia Snapshot non ha alcun effetto sulle performance del sistema SAP attivo. Pertanto, è possibile pianificare la creazione di copie Snapshot senza prendere in considerazione i periodi di dialogo di picco o di attività batch. I clienti SAP su ANF in genere pianificano più backup Snapshot online durante il giorno; ad esempio, ogni quattro o sei ore è comune. Questi backup Snapshot vengono in genere conservati per tre o cinque giorni nel sistema di storage primario prima di essere rimossi.
+
+Le copie Snapshot offrono anche vantaggi chiave per le operazioni di ripristino e ripristino. Un'operazione di revert del volume consente di ripristinare un intero database in qualsiasi momento, in base alle copie Snapshot disponibili. Tali processi di ripristino vengono completati in pochi secondi, indipendentemente dalle dimensioni del database. Poiché durante la giornata vengono creati diversi backup Snapshot online, il tempo necessario per il processo di ripristino viene ridotto in modo significativo rispetto a un approccio di backup tradizionale. Poiché è possibile eseguire un'operazione di ripristino con una copia Snapshot che ha poche ore di vita (anziché fino a 24 ore), è necessario applicare un numero inferiore di registri delle transazioni. Pertanto, l'RTO viene ridotto a diversi minuti piuttosto che alle diverse ore richieste per i backup convenzionali a ciclo singolo.
+
+I backup delle copie Snapshot vengono memorizzati sullo stesso sistema di dischi dei dati online attivi. Pertanto, NetApp consiglia di utilizzare i backup di copia Snapshot come supplemento piuttosto che come sostituto per i backup in una posizione secondaria. La maggior parte delle azioni di ripristino e ripristino viene gestita utilizzando un'operazione di ripristino del volume sul sistema di storage primario. I ripristini da una posizione secondaria sono necessari solo se il sistema di storage primario contenente le copie Snapshot viene danneggiato. È possibile utilizzare la posizione secondaria se è necessario ripristinare un backup non più disponibile da una copia Snapshot.
+
+È possibile eseguire il backup in una posizione secondaria utilizzando backup aggiuntivi basati su file HANA. Questi backup basati su file possono essere pianificati con una frequenza molto inferiore e quindi con un minore effetto sulle prestazioni del sistema di produzione.
+
+
+
+== Esecuzione delle operazioni di backup e ripristino Snapshot
+
+La figura seguente mostra HANA Studio di un cliente che utilizza le operazioni di backup Snapshot. L'immagine mostra che il backup del database HANA (di circa 4 TB) viene eseguito in 1 minuto e 20 secondi utilizzando la tecnologia di backup Snapshot e più di 4 ore con un'operazione di backup basata su file.
+
+La maggior parte del runtime complessivo del workflow di backup è il tempo necessario per eseguire l'operazione di salvataggio del backup HANA, che dipende dal carico sul database HANA. Il backup Snapshot dello storage viene sempre completato in un paio di secondi.
+
+image:anf-cba-image1.png["Questa figura mostra HANA Studio di un cliente che utilizza le operazioni di backup Snapshot."]
+
+
+
+== Confronto degli obiettivi del tempo di ripristino
+
+Questa sezione fornisce un confronto RTO (Recovery Time Objective) dei backup Snapshot basati su file e storage. L'RTO è definito dalla somma del tempo necessario per il ripristino, il ripristino e l'avvio del database.
+
+
+
+=== Tempo necessario per il ripristino del database
+
+Con un backup basato su file, il tempo di ripristino dipende dalle dimensioni del database e dell'infrastruttura di backup, che definisce la velocità di ripristino in megabyte al secondo. Ad esempio, se l'infrastruttura supporta un'operazione di ripristino a una velocità di 250 MBps, occorrono circa 4.5 ore per ripristinare un database di 4 TB sulla persistenza.
+
+Con i backup delle copie Snapshot dello storage, il tempo di ripristino è indipendente dalle dimensioni del database e si trova sempre nell'intervallo di un paio di secondi.
+
+
+
+=== Tempo necessario per avviare il database
+
+L'ora di inizio del database dipende dalle dimensioni del database e dal tempo necessario per caricare i dati in memoria. Negli esempi seguenti, si presuppone che i dati possano essere caricati con 1000 Mbps. Il caricamento di 4 TB in memoria richiede circa 1 ora e 10 minuti. L'ora di inizio è la stessa per le operazioni di ripristino e ripristino basate su file e Snapshot.
+
+
+NOTE: Con Azure NetApp Files, è possibile regolare dinamicamente il throughput del volume. Prima di un avvio HANA, il throughput del volume di dati HANA può essere aumentato e ridotto a un valore operativo giornaliero dopo l'avvio del database HANA.
+
+
+
+=== Tempo necessario per il ripristino del database
+
+Il tempo di ripristino dipende dal numero di registri che devono essere applicati dopo il ripristino. Questo numero è determinato dalla frequenza con cui vengono eseguiti i backup dei dati.
+
+Con i backup dei dati basati su file, la pianificazione del backup è generalmente una volta al giorno. In genere, non è possibile una frequenza di backup più elevata, poiché il backup diminuisce le prestazioni di produzione. Pertanto, nel peggiore dei casi, tutti i log scritti durante la giornata devono essere applicati durante il recupero in avanti.
+
+I backup di Snapshot vengono in genere pianificati con una frequenza maggiore perché non influiscono sulle prestazioni del database SAP HANA. Ad esempio, se i backup Snapshot vengono pianificati ogni sei ore, il tempo di ripristino sarebbe, nel peggiore dei casi, un quarto del tempo di ripristino per un backup basato su file (6 ore / 24 ore = 0.25).
+
+La figura seguente mostra un confronto tra le operazioni di ripristino e ripristino con backup giornalieri basati su file e backup Snapshot con diverse pianificazioni.
+
+Le prime due barre mostrano che, anche con un singolo backup Snapshot al giorno, il ripristino e il ripristino vengono ridotti al 43% a causa della velocità dell'operazione di ripristino da un backup Snapshot. Se vengono creati più backup Snapshot al giorno, il runtime può essere ulteriormente ridotto, poiché è necessario applicare un numero inferiore di registri durante il forward recovery.
+
+La figura seguente mostra anche che quattro o sei backup Snapshot al giorno sono i più sensati, perché una frequenza più elevata non influisce in modo significativo sul runtime complessivo.
+
+image:anf-cba-image2.png["Questa figura mostra un confronto delle operazioni di ripristino e ripristino con backup giornalieri basati su file e backup Snapshot con diverse pianificazioni."]
+
+link:anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-operations_overview.html["Segue: Casi di utilizzo e valore delle operazioni di backup e clonazione accelerate."]

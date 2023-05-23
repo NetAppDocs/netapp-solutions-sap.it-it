@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html 
+keywords: tenant create, rename, drop, refresh 
+summary: I passaggi necessari per eseguire un aggiornamento del sistema SAP HANA dipendono dalla configurazione del tenant del sistema di origine e dal nome del tenant richiesto nel sistema di destinazione, come mostrato nella figura seguente. 
+---
+= Flussi di lavoro delle operazioni di refresh del sistema SAP HANA utilizzando backup di snapshot di storage
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html["Precedente: Panoramica del workflow dei cloni di sistema SAP con SnapCenter."]
+
+I passaggi necessari per eseguire un aggiornamento del sistema SAP HANA dipendono dalla configurazione del tenant del sistema di origine e dal nome del tenant richiesto nel sistema di destinazione, come mostrato nella figura seguente.
+
+Poiché il nome del tenant è configurato nel database di sistema, il nome del tenant del sistema di origine è disponibile anche nel sistema di destinazione dopo il ripristino del database di sistema. Pertanto, il tenant nel sistema di destinazione può essere recuperato solo con lo stesso nome del tenant di origine, come mostrato nell'opzione 1 nella figura seguente. Se il nome del tenant nel sistema di destinazione deve essere diverso, il tenant deve essere recuperato con lo stesso nome del tenant di origine e quindi rinominato nel nome del tenant di destinazione richiesto. Questa è l'opzione 2 nella figura seguente.
+
+Un'eccezione a questa regola è un sistema HANA con un singolo tenant, in cui il nome del tenant è identico al SID di sistema. Questa configurazione è quella predefinita dopo l'installazione iniziale di HANA. Questa configurazione specifica viene contrassegnata dal database HANA. In questo caso, il ripristino del tenant nel sistema di destinazione può essere eseguito con il nome del tenant del sistema di destinazione, che deve essere identico anche al SID di sistema del sistema di destinazione. Questo flusso di lavoro è mostrato nell'opzione 3 nella figura seguente.
+
+
+NOTE: Non appena viene eseguita un'operazione di creazione, ridenominazione o interruzione del tenant nel sistema di origine, questo flag di configurazione viene cancellato dal database HANA. Pertanto, anche se la configurazione è stata riportata al tenant = SID, il flag non è più disponibile e l'eccezione relativa al ripristino del tenant con il workflow 3 non è più possibile. In questo caso, l'opzione 2 è il flusso di lavoro richiesto.
+
+image:sc-copy-clone-image11.png["Errore: Immagine grafica mancante"]
+
+Questa figura mostra il flag di configurazione per l'installazione iniziale di MDC single-tenant.
+
+image:sc-copy-clone-image12.png["Errore: Immagine grafica mancante"]
+
+link:sc-copy-clone-automation-example-scripts.html["Segue: Script di esempio di automazione."]

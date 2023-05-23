@@ -1,0 +1,20 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html 
+keywords: application, agnostic, information, azure, sap, hana 
+summary: 'Le informazioni indipendenti dall"applicazione sulla replica tra regioni sono disponibili nella seguente posizione.' 
+---
+= ANF Replication cross-Region con SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_disaster_recovery_solution_comparison.html["Precedente: Confronto tra soluzioni di disaster recovery."]
+
+Le informazioni indipendenti dalle applicazioni sulla replica tra regioni sono disponibili all'indirizzo https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Documentazione Azure NetApp Files | documenti Microsoft"^] nelle sezioni concetti e guida.
+
+link:saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html["Pagina successiva: Opzioni di configurazione per la replica interregionale con SAP HANA."]

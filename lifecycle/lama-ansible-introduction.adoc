@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-introduction.html 
+keywords: tr4953, introduction, 4953, clone, copy, refresh automation 
+summary: 'SAP Landscape Management (lama) consente agli amministratori di sistema SAP di automatizzare le operazioni del sistema SAP, incluse le operazioni end-to-end di cloning, copia e refresh del sistema SAP.' 
+---
+= TR-4953: Integrazione della gestione del panorama SAP di NetApp con Ansible
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Michael Schlosser, Nils Bauer, NetApp
+
+[role="lead"]
+SAP Landscape Management (lama) consente agli amministratori di sistema SAP di automatizzare le operazioni del sistema SAP, incluse le operazioni end-to-end di cloning, copia e refresh del sistema SAP.
+
+NetApp offre un'ampia gamma di moduli Ansible che consentono a SAP lama di accedere a tecnologie come NetApp Snapshot e FlexClone attraverso SAP lama Automation Studio. Queste tecnologie aiutano a semplificare e accelerare le operazioni di cloning, copia e refresh del sistema SAP.
+
+L'integrazione può essere utilizzata dai clienti che eseguono le soluzioni di storage NetApp on-premise o dai clienti che utilizzano i servizi di storage NetApp presso provider di cloud pubblico come Amazon Web Services, Microsoft Azure o Google Cloud Platform.
+
+Questo documento descrive la configurazione di SAP lama con le funzionalità di storage NetApp per le operazioni di copia, clonazione e refresh del sistema SAP utilizzando l'automazione Ansible.
+
+link:lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html["Pagina successiva: Scenari di cloning, copia e refresh del sistema SAP."]

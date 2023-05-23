@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html 
+keywords: policy, backup, replication, snapshot 
+summary: In questa sezione viene descritto come configurare un criterio per la replica del backup. 
+---
+= Creare un nuovo criterio SnapCenter per la replica del backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Precedente: Aggiungere una SVM di backup a SnapCenter."]
+
+È necessario configurare un criterio per la replica di backup come segue:
+
+. Specificare un nome per il criterio.
++
+image:amazon-fsx-image79.png["Errore: Immagine grafica mancante"]
+
+. Selezionare Snapshot backup (Backup Snapshot) e una frequenza di pianificazione. Daily viene generalmente utilizzato per la replica del backup.
++
+image:amazon-fsx-image80.png["Errore: Immagine grafica mancante"]
+
+. Selezionare la conservazione per i backup Snapshot.
++
+image:amazon-fsx-image81.png["Errore: Immagine grafica mancante"]
+
++
+Questa è la conservazione dei backup Snapshot giornalieri eseguiti sullo storage primario. La conservazione per i backup secondari nella destinazione SnapVault è già stata configurata in precedenza utilizzando il comando add rule a livello di ONTAP. Vedere "Configurazione delle relazioni di replica su FSX per file system ONTAP" (xref).
+
++
+image:amazon-fsx-image82.png["Errore: Immagine grafica mancante"]
+
+. Selezionare il campo Update SnapVault (Aggiorna etichetta) e fornire un'etichetta personalizzata.
++
+Questa etichetta deve corrispondere all'etichetta SnapMirror fornita in `add rule` Comando a livello di ONTAP.
+
++
+image:amazon-fsx-image83.png["Errore: Immagine grafica mancante"]
+
++
+image:amazon-fsx-image84.png["Errore: Immagine grafica mancante"]
+
+
+
+Il nuovo criterio SnapCenter è ora configurato.
+
+image:amazon-fsx-image85.png["Errore: Immagine grafica mancante"]
+
+link:amazon-fsx-add-a-policy-to-resource-protection.html["Avanti: Aggiungere un criterio alla protezione delle risorse."]

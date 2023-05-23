@@ -1,0 +1,180 @@
+---
+section: backup
+title: Backup, ripristino e disaster recovery
+entries:
+- title: SAP HANA su ANF - Backup e recovery con backup cloud per le applicazioni
+  type: solutions
+  entries:
+  - title: Panoramica
+    url: "/backup/anf-cba-overview.html"
+  - title: Backup e ripristino con Azure NetApp Files
+    url: "/backup/anf-cba-backup-and-recovery-using-azure-netapp-files.html"
+  - title: Casi di utilizzo e valore delle operazioni di backup e cloning accelerate
+    url: "/backup/anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-operations_overview.html"
+  - title: Cloud Backup per l'architettura delle applicazioni
+    url: "/backup/anf-cba-cloud-backup-for-applications-architecture.html"
+  - title: Cloud Backup per applicazioni per SAP HANA su ANF
+    url: "/backup/anf-cba-cloud-backup-for-applications-for-sap-hana-on-anf.html"
+  - title: Cloud Backup per i concetti e le Best practice delle applicazioni
+    url: "/backup/anf-cba-cloud-backup-for-applications-concepts-and-best-practices.html"
+  - title: Panoramica delle fasi di installazione e configurazione
+    url: "/backup/anf-cba-overview-of-installation-and-configuration-steps.html"
+  - title: Creare policy di backup
+    url: "/backup/anf-cba-create-backup-policies.html"
+  - title: Operazioni di backup basate su Snapshot del database HANA
+    url: "/backup/anf-cba-snapshot-based-backup-operations-of-the-hana-database.html"
+  - title: Operazioni di backup basate su file del database HANA
+    url: "/backup/anf-cba-file-based-backup-operations-of-the-hana-database.html"
+  - title: Operazioni di backup basate su Snapshot di volumi non dati
+    url: "/backup/anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html"
+  - title: Operazioni di backup basate su Snapshot di volumi globali non di dati
+    url: "/backup/anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html"
+  - title: Ripristino e ripristino dal backup Snapshot
+    url: "/backup/anf-cba-restore-and-recovery-from-snapshot-backup.html"
+  - title: Operazioni di backup con replica di sistema HANA
+    url: "/backup/anf-cba-backup-operations-with-hana-system-replication.html"
+  - title: Operazioni di backup con sistemi host multipli HANA
+    url: "/backup/anf-cba-backup-operations-with-hana-multiple-host-systems.html"
+  - title: Dove trovare informazioni aggiuntive e cronologia delle versioni
+    url: "/backup/anf-cba-where-to-find-additional-information-and-version-history.html"
+- title: SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
+  type: solutions
+  entries:
+  - title: Panoramica
+    url: "/backup/amazon-fsx-overview.html"
+  - title: Backup e ripristino con Amazon FSX per ONTAP
+    url: "/backup/amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html"
+  - title: Architettura SnapCenter
+    url: "/backup/amazon-fsx-snapcenter-architecture.html"
+  - title: Configurazione di SnapCenter
+    url: "/backup/amazon-fsx-snapcenter-configuration.html"
+  - title: Operazioni di backup di SnapCenter
+    url: "/backup/amazon-fsx-snapcenter-backup-operations.html"
+  - title: Backup di volumi non dati
+    url: "/backup/amazon-fsx-backup-of-non-data-volumes.html"
+  - title: Replica del backup con SnapVault
+    entries:
+    - title: Panoramica
+      url: "/backup/amazon-fsx-backup-replication-with-snapvault_overview.html"
+    - title: Configurare le relazioni di replica su FSX per i file system ONTAP
+      url: "/backup/amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html"
+    - title: Aggiungere una SVM di backup a SnapCenter
+      url: "/backup/amazon-fsx-add-a-backup-svm-to-snapcenter.html"
+    - title: Creare un nuovo criterio SnapCenter per la replica del backup
+      url: "/backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html"
+    - title: Aggiungere un criterio alla protezione delle risorse
+      url: "/backup/amazon-fsx-add-a-policy-to-resource-protection.html"
+    - title: Creare un backup con replica
+      url: "/backup/amazon-fsx-create-a-backup-with-replication.html"
+    - title: Ripristino e ripristino dallo storage secondario
+      url: "/backup/amazon-fsx-restore-and-recover-from-secondary-storage.html"
+  - title: Dove trovare informazioni aggiuntive e cronologia delle versioni
+    url: "/backup/amazon-fsx-where-to-find-additional-information.html"
+- title: Backup e recovery SAP HANA con SnapCenter
+  type: solutions
+  entries:
+  - title: Panoramica
+    url: "/backup/saphana-br-scs-overview.html"
+  - title: Architettura SnapCenter
+    url: "/backup/saphana-br-scs-snapcenter-architecture.html"
+  - title: Soluzione di backup SAP HANA di SnapCenter
+    url: "/backup/saphana-br-scs-snapcenter-sap-hana-backup-solution.html"
+  - title: Concetti e Best practice di SnapCenter
+    url: "/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html"
+  - title: Setup di laboratorio utilizzato per questo report
+    url: "/backup/saphana-br-scs-lab-setup-used-for-this-report.html"
+  - title: Configurazione di SnapCenter
+    url: "/backup/saphana-br-scs-snapcenter-configuration.html"
+  - title: Configurazione iniziale di SnapCenter
+    url: "/backup/saphana-br-scs-snapcenter-initial-configuration.html"
+  - title: Configurazione specifica delle risorse SnapCenter per i backup dei database
+      SAP HANA
+    url: "/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html"
+  - title: Configurazione specifica delle risorse SnapCenter per i backup di volumi
+      diversi dai dati
+    url: "/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html"
+  - title: Backup del database
+    url: "/backup/saphana-br-scs-database-backups.html"
+  - title: Controllo dell'integrità del blocco
+    url: "/backup/saphana-br-scs-block-integrity-check.html"
+  - title: Ripristino e ripristino
+    url: "/backup/saphana-br-scs-restore-and-recovery.html"
+  - title: Configurazione e tuning avanzati
+    url: "/backup/saphana-br-scs-advanced-configuration-and-tuning.html"
+  - title: Dove trovare informazioni aggiuntive e cronologia delle versioni
+    url: "/backup/saphana-br-scs-where-to-find-additional-information.html"
+- title: Backup e ripristino della replica del sistema SAP HANA con SnapCenter
+  type: solutions
+  entries:
+  - title: Panoramica della replica del sistema SAP HANA
+    url: "/backup/saphana-sr-scs-sap-hana-system-replication-overview.html"
+  - title: Backup Snapshot dello storage e replica del sistema SAP
+    url: "/backup/saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html"
+  - title: Opzioni di configurazione SnapCenter per la replica del sistema SAP
+    url: "/backup/saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html"
+  - title: Configurazione di SnapCenter 4.6 mediante un gruppo di risorse
+    url: "/backup/saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html"
+  - title: Configurazione di SnapCenter con una singola risorsa
+    url: "/backup/saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html"
+  - title: Ripristino e ripristino da un backup creato sull'altro host
+    url: "/backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html"
+  - title: Dove trovare ulteriori informazioni
+    url: "/backup/saphana-sr-scs-where-to-find-additional-information_overview.html"
+  - title: Cronologia delle versioni
+    url: "/backup/saphana-sr-scs-version-history.html"
+- title: Disaster recovery SAP HANA con Azure NetApp Files
+  type: solutions
+  entries:
+  - title: Panoramica sulla protezione dei dati
+    url: "/backup/saphana-dr-anf_data_protection_overview_overview.html"
+  - title: Confronto tra soluzioni di disaster recovery
+    url: "/backup/saphana-dr-anf_disaster_recovery_solution_comparison.html"
+  - title: ANF Replication cross-Region con SAP HANA
+    entries:
+    - title: Panoramica della replica cross-region con SAP HANA
+      url: "/backup/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html"
+    - title: Opzioni di configurazione per la replica interregionale con SAP HANA
+      url: "/backup/saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html"
+    - title: Requisiti e Best practice
+      url: "/backup/saphana-dr-anf_requirements_and_best_practices.html"
+    - title: Setup di laboratorio
+      url: "/backup/saphana-dr-anf_lab_setup.html"
+    - title: Procedura di configurazione per la replica ANF Cross-Region
+      url: "/backup/saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html"
+    - title: Monitoraggio della replica ANF tra regioni
+      url: "/backup/saphana-dr-anf_monitoring_anf_cross-region_replication.html"
+  - title: Test di disaster recovery
+    entries:
+    - title: Panoramica dei test di disaster recovery
+      url: "/backup/saphana-dr-anf_disaster_recovery_testing_overview.html"
+    - title: Preparare l'host di destinazione
+      url: "/backup/saphana-dr-anf_prepare_the_target_host.html"
+    - title: Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery
+      url: "/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+    - title: Montare i nuovi volumi sull'host di destinazione
+      url: "/backup/saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html"
+    - title: Ripristino del database HANA
+      url: "/backup/saphana-dr-anf_hana_database_recovery.html"
+  - title: Failover del disaster recovery
+    entries:
+    - title: Panoramica sul failover del disaster recovery
+      url: "/backup/saphana-dr-anf_disaster_recovery_failover_overview.html"
+    - title: Preparare l'host di destinazione
+      url: "/backup/saphana-dr-anf_prepare_the_target_host_01.html"
+    - title: Interrompere ed eliminare il peering delle repliche
+      url: "/backup/saphana-dr-anf_break_and_delete_replication_peering.html"
+    - title: Montare i volumi sull'host di destinazione
+      url: "/backup/saphana-dr-anf_mount_the_volumes_at_the_target_host.html"
+    - title: Ripristino del database HANA
+      url: "/backup/saphana-dr-anf_hana_database_recovery_01.html"
+  - title: Aggiornare la cronologia
+    url: "/backup/saphana-dr-anf_update_history.html"
+- title: Disaster recovery SAP HANA con replica dello storage
+  url: "/backup/saphana-dr-sr_pdf_link.html"
+- title: Backup e ripristino SAP HANA con Snap Creator
+  url: "/backup/saphana-bandr-sc_pdf_link.html"
+- title: Backup e ripristino SAP HANA con storage NetApp e software CommVault
+  url: "/backup/saphana-commvault_pdf_link.html"
+- title: SAP HANA su NetApp All SAN Array - SAN moderne, protezione dei dati e disaster
+    recovery
+  url: "/backup/saphana-san_pdf_link.html"

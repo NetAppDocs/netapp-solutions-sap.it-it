@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-sap-lama-provisioning-workflow-copy-system.html 
+keywords: system copy, timeline, storage workflow 
+summary: In questo capitolo, discuteremo brevemente delle differenze per il flusso di lavoro dei cloni di sistema e le schermate di input. 
+---
+= Workflow di provisioning SAP lama - sistema di copia
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Precedente: Workflow di deprovisioning SAP lama - system Destroy."]
+
+[role="lead"]
+La figura seguente evidenzia i passaggi principali eseguiti con il flusso di lavoro di copia del sistema.
+
+image:lama-ansible-image40.png["Questa figura fornisce una timeline per il flusso di lavoro System Copy. Contiene i passaggi Storage Cloning, preparazione del sistema, attivazione dell'isolamento, ridenominazione del sistema, avvio del sistema, importare la configurazione, eseguire l'automazione post-copia e disattivare il sistema."]
+
+In questo capitolo, discuteremo brevemente delle differenze per il flusso di lavoro dei cloni di sistema e le schermate di input. Come si può vedere nell'immagine seguente, non cambia nulla nel flusso di lavoro dello storage.
+
+image:lama-ansible-image41.png["Questa figura fornisce un diagramma architetturale con passaggi sovrapposti che mostrano dove si verifica ogni fase del flusso di lavoro."]
+
+. Il flusso di lavoro di copia del sistema può essere avviato quando il sistema viene preparato di conseguenza. Non si tratta di un'attività specifica per questa configurazione e non viene spiegata in dettaglio. Per ulteriori informazioni, consulta la documentazione di SAP lama.
++
+image:lama-ansible-image42.png["Questa schermata mostra la visualizzazione Provisioning System nella scheda Systems (sistemi). Vengono elencati due sistemi ed è stato evidenziato il menu a discesa Copy System (sistema di copia)."]
+
+. Durante il flusso di lavoro di copia, il sistema viene rinominato, come deve essere specificato nella prima schermata.
++
+image:lama-ansible-image43.png["Questa schermata mostra la pagina Copy System (Copia sistema) con le caselle System ID (ID sistema) e HANA SID (SID HANA) evidenziate."]
+
+. Durante il flusso di lavoro, è possibile modificare i numeri di istanza.
++
+image:lama-ansible-image44.png["Questa schermata mostra la scheda SAP instance numbers (numeri istanza SAP) con tre caselle per i dati."]
+
++
+
+NOTE: La modifica dei numeri di istanza non è stata testata e potrebbe richiedere modifiche nello script del provider.
+
+. Come descritto, la schermata *Custom Clone* non differisce dal flusso di lavoro di cloning, come illustrato di seguito.
++
+image:lama-ansible-image45.png["Questa schermata mostra la pagina Copy System (sistema di copia) con informazioni sui cloni personalizzati e parametri operativi."]
+
+. Come abbiamo già descritto, le restanti maschere di input non si discostano dallo standard e non vengono ulteriormente descritte in questa sede. La schermata finale mostra un riepilogo e ora è possibile avviare l'esecuzione.
++
+image:lama-ansible-image46.png["Questa schermata mostra la schermata Copy System (Copia sistema) con informazioni di base e un elenco di host. In basso a destra si trova il pulsante Execute (Esegui)."]
+
+
+
+Dopo il processo di copia, l'istanza di destinazione non viene attivata per il processo di clonazione personalizzato.
+
+image:lama-ansible-image47.png["Questa schermata mostra la schermata dei sistemi lama insieme ai dettagli dei sistemi."]
+
+Deve essere adottato manualmente per eseguire la fase di pre-hook durante il processo di distruzione del sistema, in quanto viene impostato un vincolo che impedirebbe l'esecuzione.
+
+image:lama-ansible-image48.png["Questa schermata mostra la schermata dei sistemi lama insieme ai dettagli dei sistemi e la casella di controllo Use Custom Processing Process (Usa processo di elaborazione personalizzato) è selezionata."]
+
+link:lama-ansible-sap-lama-provisioning-workflow-system-refresh.html["Segue: Workflow di provisioning SAP lama - refresh del sistema."]

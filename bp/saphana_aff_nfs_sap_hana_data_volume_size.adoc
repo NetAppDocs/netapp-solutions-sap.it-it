@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_nfs_sap_hana_data_volume_size.html 
+keywords: data volume, service, 
+summary: Per impostazione predefinita, SAP HANA utilizza un solo volume di dati per ogni servizio SAP HANA. A causa della limitazione delle dimensioni massime del file system, NetApp consiglia di limitare le dimensioni massime del volume di dati. 
+---
+= Dimensioni del volume di dati SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html["Precedente: Configurazione dello stack di i/o per SAP HANA."]
+
+Per impostazione predefinita, SAP HANA utilizza un solo volume di dati per ogni servizio SAP HANA. A causa della limitazione delle dimensioni massime del file system, NetApp consiglia di limitare le dimensioni massime del volume di dati.
+
+Per eseguire questa operazione automaticamente, impostare il seguente parametro in `global.ini` nella sezione `[persistence]`:
+
+....
+datavolume_striping = true
+datavolume_striping_size_gb = 8000
+....
+Questo crea un nuovo volume di dati dopo il raggiungimento del limite di 8.000 GB. https://launchpad.support.sap.com/["Nota SAP 240005 domanda 15"^] fornisce ulteriori informazioni.
+
+link:saphana_aff_nfs_sap_hana_software_installation.html["Successivo: Installazione del software SAP HANA."]

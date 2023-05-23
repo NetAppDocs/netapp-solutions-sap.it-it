@@ -1,0 +1,87 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/libelle-sc-overview.html 
+keywords: tr4929, 4929, overview, introduction 
+summary: 'Le soluzioni NetApp per l"ottimizzazione della gestione del ciclo di vita SAP sono integrate nei database SAP AnyDB e SAP HANA. Inoltre, NetApp si integra negli strumenti di gestione del ciclo di vita SAP, combinando un"efficiente protezione dei dati integrata con le applicazioni con il provisioning flessibile dei sistemi di test SAP.' 
+---
+= TR-4929: Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Holger Zecha, Tobias Brandl, NetApp Franz Diegruber, libelle
+
+Nel dinamico ambiente di business di oggi, le aziende devono fornire innovazione continua e reagire rapidamente ai mercati in continua evoluzione. In queste circostanze competitive, le aziende che implementano una maggiore flessibilità nei propri processi di lavoro possono adattarsi alle esigenze del mercato in modo più efficace.
+
+Le mutevoli esigenze di mercato influiscono anche sugli ambienti SAP di un'azienda, in modo da richiedere integrazioni, modifiche e aggiornamenti regolari. I reparti IT devono implementare queste modifiche con meno risorse e in periodi di tempo più brevi. Ridurre al minimo i rischi durante l'implementazione di tali modifiche richiede test e formazione completi che richiedono sistemi SAP aggiuntivi con dati effettivi provenienti dalla produzione.
+
+Gli approcci tradizionali di gestione del ciclo di vita SAP per il provisioning di questi sistemi si basano principalmente su processi manuali. Questi processi manuali sono spesso soggetti a errori e richiedono molto tempo, ritardando l'innovazione e la risposta ai requisiti di business.
+
+Le soluzioni NetApp per l'ottimizzazione della gestione del ciclo di vita SAP sono integrate nei database SAP AnyDB e SAP HANA. Inoltre, NetApp si integra negli strumenti di gestione del ciclo di vita SAP, combinando un'efficiente protezione dei dati integrata con le applicazioni con il provisioning flessibile dei sistemi di test SAP.
+
+Mentre queste soluzioni NetApp risolvono il problema della gestione efficiente di enormi quantità di dati anche per i database più grandi, le operazioni complete di copia e refresh del sistema SAP end-to-end devono includere attività pre e post-copia per modificare completamente l'identità del sistema SAP di origine nel sistema di destinazione. SAP descrive le attività richieste nel loro https://help.sap.com/viewer/6ffd9a3438944dc39dfe288d758a2ed5/LATEST/en-US/f6abb90a62aa4695bb96871a89287704.html["Guida di copia omogenea del sistema SAP"^]. Per ridurre ulteriormente il numero di processi manuali e migliorare la qualità e la stabilità di un processo di copia del sistema SAP, il nostro partner https://www.libelle.com["Libelle"^] ha sviluppato il https://www.libelle.com/products/systemcopy["Libelle SystemCopy (LSC)"^] tool. Abbiamo collaborato con Libelle per integrare le soluzioni NetApp per le copie dei sistemi SAP in LSC da fornire https://www.youtube.com/watch?v=wAFyA_WbNm4["copie di sistema automatiche end-to-end complete in tempi record"^].
+
+
+
+== Operazione di copia Snapshot integrata nell'applicazione
+
+La possibilità di creare copie Snapshot NetApp coerenti con l'applicazione sul layer di storage è la base per le operazioni di copia del sistema e di cloni del sistema descritte in questo documento. Le copie Snapshot basate su storage vengono create con il plug-in NetApp SnapCenter per SAP HANA o SAP qualsiasi DBS su sistemi NetApp ONTAP nativi o utilizzando https://docs.microsoft.com/en-us/azure/azure-netapp-files/azacsnap-introduction["Tool Microsoft Azure Application coerente Snapshot"^] (AzAcSnap) e le interfacce fornite dal database SAP HANA e Oracle in esecuzione in Microsoft Azure. Quando si utilizza SAP HANA, SnapCenter e AzAcSnap registrano le copie Snapshot nel catalogo di backup SAP HANA in modo che i backup possano essere utilizzati per operazioni di ripristino e ripristino e per operazioni di cloning.
+
+
+
+== Backup off-site e/o replica dei dati di disaster recovery
+
+Le copie Snapshot coerenti con l'applicazione possono essere replicate sul layer di storage in un sito di backup off-site o in un sito di disaster recovery controllato da SnapCenter on-premise. La replica si basa sulle modifiche dei blocchi ed è quindi efficiente in termini di spazio e larghezza di banda. La stessa tecnologia è disponibile per i sistemi SAP HANA e Oracle in esecuzione in Azure con Azure NetApp Files utilizzando la funzione di replica tra regioni (CRR) per replicare in modo efficiente i volumi Azure NetApp Files tra regioni Azure.
+
+
+
+== Utilizzare qualsiasi copia Snapshot per operazioni di copia o clonazione del sistema SAP
+
+La tecnologia NetApp e l'integrazione del software consentono di utilizzare qualsiasi copia Snapshot di un sistema di origine per un'operazione di copia o clonazione del sistema SAP. Questa copia Snapshot può essere selezionata dallo stesso storage utilizzato per i sistemi di produzione SAP, dallo storage utilizzato per i backup off-site (come il backup Azure NetApp Files in Azure) o dallo storage nel sito di disaster recovery (volumi di destinazione CRR Azure NetApp Files). Questa flessibilità consente di separare i sistemi di sviluppo e test dalla produzione, se necessario, e copre altri scenari, come il test del disaster recovery nel sito di disaster recovery.
+
+
+
+== Automazione con integrazione
+
+Esistono diversi scenari e casi di utilizzo per il provisioning dei sistemi di test SAP, oltre a requisiti diversi per il livello di automazione. I prodotti software NetApp per SAP si integrano nei prodotti di gestione del ciclo di vita e dei database di SAP e di altri vendor di terze parti (ad esempio, libelle) per supportare diversi scenari e livelli di automazione.
+
+NetApp SnapCenter con il plug-in per SAP HANA e SAP AnyDB o AzAcSnap su Azure viene utilizzato per eseguire il provisioning dei cloni di volumi di storage richiesti in base a una copia Snapshot coerente con l'applicazione e per eseguire tutte le operazioni di host e database necessarie fino a un database SAP avviato. A seconda del caso d'utilizzo, potrebbero essere necessarie la copia del sistema SAP, la clonazione del sistema, il refresh del sistema o ulteriori operazioni manuali, come la post-elaborazione SAP. Ulteriori dettagli sono illustrati nella sezione successiva.
+
+È possibile eseguire un provisioning end-to-end completamente automatizzato o un refresh dei sistemi di test SAP utilizzando l'automazione Libelle SystemCopy (LSC). L'integrazione di SnapCenter o AzAcSnap in LSC è descritta più dettagliatamente in questo documento.
+
+
+
+== Libelle SystemCopy
+
+Libelle SystemCopy è una soluzione software basata su framework per creare copie di sistema e orizzontale completamente automatizzate. Con il tocco proverbiale di un pulsante, i sistemi di QA e test possono essere aggiornati con nuovi dati di produzione. Libelle SystemCopy supporta tutti i database e i sistemi operativi convenzionali, fornisce i propri meccanismi di copia per tutte le piattaforme ma, allo stesso tempo, integra procedure di backup/ripristino o tool di storage come le copie Snapshot di NetApp e i volumi FlexClone di NetApp. Le attività necessarie durante una copia del sistema sono controllate dall'esterno dello stack SAP ABAP. In questo modo, non sono richiesti trasporti o altre modifiche nelle applicazioni SAP. In genere, tutti i passaggi necessari per completare correttamente una procedura di copia del sistema possono essere suddivisi in quattro fasi:
+
+* *Fase di controllo.* controllare gli ambienti di sistema interessati.
+* *Fase preliminare.* preparare il sistema di destinazione per una copia del sistema.
+* *Copy phase.* fornire una copia del database di produzione effettivo nel sistema di destinazione dall'origine.
+* *Fase post.* tutte le attività successive alla copia per completare la procedura di copia omogenea del sistema e fornire un sistema di destinazione aggiornato.
+
+
+Durante la fase di copia, le funzionalità NetApp Snapshot e FlexClone vengono utilizzate per ridurre al minimo il tempo necessario a un paio di minuti anche per i database più grandi.
+
+Per le fasi Check, Pre e Post, LSC include oltre 450 attività preconfigurate che coprono il 95% delle tipiche operazioni di refresh. Di conseguenza, LSC adotta l'automazione seguendo gli standard SAP. Grazie alla natura software-defined di LSC, i processi di refresh del sistema possono essere facilmente modificati e migliorati per soddisfare le esigenze specifiche degli ambienti SAP dei clienti.
+
+
+
+== Casi d'utilizzo per il refresh e la clonazione del sistema SAP
+
+Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione:
+
+* Aggiornamento regolare dei sistemi di quality assurance e test e training
+* Creazione di ambienti di sistema di riparazione o riparazione per risolvere il danneggiamento logico
+* Scenari di test per il disaster recovery
+
+
+Sebbene i sistemi di riparazione e i sistemi di test per il disaster recovery siano generalmente forniti utilizzando cloni di sistema SAP (che non richiedono operazioni di post-elaborazione estese) per sistemi di test e training aggiornati, queste fasi di post-elaborazione devono essere applicate per consentire la coesistenza con il sistema di origine. Pertanto, questo documento si concentra sugli scenari di refresh del sistema SAP. Ulteriori dettagli sui diversi casi di utilizzo sono disponibili nel report tecnico https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"^].
+
+Il resto di questo documento è suddiviso in due parti. La prima parte descrive l'integrazione di NetApp SnapCenter con i sistemi libelle SystemCopy per SAP HANA e SAP AnyDB in esecuzione su sistemi NetApp ONTAP on-premise. La seconda parte descrive l'integrazione di AzAcSnap con LSC per sistemi SAP HANA in esecuzione in Microsoft Azure con Azure NetApp Files fornito. Sebbene la tecnologia ONTAP sottostante sia identica, Azure NetApp Files fornisce interfacce e strumenti diversi (ad esempio, AzAcSnap) rispetto all'installazione ONTAP nativa.
+
+link:libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html["Successivo: Aggiornamento del sistema SAP HANA con LSC e SnapCenter."]

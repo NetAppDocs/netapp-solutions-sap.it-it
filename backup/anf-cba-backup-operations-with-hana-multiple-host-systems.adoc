@@ -1,0 +1,69 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-backup-operations-with-hana-multiple-host-systems.html 
+keywords: system replication, cba, hsr, multiple host, standby host 
+summary: In questa sezione viene descritto come eseguire operazioni di backup con la replica del sistema HANA. 
+---
+= Operazioni di backup con sistemi host multipli HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-backup-operations-with-hana-system-replication.html["Precedente: Operazioni di backup con replica di sistema HANA."]
+
+Il database HANA esegue i backup Snapshot nello stesso modo dei sistemi a singolo host. I comandi SQL dell'operazione di backup devono essere attivati nel database di sistema e il punto di salvataggio del backup HANA viene creato per tutti i nodi di lavoro HANA in modo che tutti i volumi di dati di ciascun nodo siano coerenti. Come fase successiva, le operazioni Snapshot dello storage devono essere eseguite su ciascun volume di dati.
+
+
+
+== HANA sistemi multihost senza host in standby
+
+Un sistema host multiplo HANA senza host in standby viene configurato in CBA in modo simile a un sistema host singolo HANA.
+
+. Il plug-in HANA deve essere installato sul nodo di lavoro, dove sono in esecuzione il server dei nomi HANA e il database di sistema. I nodi di lavoro che eseguono Indexserver non richiedono il plug-in HANA.
+. La chiave di memorizzazione utente HDB viene configurata per il database di sistema allo stesso modo di un sistema HANA a host singolo.
+. Nella configurazione dell'impatto dello storage, è necessario aggiungere tutti i volumi di dati del sistema HANA.
++
+Nell'esempio seguente, aggiungere volumi Data1, Data2 e Data3.
+
++
+
+NOTE: I volumi di dati di ciascun host HANA devono essere montati su ciascun host nello stesso modo della configurazione di un host in standby. Cloud Backup for Applications crea un elenco di file inclusi nel backup e pertanto deve avere accesso a tutti i volumi appartenenti al sistema HANA. L'elenco di file è necessario per le operazioni di ripristino di un singolo file quando è attivata la replica ANF cross-region o il backup ANF.
+
++
+image:anf-cba-image111.png["Questa figura mostra come installare un plug-in HANA sui nodi di lavoro in cui viene eseguito Nameserver/systemDB."]
+
+
+
+
+
+== HANA sistemi multihost con host in standby
+
+Con la versione corrente di CBA, i sistemi HANA con host multipli con un host in standby sono supportati con il presupposto che, dopo un failover del server dei nomi all'host in standby, l'host guasto venga riavviato e quindi venga visualizzata la stessa configurazione del sistema operativo, i montaggi del file system e il plug-in HANA.
+
+In CBA viene configurato un sistema host multiplo HANA con host in standby seguendo la procedura riportata di seguito.
+
+. Il plug-n HANA deve essere installato sul nodo di lavoro, dove è in esecuzione il server dei nomi HANA/database di sistema.
+. La chiave di memorizzazione utente HDB è configurata con due host, il database di sistema (host name server) e l'host di standby. Le stringhe host:port nella configurazione della chiave CBA devono essere separate con un punto e virgola e l'elenco deve iniziare e terminare con virgolette doppie. Il client hdbsql inizia quindi con la prima voce nella chiave dell'archivio utente e tenta di connettersi al database. Se la voce non funziona, viene utilizzata la voce successiva. È quindi importante configurare l'host del server dei nomi primario come primo e l'host di standby come seconda voce nella chiave di memorizzazione utente.
++
+image:anf-cba-image112.png["Questa schermata mostra la schermata Add User Store (Aggiungi archivio utenti) con le informazioni appropriate inserite."]
+
+. Tutti i volumi di dati del sistema HANA devono essere aggiunti alla configurazione dell'impatto dello storage.
++
+Nell'esempio illustrato nella figura seguente, è necessario aggiungere volumi Data1 e Data2.
+
++
+image:anf-cba-image113.png["Questa figura mostra come aggiungere Data1 e Data2 ai nameserver dei lavoratori e allo standby."]
+
+
+
+In caso di failover del server dei nomi sull'host di standby, si presuppone che l'host guasto venga riavviato in un breve intervallo di tempo e che venga fornita la stessa configurazione di prima. In questo caso, il plugin HANA e i componenti dell'archivio utenti hdbsql e hdb sono disponibili e possono continuare ad essere utilizzati per le operazioni di backup.
+
+Con la configurazione dell'archivio utente descritta in precedenza, il client hdbsql utilizza ora la seconda voce host che punta all'host del server dei nomi corrente ed esegue le operazioni di backup.
+
+image:anf-cba-image114.png["Questa figura mostra che la macchina virtuale guasta viene riavviata e funge da nuovo host di standby dopo un failover verso l'host di standby."]
+
+link:anf-cba-where-to-find-additional-information-and-version-history.html["Pagina successiva: Dove trovare informazioni aggiuntive e cronologia delle versioni."]

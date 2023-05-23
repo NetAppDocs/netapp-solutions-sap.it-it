@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_disaster_recovery_testing_overview.html 
+keywords: disaster, recovery, strategy, workflow, testing, internal, documentation 
+summary: Per implementare una strategia di disaster recovery efficace, è necessario testare il flusso di lavoro richiesto. I test dimostrano se la strategia funziona e se la documentazione interna è sufficiente e consentono agli amministratori di seguire le procedure richieste. 
+---
+= Test di disaster recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Precedente: Monitoraggio della replica ANF tra regioni."]
+
+Per implementare una strategia di disaster recovery efficace, è necessario testare il flusso di lavoro richiesto. I test dimostrano se la strategia funziona e se la documentazione interna è sufficiente e consentono agli amministratori di seguire le procedure richieste.
+
+ANF la replica interregionale consente di eseguire test di disaster recovery senza mettere a rischio RTO e RPO. I test di disaster recovery possono essere eseguiti senza interrompere la replica dei dati.
+
+Il workflow di test del disaster recovery sfrutta il set di funzionalità ANF per creare nuovi volumi in base ai backup Snapshot esistenti nella destinazione del disaster recovery. Vedere https://docs.microsoft.com/en-us/azure/azure-netapp-files/snapshots-introduction["Funzionamento delle istantanee di Azure NetApp Files | documenti Microsoft"^].
+
+A seconda che la replica del backup dei log faccia parte o meno della configurazione del disaster recovery, le fasi del disaster recovery sono leggermente diverse. In questa sezione vengono descritti i test di disaster recovery per la replica solo backup dei dati e per la replica del volume dei dati combinata con la replica del volume di backup del registro.
+
+Per eseguire il test di disaster recovery, attenersi alla seguente procedura:
+
+. Preparare l'host di destinazione.
+. Creare nuovi volumi in base ai backup Snapshot nel sito di disaster recovery.
+. Montare i nuovi volumi sull'host di destinazione.
+. Ripristinare il database HANA.
++
+** Solo ripristino del volume di dati.
+** Eseguire il ripristino in avanti utilizzando backup di log replicati.
+
+
+
+
+Le seguenti sottosezioni descrivono in dettaglio questi passaggi.
+
+image:saphana-dr-anf_image18.png["Errore: Immagine grafica mancante"]
+
+link:saphana-dr-anf_prepare_the_target_host.html["Avanti: Preparare l'host di destinazione."]

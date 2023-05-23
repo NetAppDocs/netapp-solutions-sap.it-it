@@ -1,0 +1,182 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-restore-and-recovery.html 
+keywords: restore, recovery, workflow, studio, cockpit 
+summary: In questa sezione vengono descritti i flussi di lavoro di ripristino e ripristino per un sistema tenant singolo HANA MDC a host singolo. Vengono descritte le differenze per un sistema host multiplo. 
+---
+= Ripristino e ripristino
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Precedente: Backup basati su file e controllo dell'integrità dei blocchi."]
+
+La sezione seguente descrive i flussi di lavoro di ripristino e ripristino per un sistema tenant singolo e host singolo HANA MDC. Vengono descritte le differenze per un sistema host multiplo.
+
+Gli esempi mostrano SAP HANA Studio come uno strumento per eseguire il ripristino manuale. Per le operazioni di recovery è inoltre possibile utilizzare istruzioni SAP HANA Cockpit o HANA SQL.
+
+Per ripristinare e ripristinare un sistema single-tenant SAP HANA MDC utilizzando SAP HANA Studio e il servizio SnapCenter, attenersi alla seguente procedura:
+
+. Preparare il processo di ripristino con SAP HANA Studio:
++
+.. Selezionare Recover System Database (Ripristina database di sistema) e confermare la chiusura del sistema SAP HANA.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
++
+Viene visualizzato l'elenco dei backup dei dati.
+
+.. Selezionare il backup appropriato per visualizzare l'ID del backup esterno.
+
+
+. Smontare i volumi di dati HANA.
+. Eseguire il processo di ripristino con il servizio SnapCenter:
++
+.. Nella vista Backup, selezionare il backup che corrisponde all'ID di backup esterno o al campo dei commenti di SAP HANA Studio.
+.. Per avviare l'operazione di ripristino, selezionare Restore (Ripristina) nel menu di scelta rapida.
+
+
+. Montare i volumi di dati HANA.
+. Eseguire il processo di ripristino del database di sistema con SAP HANA Studio:
++
+.. Fare clic su Refresh (Aggiorna) dall'elenco dei backup e selezionare il backup disponibile per il ripristino (indicato da un'icona verde).
+.. Avviare l'operazione di ripristino.
++
+Al termine dell'operazione di ripristino, viene avviato il database di sistema.
+
+
+
+. Eseguire il processo di ripristino del database tenant con SAP HANA Studio:
++
+.. Selezionare Recover tenant Database (Ripristina database tenant) e selezionare il tenant da ripristinare.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
++
+Viene visualizzato un elenco di backup dei dati. Poiché il volume di dati è già stato ripristinato, il backup del tenant indica come disponibile (in verde).
+
+.. Selezionare il backup e avviare il processo di ripristino. Al termine del processo di ripristino, il database del tenant viene avviato automaticamente.
+
+
+
+
+La seguente procedura descrive le operazioni di ripristino e ripristino del sistema HANA PR1:
+
+. Per avviare il ripristino del database di sistema, in SAP HANA Studio, selezionare l'opzione Backup and Recovery Recover System Database.
++
+image:saphana-backup-anf-image59.png["Errore: Immagine grafica mancante"]
+
+. Selezionare il tipo di ripristino e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image60.png["Errore: Immagine grafica mancante"]
+
+. Fornire la posizione del catalogo di backup e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image61.png["Errore: Immagine grafica mancante"]
+
+. Viene visualizzato un elenco dei backup disponibili in base al contenuto del catalogo di backup HANA. Scegliere il backup richiesto e annotare l'ID del backup esterno, ad esempio, come mostrato nella seguente schermata, il backup più recente.
++
+image:saphana-backup-anf-image62.png["Errore: Immagine grafica mancante"]
+
+. Smontare tutti i volumi di dati.
++
+....
+umount /hana/data/PR1/mnt00001
+....
++
+
+NOTE: Per un sistema host multiplo SAP HANA, è necessario smontare tutti i volumi di dati su ciascun host.
+
+. Dall'interfaccia utente del servizio SnapCenter, selezionare Visualizza backup nel menu di scelta rapida della vista sistemi SAP HANA.
+. Per avviare l'operazione di ripristino, nella vista Backup, selezionare il backup più recente, visualizzato anche in HANA Studio, quindi selezionare Restore (Ripristina) nel menu di scelta rapida.
++
+image:saphana-backup-anf-image63.png["Errore: Immagine grafica mancante"]
+
+. Per confermare l'operazione di ripristino, fare clic su Yes (Sì), Restore (Ripristina).
++
+image:saphana-backup-anf-image64.png["Errore: Immagine grafica mancante"]
+
++
+Il log dei lavori del servizio SnapCenter mostra lo stato di avanzamento dell'operazione di ripristino.
+
++
+image:saphana-backup-anf-image65.png["Errore: Immagine grafica mancante"]
+
+. Attendere il completamento del processo di ripristino. Su ciascun host di database, montare tutti i volumi di dati. Nell'esempio seguente, è necessario eseguire il remount di un solo volume sull'host del database:
++
+....
+mount /hana/data/SP1/mnt00001
+....
+. Per aggiornare l'elenco dei backup disponibili, accedere a SAP HANA Studio e fare clic su Refresh (Aggiorna). Il backup ripristinato con il servizio SnapCenter viene visualizzato con un'icona verde nell'elenco dei backup. Selezionare il backup e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image66.png["Errore: Immagine grafica mancante"]
+
+. Fornire la posizione dei backup del registro. Fare clic su Avanti.
++
+image:saphana-backup-anf-image67.png["Errore: Immagine grafica mancante"]
+
+. Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
++
+image:saphana-backup-anf-image68.png["Errore: Immagine grafica mancante"]
+
+. Rivedere le impostazioni di ripristino e fare clic su fine.
++
+image:saphana-backup-anf-image69.png["Errore: Immagine grafica mancante"]
+
++
+Viene avviato il processo di ripristino. Attendere il completamento del ripristino del database di sistema.
+
++
+image:saphana-backup-anf-image70.png["Errore: Immagine grafica mancante"]
+
+. In SAP HANA Studio, selezionare la voce relativa al database di sistema e passare a Backup and Recovery Recover Tenant Database.
++
+image:saphana-backup-anf-image71.png["Errore: Immagine grafica mancante"]
+
+. Selezionare il tenant da ripristinare e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image72.png["Errore: Immagine grafica mancante"]
+
+. Specificare il tipo di ripristino e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image73.png["Errore: Immagine grafica mancante"]
+
+. Confermare la posizione del catalogo di backup e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image74.png["Errore: Immagine grafica mancante"]
+
+. Verificare che il database del tenant sia offline. Fare clic su OK per continuare.
++
+image:saphana-backup-anf-image75.png["Errore: Immagine grafica mancante"]
+
++
+Poiché il ripristino del volume di dati si è verificato prima del ripristino del database di sistema, il backup del tenant è immediatamente disponibile.
+
+. Selezionare il backup evidenziato in verde e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image76.png["Errore: Immagine grafica mancante"]
+
+. Confermare la posizione di backup del registro e fare clic su Next (Avanti).
++
+image:saphana-backup-anf-image77.png["Errore: Immagine grafica mancante"]
+
+. Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
++
+image:saphana-backup-anf-image78.png["Errore: Immagine grafica mancante"]
+
+. Esaminare le impostazioni di ripristino e avviare il processo di ripristino del database tenant facendo clic su Finish (fine).
++
+image:saphana-backup-anf-image79.png["Errore: Immagine grafica mancante"]
+
+. Attendere il completamento del ripristino e l'avvio del database tenant.
++
+image:saphana-backup-anf-image80.png["Errore: Immagine grafica mancante"]
+
++
+Il sistema SAP HANA è operativo.
+
+
+
+Per un sistema SAP HANA MDC con più tenant, è necessario ripetere i passaggi da 15 a 24 per ciascun tenant.
+
+link:saphana-backup-anf-additional-information.html["Avanti: Dove trovare ulteriori informazioni."]

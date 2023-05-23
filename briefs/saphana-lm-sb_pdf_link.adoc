@@ -1,0 +1,13 @@
+---
+sidebar: sidebar 
+permalink: briefs/saphana-lm-sb_pdf_link.html 
+keywords: sb-3978, pdf, sap, hana, provisioning, lifecycle, management, automation, LaMa, landscape 
+summary: 'NetApp sta affrontando le sfide legate alla lenta implementazione delle funzionalità, alla mancanza di automazione e alla perdita di produttività fornendo una soluzione per la gestione del ciclo di vita completamente integrata negli strumenti utilizzati dagli amministratori SAP per le operazioni quotidiane, come SAP Landscape Management (SAP lama). L"obiettivo è semplificare il flusso di lavoro di provisioning dalla pre-elaborazione alla post-elaborazione, incluse tutte le attività software e a livello di storage necessarie per creare una copia del sistema di produzione. Con questa soluzione, gli amministratori possono creare un ambiente di sviluppo e test con un paio di clic del mouse, migliorando così la gestione del ciclo di vita.' 
+---
+= SB-3978: Gestione del ciclo di vita per SAP HANA
+:allow-uri-read: 
+
+
+NetApp sta affrontando le sfide legate alla lenta implementazione delle funzionalità, alla mancanza di automazione e alla perdita di produttività fornendo una soluzione per la gestione del ciclo di vita completamente integrata negli strumenti utilizzati dagli amministratori SAP per le operazioni quotidiane, come SAP Landscape Management (SAP lama). L'obiettivo è semplificare il flusso di lavoro di provisioning dalla pre-elaborazione alla post-elaborazione, incluse tutte le attività software e a livello di storage necessarie per creare una copia del sistema di produzione. Con questa soluzione, gli amministratori possono creare un ambiente di sviluppo e test con un paio di clic del mouse, migliorando così la gestione del ciclo di vita.
+
+link:https://www.netapp.com/pdf.html?item=/media/6996-sb-3978pdf.pdf["https://www.netapp.com/pdf.html?item=/media/6996-sb-3978pdf.pdf"]

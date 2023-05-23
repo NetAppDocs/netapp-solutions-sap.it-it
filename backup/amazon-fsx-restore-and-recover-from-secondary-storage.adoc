@@ -1,0 +1,30 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-restore-and-recover-from-secondary-storage.html 
+keywords: restore, recover, secondary, storage, 
+summary: Questa sezione descrive come ripristinare e ripristinare dallo storage secondario. 
+---
+= Ripristino e ripristino dallo storage secondario
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-create-a-backup-with-replication.html["Precedente: Creare un backup con replica."]
+
+Per ripristinare e ripristinare dallo storage secondario, attenersi alla seguente procedura:
+
+Per recuperare l'elenco di tutti i backup sullo storage secondario, nella vista topologia SnapCenter, fare clic su copie del vault, quindi selezionare un backup e fare clic su Ripristina.
+
+image:amazon-fsx-image92.png["Errore: Immagine grafica mancante"]
+
+La finestra di dialogo di ripristino mostra le posizioni secondarie.
+
+image:amazon-fsx-image93.png["Errore: Immagine grafica mancante"]
+
+Ulteriori fasi di ripristino e ripristino sono identiche a quelle precedentemente descritte per un backup Snapshot nello storage primario.
+
+link:amazon-fsx-where-to-find-additional-information.html["Pagina successiva: Dove trovare informazioni aggiuntive e cronologia delle versioni."]

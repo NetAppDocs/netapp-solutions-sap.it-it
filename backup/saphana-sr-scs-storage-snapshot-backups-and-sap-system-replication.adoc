@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html 
+keywords: Snapshot, storage, backup, primary host, sql 
+summary: 'Le operazioni di backup vengono sempre eseguite sull"host SAP HANA primario. I comandi SQL richiesti per l"operazione di backup non possono essere eseguiti sull"host SAP HANA secondario.' 
+---
+= Backup Snapshot dello storage e replica del sistema SAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-sr-scs-sap-hana-system-replication-overview.html["Precedente: Panoramica della replica del sistema SAP HANA."]
+
+Le operazioni di backup vengono sempre eseguite sull'host SAP HANA primario. I comandi SQL richiesti per l'operazione di backup non possono essere eseguiti sull'host SAP HANA secondario.
+
+Per le operazioni di backup SAP HANA, gli host SAP HANA primari e secondari sono una singola entità. Condividono lo stesso catalogo di backup SAP HANA e utilizzano i backup per il ripristino, indipendentemente dal fatto che il backup sia stato creato nell'host SAP HANA primario o secondario.
+
+La possibilità di utilizzare qualsiasi backup per il ripristino e l'inoltro del ripristino utilizzando i backup dei log da entrambi gli host richiede una posizione di backup dei log condivisa accessibile da entrambi gli host. NetApp consiglia di utilizzare un volume di storage condiviso. Tuttavia, occorre anche separare la destinazione di backup del log in sottodirectory all'interno del volume condiviso.
+
+Ogni host SAP HANA dispone di un proprio volume di storage. Quando si utilizza un'istantanea basata su storage per eseguire un backup, viene creata un'istantanea coerente con il database sul volume di storage dell'host SAP HANA primario.
+
+image:saphana-sr-scs-image3.png["Errore: Immagine grafica mancante"]
+
+Quando viene eseguito un failover sull'host 2, l'host 2 diventa l'host primario, i backup vengono eseguiti sull'host 2 e i backup Snapshot vengono creati sul volume di storage dell'host 2.
+
+Il backup creato sull'host 2 può essere ripristinato direttamente al livello di storage. Se è necessario utilizzare un backup creato sull'host 1, il backup deve essere copiato dal volume di storage dell'host 1 al volume di storage dell'host 2. Forward Recovery utilizza i backup dei log di entrambi gli host.
+
+image:saphana-sr-scs-image4.png["Errore: Immagine grafica mancante"]
+
+link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Pagina successiva: Opzioni di configurazione SnapCenter per la replica del sistema SAP."]

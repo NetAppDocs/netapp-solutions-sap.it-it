@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_fc_san_fabric_setup.html 
+keywords: fabric, FCP, SAN 
+summary: Ogni server SAP HANA deve disporre di una connessione SAN FCP ridondante con una larghezza di banda minima di 8 Gbps. Per ogni host SAP HANA collegato a un controller di storage, è necessario configurare una larghezza di banda di almeno 8 Gbps nel controller di storage. 
+---
+= Configurazione del fabric SAN
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_aff_fc_infrastructure_setup_and_configuration_overview.html["Precedente: Configurazione e configurazione dell'infrastruttura."]
+
+Ogni server SAP HANA deve disporre di una connessione SAN FCP ridondante con una larghezza di banda minima di 8 Gbps. Per ogni host SAP HANA collegato a un controller di storage, è necessario configurare una larghezza di banda di almeno 8 Gbps nel controller di storage.
+
+La figura seguente mostra un esempio con quattro host SAP HANA collegati a due storage controller. Ciascun host SAP HANA dispone di due porte FCP collegate al fabric ridondante. A livello di storage, quattro porte FCP sono configurate per fornire il throughput richiesto per ciascun host SAP HANA.
+
+image:saphana_aff_fc_image9.png["Errore: Immagine grafica mancante"]
+
+Oltre alla suddivisione in zone sul layer dello switch, è necessario mappare ogni LUN del sistema di storage agli host che si connettono a questo LUN. Mantenere lo zoning sullo switch semplice, ovvero definire un set di zone in cui tutti gli HBA host possano vedere tutti gli HBA dei controller.
+
+link:saphana_aff_fc_time_synchronization.html["Successivo: Sincronizzazione dell'ora."]

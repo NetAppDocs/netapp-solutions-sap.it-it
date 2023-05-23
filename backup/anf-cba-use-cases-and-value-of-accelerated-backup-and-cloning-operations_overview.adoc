@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-operations_overview.html 
+keywords: system upgrade, backups, restore 
+summary: 'L"esecuzione dei backup è una parte critica di qualsiasi strategia di protezione dei dati. I backup vengono pianificati regolarmente per garantire che sia possibile eseguire il ripristino in caso di guasti del sistema. Questo è il caso di utilizzo più ovvio, ma esistono anche altre attività di gestione del ciclo di vita SAP per le quali l"accelerazione delle operazioni di backup e recovery è fondamentale.' 
+---
+= Casi di utilizzo e valore delle operazioni di backup e cloning accelerate
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-backup-and-recovery-using-azure-netapp-files.html["Precedente: Backup e ripristino con Azure NetApp Files."]
+
+[role="lead"]
+L'esecuzione dei backup è una parte critica di qualsiasi strategia di protezione dei dati. I backup vengono pianificati regolarmente per garantire che sia possibile eseguire il ripristino in caso di guasti del sistema. Questo è il caso di utilizzo più ovvio, ma esistono anche altre attività di gestione del ciclo di vita SAP per le quali l'accelerazione delle operazioni di backup e recovery è fondamentale.
+
+L'upgrade del sistema SAP HANA è un esempio di come un backup on-demand prima dell'upgrade e una possibile operazione di ripristino in caso di errore dell'upgrade abbiano un effetto significativo sul downtime complessivo pianificato. Con l'esempio di un database da 4 TB, è possibile ridurre il downtime pianificato di 8 ore utilizzando le operazioni di backup e ripristino basate su Snapshot.
+
+Un altro esempio di caso d'utilizzo potrebbe essere un tipico ciclo di test, in cui il test deve essere eseguito su più iterazioni con diversi set di dati o parametri. Quando si sfruttano le rapide operazioni di backup e ripristino, è possibile creare facilmente punti di salvataggio all'interno del ciclo di test e ripristinare il sistema a uno qualsiasi di questi punti di salvataggio precedenti se un test non riesce o deve essere ripetuto. Ciò consente di completare i test in anticipo, consentendo di ottenere più test e di migliorare i risultati dei test.
+
+image:anf-cba-image3.png["In questa figura sono illustrati i casi di utilizzo per le operazioni di backup e ripristino."]
+
+Una volta implementati, i backup Snapshot possono essere utilizzati anche per altri casi di utilizzo, che richiedono copie di un database HANA. Con ANF, è possibile creare un nuovo volume in base al contenuto di qualsiasi backup Snapshot disponibile. Il tempo di esecuzione di questa operazione è di alcuni secondi, indipendentemente dalle dimensioni del volume.
+
+Il caso di utilizzo più diffuso è SAP System Refresh, in cui i dati del sistema di produzione devono essere copiati nel sistema di test o QA. Sfruttando la funzione di cloning ANF, è possibile eseguire il provisioning del volume per il sistema di test da qualsiasi copia Snapshot del sistema di produzione in pochi secondi. Il nuovo volume deve quindi essere collegato al sistema di test e il database HANA recuperato.
+
+Il secondo caso di utilizzo è la creazione di un sistema di riparazione, utilizzato per risolvere un danneggiamento logico del sistema di produzione. In questo caso, viene utilizzato un backup Snapshot precedente del sistema di produzione per avviare un sistema di riparazione, che è un clone identico del sistema di produzione con i dati prima che si verificasse il danneggiamento. Il sistema di riparazione viene quindi utilizzato per analizzare il problema ed esportare i dati richiesti prima che sia danneggiato.
+
+L'ultimo caso di utilizzo è la capacità di eseguire un test di failover per il disaster recovery senza interrompere la replica e quindi senza influenzare l'RTO e l'RPO (Recovery Point Objective) della configurazione del disaster recovery. Quando la replica ANF tra regioni viene utilizzata per replicare i dati nel sito di disaster recovery, i backup Snapshot di produzione sono disponibili anche nel sito di disaster recovery e possono essere utilizzati per creare un nuovo volume per il test di disaster recovery.
+
+image:anf-cba-image4.png["Questa immagine mostra i casi di utilizzo per le operazioni di cloning."]
+
+link:anf-cba-cloud-backup-for-applications-architecture.html["Avanti: Backup cloud per l'architettura delle applicazioni."]

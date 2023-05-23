@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-file-based-backups-and-block-integrity-check.html 
+keywords: file-based, backup, block integrity, check, 
+summary: 'SAP consiglia di combinare i backup snapshot basati su storage con un backup settimanale basato su file per eseguire un controllo dell"integrità dei blocchi. Il servizio SnapCenter supporta l"esecuzione di un controllo dell"integrità dei blocchi utilizzando una policy in cui il backup basato su file viene selezionato come tipo di backup.' 
+---
+= Backup basati su file e controllo dell'integrità dei blocchi
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-sap-hana-database-snapshot-backups.html["Precedente: Backup Snapshot del database SAP HANA."]
+
+SAP consiglia di combinare i backup snapshot basati su storage con un backup settimanale basato su file per eseguire un controllo dell'integrità dei blocchi. Il servizio SnapCenter supporta l'esecuzione di un controllo dell'integrità dei blocchi utilizzando una policy in cui il backup basato su file viene selezionato come tipo di backup.
+
+I backup basati su file vengono utilizzati anche per avere copie di backup secondarie oltre ai backup snapshot sul volume di dati HANA. È possibile utilizzare questi backup basati su file per le operazioni di ripristino e ripristino in caso di perdita completa del volume di dati primario.
+
+Quando si pianificano i backup utilizzando questa policy, il servizio SnapCenter crea un backup standard del file SAP HANA per il sistema e per tutti i database tenant.
+
+Il servizio SnapCenter non visualizza i backup basati su file nello stesso modo dei backup basati su snapshot. Viene invece elencato solo l'ultimo backup basato su file. Il successo o l'errore dei backup basati su file sono visibili nella vista Job Monitor.
+
+image:saphana-backup-anf-image51.png["Errore: Immagine grafica mancante"]
+
+Il catalogo di backup SAP HANA mostra le voci per i database di sistema e tenant. La figura seguente mostra un controllo dell'integrità dei blocchi di servizio SnapCenter nel catalogo di backup del database di sistema.
+
+image:saphana-backup-anf-image58.png["Errore: Immagine grafica mancante"]
+
+Un controllo dell'integrità dei blocchi consente di creare file di backup dei dati SAP HANA standard. Il servizio SnapCenter utilizza il percorso di backup configurato nel database HANA per le operazioni di backup dei dati basate su file.
+
+....
+vm-pr1:/hanabackup/PR1/file # ls -al *
+DB_PR1:
+total 1743736
+drwxr-xr-- 2 pr1adm sapsys       4096 Jun  6 05:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Jan 31 18:59 ..
+-rw-r----- 1 pr1adm sapsys     155648 Jun  6 05:00 SnapCenter_SCS_PR1_BlockIntegrityCheckEverySunday_Weekly_2021_06_06_05_00_00_databackup_0_1
+-rw-r----- 1 pr1adm sapsys   83894272 Jun  6 05:01 SnapCenter_SCS_PR1_BlockIntegrityCheckEverySunday_Weekly_2021_06_06_05_00_00_databackup_2_1
+-rw-r----- 1 pr1adm sapsys 1694507008 Jun  6 05:02 SnapCenter_SCS_PR1_BlockIntegrityCheckEverySunday_Weekly_2021_06_06_05_00_00_databackup_3_1
+SYSTEMDB:
+total 1562788
+drwxr-xr-- 2 pr1adm sapsys       4096 Jun  6 05:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Jan 31 18:59 ..
+-rw-r----- 1 pr1adm sapsys     159744 Jun  6 05:00 SnapCenter_SCS_PR1_BlockIntegrityCheckEverySunday_Weekly_2021_06_06_05_00_00_databackup_0_1
+-rw-r----- 1 pr1adm sapsys 1593843712 Jun  6 05:02 SnapCenter_SCS_PR1_BlockIntegrityCheckEverySunday_Weekly_2021_06_06_05_00_00_databackup_1_1
+....
+
+
+== Ripristino e ripristino mediante backup basati su file
+
+È necessario eseguire un'operazione di ripristino e ripristino di un backup basato su file al di fuori di SnapCenter utilizzando le operazioni di ripristino HANA standard con HANA Studio o HANA Cockpit.
+
+link:saphana-backup-anf-restore-and-recovery.html["Successivo: Ripristino e ripristino."]

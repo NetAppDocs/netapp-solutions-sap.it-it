@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-file-based-backup-operations-of-the-hana-database.html 
+keywords: assign policy, file-based backup, cba topology, sap hana studio 
+summary: Questa sezione descrive come completare le operazioni di backup basate su file del database HANA. 
+---
+= Operazioni di backup basate su file del database HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-the-hana-database.html["Precedente: Operazioni di backup basate su Snapshot del database HANA."]
+
+[role="lead"]
+SAP consiglia di combinare i backup Snapshot basati su storage con un backup settimanale basato su file per eseguire un controllo dell'integrità dei blocchi. Cloud Backup for Applications supporta l'esecuzione di un controllo dell'integrità dei blocchi utilizzando un criterio in cui il backup basato su file viene selezionato come tipo di backup.
+
+I backup basati su file vengono utilizzati anche per avere copie di backup secondarie oltre ai backup Snapshot sul volume di dati HANA. È possibile utilizzare questi backup basati su file per le operazioni di ripristino e ripristino in caso di perdita completa del volume di dati primario.
+
+Quando si pianificano i backup utilizzando questa policy, Cloud Backup for Applications crea un backup standard del file SAP HANA per il sistema e tutti i database tenant.
+
+
+
+== Assegnare il criterio al sistema HANA
+
+Per attivare i backup pianificati, il criterio di backup deve essere assegnato al sistema HANA.
+
+. Accedere a *Assign Policy* > *Data Volume*.
++
+image:anf-cba-image48.png["Schermata del passaggio in fase di completamento."]
+
+. Selezionare il criterio per i backup basati su file e fare clic su *Assign* (Assegna).
++
+image:anf-cba-image49.png["Schermata del passaggio in fase di completamento."]
+
+. La policy viene ora assegnata al sistema HANA e i backup basati su file verranno eseguiti in base alla definizione della pianificazione.
+
+
+
+
+== Creazione di backup on-demand basato su file
+
+Per creare un backup del database on-demand, attenersi alla seguente procedura:
+
+. Nella vista della dashboard di CBA, selezionare Backup on-Demand – Volume dati nel menu di scelta rapida.
++
+image:anf-cba-image50.png["Schermata del passaggio in fase di completamento."]
+
+. Nella finestra di dialogo on-Demand Backup (Backup su richiesta), selezionare *Policy-based* (basato su policy) o *One Time* (una volta).
++
+** Con *Policy-based*, il backup on-demand viene trattato allo stesso modo dei backup pianificati per quanto riguarda la conservazione e la configurazione pre e post-script.
+** Con *una sola volta*, è possibile definire una conservazione specifica, un nome di backup specifico e specifici pre- e post-script.
+
+
+. Nel nostro esempio, abbiamo selezionato policy-based e selezioneremo policy e conservazione come fase successiva.
++
+image:anf-cba-image51.png["Schermata del passaggio in fase di completamento."]
+
+. Nella vista Job Monitoring, è possibile visualizzare le diverse fasi del flusso di lavoro, il runtime delle fasi e il runtime totale dell'operazione.
++
+image:anf-cba-image52.png["Schermata del passaggio in fase di completamento."]
+
++
+image:anf-cba-image53.png["Schermata del passaggio in fase di completamento."]
+
+
+
+
+
+== Esaminare le informazioni di backup basate su file nella vista topologia CBA
+
+Cloud Backup for Applications (Backup cloud per applicazioni) non visualizza i backup basati su file allo stesso modo dei backup basati su copia Snapshot. Viene invece elencato solo l'ultimo backup basato su file. Il successo o l'errore dei backup basati su file sono visibili nella vista Job Monitor.
+
+image:anf-cba-image54.png["Schermata del passaggio in fase di completamento."]
+
+
+
+== Esaminare le informazioni di backup basate su file sul file system
+
+Un controllo dell'integrità dei blocchi consente di creare file di backup dei dati SAP HANA standard. CBA utilizza il percorso di backup configurato nel database HANA per le operazioni di backup dei dati basate su file. La convenzione di naming segue la configurazione del criterio di backup per il backup basato su file.
+
+....
+vm-pr1:/hanabackup/PR1/file # ls -al *
+DB_PR1:
+total 3355880
+drwxr-xr-- 2 pr1adm sapsys       4096 Jan  3 10:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Dec 19 13:53 ..
+-rw-r----- 1 pr1adm sapsys     155648 Jan  3 10:10 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_0_1
+-rw-r----- 1 pr1adm sapsys   83894272 Jan  3 10:11 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_2_1
+-rw-r----- 1 pr1adm sapsys 1627398144 Jan  3 10:12 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_3_1
+SYSTEMDB:
+total 3092672
+drwxr-xr-- 2 pr1adm sapsys       4096 Jan  3 10:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Dec 19 13:53 ..
+-rw-r----- 1 pr1adm sapsys     159744 Jan  3 10:10 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_0_1
+-rw-r----- 1 pr1adm sapsys 1577066496 Jan  3 10:12 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_1_1
+vm-pr1:/hanabackup/PR1/file #
+....
+
+
+== Esaminate le informazioni di backup basate su file in SAP HANA Studio
+
+Il catalogo di backup SAP HANA mostra le voci per i database di sistema e tenant. Le seguenti figure mostrano il backup basato su file CBA nel catalogo di backup del database di sistema e del database tenant.
+
+image:anf-cba-image55.png["Le seguenti figure mostrano il backup basato su file CBA nel catalogo di backup del database di sistema."]
+
+image:anf-cba-image56.png["Le seguenti figure mostrano il backup basato su file CBA nel catalogo di backup del database tenant."]
+
+link:anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html["Avanti: Operazioni di backup basate su Snapshot di volumi non dati."]

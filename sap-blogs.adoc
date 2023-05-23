@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: sap-blogs.html 
+summary: Serie di blog sulle soluzioni SAP 
+keywords: netapp, solutions, SAP, blogs 
+---
+= Blog sulle soluzioni SAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:table-stripes: odd
+:imagesdir: ./media/
+
+
+[role="lead"]
+Panoramica dei blog che evidenziano SAP su NetApp.
+
+
+
+== Blog sulle soluzioni SAP
+
+
+
+== Blog sulle Best practice per la configurazione SAP
+
+
+
+=== Blog su backup, ripristino e disaster recovery SAP
+
+
+
+== Blog sulla gestione del ciclo di vita SAP
+
+* link:https://blogs.sap.com/2021/10/27/whitepaper-sap-landscape-management-with-netapp/["SAP Landscape Management con NetApp"]
+

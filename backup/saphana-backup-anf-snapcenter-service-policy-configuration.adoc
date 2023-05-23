@@ -1,0 +1,81 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-policy-configuration.html 
+keywords: minimum configuration, policy, service 
+summary:  
+---
+= Configurazione della policy del servizio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-lab-setup-used-for-this-report.html["Precedente: Impostazione di laboratorio utilizzata per questo report."]
+
+Come discusso nella sezione link:saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html#data-protection-strategy[""Strategia di protezione dei dati","] Le policy sono in genere configurate indipendentemente dalla risorsa e possono essere utilizzate da più database SAP HANA.
+
+Una configurazione minima tipica è costituita dai seguenti criteri:
+
+* Policy per backup Snapshot orari.
++
+Ad esempio, `SnapshotEvery4h`
+
+* Policy per il controllo settimanale dell'integrità dei blocchi utilizzando un backup basato su file.
++
+Ad esempio, `BlockIntegrityCheckEverySunday`
+
+
+
+Le sezioni seguenti descrivono la configurazione di questi due criteri.
+
+
+
+== Policy per backup Snapshot orari
+
+Per creare una policy per i backup Snapshot orari, attenersi alla seguente procedura:
+
+. Accedere a Criteri e fare clic su Aggiungi criterio.
++
+image:saphana-backup-anf-image14.png["Errore: Immagine grafica mancante"]
+
+. Nella schermata Create Policy (Crea policy), specificare il nome del criterio, il tipo di backup, la convenzione di denominazione del backup e i dettagli di pianificazione e conservazione.
++
+image:saphana-backup-anf-image10.png["Errore: Immagine grafica mancante"]
+
++
+Ad esempio, nella figura seguente, per il backup Snapshot, viene configurata una pianificazione ogni 4 ore e un'ora di inizio delle 10:00. La conservazione viene configurata con 18, ovvero 3 giorni.
+
++
+image:saphana-backup-anf-image15.png["Errore: Immagine grafica mancante"]
+
+. Nella finestra Custom Backup Name (Nome backup personalizzato), è possibile modificare la convenzione di denominazione del backup e aggiungere un prefisso personalizzato.
++
+image:saphana-backup-anf-image16.png["Errore: Immagine grafica mancante"]
+
+. Per creare il nuovo criterio, fare clic su Add (Aggiungi).
+
+
+
+
+== Policy per il controllo settimanale dell'integrità dei blocchi
+
+Per creare una policy per un controllo settimanale dell'integrità dei blocchi, attenersi alla seguente procedura:
+
+. Accedere a Criteri e fare clic su Aggiungi criterio.
+. Nella schermata Create Policy (Crea policy), specificare il nome del criterio, il tipo di backup, la convenzione di denominazione del backup e i dettagli di pianificazione e conservazione.
++
+image:saphana-backup-anf-image17.png["Errore: Immagine grafica mancante"]
+
+. Per creare il nuovo criterio, fare clic su Add (Aggiungi).
++
+La figura seguente mostra un riepilogo dei criteri configurati.
+
++
+image:saphana-backup-anf-image18.png["Errore: Immagine grafica mancante"]
+
+
+
+link:saphana-backup-anf-snapcenter-service-snapshot-backup-configuration-overview.html["Pagina successiva: Panoramica della configurazione del backup Snapshot del servizio SnapCenter."]

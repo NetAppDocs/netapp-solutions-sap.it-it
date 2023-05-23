@@ -1,0 +1,52 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-backup-replication-with-snapvault_overview.html 
+keywords: overview, configuration, 
+summary: Nella nostra configurazione di laboratorio, utilizziamo un secondo file system FSX per ONTAP in una seconda zona di disponibilità AWS per mostrare la replica di backup per il volume di dati HANA. 
+---
+= Panoramica - replica di backup con SnapVault
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-backup-of-non-data-volumes.html["Precedente: Backup di volumi non dati."]
+
+Nella nostra configurazione di laboratorio, utilizziamo un secondo file system FSX per ONTAP in una seconda zona di disponibilità AWS per mostrare la replica di backup per il volume di dati HANA.
+
+Come discusso nel capitolo link:amazon-fsx-snapcenter-architecture.html#data-protection-strategy[""Strategia di protezione dei dati""], La destinazione della replica deve essere un secondo FSX per il file system ONTAP in un'altra zona di disponibilità per essere protetto da un errore del file system FSX primario per ONTAP. Inoltre, il volume condiviso HANA deve essere replicato nel file system FSX secondario per ONTAP.
+
+image:amazon-fsx-image8.png["Errore: Immagine grafica mancante"]
+
+
+
+=== Panoramica delle fasi di configurazione
+
+È necessario eseguire un paio di passaggi di configurazione sul layer FSX per ONTAP. Puoi farlo con NetApp Cloud Manager o con la riga di comando FSX per ONTAP.
+
+. Peer FSX per file system ONTAP. I file system FSX per ONTAP devono essere dotati di peering per consentire la replica reciproca.
+. SVM peer. Le SVM devono essere peering per consentire la replica tra loro.
+. Creare un volume di destinazione. Creare un volume nella SVM di destinazione con il tipo di volume `DP`. Tipo `DP` deve essere utilizzato come volume di destinazione della replica.
+. Creare un criterio SnapMirror. Viene utilizzato per creare un criterio per la replica con il tipo `vault`.
++
+.. Aggiungere una regola al criterio. La regola contiene l'etichetta SnapMirror e la conservazione dei backup nel sito secondario. È necessario configurare la stessa etichetta SnapMirror in un secondo momento nel criterio SnapCenter in modo che SnapCenter crei backup Snapshot nel volume di origine contenente questa etichetta.
+
+
+. Creare una relazione SnapMirror. Definisce la relazione di replica tra il volume di origine e quello di destinazione e allega un criterio.
+. Inizializzare SnapMirror. In questo modo viene avviata la replica iniziale in cui i dati di origine completi vengono trasferiti al volume di destinazione.
+
+
+Una volta completata la configurazione della replica del volume, è necessario configurare la replica di backup in SnapCenter come segue:
+
+. Aggiungere la SVM di destinazione a SnapCenter.
+. Creare una nuova policy SnapCenter per il backup Snapshot e la replica SnapVault.
+. Aggiungere il criterio alla protezione delle risorse HANA.
+. È ora possibile eseguire i backup con la nuova policy.
+
+
+I seguenti capitoli descrivono i singoli passaggi in modo più dettagliato.
+
+link:amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html["Avanti: Configurare le relazioni di replica su FSX per i file system ONTAP."]

@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-where-to-find-additional-information-and-version-history.html 
+keywords:  
+summary:  
+---
+= Dove trovare informazioni aggiuntive e cronologia delle versioni
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-backup-operations-with-hana-system-replication.html["Precedente: Operazioni di backup con replica di sistema HANA."]
+
+[role="lead"]
+Per ulteriori informazioni sulle informazioni descritte in questo documento, consultare i seguenti documenti e/o siti Web:
+
+* NetApp Cloud Backup per applicazioni documentazione di prodotto
++
+https://docs.netapp.com/us-en/cloud-manager-backup-restore/concept-protect-cloud-app-data-to-cloud.html["Proteggi i dati delle tue applicazioni native nel cloud | documentazione NetApp"^]
+
+* Architetture di soluzioni che utilizzano Azure NetApp Files
++
+https://learn.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-solution-architectures["https://learn.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-solution-architectures"^]
+
+
+
+
+
+== Cronologia delle versioni
+
+|===
+| Versione | Data | Cronologia delle versioni del documento 
+
+
+| Versione 1.0 | Marzo 2023 | Versione iniziale 
+|===
