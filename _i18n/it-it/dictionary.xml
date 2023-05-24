@@ -5859,4 +5859,6 @@
   <block id="d5d6ed7727f0e542e6846a58af1d02ba" category="sidebar">Gestione del ciclo di vita SAP HANA</block>
   <block id="9feb66d55a80dea870deeb88fab704c9" category="sidebar">Backup e ripristino SAP HANA</block>
   <block id="68cc439f4e585883d2aaa26a4e3bcef2" category="sidebar">Disaster recovery SAP HANA</block>
+  <block id="75bdc4f45cfc79b09fa1f15e1cd83b33" category="admonition">La disattivazione degli id numerici richiede la gestione degli utenti come descritto in <block ref="7cbf1992917906c8f8c329ad679d4886" category="inline-link-macro-rx"></block></block>
+  <block id="a548c9345f858c0926b5fa0db82b1d29" category="admonition">La disattivazione degli id numerici richiede la gestione dell'utente, come descritto nella sezione <block ref="19618adae76246007b68ca646cc14e2b" category="inline-link-macro-rx"></block></block>
 </blocks>
