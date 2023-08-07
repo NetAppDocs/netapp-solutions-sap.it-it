@@ -23,7 +23,7 @@ Questa certificazione è valida per i seguenti modelli:
 * AFF C250, AFF C400, AFF C800
 +
 
-NOTE: NetApp AFF C-Series richiede NetApp OMTAP 9.13.1 o versione successiva
+NOTE: NetApp AFF C-Series richiede NetApp ONTAP 9.13.1 o versione successiva
 
 
 
