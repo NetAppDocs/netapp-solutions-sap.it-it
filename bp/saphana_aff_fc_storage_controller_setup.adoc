@@ -25,9 +25,9 @@ La deduplica inline, la deduplica inline di più volumi, la compressione inline 
 
 
 
-== Crittografia dei volumi NetApp
+== Crittografia dei volumi e degli aggregati NetApp
 
-L'utilizzo di NetApp Volume Encryption (NVE) è supportato con SAP HANA.
+L'utilizzo di NetApp Volume Encryption (NVE) e NetApp aggregate Encryption (NAE) sono supportati con SAP HANA.
 
 
 

@@ -27,9 +27,9 @@ L'abilitazione delle funzioni di efficienza dello storage in una configurazione 
 
 
 
-== Crittografia dei volumi NetApp
+== Crittografia dei volumi e degli aggregati NetApp
 
-L'utilizzo di NetApp Volume Encryption (NVE) è supportato per SAP HANA.
+L'utilizzo di NetApp Volume Encryption (NVE) e NetApp aggregate Encryption (NAE) sono supportati con SAP HANA.
 
 
 
