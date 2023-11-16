@@ -1367,7 +1367,6 @@
   <block id="0db6b81db5bd35e1eef1e83e154c3cb5" category="doc">TR-4436: SAP HANA su sistemi NetApp AFF con protocollo Fibre Channel</block>
   <block id="3582e9217fbd3de24b2e5ecfb0fc97b4" category="paragraph">Nils Bauer e Marco Schoen, NetApp</block>
   <block id="e4509a748ae3ce7cb528662f2f9f7e10" category="paragraph">La certificazione è valida per i seguenti modelli:</block>
-  <block id="eb08d46fa92fc78a1fd6730ec46042b6" category="list-text">ASA AFF A220, ASA AFF A250, ASA AFF A400, ASA AFF A700, ASA AFF A800, ASA AFF A900</block>
   <block id="97bfb54320c9268725cfbb374a5168fb" category="paragraph">Per un elenco completo delle soluzioni di storage certificate NetApp per SAP HANA, consulta la<block ref="a3976abaebe3520fd66c465c4d7747d7" category="inline-link-rx"></block>.</block>
   <block id="171ad4663cdfb492651e0357292fbe82" category="paragraph">Questo documento descrive le configurazioni AFF che utilizzano il protocollo Fibre Channel (FCP).</block>
   <block id="9ba59bf1b64e9d129b41dbb49f3c385f" category="paragraph">Le guide di configurazione per i sistemi AFF che utilizzano i sistemi NFS e NetApp FAS sono disponibili tramite i seguenti collegamenti:</block>
@@ -5285,4 +5284,8 @@
   <block id="2976619a79e897d24427ec6796aa4a70" category="paragraph">Se si utilizzano sistemi SAP HANA a host multipli con failover automatico dell'host, è necessario regolare i parametri di failover all'interno di<block ref="46649585ec21482ae2e5fcac30c7dcae" prefix=" " category="inline-code"></block> come mostrato nella tabella seguente.
 Mantenere l'intervallo di ripetizione predefinito di 10 secondi all'interno di queste sezioni.</block>
   <block id="73d4ace7e434b8709f5a930ad845d6d6" category="paragraph">Se si utilizzano sistemi SAP HANA a host multipli con failover automatico dell'host, è necessario regolare i parametri di failover all'interno di<block ref="46649585ec21482ae2e5fcac30c7dcae" prefix=" " category="inline-code"></block> come mostrato nella tabella seguente. Mantenere l'intervallo di tentativi predefinito di 10 secondi all'interno di queste sezioni.</block>
+  <block id="724e5b34aefa3c5cafe7d5d30b9a4beb" category="list-text">AFF A150, AFF A250, AFF A400, AFF A800, AFF A900</block>
+  <block id="f24901db79bd7adbcfdc97deb6526be7" category="list-text">ASA A250, ASA A400, ASA A800, ASA A900</block>
+  <block id="7165d8e624155bf7a4889b98927f605c" category="list-text">ASA C250, ASA C400, ASA C800</block>
+  <block id="ba7dc8a883957fda819c429f468dc4d0" category="admonition">NetApp AFF e ASA C-Series richiedono NetApp ONTAP 9.13.1 o versione successiva</block>
 </blocks>
