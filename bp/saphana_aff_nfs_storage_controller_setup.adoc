@@ -343,17 +343,8 @@ NOTE: L'ID di dominio NFSv4 deve essere impostato sullo stesso valore su tutti i
 
 NOTE: Se si utilizza NFSV4.1, è possibile attivare e utilizzare pNFS.
 
-Impostare il tempo di lease NFSv4 sulla SVM (come mostrato nella tabella seguente) se si utilizza un sistema host multiplo SAP HANA.
-
-|===
-| Azione | Comando 
-
-
-| Impostare il tempo di lease NFSv4 | set advanced nfs modify -vserver <vserver_name> -v4-lease-seconds 10 set admin 
-|===
-A partire da HANA 2.0 SPS4, HANA fornisce i parametri per controllare il comportamento di failover. Invece di impostare il tempo di lease a livello di SVM, NetApp consiglia di utilizzare questi parametri HANA.
-
-I parametri sono compresi in `nameserver.ini` come mostrato nella tabella seguente. Mantenere l'intervallo di tentativi predefinito di 10 secondi all'interno di queste sezioni.
+Se si utilizzano sistemi SAP HANA a host multipli con failover automatico dell'host, è necessario regolare i parametri di failover all'interno di `nameserver.ini` come mostrato nella tabella seguente.
+Mantenere l'intervallo di ripetizione predefinito di 10 secondi all'interno di queste sezioni.
 
 |===
 | Sezione all'interno di nameserver.ini | Parametro | Valore 
