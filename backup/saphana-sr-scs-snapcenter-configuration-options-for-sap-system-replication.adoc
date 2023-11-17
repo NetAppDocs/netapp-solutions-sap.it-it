@@ -13,8 +13,7 @@ summary: Questa pagina descrive le opzioni di configurazione per la replica del 
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html["Precedente: Backup Snapshot dello storage e replica del sistema SAP."]
-
+[role="lead"]
 Sono disponibili due opzioni per la configurazione della protezione dei dati con il software NetApp SnapCenter in un ambiente di replica del sistema SAP HANA:
 
 * Un gruppo di risorse SnapCenter che include host SAP HANA e il rilevamento automatico con SnapCenter versione 4.6 o superiore.
@@ -51,5 +50,3 @@ La seguente tabella riassume le differenze principali delle due opzioni di confi
 NOTE: In generale, NetApp consiglia di utilizzare l'opzione di configurazione del gruppo di risorse con SnapCenter 4.6 per proteggere i sistemi HANA con la replica del sistema HANA abilitata. L'utilizzo di una singola configurazione delle risorse SnapCenter è necessario solo se l'approccio operativo SnapCenter è basato su un host plug-in centrale e il plug-in HANA non è distribuito sugli host del database HANA.
 
 Le due opzioni sono descritte in dettaglio nelle sezioni seguenti.
-
-link:saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html["Pagina successiva: Configurazione di SnapCenter 4.6 mediante un gruppo di risorse."]

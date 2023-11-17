@@ -13,8 +13,7 @@ summary: In questa sezione vengono descritte le procedure di configurazione per 
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-initial-configuration.html["Precedente: Configurazione iniziale di SnapCenter."]
-
+[role="lead"]
 In questa sezione vengono descritte le fasi di configurazione per due configurazioni di esempio.
 
 * *SS2.*
@@ -398,5 +397,3 @@ Se un host Linux separato viene utilizzato come host plug-in HANA centrale, è n
 La figura seguente mostra il comando Post Quiesce nella schermata di configurazione della protezione delle risorse.
 
 image:saphana-br-scs-image77.png["Errore: Immagine grafica mancante"]
-
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html["Pagina successiva: Configurazione specifica delle risorse SnapCenter per i backup di volumi diversi dai dati."]

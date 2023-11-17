@@ -13,8 +13,7 @@ summary: 'Un"operazione di ripristino da un backup creato sull"altro host SAP HA
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html["Precedente: Configurazione SnapCenter con una singola risorsa."]
-
+[role="lead"]
 Un'operazione di ripristino da un backup creato sull'altro host SAP HANA è uno scenario valido per entrambe le opzioni di configurazione di SnapCenter.
 
 La figura seguente mostra una panoramica dello scenario di ripristino e ripristino descritto in questa sezione.
@@ -80,5 +79,3 @@ stlrx300s8-5:/mnt/tmp # cp -Rp hdb00002.00003/ /hana/data/SSR/mnt00001/
 stlrx300s8-5:/mnt/tmp # cp -Rp hdb00003.00003/ /hana/data/SSR/mnt00001/
 ....
 Il ripristino con SAP HANA Studio viene eseguito come descritto nella sezione link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html#snapcenter-restore-of-the-valid-backup-only["Ripristino SnapCenter solo del backup valido"].
-
-link:saphana-sr-scs-where-to-find-additional-information_overview.html["Avanti: Dove trovare ulteriori informazioni."]

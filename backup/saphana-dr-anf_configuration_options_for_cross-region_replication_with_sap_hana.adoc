@@ -13,8 +13,7 @@ summary: La figura seguente mostra le relazioni di replica del volume per un sis
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Precedente: REPLICA interregionale CON SAP HANA."]
-
+[role="lead"]
 La figura seguente mostra le relazioni di replica del volume per un sistema SAP HANA che utilizza la replica interregionale ANF. Con la replica interregionale ANF, i dati HANA e il volume condiviso HANA devono essere replicati. Se viene replicato solo il volume di dati HANA, i valori RPO tipici rientrano nell'intervallo di un giorno. Se sono richiesti valori RPO inferiori, è necessario replicare anche i backup del registro HANA per il forward recovery.
 
 
@@ -51,4 +50,3 @@ Con la versione corrente di Cross-Region Replication, è possibile selezionare s
 
 | Recupero in avanti | NA | +registri per le ultime 24 ore + programma Snapshot (ad esempio, 6 ore)+ | +registri per le ultime 24 ore + programma Snapshot (ad esempio, 6 ore)+ 
 |===
-link:saphana-dr-anf_requirements_and_best_practices.html["Avanti: Requisiti e Best practice."]

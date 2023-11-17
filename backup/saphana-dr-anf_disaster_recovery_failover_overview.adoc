@@ -13,8 +13,7 @@ summary: A seconda che la replica del backup del registro faccia parte della con
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_hana_database_recovery.html["Precedente: Ripristino del database HANA."]
-
+[role="lead"]
 A seconda che la replica del backup del registro faccia parte della configurazione del disaster recovery, le fasi del disaster recovery sono leggermente diverse. In questa sezione viene descritto il failover del disaster recovery per la replica solo backup dei dati e per la replica del volume dei dati combinata con la replica del volume di backup del registro.
 
 Per eseguire il failover del disaster recovery, attenersi alla seguente procedura:
@@ -34,5 +33,3 @@ Per eseguire il failover del disaster recovery, attenersi alla seguente procedur
 Le seguenti sottosezioni descrivono in dettaglio questi passaggi e la seguente figura illustra il test di disaster failover.
 
 image:saphana-dr-anf_image26.png["Errore: Immagine grafica mancante"]
-
-link:saphana-dr-anf_prepare_the_target_host_01.html["Avanti: Preparare l'host di destinazione."]

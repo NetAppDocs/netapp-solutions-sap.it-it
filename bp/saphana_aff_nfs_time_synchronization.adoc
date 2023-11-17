@@ -13,8 +13,5 @@ summary: 'È necessario sincronizzare l"ora tra i controller di storage e gli ho
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_network_setup.html["Precedente: Configurazione di rete."]
-
+[role="lead"]
 È necessario sincronizzare l'ora tra i controller di storage e gli host del database SAP HANA. A tale scopo, impostare lo stesso server di riferimento orario per tutti i controller di storage e tutti gli host SAP HANA.
-
-link:saphana_aff_nfs_storage_controller_setup.html["Avanti: Configurazione dello storage controller."]

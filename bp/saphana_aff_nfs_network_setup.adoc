@@ -13,7 +13,8 @@ summary: In questa sezione viene descritta la configurazione della rete di stora
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_infrastructure_setup_and_configuration_overview.html["Precedente: Configurazione e configurazione dell'infrastruttura."]
+[role="lead"]
+In questa sezione viene descritta la configurazione della rete di storage dedicata per gli host SAP HANA.
 
 Per configurare la rete, attenersi alle seguenti indicazioni:
 
@@ -53,5 +54,3 @@ Come illustrato nella figura precedente, ciascun nodo SAP HANA utilizza un grupp
 NOTE: LRO (Large receive offload) deve essere disattivato per le interfacce utilizzate per il traffico NFS. Per tutte le altre linee guida sulla configurazione di rete, consultare le rispettive guide alle Best practice VMware per SAP HANA.
 
 image:saphana_aff_nfs_image12.png["Errore: Immagine grafica mancante"]
-
-link:saphana_aff_nfs_time_synchronization.html["Successivo: Sincronizzazione dell'ora."]

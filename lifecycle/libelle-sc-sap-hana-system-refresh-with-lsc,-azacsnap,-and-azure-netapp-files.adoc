@@ -13,8 +13,7 @@ summary: 'L"utilizzo di Azure NetApp Files per SAP HANA, Oracle e DB2 su Azure o
 :imagesdir: ./../media/
 
 
-link:libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html["Precedente: Aggiornamento del sistema SAP HANA con LSC e SnapCenter."]
-
+[role="lead"]
 Utilizzo di https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-solution-architectures["Azure NetApp Files per SAP HANA"^], Oracle e DB2 su Azure offrono ai clienti le funzionalità avanzate di gestione dei dati e protezione dei dati di NetApp ONTAP con il servizio nativo Microsoft Azure NetApp Files. https://docs.microsoft.com/en-us/azure/azure-netapp-files/azacsnap-introduction["AzAcSnap"^] È la base per operazioni di refresh dei sistemi SAP molto veloci per creare copie Snapshot NetApp coerenti con le applicazioni dei sistemi SAP HANA e Oracle (DB2 non è attualmente supportato da AzAcSnap).
 
 I backup delle copie Snapshot, creati on-demand o su base regolare come parte della strategia di backup, possono quindi essere clonati in modo efficiente su nuovi volumi e utilizzati per aggiornare rapidamente i sistemi di destinazione. AzAcSnap fornisce i flussi di lavoro necessari per creare backup e clonarli in nuovi volumi, mentre libelle SystemCopy esegue le fasi di pre e post-elaborazione necessarie per un refresh completo del sistema end-to-end.
@@ -241,5 +240,3 @@ image:libelle-sc-image38.jpg["Errore: Immagine grafica mancante"]
 Dopo la fase di copia, l'LSC continua con tutte le fasi definite della fase successiva. Al termine del processo di aggiornamento del sistema, il sistema di destinazione è nuovamente operativo e pienamente utilizzabile. Con questo sistema di laboratorio, il runtime totale per il refresh del sistema SAP è stato di circa 25 minuti, di cui la fase di copia ha consumato poco meno di 5 minuti.
 
 image:libelle-sc-image39.jpg["Errore: Immagine grafica mancante"]
-
-link:libelle-sc-where-to-find-additional-information.html["Pagina successiva: Dove trovare informazioni aggiuntive e cronologia delle versioni."]

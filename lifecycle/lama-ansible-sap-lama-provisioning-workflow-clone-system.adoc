@@ -13,8 +13,6 @@ summary: In questa sezione, viene descritto il workflow completo di cloning del 
 :imagesdir: ./../media/
 
 
-link:lama-ansible-example-implementation.html["Precedente: Implementazione di esempio."]
-
 [role="lead"]
 La figura seguente evidenzia i passaggi principali eseguiti con il flusso di lavoro dei cloni di sistema.
 
@@ -84,5 +82,3 @@ image:lama-ansible-image31.png["Ulteriori informazioni di log"]
 
 
 Una volta completato il workflow, il sistema SAP clonato viene preparato, avviato e pronto per l'uso.
-
-link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Segue: Workflow di deprovisioning di SAP lama - system Destroy."]

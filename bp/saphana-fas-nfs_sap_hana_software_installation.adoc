@@ -13,7 +13,8 @@ summary: 'Di seguito sono riportati i requisiti per l"installazione del software
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_sap_hana_data_volume_size.html["Precedente: Dimensione del volume di dati SAP HANA."]
+[role="lead"]
+Di seguito sono riportati i requisiti per l'installazione del software per SAP HANA.
 
 
 
@@ -83,5 +84,3 @@ Enter Installation Path [/hana/shared]:
 ....
 . Verificare che lo strumento di installazione abbia installato tutti i componenti selezionati su tutti gli host di lavoro e di standby.
 
-
-link:saphana-fas-nfs_adding_additional_data_volume_partitions.html["Avanti: Aggiunta di partizioni di volumi di dati aggiuntive."]

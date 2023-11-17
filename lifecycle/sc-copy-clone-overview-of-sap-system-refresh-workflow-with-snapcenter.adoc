@@ -13,8 +13,7 @@ summary: SnapCenter offre flussi di lavoro che consentono di gestire cloni di se
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-use-cases-for-system-refresh-and-cloning.html["Precedente: Casi di utilizzo per il refresh e la clonazione del sistema."]
-
+[role="lead"]
 SnapCenter offre flussi di lavoro che consentono di gestire cloni di set di dati da qualsiasi backup Snapshot esistente. Questo set di dati clonato, un volume FlexClone, può essere utilizzato per eseguire rapidamente il provisioning di un volume di dati HANA da un sistema di origine e collegarlo a un sistema di destinazione. Si tratta quindi di una soluzione perfetta per eseguire operazioni di refresh del sistema per QA, test, sandbox o sistemi di training.
 
 I flussi di lavoro di cloning di SnapCenter gestiscono tutte le operazioni richieste sul layer di storage e possono essere estesi utilizzando script per eseguire operazioni specifiche dell'host e del database HANA. In questo documento, utilizziamo uno script per eseguire operazioni di montaggio e disinstallazione sull'host di destinazione, nonché operazioni di ripristino e arresto del database HANA. I flussi di lavoro SnapCenter con ulteriore automazione utilizzando lo script gestiscono tutte le operazioni di database HANA richieste, ma non coprono alcuna procedura di post-elaborazione SAP richiesta. La post-elaborazione SAP deve essere eseguita manualmente o con strumenti di terze parti.
@@ -56,5 +55,3 @@ La figura seguente mostra una panoramica del workflow di refresh del sistema SAP
 image:sc-copy-clone-image8.png["Errore: Immagine grafica mancante"]
 
 La sezione link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html[""Aggiornamento del sistema SAP HANA con SnapCenter""] fornisce una descrizione dettagliata passo-passo di entrambi i flussi di lavoro di refresh del sistema.
-
-link:sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html["Pagina successiva: Panoramica del workflow di copia del sistema SAP con SnapCenter."]

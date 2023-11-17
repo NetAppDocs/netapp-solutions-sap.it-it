@@ -13,8 +13,7 @@ summary: 'Gli host SAP HANA sono connessi ai controller di storage utilizzando u
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_introduction.html["Precedente: Guida alla configurazione di SAP HANA su sistemi NetApp All Flash FAS con NFS."]
-
+[role="lead"]
 Gli host SAP HANA sono connessi ai controller di storage utilizzando un'infrastruttura di rete ridondante da 10 GbE o più veloce. La comunicazione dei dati tra gli host SAP HANA e i controller di storage si basa sul protocollo NFS. È necessaria un'infrastruttura di switching ridondante per fornire connettività host-storage SAP HANA fault-tolerant in caso di guasto dello switch o della scheda di interfaccia di rete (NIC).
 
 Gli switch potrebbero aggregare le performance delle singole porte con i canali delle porte in modo da apparire come una singola entità logica a livello di host.
@@ -103,5 +102,3 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito fornisce alta disponibilità locale e viene utilizzato per il carico di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.
 
 image:saphana_aff_nfs_image8.png["Errore: Immagine grafica mancante"]
-
-link:saphana_aff_nfs_storage_sizing.html["Successivo: Dimensionamento dello storage."]

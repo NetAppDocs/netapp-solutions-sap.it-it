@@ -13,13 +13,10 @@ summary: 'SnapCenter è una piattaforma unificata e scalabile per la protezione 
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-overview.html["Precedente: Panoramica."]
+[role="lead"]
+SnapCenter è una piattaforma unificata e scalabile per la protezione dei dati coerente con l'applicazione. SnapCenter offre controllo e supervisione centralizzati, delegando al contempo la capacità degli utenti di gestire processi di backup, ripristino e clonazione specifici dell'applicazione. Con SnapCenter, gli amministratori di database e storage imparano a utilizzare un unico strumento per gestire le operazioni di backup, ripristino e clonazione per una vasta gamma di applicazioni e database.
 
-
-
-== Panoramica di SnapCenter
-
-SnapCenter è una piattaforma unificata e scalabile per la protezione dei dati coerente con l'applicazione. SnapCenter offre controllo e supervisione centralizzati, delegando al contempo la capacità degli utenti di gestire processi di backup, ripristino e clonazione specifici dell'applicazione. Con SnapCenter, gli amministratori di database e storage imparano a utilizzare un unico strumento per gestire le operazioni di backup, ripristino e clonazione per una vasta gamma di applicazioni e database. SnapCenter gestisce i dati tra gli endpoint del data fabric basato su NetApp. Puoi utilizzare SnapCenter per replicare i dati tra ambienti on-premise, tra ambienti on-premise e cloud e tra cloud privati, ibridi o pubblici.
+SnapCenter gestisce i dati tra gli endpoint del data fabric basato su NetApp. Puoi utilizzare SnapCenter per replicare i dati tra ambienti on-premise, tra ambienti on-premise e cloud e tra cloud privati, ibridi o pubblici.
 
 
 
@@ -32,5 +29,3 @@ I plug-in personalizzati di SnapCenter consentono di creare plug-in personalizza
 La figura seguente illustra i componenti di SnapCenter.
 
 image:saphana-br-scs-image6.png["Errore: Immagine grafica mancante"]
-
-link:saphana-br-scs-snapcenter-sap-hana-backup-solution.html["Avanti: Soluzione di backup SAP HANA di SnapCenter."]

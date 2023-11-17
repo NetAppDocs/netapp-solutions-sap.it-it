@@ -13,8 +13,7 @@ summary: 'La convalida della soluzione è stata eseguita con un sistema host sin
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_requirements_and_best_practices.html["Precedente: Requisiti e Best practice."]
-
+[role="lead"]
 La convalida della soluzione è stata eseguita con un sistema host singolo SAP HANA. Lo strumento di backup Microsoft AzAcSnap Snapshot per ANF è stato utilizzato per configurare i backup Snapshot coerenti con l'applicazione HANA. Sono stati configurati un volume di dati giornaliero, un backup del registro orario e una replica del volume condiviso. Il test e il failover del disaster recovery sono stati validati con un punto di salvataggio e con operazioni di forward recovery.
 
 Nella configurazione di laboratorio sono state utilizzate le seguenti versioni software:
@@ -45,5 +44,3 @@ image:saphana-dr-anf_image8.png["Errore: Immagine grafica mancante"]
 La figura seguente mostra il catalogo di backup SAP HANA.
 
 image:saphana-dr-anf_image9.png["Errore: Immagine grafica mancante"]
-
-link:saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html["Pagina successiva: Procedura di configurazione per la replica ANF Cross-Region."]

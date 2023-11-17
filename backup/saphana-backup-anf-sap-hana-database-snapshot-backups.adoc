@@ -13,8 +13,7 @@ summary: 'Con il servizio SnapCenter, i backup del database vengono in genere es
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html["Precedente: Configurazione di backup di volumi non dati globali."]
-
+[role="lead"]
 Con il servizio SnapCenter, i backup del database vengono in genere eseguiti utilizzando le pianificazioni definite all'interno delle policy. È inoltre possibile eseguire backup di database on-demand utilizzando l'interfaccia utente del servizio SnapCenter o le API REST.
 
 
@@ -101,5 +100,3 @@ Job Monitor visualizza le diverse fasi del flusso di lavoro, il runtime delle op
 image:saphana-backup-anf-image57.png["Errore: Immagine grafica mancante"]
 
 
-
-link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Avanti: Backup basati su file e controllo dell'integrità dei blocchi."]

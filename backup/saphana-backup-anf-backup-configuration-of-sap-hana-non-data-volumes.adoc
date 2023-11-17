@@ -13,8 +13,7 @@ summary: Il backup dei volumi non dati è parte integrante del servizio SnapCent
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html["Precedente: Configurazione di backup dei backup del database SAP HANA."]
-
+[role="lead"]
 Il backup dei volumi non dati è parte integrante del servizio SnapCenter. La protezione del volume di dati del database è sufficiente per ripristinare e ripristinare il database SAP HANA in un dato momento, a condizione che le risorse di installazione del database e i registri richiesti siano ancora disponibili.
 
 Per eseguire il ripristino da situazioni in cui devono essere ripristinati altri file non di dati, NetApp consiglia di sviluppare una strategia di backup aggiuntiva per questi volumi per aumentare il backup del database SAP HANA. A seconda dei requisiti specifici, il backup dei volumi non dati potrebbe differire in termini di frequenza di pianificazione e impostazioni di conservazione e si dovrebbe considerare la frequenza con cui i file vengono modificati. Ad esempio, il volume HANA `/hana/shared` Contiene file eseguibili ma anche file di traccia SAP HANA. Sebbene gli eseguibili cambino solo quando il database SAP HANA viene aggiornato, i file di traccia SAP HANA potrebbero richiedere una frequenza di backup più elevata per supportare l'analisi delle situazioni problematiche con SAP HANA.
@@ -57,5 +56,3 @@ image:saphana-backup-anf-image37.png["Errore: Immagine grafica mancante"]
 image:saphana-backup-anf-image38.png["Errore: Immagine grafica mancante"]
 
 
-
-link:saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html["Pagina successiva: Configurazione di backup di volumi non dati globali."]

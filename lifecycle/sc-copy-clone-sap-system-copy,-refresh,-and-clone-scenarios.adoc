@@ -13,8 +13,7 @@ summary: Il termine copia del sistema SAP viene spesso utilizzato come sinonimo 
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-introduction.html["Precedente: Introduzione."]
-
+[role="lead"]
 Il termine copia del sistema SAP viene spesso utilizzato come sinonimo per tre diversi processi: Aggiornamento del sistema SAP, copia del sistema SAP o operazioni di clonazione del sistema SAP. È importante distinguere tra le diverse operazioni, in quanto i flussi di lavoro e i casi di utilizzo sono diversi per ciascuno di essi.
 
 * *SAP system refresh.* un refresh del sistema SAP è un refresh di un sistema SAP di destinazione esistente con i dati di un sistema SAP di origine. Il sistema di destinazione fa generalmente parte di un ambiente di trasporto SAP, ad esempio un sistema di quality assurance, che viene aggiornato con i dati del sistema di produzione. Il nome host, il numero di istanza e il SID sono diversi per i sistemi di origine e di destinazione.
@@ -29,5 +28,3 @@ Tutte e tre le operazioni possono essere completamente automatizzate utilizzando
 NetApp ha lavorato anche con Libelle https://www.libelle.com["www.libelle.com"^] Per integrare la clonazione SnapCenter con libelle SystemCopy per automatizzare la pre- e post-elaborazione SAP. Una descrizione dettagliata della soluzione è disponibile all'indirizzo link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html["Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy"^].
 
 image:sc-copy-clone-image2.png["Errore: Immagine grafica mancante"]
-
-link:sc-copy-clone-use-cases-for-system-refresh-and-cloning.html["Segue: Casi di utilizzo per il refresh e la clonazione del sistema."]

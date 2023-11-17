@@ -13,7 +13,8 @@ summary: Di seguito vengono illustrati i passaggi per il ripristino del database
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html["Precedente: Montare i volumi sull'host di destinazione."]
+[role="lead"]
+Di seguito vengono illustrati i passaggi per il ripristino del database HANA
 
 Avviare i servizi SAP richiesti.
 
@@ -196,5 +197,3 @@ Backup '/mnt/log-backup/SYSTEMDB/log_backup_0_0_0_0.1589289811148' successfully 
 La verifica deve essere eseguita per i file di backup dei log più recenti del sistema e del database del tenant.
 
 Se il `hdbbackupcheck` lo strumento segnala un errore per i backup dei log più recenti; è necessario rimuovere o eliminare l'ultimo set di backup dei log.
-
-link:saphana-dr-anf_disaster_recovery_failover_overview.html["Successivo: Failover del disaster recovery."]

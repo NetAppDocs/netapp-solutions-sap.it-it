@@ -13,8 +13,7 @@ summary: 'In questa sezione viene fornita una descrizione dettagliata dell"opera
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["Precedente: Aggiornamento del sistema SAP HANA con SnapCenter."]
-
+[role="lead"]
 In questa sezione viene fornita una descrizione dettagliata dell'operazione di clonazione del sistema SAP, che può essere utilizzata per configurare un sistema di riparazione per risolvere il problema della corruzione logica.
 
 
@@ -294,5 +293,3 @@ Filesystem                                                       1K-blocks     U
 192.168.175.117:/SS1_data_mnt00001_Clone_0421220520054605           262144064  3732864 258411200   2% /hana/data/SS1/mnt00001
 ....
 Il sistema HANA è ora disponibile e può essere utilizzato, ad esempio, come sistema di riparazione.
-
-link:sc-copy-clone-where-to-find-additional-information.html["Pagina successiva: Dove trovare informazioni aggiuntive e cronologia delle versioni."]

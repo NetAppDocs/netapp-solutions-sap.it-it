@@ -29,5 +29,3 @@ I seguenti punti riassumono le sfide che devono affrontare il backup e il recove
 * *Aumento del costo del downtime.* il downtime non pianificato di un sistema SAP influisce in genere sulle finanze aziendali. Una parte significativa di qualsiasi downtime non pianificato viene consumata dal requisito di ripristino e ripristino del sistema SAP. Pertanto, l'RTO desiderato determina la progettazione dell'architettura di backup e ripristino.
 * *Tempi di backup e recovery per i progetti di upgrade SAP.* il piano di progetto per un upgrade SAP include almeno tre backup del database SAP. Questi backup riducono significativamente il tempo disponibile per il processo di aggiornamento. La decisione di procedere si basa generalmente sul tempo necessario per ripristinare e ripristinare il database dal backup creato in precedenza. Invece di ripristinare semplicemente un sistema allo stato precedente, un ripristino rapido offre più tempo per risolvere i problemi che potrebbero verificarsi durante un aggiornamento.
 
-
-link:saphana-backup-anf-the-netapp-solution.html["Avanti: La soluzione NetApp."]

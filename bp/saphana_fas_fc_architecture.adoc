@@ -13,8 +13,7 @@ summary: 'Gli host SAP HANA sono connessi ai controller di storage utilizzando u
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_introduction.html["Precedente: Guida alla configurazione di SAP HANA su sistemi FAS con FCP."]
-
+[role="lead"]
 Gli host SAP HANA sono connessi ai controller di storage utilizzando un'infrastruttura FCP ridondante e un software multipath. È necessaria un'infrastruttura di switch FCP ridondante per fornire connettività host-to-storage SAP HANA fault-tolerant in caso di guasto dello switch o dell'HBA (host bus adapter). È necessario configurare lo zoning appropriato sullo switch per consentire a tutti gli host HANA di raggiungere i LUN richiesti sui controller di storage.
 
 È possibile utilizzare diversi modelli della famiglia di prodotti FAS a livello di storage. Il numero massimo di host SAP HANA collegati allo storage è definito dai requisiti di performance SAP HANA. Il numero di shelf di dischi richiesti è determinato dai requisiti di capacità e performance dei sistemi SAP HANA.
@@ -96,5 +95,3 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito offre alta disponibilità locale e viene utilizzato per i carichi di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.
 
 image:saphana_fas_fc_image7.png["Errore: Immagine grafica mancante"]
-
-link:saphana_fas_fc_storage_sizing.html["Successivo: Dimensionamento dello storage."]

@@ -13,8 +13,6 @@ summary:
 :imagesdir: ./../media/
 
 
-link:lama-ansible-introduction.html["Precedente: Introduzione."]
-
 [role="lead"]
 Il termine copia del sistema SAP viene spesso utilizzato come sinonimo per tre diversi processi: Clone del sistema SAP, copia del sistema SAP o refresh del sistema SAP. È importante distinguere tra le diverse operazioni, in quanto i flussi di lavoro e i casi di utilizzo sono diversi per ciascuno di essi.
 
@@ -26,5 +24,3 @@ Il termine copia del sistema SAP viene spesso utilizzato come sinonimo per tre d
 La figura seguente illustra i passaggi principali da eseguire durante un'operazione di clonazione del sistema, copia del sistema o aggiornamento del sistema. Le caselle viola indicano i passaggi in cui è possibile integrare le funzionalità di storage NetApp. Tutte e tre le operazioni possono essere completamente automatizzate utilizzando SAP lama.
 
 image:lama-ansible-image1.png["Questa figura mostra tre tempistiche di processo rispettivamente per System Clone, System Copy e System Refresh."]
-
-link:lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html["Pagina successiva: Casi di utilizzo per l'aggiornamento, la copia e la clonazione del sistema."]

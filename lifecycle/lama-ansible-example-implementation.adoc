@@ -13,8 +13,6 @@ summary: 'A causa dell"elevato numero di opzioni disponibili per le configurazio
 :imagesdir: ./../media/
 
 
-link:lama-ansible-netapp-sap-lama-integration-using-ansible.html["Precedente: Integrazione di NetApp SAP lama con Ansible."]
-
 A causa dell'elevato numero di opzioni disponibili per le configurazioni di sistema e storage, l'implementazione di esempio deve essere utilizzata come modello per i requisiti di configurazione e configurazione del sistema.
 
 
@@ -119,5 +117,3 @@ Ulteriori informazioni sull'utilizzo di ganci personalizzati sono disponibili ne
 Per abilitare il workflow di provisioning personalizzato per il sistema di origine, è necessario adattarlo nella configurazione. Selezionare la casella di controllo *Usa processo di provisioning personalizzato* con la definizione di provisioning personalizzato corrispondente.
 
 image:lama-ansible-image16.png["Schermata della schermata SAP lama Configuration > Systems> System Details. La casella di controllo Usa processo di provisioning personalizzato è evidenziata."]
-
-link:lama-ansible-sap-lama-provisioning-workflow-clone-system.html["Segue: Workflow di provisioning SAP lama - sistema clone."]

@@ -13,8 +13,7 @@ summary: 'Una risorsa SnapCenter viene configurata con l"indirizzo IP virtuale (
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html["Precedente: Configurazione di SnapCenter 4.6 con un gruppo di risorse."]
-
+[role="lead"]
 Una risorsa SnapCenter viene configurata con l'indirizzo IP virtuale (nome host) dell'ambiente di replica del sistema HANA. Con questo approccio, SnapCenter comunica sempre con l'host primario, indipendentemente dal fatto che l'host 1 o l'host 2 sia primario. I volumi di dati di entrambi gli host SAP HANA sono inclusi nella risorsa SnapCenter.
 
 
@@ -192,5 +191,3 @@ image:saphana-sr-scs-image46.png["Errore: Immagine grafica mancante"]
 Una volta completato il forward recovery, viene avviato l'host secondario (host 2) e viene avviata la risincronizzazione della replica del sistema SAP HANA. Viene eseguita la replica completa di tutti i dati.
 
 image:saphana-sr-scs-image47.png["Errore: Immagine grafica mancante"]
-
-link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Successivo: Ripristino e ripristino da un backup creato sull'altro host."]

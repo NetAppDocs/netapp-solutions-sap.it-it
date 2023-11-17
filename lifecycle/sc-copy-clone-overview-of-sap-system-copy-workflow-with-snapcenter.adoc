@@ -13,8 +13,7 @@ summary: Il flusso di lavoro delle copie SAP è simile ai passaggi iniziali per 
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html["Precedente: Panoramica del workflow di refresh del sistema SAP con SnapCenter."]
-
+[role="lead"]
 Il flusso di lavoro delle copie SAP è simile ai passaggi iniziali per un flusso di lavoro di refresh del sistema. Il flusso di lavoro con SnapCenter è costituito da cinque fasi principali, come mostrato nella figura seguente.
 
 . Installazione iniziale e preparazione del sistema di destinazione.
@@ -25,5 +24,3 @@ Il flusso di lavoro delle copie SAP è simile ai passaggi iniziali per un flusso
 
 
 image:sc-copy-clone-image9.png["Errore: Immagine grafica mancante"]
-
-link:sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html["Pagina successiva: Panoramica del workflow dei cloni di sistema SAP con SnapCenter."]

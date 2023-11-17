@@ -13,8 +13,7 @@ summary: La sezione seguente fornisce una panoramica delle considerazioni su per
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_architecture.html["Precedente: Architettura."]
-
+[role="lead"]
 La sezione seguente fornisce una panoramica delle considerazioni su performance e capacità per il dimensionamento di un sistema storage per SAP HANA.
 
 
@@ -217,5 +216,3 @@ Le dimensioni della RAM, le dimensioni nette dei dati sul disco di ciascun host 
 La figura seguente riassume il processo di dimensionamento.
 
 image:saphana_fas_fc_image8.jpg["Errore: Immagine grafica mancante"]
-
-link:saphana_fas_fc_infrastructure_setup_and_configuration_overview.html["Pagina successiva: Configurazione e configurazione dell'infrastruttura."]

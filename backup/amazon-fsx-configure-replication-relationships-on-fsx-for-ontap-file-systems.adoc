@@ -13,8 +13,7 @@ summary: Questa sezione descrive come eseguire il peer di file system FSX per ON
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-replication-with-snapvault_overview.html["Precedente: Panoramica - replica di backup con SnapVault."]
-
+[role="lead"]
 Per ulteriori informazioni sulle opzioni di configurazione di SnapMirror, consultare la documentazione di ONTAP all'indirizzo https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-replication-workflow-concept.html["Workflow di replica di SnapMirror (netapp.com)"^].
 
 * FSX di origine per il file system ONTAP: `FsxId00fa9e3c784b6abbb`
@@ -170,4 +169,3 @@ sapcc-hana-svm:PFX_data_mnt00001
                               Snapmirrored
                                       Idle           -         true    -
 ....
-link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Avanti: Aggiungere una SVM di backup a SnapCenter."]

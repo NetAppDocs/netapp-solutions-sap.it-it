@@ -13,10 +13,7 @@ summary: La configurazione di laboratorio utilizzata per questo report include i
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html["Precedente: Concetti e Best practice del servizio SnapCenter."]
-
+[role="lead"]
 Il setup di laboratorio utilizzato per questo report include il sistema SAP HANA PR1-SAP HANA single host MDC single tenant system e i componenti del servizio SnapCenter, come mostrato nella figura seguente.
 
 image:saphana-backup-anf-image13.jpg["Errore: Immagine grafica mancante"]
-
-link:saphana-backup-anf-snapcenter-service-policy-configuration.html["Pagina successiva: Configurazione della policy di servizio SnapCenter."]

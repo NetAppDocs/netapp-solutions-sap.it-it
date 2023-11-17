@@ -13,8 +13,6 @@ summary: Durante il flusso di lavoro di refresh, il clone dello storage deve ess
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-provisioning-workflow-copy-system.html["Precedente: Workflow di provisioning SAP lama - sistema di copia."]
-
 [role="lead"]
 La figura seguente evidenzia i passaggi principali eseguiti con il flusso di lavoro di refresh del sistema.
 
@@ -31,5 +29,3 @@ image:lama-ansible-image51.png["Questa schermata mostra la vista del sistema di 
 Anche in questo caso, nulla differenzia le schermate di input dallo standard e l'esecuzione del workflow può essere avviata dalla schermata di riepilogo.
 
 image:lama-ansible-image52.png["Questa schermata mostra la schermata Refresh System (Aggiorna sistema), che include i dati di base del sistema da aggiornare e la selezione dell'host del sistema di destinazione."]
-
-link:lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html["Pagina successiva: Configurazione dello script del provider e playbook Ansible."]

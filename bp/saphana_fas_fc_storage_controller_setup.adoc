@@ -13,8 +13,7 @@ summary: 'Questa sezione descrive la configurazione del sistema storage NetApp. 
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_time_synchronization.html["Precedente: Sincronizzazione dell'ora."]
-
+[role="lead"]
 Questa sezione descrive la configurazione del sistema storage NetApp. È necessario completare l'installazione e la configurazione primaria in base alle corrispondenti guide di configurazione e configurazione di ONTAP.
 
 
@@ -459,5 +458,3 @@ lun map -path /vol/FC5_log_mnt00002/FC5_log_mnt00002  -igroup HANA-FC5
 lun map -path /vol/FC5_log2_mnt00002/FC5_log2_mnt00002  -igroup HANA-FC5
 ....
 
-
-link:saphana_fas_fc_sap_hana_storage_connector_api.html["Successivo: API del connettore di storage SAP HANA."]

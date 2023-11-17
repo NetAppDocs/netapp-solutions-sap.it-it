@@ -13,13 +13,10 @@ summary: Esistono diversi scenari in cui i dati di un sistema di origine devono 
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html["Precedente: Scenari di copia, aggiornamento e clonazione del sistema SAP."]
+[role="lead"]
+Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente.
 
-
-
-== Aggiornamento dei dati di sistemi di QA, test, sandbox o training
-
-Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente. Queste operazioni di refresh del sistema sono costituite da più attività a livello di infrastruttura, database e applicazioni e possono richiedere più giorni a seconda del livello di automazione.
+Queste operazioni di refresh del sistema sono costituite da più attività a livello di infrastruttura, database e applicazioni e possono richiedere più giorni a seconda del livello di automazione.
 
 La seguente figura illustra le operazioni di aggiornamento, copia e clonazione del sistema SAP.
 
@@ -64,5 +61,3 @@ La seguente figura illustra i test di disaster recovery.
 image:sc-copy-clone-image6.png["Errore: Immagine grafica mancante"]
 
 Una descrizione dettagliata e dettagliata è disponibile nel report tecnico http://www.netapp.com/us/media/tr-4646.pdf["Disaster recovery SAP HANA con replica dello storage"^].
-
-link:sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html["Pagina successiva: Panoramica del workflow di refresh del sistema SAP con SnapCenter."]

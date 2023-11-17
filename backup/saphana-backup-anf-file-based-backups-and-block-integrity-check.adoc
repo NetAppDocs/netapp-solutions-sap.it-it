@@ -13,8 +13,7 @@ summary: 'SAP consiglia di combinare i backup snapshot basati su storage con un 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-sap-hana-database-snapshot-backups.html["Precedente: Backup Snapshot del database SAP HANA."]
-
+[role="lead"]
 SAP consiglia di combinare i backup snapshot basati su storage con un backup settimanale basato su file per eseguire un controllo dell'integrità dei blocchi. Il servizio SnapCenter supporta l'esecuzione di un controllo dell'integrità dei blocchi utilizzando una policy in cui il backup basato su file viene selezionato come tipo di backup.
 
 I backup basati su file vengono utilizzati anche per avere copie di backup secondarie oltre ai backup snapshot sul volume di dati HANA. È possibile utilizzare questi backup basati su file per le operazioni di ripristino e ripristino in caso di perdita completa del volume di dati primario.
@@ -52,5 +51,3 @@ drwxr-x--- 4 pr1adm sapsys       4096 Jan 31 18:59 ..
 == Ripristino e ripristino mediante backup basati su file
 
 È necessario eseguire un'operazione di ripristino e ripristino di un backup basato su file al di fuori di SnapCenter utilizzando le operazioni di ripristino HANA standard con HANA Studio o HANA Cockpit.
-
-link:saphana-backup-anf-restore-and-recovery.html["Successivo: Ripristino e ripristino."]

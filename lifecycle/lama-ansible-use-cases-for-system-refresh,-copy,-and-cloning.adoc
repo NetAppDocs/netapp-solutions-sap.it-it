@@ -13,13 +13,10 @@ summary: Esistono diversi scenari in cui i dati di un sistema di origine devono 
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html["Precedente: Scenari di cloning, copia e refresh del sistema SAP."]
+[role="lead"]
+Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente.
 
-
-
-== Aggiornamento dei dati di sistemi di QA, test, sandbox o training
-
-Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente. Queste operazioni di refresh del sistema consistono in più attività a livello di infrastruttura, database e applicazioni, che possono richiedere più giorni a seconda del livello di automazione.
+Queste operazioni di refresh del sistema consistono in più attività a livello di infrastruttura, database e applicazioni, che possono richiedere più giorni a seconda del livello di automazione.
 
 image:lama-ansible-image2.png["Questa immagine mostra il flusso di lavoro ambientale dal principale scenario di sviluppo alle divisioni temporanee dei progetti, ai sistemi di riparazione, ai sistemi di formazione e ai sistemi sanbox. Mostra dove vengono utilizzati System Refresh, System Copy e System Clone per questi diversi scopi."]
 
@@ -52,5 +49,3 @@ La replica dello storage con SnapMirror consente di eseguire test di disaster re
 SAP lama può essere utilizzato per orchestrare l'intera procedura di test e si occupa anche di scherma di rete, manutenzione degli host di destinazione e così via.
 
 image:lama-ansible-image5.png["Questa immagine mostra la relazione tra i sistemi storage NetApp nel data center primario, nel data center DR locale e nel data center DR remoto. Sono connessi sia da relazioni SnapMirror sincrone che da relazioni SnapMirror asincrone."]
-
-link:lama-ansible-netapp-sap-lama-integration-using-ansible.html["Pagina successiva: Integrazione di NetApp SAP lama con Ansible."]

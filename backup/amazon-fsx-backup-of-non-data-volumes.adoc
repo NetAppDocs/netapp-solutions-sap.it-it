@@ -13,9 +13,10 @@ summary: Il backup dei volumi non dati è parte integrante di SnapCenter e del p
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-snapcenter-backup-operations.html["Precedente: Operazioni di backup di SnapCenter."]
+[role="lead"]
+Il backup dei volumi non dati è parte integrante di SnapCenter e del plug-in SAP HANA.
 
-Il backup dei volumi non dati è parte integrante di SnapCenter e del plug-in SAP HANA. La protezione del volume di dati del database è sufficiente per ripristinare e ripristinare il database SAP HANA in un dato momento, a condizione che le risorse di installazione del database e i registri richiesti siano ancora disponibili.
+La protezione del volume di dati del database è sufficiente per ripristinare e ripristinare il database SAP HANA in un dato momento, a condizione che le risorse di installazione del database e i registri richiesti siano ancora disponibili.
 
 Per eseguire il ripristino da situazioni in cui devono essere ripristinati altri file non di dati, NetApp consiglia di sviluppare una strategia di backup aggiuntiva per i volumi non di dati per aumentare il backup del database SAP HANA. A seconda dei requisiti specifici, il backup dei volumi non dati potrebbe differire in termini di frequenza di pianificazione e impostazioni di conservazione e si dovrebbe considerare la frequenza con cui i file non dati vengono modificati. Ad esempio, il volume HANA `/hana/shared` Contiene file eseguibili ma anche file di traccia SAP HANA. Mentre gli eseguibili cambiano solo quando il database SAP HANA viene aggiornato, i file di traccia SAP HANA potrebbero richiedere una frequenza di backup più elevata per supportare l'analisi delle situazioni problematiche con SAP HANA.
 
@@ -153,5 +154,3 @@ SnapCenter esegue l'operazione di ripristino e ripristino. Questo esempio mostra
 image:amazon-fsx-image75.png["Errore: Immagine grafica mancante"]
 
 
-
-link:amazon-fsx-backup-replication-with-snapvault_overview.html["Pagina successiva: Panoramica - replica di backup con SnapVault."]

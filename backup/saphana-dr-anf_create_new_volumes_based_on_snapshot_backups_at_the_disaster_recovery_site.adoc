@@ -13,9 +13,10 @@ summary: 'A seconda della configurazione del disaster recovery (con o senza repl
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_prepare_the_target_host.html["Precedente: Preparare l'host di destinazione."]
+[role="lead"]
+A seconda della configurazione del disaster recovery (con o senza replica del backup del log), è necessario creare due o tre nuovi volumi basati sui backup snapshot. In entrambi i casi, è necessario creare un nuovo volume dei dati e il volume condiviso HANA.
 
-A seconda della configurazione del disaster recovery (con o senza replica del backup del log), è necessario creare due o tre nuovi volumi basati sui backup snapshot. In entrambi i casi, è necessario creare un nuovo volume dei dati e il volume condiviso HANA. Se vengono replicati anche i dati di backup del registro, è necessario creare un nuovo volume del volume di backup del registro. Nel nostro esempio, i dati e il volume di backup del log sono stati replicati nel sito di disaster recovery. La procedura seguente utilizza Azure Portal.
+Se vengono replicati anche i dati di backup del registro, è necessario creare un nuovo volume del volume di backup del registro. Nel nostro esempio, i dati e il volume di backup del log sono stati replicati nel sito di disaster recovery. La procedura seguente utilizza Azure Portal.
 
 . Uno dei backup snapshot coerenti con l'applicazione viene selezionato come origine per il nuovo volume del volume di dati HANA. L'opzione Restore to New Volume (Ripristina su nuovo volume) è selezionata per creare un nuovo volume in base al backup dello snapshot.
 +
@@ -51,5 +52,3 @@ image:saphana-dr-anf_image25.png["Errore: Immagine grafica mancante"]
 NOTE: Se è stato utilizzato un pool di capacità con un livello di performance basso, i volumi devono ora essere spostati in un pool di capacità che fornisca le performance richieste.
 
 Tutti e tre i nuovi volumi sono ora disponibili e possono essere montati sull'host di destinazione.
-
-link:saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html["Avanti: Montare i nuovi volumi sull'host di destinazione."]

@@ -13,8 +13,7 @@ summary: I passaggi necessari per eseguire un aggiornamento del sistema SAP HANA
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html["Precedente: Panoramica del workflow dei cloni di sistema SAP con SnapCenter."]
-
+[role="lead"]
 I passaggi necessari per eseguire un aggiornamento del sistema SAP HANA dipendono dalla configurazione del tenant del sistema di origine e dal nome del tenant richiesto nel sistema di destinazione, come mostrato nella figura seguente.
 
 Poiché il nome del tenant è configurato nel database di sistema, il nome del tenant del sistema di origine è disponibile anche nel sistema di destinazione dopo il ripristino del database di sistema. Pertanto, il tenant nel sistema di destinazione può essere recuperato solo con lo stesso nome del tenant di origine, come mostrato nell'opzione 1 nella figura seguente. Se il nome del tenant nel sistema di destinazione deve essere diverso, il tenant deve essere recuperato con lo stesso nome del tenant di origine e quindi rinominato nel nome del tenant di destinazione richiesto. Questa è l'opzione 2 nella figura seguente.
@@ -29,5 +28,3 @@ image:sc-copy-clone-image11.png["Errore: Immagine grafica mancante"]
 Questa figura mostra il flag di configurazione per l'installazione iniziale di MDC single-tenant.
 
 image:sc-copy-clone-image12.png["Errore: Immagine grafica mancante"]
-
-link:sc-copy-clone-automation-example-scripts.html["Segue: Script di esempio di automazione."]

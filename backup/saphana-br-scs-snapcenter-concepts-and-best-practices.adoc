@@ -13,7 +13,8 @@ summary: 'In questa sezione vengono descritti i concetti e le Best practice di S
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-sap-hana-backup-solution.html["Precedente: Soluzione di backup SAP HANA di SnapCenter."]
+[role="lead"]
+In questa sezione vengono descritti i concetti e le Best practice di SnapCenter relativi alla configurazione e all'implementazione delle risorse SAP HANA.
 
 
 
@@ -615,4 +616,3 @@ La seguente tabella riassume le operazioni di ripristino e ripristino in base al
 
 | Manuale | Manuale | Manuale 
 |===
-link:saphana-br-scs-lab-setup-used-for-this-report.html["Segue: Impostazione di laboratorio utilizzata per questo report."]

@@ -13,8 +13,5 @@ summary: 'È necessario sincronizzare l"ora tra i controller di storage e gli ho
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_san_fabric_setup.html["Precedente: Configurazione del fabric SAN."]
-
+[role="lead"]
 È necessario sincronizzare l'ora tra i controller di storage e gli host del database SAP HANA. È necessario impostare lo stesso server di riferimento orario per tutti i controller di storage e per tutti gli host SAP HANA.
-
-link:saphana_fas_fc_storage_controller_setup.html["Avanti: Configurazione dello storage controller."]

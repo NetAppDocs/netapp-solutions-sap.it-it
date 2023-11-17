@@ -13,8 +13,7 @@ summary: SnapCenter 4.6 supporta il rilevamento automatico per i sistemi HANA co
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Precedente: Opzioni di configurazione SnapCenter per la replica del sistema SAP."]
-
+[role="lead"]
 SnapCenter 4.6 supporta il rilevamento automatico per i sistemi HANA configurati con la replica del sistema HANA. SnapCenter 4.6 include la logica per identificare gli host HANA primari e secondari durante le operazioni di backup e gestisce anche la gestione della conservazione su entrambi gli host HANA. Inoltre, il ripristino e il ripristino automatici sono ora disponibili anche per gli ambienti di replica del sistema HANA.
 
 
@@ -161,5 +160,3 @@ image:saphana-sr-scs-image26.png["Errore: Immagine grafica mancante"]
 Le operazioni di ripristino e ripristino per una configurazione del gruppo di risorse di SnapCenter 4.6 sono identiche a quelle di una configurazione della replica non di sistema rilevata automaticamente. Sono disponibili tutte le opzioni per il ripristino e il ripristino automatizzato. Per ulteriori dettagli, consultare il report tecnico https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^].
 
 Nella sezione viene descritta un'operazione di ripristino da un backup creato sull'altro host link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Ripristino e ripristino da un backup creato sull'altro host"].
-
-link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html["Pagina successiva: Configurazione di SnapCenter con una singola risorsa."]

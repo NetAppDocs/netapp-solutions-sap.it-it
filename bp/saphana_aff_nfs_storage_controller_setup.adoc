@@ -13,8 +13,7 @@ summary: 'Questa sezione descrive la configurazione del sistema storage NetApp. 
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_time_synchronization.html["Precedente: Sincronizzazione dell'ora."]
-
+[role="lead"]
 Questa sezione descrive la configurazione del sistema storage NetApp. È necessario completare l'installazione e la configurazione primaria in base alle corrispondenti guide di configurazione e configurazione di ONTAP.
 
 
@@ -363,5 +362,3 @@ Mantenere l'intervallo di ripetizione predefinito di 10 secondi all'interno di q
 == Montare i volumi nello spazio dei nomi e impostare i criteri di esportazione
 
 Quando viene creato un volume, il volume deve essere montato nello spazio dei nomi. In questo documento, si presuppone che il nome del percorso di giunzione sia lo stesso del nome del volume. Per impostazione predefinita, il volume viene esportato con il criterio predefinito. Se necessario, è possibile adattare la policy di esportazione.
-
-link:saphana_aff_nfs_host_setup.html["Avanti: Configurazione dell'host."]

@@ -13,8 +13,7 @@ summary: Questa sezione descrive la configurazione iniziale di SnapCenter, inclu
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-configuration.html["Precedente: Configurazione SnapCenter."]
-
+[role="lead"]
 La configurazione iniziale include i seguenti passaggi:
 
 . Configurazione del sistema storage
@@ -257,5 +256,3 @@ La figura seguente mostra un riepilogo dei criteri configurati.
 image:saphana-br-scs-image52.png["Errore: Immagine grafica mancante"]
 
 
-
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html["Pagina successiva: Configurazione specifica delle risorse SnapCenter per i backup dei database SAP HANA."]

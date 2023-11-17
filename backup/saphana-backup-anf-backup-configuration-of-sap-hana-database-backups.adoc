@@ -13,8 +13,7 @@ summary: In questa sezione vengono descritte le procedure di configurazione per 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-snapshot-backup-configuration-overview.html["Precedente: Panoramica della configurazione del backup Snapshot del servizio SnapCenter."]
-
+[role="lead"]
 In questa sezione vengono descritte le procedure di configurazione per un sistema single-tenant SAP HANA MDC host singolo PR1. I passaggi sono identici per un sistema MDC con tenant multipli. Le differenze per un sistema a singolo container o a più host si riflettono nei passi di configurazione corrispondenti.
 
 
@@ -102,5 +101,3 @@ La schermata di panoramica dei sistemi HANA mostra il sistema HANA e i criteri a
 image:saphana-backup-anf-image30.png["Errore: Immagine grafica mancante"]
 
 
-
-link:saphana-backup-anf-backup-configuration-of-sap-hana-non-data-volumes.html["Pagina successiva: Configurazione di backup dei volumi non dati SAP HANA."]

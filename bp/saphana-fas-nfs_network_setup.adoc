@@ -13,8 +13,7 @@ summary: Per configurare la rete, attenersi alle seguenti indicazioni.
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_infrastructure_setup_and_configuration_overview.html["Precedente: Configurazione e configurazione dell'infrastruttura."]
-
+[role="lead"]
 Per configurare la rete, attenersi alle seguenti indicazioni:
 
 * Per collegare gli host SAP HANA ai controller di storage con una rete 10 GbE o superiore, è necessario utilizzare una rete storage dedicata.
@@ -55,5 +54,3 @@ Ogni nodo SAP HANA utilizza un gruppo di porte dedicato sullo switch distribuito
 NOTE: LRO (Large receive offload) deve essere disattivato per le interfacce utilizzate per il traffico NFS. Per tutte le altre linee guida sulla configurazione di rete, consultare le rispettive guide alle Best practice VMware per SAP HANA.
 
 image:saphana-fas-nfs_image12.png["Errore: Immagine grafica mancante"]
-
-link:saphana-fas-nfs_time_synchronization.html["Successivo: Sincronizzazione dell'ora."]

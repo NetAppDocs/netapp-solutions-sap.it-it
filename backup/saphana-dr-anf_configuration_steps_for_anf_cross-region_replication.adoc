@@ -13,8 +13,7 @@ summary: Prima di poter configurare la replica del volume, è necessario eseguir
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_lab_setup.html["Precedente: Installazione di laboratorio."]
-
+[role="lead"]
 Prima di poter configurare la replica del volume, è necessario eseguire alcune fasi di preparazione presso il sito di disaster recovery.
 
 * Un account NetApp deve essere disponibile e configurato con lo stesso abbonamento Azure dell'origine.
@@ -91,5 +90,3 @@ NOTE: È possibile copiare l'ID del volume di destinazione dalla schermata Propr
 image:saphana-dr-anf_image13.png["Errore: Immagine grafica mancante"]
 
 È necessario eseguire le stesse operazioni per il volume condiviso HANA e per il volume di backup del registro.
-
-link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Successivo: Monitoraggio della replica ANF tra regioni."]

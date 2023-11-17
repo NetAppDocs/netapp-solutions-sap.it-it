@@ -13,8 +13,7 @@ summary: In questa sezione viene descritto come configurare un criterio per la r
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Precedente: Aggiungere una SVM di backup a SnapCenter."]
-
+[role="lead"]
 È necessario configurare un criterio per la replica di backup come segue:
 
 . Specificare un nome per il criterio.
@@ -50,5 +49,3 @@ image:amazon-fsx-image84.png["Errore: Immagine grafica mancante"]
 Il nuovo criterio SnapCenter è ora configurato.
 
 image:amazon-fsx-image85.png["Errore: Immagine grafica mancante"]
-
-link:amazon-fsx-add-a-policy-to-resource-protection.html["Avanti: Aggiungere un criterio alla protezione delle risorse."]

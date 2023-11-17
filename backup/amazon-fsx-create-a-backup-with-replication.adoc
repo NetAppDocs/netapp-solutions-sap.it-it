@@ -13,8 +13,7 @@ summary: In questa sezione viene descritto come creare un backup con replica.
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-add-a-policy-to-resource-protection.html["Precedente: Aggiungere un criterio alla protezione delle risorse."]
-
+[role="lead"]
 Un backup viene creato allo stesso modo di una copia Snapshot locale.
 
 Per creare un backup con replica, selezionare il criterio che include la replica di backup e fare clic su Backup.
@@ -58,5 +57,3 @@ image:amazon-fsx-image90.png["Errore: Immagine grafica mancante"]
 In SnapCenter, è possibile elencare i backup replicati facendo clic su copie del vault nella vista della topologia.
 
 image:amazon-fsx-image91.png["Errore: Immagine grafica mancante"]
-
-link:amazon-fsx-restore-and-recover-from-secondary-storage.html["Successivo: Ripristino e ripristino dallo storage secondario."]

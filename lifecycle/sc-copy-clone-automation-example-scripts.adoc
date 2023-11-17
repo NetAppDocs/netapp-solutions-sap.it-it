@@ -13,8 +13,7 @@ summary: In questo documento vengono utilizzati due script per automatizzare ult
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html["Precedente: Flussi di lavoro delle operazioni di refresh del sistema SAP HANA utilizzando backup di snapshot di storage."]
-
+[role="lead"]
 In questo documento vengono utilizzati due script per automatizzare ulteriormente le operazioni di creazione e cancellazione dei cloni SnapCenter.
 
 * Lo script `sc-system-refresh.sh` Viene utilizzato per il refresh del sistema e per il workflow dei cloni del sistema per eseguire operazioni di montaggio e smontaggio del volume di dati HANA, nonché per le operazioni di recovery e shutdown del database HANA.
@@ -173,4 +172,3 @@ Ad esempio:
 ....
 CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_data_mnt00001_Clone_05112206115489411
 ....
-link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["Successivo: Aggiornamento del sistema SAP HANA con SnapCenter."]

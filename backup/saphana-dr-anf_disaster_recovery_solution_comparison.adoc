@@ -13,8 +13,7 @@ summary: Una soluzione di disaster recovery completa deve consentire ai clienti 
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_data_protection_overview_overview.html["Precedente: Disaster recovery SAP HANA con panoramica su Azure NetApp Files."]
-
+[role="lead"]
 Una soluzione di disaster recovery completa deve consentire ai clienti di eseguire il ripristino da un guasto completo del sito primario. Pertanto, i dati devono essere trasferiti a un sito secondario ed è necessaria un'infrastruttura completa per eseguire i sistemi SAP HANA di produzione richiesti in caso di guasto di un sito. A seconda dei requisiti di disponibilità dell'applicazione e del tipo di disastro da cui si desidera essere protetti, è necessario prendere in considerazione una soluzione di disaster recovery a due o tre siti.
 
 La figura seguente mostra una configurazione tipica in cui i dati vengono replicati in modo sincrono all'interno della stessa regione Azure in una seconda zona di disponibilità. La breve distanza consente di replicare i dati in modo sincrono per ottenere un RPO pari a zero (generalmente utilizzato per fornire ha).
@@ -139,4 +138,3 @@ La seguente tabella fornisce un confronto tra le soluzioni di disaster recovery.
 
 | Test di DR senza influire su RTO e RPO | Sì | No | No 
 |===
-link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Avanti: REPLICA cross-region CON SAP HANA."]

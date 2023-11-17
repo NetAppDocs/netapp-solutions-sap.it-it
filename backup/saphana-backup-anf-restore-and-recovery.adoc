@@ -13,8 +13,7 @@ summary: In questa sezione vengono descritti i flussi di lavoro di ripristino e 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Precedente: Backup basati su file e controllo dell'integrità dei blocchi."]
-
+[role="lead"]
 La sezione seguente descrive i flussi di lavoro di ripristino e ripristino per un sistema tenant singolo e host singolo HANA MDC. Vengono descritte le differenze per un sistema host multiplo.
 
 Gli esempi mostrano SAP HANA Studio come uno strumento per eseguire il ripristino manuale. Per le operazioni di recovery è inoltre possibile utilizzare istruzioni SAP HANA Cockpit o HANA SQL.
@@ -178,5 +177,3 @@ Il sistema SAP HANA è operativo.
 
 
 Per un sistema SAP HANA MDC con più tenant, è necessario ripetere i passaggi da 15 a 24 per ciascun tenant.
-
-link:saphana-backup-anf-additional-information.html["Avanti: Dove trovare ulteriori informazioni."]

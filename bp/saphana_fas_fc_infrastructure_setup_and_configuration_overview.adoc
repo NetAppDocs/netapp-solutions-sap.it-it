@@ -13,8 +13,7 @@ summary: 'Le seguenti sezioni forniscono le linee guida per la configurazione e 
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_storage_sizing.html["Precedente: Dimensionamento dello storage."]
-
+[role="lead"]
 Le seguenti sezioni forniscono le linee guida per la configurazione e la configurazione dell'infrastruttura SAP HANA. Sono inclusi tutti i passaggi necessari per configurare SAP HANA. Viene creata una SVM per ospitare i dati. All'interno di queste sezioni, vengono utilizzate le seguenti configurazioni di esempio:
 
 * Sistema HANA con SID=SS3 e ONTAP 9.7 o versioni precedenti
@@ -29,5 +28,3 @@ Le seguenti sezioni forniscono le linee guida per la configurazione e la configu
 
 
 
-
-link:saphana_fas_fc_san_fabric_setup.html["Avanti: Configurazione del fabric SAN."]

@@ -13,8 +13,7 @@ summary: A partire da SAP HANA 2.0 SPS4, è possibile configurare ulteriori part
 :imagesdir: ./../media/
 
 
-link:saphana_aff_fc_sap_hana_software_installation.html["Precedente: Installazione del software SAP HANA."]
-
+[role="lead"]
 A partire da SAP HANA 2.0 SPS4, è possibile configurare ulteriori partizioni del volume di dati. Questa funzione consente di configurare due o più LUN per il volume di dati di un database tenant SAP HANA e di scalare oltre i limiti di dimensioni e performance di una singola LUN.
 
 
@@ -115,5 +114,3 @@ Per aggiungere un'ulteriore partizione di datavolume al database del tenant, ese
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
 image:saphana_aff_fc_image20.jpg["Errore: Immagine grafica mancante"]
-
-link:saphana_aff_fc_where_to_find_additional_information.html["Avanti: Dove trovare ulteriori informazioni."]

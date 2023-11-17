@@ -106,5 +106,3 @@ NOTE: Il grafico mostra le dimensioni della RAM del server HANA. La dimensione d
 
 
 NOTE: I tempi di ripristino e ripristino vengono calcolati in base ai seguenti presupposti. Il database può essere ripristinato a 250 MBps. Il numero di file di log al giorno corrisponde al 50% delle dimensioni del database. Ad esempio, un database da 1 TB crea 500 MB di file di log al giorno. È possibile eseguire un ripristino a 100 Mbps.
-
-link:saphana-br-scs-snapcenter-architecture.html["Avanti: Architettura SnapCenter."]

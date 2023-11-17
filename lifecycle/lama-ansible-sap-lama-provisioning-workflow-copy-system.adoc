@@ -13,8 +13,6 @@ summary: In questo capitolo, discuteremo brevemente delle differenze per il flus
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Precedente: Workflow di deprovisioning SAP lama - system Destroy."]
-
 [role="lead"]
 La figura seguente evidenzia i passaggi principali eseguiti con il flusso di lavoro di copia del sistema.
 
@@ -57,5 +55,3 @@ image:lama-ansible-image47.png["Questa schermata mostra la schermata dei sistemi
 Deve essere adottato manualmente per eseguire la fase di pre-hook durante il processo di distruzione del sistema, in quanto viene impostato un vincolo che impedirebbe l'esecuzione.
 
 image:lama-ansible-image48.png["Questa schermata mostra la schermata dei sistemi lama insieme ai dettagli dei sistemi e la casella di controllo Use Custom Processing Process (Usa processo di elaborazione personalizzato) è selezionata."]
-
-link:lama-ansible-sap-lama-provisioning-workflow-system-refresh.html["Segue: Workflow di provisioning SAP lama - refresh del sistema."]

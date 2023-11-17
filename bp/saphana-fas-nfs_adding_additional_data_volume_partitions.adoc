@@ -13,7 +13,8 @@ summary: A partire da SAP HANA 2.0 SPS4, è possibile configurare ulteriori part
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_sap_hana_software_installation.html["Precedente: Installazione del software SAP HANA."]A partire da SAP HANA 2.0 SPS4, è possibile configurare ulteriori partizioni del volume di dati, che consentono di configurare due o più volumi per il volume di dati di un database tenant SAP HANA. Puoi anche scalare oltre i limiti di dimensioni e performance di un singolo volume.
+[role="lead"]
+A partire da SAP HANA 2.0 SPS4, è possibile configurare ulteriori partizioni del volume di dati, che consentono di configurare due o più volumi per il volume di dati di un database tenant SAP HANA. Puoi anche scalare oltre i limiti di dimensioni e performance di un singolo volume.
 
 
 NOTE: L'utilizzo di due o più volumi singoli per il volume di dati è disponibile per i sistemi SAP HANA a host singolo e multiplo. È possibile aggiungere ulteriori partizioni del volume di dati in qualsiasi momento, ma in questo modo potrebbe essere necessario riavviare il database SAP HANA.
@@ -212,5 +213,3 @@ Eseguire la seguente istruzione SQL sul database tenant per aggiungere una parti
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
 image:saphana-fas-nfs_image19.jpg["Errore: Immagine grafica mancante"]
-
-link:saphana-fas-nfs_where_to_find_additional_information.html["Avanti: Dove trovare ulteriori informazioni."]

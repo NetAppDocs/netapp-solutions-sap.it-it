@@ -13,8 +13,7 @@ summary: In questa sezione vengono descritte le fasi di preparazione necessarie 
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_disaster_recovery_failover_overview.html["Precedente: Failover del disaster recovery."]
-
+[role="lead"]
 In questa sezione vengono descritte le fasi di preparazione necessarie per il server utilizzato per il failover del disaster recovery.
 
 Durante il normale funzionamento, l'host di destinazione viene generalmente utilizzato per altri scopi, ad esempio come sistema di test o QA HANA. Pertanto, la maggior parte dei passaggi descritti deve essere eseguita quando viene eseguito il test di failover di emergenza. D'altra parte, i file di configurazione pertinenti, come `/etc/fstab` e. `/usr/sap/sapservices`, può essere preparato e quindi messo in produzione semplicemente copiando il file di configurazione. La procedura di failover del disaster recovery garantisce che i file di configurazione preparati siano configurati correttamente.
@@ -111,4 +110,3 @@ vm-pr1:~ # cat /etc/fstab
 # HANA file and log backup destination
 10.0.2.4:/hanabackup-sm-dest    /hanabackup nfs   rw,vers=3,hard,timeo=600,rsize=262144,wsize=262144,nconnect=8,bg,noatime,nolock 0 0
 ....
-link:saphana-dr-anf_break_and_delete_replication_peering.html["Successivo: Interrompere ed eliminare il peering delle repliche."]

@@ -13,7 +13,8 @@ summary: Per la configurazione di base del SnapCenter e la protezione della riso
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-snapcenter-architecture.html["Precedente: Architettura SnapCenter."]
+[role="lead"]
+Per la configurazione di base del SnapCenter e la protezione della risorsa HANA, è necessario eseguire le operazioni descritte in questa sezione.
 
 
 
@@ -349,5 +350,3 @@ image:amazon-fsx-image46.png["Errore: Immagine grafica mancante"]
 La configurazione delle risorse HANA è stata completata ed è possibile eseguire i backup.
 
 image:amazon-fsx-image47.png["Errore: Immagine grafica mancante"]
-
-link:amazon-fsx-snapcenter-backup-operations.html["Avanti: Operazioni di backup di SnapCenter."]

@@ -4,7 +4,7 @@ permalink: backup/saphana-br-scs-where-to-find-additional-information.html
 keywords:  
 summary:  
 ---
-= Dove trovare informazioni aggiuntive e cronologia delle versioni
+= Dove trovare ulteriori informazioni
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -13,8 +13,7 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-advanced-configuration-and-tuning.html["Precedente: Configurazione e messa a punto avanzate."]
-
+[role="lead"]
 Per ulteriori informazioni sulle informazioni descritte in questo documento, consultare i seguenti documenti e/o siti Web:
 
 * Pagina delle risorse SnapCenter
@@ -42,68 +41,3 @@ https://www.netapp.com/pdf.html?item=/media/17195-tr4018pdf.pdf["https://www.net
 https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf"^]
 
 
-
-
-
-== Cronologia delle versioni
-
-|===
-| Versione | Data | Cronologia delle versioni del documento 
-
-
-| Versione 1.0 | Luglio 2017  a| 
-* Release iniziale.
-
-
-
-
-| Versione 1.1 | Settembre 2017  a| 
-* Aggiunta della sezione "Configurazione e ottimizzazione avanzate".
-* Correzioni minori.
-
-
-
-
-| Versione 2.0 | Marzo 2018  a| 
-* Aggiornamenti per Cover SnapCenter 4.0: Le nuove risorse per volumi di dati hanno migliorato il funzionamento di Single file SnapRestore
-
-
-
-
-| Versione 3.0 | Gennaio 2020  a| 
-* Aggiunta la sezione "concetti e Best practice SnapCenter".
-* Aggiornamenti per Cover SnapCenter 4.3: Rilevamento automatico Ripristino e ripristino automatici supporto di più tenant HANA MDC operazione di ripristino single-tenant
-
-
-
-
-| Versione 3.1 | Luglio 2020  a| 
-* Aggiornamenti e correzioni minori: Supporto NFSv4 con SnapCenter 4.3.1 Configurazione della comunicazione SSL implementazione del plug-in centrale per Linux su IBM Power
-
-
-
-
-| Versione 3.2 | Novembre 2020  a| 
-* Aggiunti i privilegi utente del database richiesti per HANA 2.0 SPS5.
-
-
-
-
-| Versione 3.3 | Maggio 2021  a| 
-* Aggiornata la sezione di configurazione di SSL hdbsql.
-* Supporto LVM Linux aggiunto.
-
-
-
-
-| Versione 3.4 | Agosto 2021  a| 
-* È stata aggiunta la descrizione della configurazione per la disattivazione del rilevamento automatico.
-
-
-
-
-| Versione 3.5 | Febbraio 2022  a| 
-* Aggiornamenti minori per SnapCenter 4.6 e supporto del rilevamento automatico per i sistemi HANA abilitati alla replica del sistema HANA.
-
-
-|===

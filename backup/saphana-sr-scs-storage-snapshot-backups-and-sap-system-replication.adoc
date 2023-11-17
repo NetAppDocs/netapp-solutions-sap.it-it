@@ -13,8 +13,7 @@ summary: 'Le operazioni di backup vengono sempre eseguite sull"host SAP HANA pri
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-sap-hana-system-replication-overview.html["Precedente: Panoramica della replica del sistema SAP HANA."]
-
+[role="lead"]
 Le operazioni di backup vengono sempre eseguite sull'host SAP HANA primario. I comandi SQL richiesti per l'operazione di backup non possono essere eseguiti sull'host SAP HANA secondario.
 
 Per le operazioni di backup SAP HANA, gli host SAP HANA primari e secondari sono una singola entità. Condividono lo stesso catalogo di backup SAP HANA e utilizzano i backup per il ripristino, indipendentemente dal fatto che il backup sia stato creato nell'host SAP HANA primario o secondario.
@@ -30,5 +29,3 @@ Quando viene eseguito un failover sull'host 2, l'host 2 diventa l'host primario,
 Il backup creato sull'host 2 può essere ripristinato direttamente al livello di storage. Se è necessario utilizzare un backup creato sull'host 1, il backup deve essere copiato dal volume di storage dell'host 1 al volume di storage dell'host 2. Forward Recovery utilizza i backup dei log di entrambi gli host.
 
 image:saphana-sr-scs-image4.png["Errore: Immagine grafica mancante"]
-
-link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Pagina successiva: Opzioni di configurazione SnapCenter per la replica del sistema SAP."]

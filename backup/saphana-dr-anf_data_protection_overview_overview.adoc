@@ -80,5 +80,3 @@ Se un RPO più grande è accettabile, la replica asincrona può essere utilizzat
 Il tempo di avvio di un database SAP HANA è molto più lungo di quello dei database tradizionali, perché è necessario caricare una grande quantità di dati in memoria prima che il database possa fornire le performance previste. Pertanto, una parte significativa dell'RTO è il tempo necessario per avviare il database. Con qualsiasi replica basata su storage e con la replica del sistema HANA senza precaricamento dei dati, il database SAP HANA deve essere avviato in caso di failover nel sito di disaster recovery.
 
 La replica del sistema SAP HANA offre una modalità operativa in cui i dati vengono precaricati e continuamente aggiornati sull'host secondario. Questa modalità consente valori RTO molto bassi, ma richiede anche un server dedicato che viene utilizzato solo per ricevere i dati di replica dal sistema di origine.
-
-link:saphana-dr-anf_disaster_recovery_solution_comparison.html["Avanti: Confronto tra le soluzioni di disaster recovery."]

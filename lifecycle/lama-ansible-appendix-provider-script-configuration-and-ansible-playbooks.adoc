@@ -13,8 +13,6 @@ summary: 'I seguenti file di configurazione del provider, script di esecuzione e
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-provisioning-workflow-system-refresh.html["Precedente: Workflow di provisioning di AP lama - refresh del sistema."]
-
 [role="lead"]
 I seguenti file di configurazione del provider, script di esecuzione e playbook Ansible vengono utilizzati durante l'implementazione di esempio e l'esecuzione del flusso di lavoro in questa documentazione.
 
@@ -518,4 +516,3 @@ ontapservers:
    snapshotpostfix: " _snap_20221115"
    clonepostfix: "_clone_20221115"
 ....
-link:lama-ansible-conclusion.html["Prossimo: Conclusione."]

@@ -13,8 +13,7 @@ summary: 'Questa sezione descrive la configurazione del sistema storage NetApp. 
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_time_synchronization.html["Precedente: Sincronizzazione dell'ora."]
-
+[role="lead"]
 Questa sezione descrive la configurazione del sistema storage NetApp. È necessario completare l'installazione e la configurazione primaria in base alle corrispondenti guide di configurazione e configurazione di ONTAP.
 
 
@@ -375,5 +374,3 @@ Se si utilizzano sistemi SAP HANA a host multipli con failover automatico dell'h
 == Montare i volumi nello spazio dei nomi e impostare i criteri di esportazione
 
 Quando viene creato un volume, il volume deve essere montato nello spazio dei nomi. In questo documento, si presuppone che il nome del percorso di giunzione sia lo stesso del nome del volume. Per impostazione predefinita, il volume viene esportato con il criterio predefinito. Se necessario, è possibile adattare la policy di esportazione.
-
-link:saphana-fas-nfs_host_setup.html["Avanti: Configurazione dell'host."]

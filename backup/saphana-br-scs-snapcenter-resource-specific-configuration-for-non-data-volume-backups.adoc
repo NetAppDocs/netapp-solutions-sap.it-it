@@ -13,8 +13,7 @@ summary: Il backup dei volumi non dati è parte integrante del plug-in SAP HANA.
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html["Precedente: Configurazione specifica delle risorse SnapCenter per i backup dei database SAP HANA."]
-
+[role="lead"]
 Il backup dei volumi non dati è parte integrante del plug-in SAP HANA. La protezione del volume di dati del database è sufficiente per ripristinare e ripristinare il database SAP HANA in un dato momento, a condizione che le risorse di installazione del database e i registri richiesti siano ancora disponibili.
 
 Per eseguire il ripristino da situazioni in cui devono essere ripristinati altri file non di dati, NetApp consiglia di sviluppare una strategia di backup aggiuntiva per i volumi non di dati per aumentare il backup del database SAP HANA. A seconda dei requisiti specifici, il backup dei volumi non dati potrebbe differire in termini di frequenza di pianificazione e impostazioni di conservazione e si dovrebbe considerare la frequenza con cui i file non dati vengono modificati. Ad esempio, il volume HANA `/hana/shared` Contiene file eseguibili ma anche file di traccia SAP HANA. Mentre gli eseguibili cambiano solo quando il database SAP HANA viene aggiornato, i file di traccia SAP HANA potrebbero richiedere una frequenza di backup più elevata per supportare l'analisi delle situazioni problematiche con SAP HANA.
@@ -87,5 +86,3 @@ NetApp SSC e SAP lama possono creare copie Snapshot on-demand direttamente utili
 NOTE: Nelle normali operazioni di backup, NetApp sconsiglia di includere il volume di log. Se si ripristina il volume di log da un backup, vengono sovrascritti gli ultimi log di ripristino attivi e viene impedito il ripristino del database all'ultimo stato recente.
 
 I gruppi di risorse SnapCenter soddisfano tutti questi requisiti. In SnapCenter sono configurate tre risorse: Una risorsa per il volume di dati, il volume di log e il volume condiviso. Le risorse vengono inserite in un gruppo di risorse e la protezione viene quindi definita a livello di gruppo di risorse. Nella protezione del gruppo di risorse, il nome Snapshot personalizzato deve essere definito con VCM all'inizio.
-
-link:saphana-br-scs-database-backups.html["Avanti: Backup del database."]

@@ -13,8 +13,7 @@ summary:
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-restore-and-recover-from-secondary-storage.html["Precedente: Ripristino e ripristino dallo storage secondario."]
-
+[role="lead"]
 Per ulteriori informazioni sulle informazioni descritte in questo documento, consultare i seguenti documenti e/o siti Web:
 
 * Guida utente di FSX per NetApp ONTAP - che cos'è Amazon FSX per NetApp ONTAP?
@@ -38,14 +37,3 @@ https://www.netapp.com/pdf.html?item=/media/17111-tr4667.pdf[]
 https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html["https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html"^]
 
 
-
-
-
-== Cronologia delle versioni
-
-|===
-| Versione | Data | Cronologia delle versioni del documento 
-
-
-| Versione 1.0 | Maggio 2022 | Release iniziale. 
-|===

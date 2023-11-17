@@ -13,8 +13,7 @@ summary: Nella nostra configurazione di laboratorio, utilizziamo un secondo file
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-of-non-data-volumes.html["Precedente: Backup di volumi non dati."]
-
+[role="lead"]
 Nella nostra configurazione di laboratorio, utilizziamo un secondo file system FSX per ONTAP in una seconda zona di disponibilità AWS per mostrare la replica di backup per il volume di dati HANA.
 
 Come discusso nel capitolo link:amazon-fsx-snapcenter-architecture.html#data-protection-strategy[""Strategia di protezione dei dati""], La destinazione della replica deve essere un secondo FSX per il file system ONTAP in un'altra zona di disponibilità per essere protetto da un errore del file system FSX primario per ONTAP. Inoltre, il volume condiviso HANA deve essere replicato nel file system FSX secondario per ONTAP.
@@ -48,5 +47,3 @@ Una volta completata la configurazione della replica del volume, è necessario c
 
 
 I seguenti capitoli descrivono i singoli passaggi in modo più dettagliato.
-
-link:amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html["Avanti: Configurare le relazioni di replica su FSX per i file system ONTAP."]

@@ -13,8 +13,7 @@ summary: Per implementare una strategia di disaster recovery efficace, è necess
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Precedente: Monitoraggio della replica ANF tra regioni."]
-
+[role="lead"]
 Per implementare una strategia di disaster recovery efficace, è necessario testare il flusso di lavoro richiesto. I test dimostrano se la strategia funziona e se la documentazione interna è sufficiente e consentono agli amministratori di seguire le procedure richieste.
 
 ANF la replica interregionale consente di eseguire test di disaster recovery senza mettere a rischio RTO e RPO. I test di disaster recovery possono essere eseguiti senza interrompere la replica dei dati.
@@ -39,5 +38,3 @@ Per eseguire il test di disaster recovery, attenersi alla seguente procedura:
 Le seguenti sottosezioni descrivono in dettaglio questi passaggi.
 
 image:saphana-dr-anf_image18.png["Errore: Immagine grafica mancante"]
-
-link:saphana-dr-anf_prepare_the_target_host.html["Avanti: Preparare l'host di destinazione."]

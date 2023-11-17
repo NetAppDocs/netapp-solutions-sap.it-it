@@ -13,8 +13,7 @@ summary: Le sezioni seguenti descrivono i flussi di lavoro di ripristino e ripri
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-block-integrity-check.html["Precedente: Controllo dell'integrità del blocco."]
-
+[role="lead"]
 Le sezioni seguenti descrivono i flussi di lavoro di ripristino e ripristino di tre scenari diversi e configurazioni di esempio.
 
 * Ripristino e ripristino automatici:
@@ -534,5 +533,3 @@ Il sistema SAP HANA è operativo.
 NOTE: Per un sistema SAP HANA MDC con più tenant, è necessario ripetere i passaggi 20–29 per ciascun tenant.
 
 
-
-link:saphana-br-scs-advanced-configuration-and-tuning.html["Avanti: Configurazione e tuning avanzati."]
