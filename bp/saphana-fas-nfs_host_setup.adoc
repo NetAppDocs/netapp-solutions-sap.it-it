@@ -44,7 +44,7 @@ net.ipv4.tcp_sack = 1
 
 NOTE: Saptune, incluso in SLES per le versioni di SAP OS, può essere utilizzato per impostare questi valori. Vedere https://launchpad.support.sap.com/#/notes/3024346["Nota SAP 3024346"^] (Richiede l'accesso SAP).
 
-Se viene utilizzato NFSv3 per la connessione dello storage, il `sunrpc.tcp_max_slot_table_entries` il parametro deve essere impostato in `/etc/modprobe.d/sunrpc.conf`. Se il file non esiste, è necessario prima crearlo aggiungendo la seguente riga:
+Il `sunrpc.tcp_max_slot_table_entries` il parametro deve essere impostato in `/etc/modprobe.d/sunrpc.conf`. Se il file non esiste, è necessario prima crearlo aggiungendo la seguente riga:
 
 ....
 options sunrpc tcp_max_slot_table_entries=128
@@ -55,7 +55,7 @@ options sunrpc tcp_max_slot_table_entries=128
 
 È necessario regolare altri parametri di kernel e configurazione in ogni host SAP HANA per il carico di lavoro generato da SAP HANA.
 
-Se si utilizza NFSv3 per la connessione dello storage, è necessario impostare il parametro `sunrpc.tcp_max_slot_table_entries` poll `/etc/modprobe.d/sunrpc.conf`. Se il file non esiste, è necessario prima crearlo aggiungendo la seguente riga:
+Il `sunrpc.tcp_max_slot_table_entries` il parametro deve essere impostato in `/etc/modprobe.d/sunrpc.conf`. Se il file non esiste, è necessario prima crearlo aggiungendo la seguente riga:
 
 ....
 options sunrpc tcp_max_slot_table_entries=128
@@ -236,10 +236,17 @@ Con ONTAP 9, le dimensioni di trasferimento NFS possono essere configurate fino 
 NOTE: Per migliorare le prestazioni di lettura con NFSv3, NetApp consiglia di utilizzare `nconnect=n` Opzione di montaggio, disponibile con SUSE Linux Enterprise Server 12 SP4 o versione successiva e RedHat Enterprise Linux (RHEL) 8.3 o versione successiva.
 
 
-NOTE: I test delle performance lo dimostrano `nconnect=8` fornisce buoni risultati di lettura, in particolare per i volumi di dati. Le scritture dei log potrebbero trarre vantaggio da un numero inferiore di sessioni, ad esempio `nconnect=2`. Anche i volumi condivisi potrebbero trarre vantaggio dall'utilizzo dell'opzione 'nconnect'. Tenere presente che il primo mount da un server NFS (indirizzo IP) definisce il numero di sessioni utilizzate. Ulteriori montaggi sullo stesso indirizzo IP non modificano questo valore anche se per nconnect viene utilizzato un valore diverso.
+NOTE: I test delle performance lo dimostrano `nconnect=4` fornisce buoni risultati di lettura, in particolare per i volumi di dati. Le scritture dei log potrebbero trarre vantaggio da un numero inferiore di sessioni, ad esempio `nconnect=2`. Anche i volumi condivisi potrebbero trarre vantaggio dall'utilizzo dell'opzione 'nconnect'. Tenere presente che il primo mount da un server NFS (indirizzo IP) definisce il numero di sessioni utilizzate. Ulteriori montaggi sullo stesso indirizzo IP non modificano questo valore anche se per nconnect viene utilizzato un valore diverso.
 
 
-NOTE: A partire da ONTAP 9.8 e SUSE SLES15SP2 o RedHat RHEL 8.4 o superiore, NetApp supporta l'opzione nconnect anche per NFSv4.1. Per ulteriori informazioni, consultare la documentazione del vendor Linux.
+NOTE: A partire da ONTAP 9.8 e SUSE SLES15SP2 o RedHat RHEL 8.4 o superiore, NetApp supporta l'opzione nconnect anche per NFSv4.1.
+
+
+NOTE: Se nconnect viene utilizzato con NFSv4.x, la quantità di slot di sessione NFSv4.x deve essere regolata in base alla regola seguente:
+La quantità di slot di sessione è pari a <nconnect value> x 64.
+All'ospite questo sarà adjusted da
+`echo options nfs max_session_slots= <calculated value> > /etc/modprobe.d/nfsclient.conf`
+seguito da un riavvio. Anche il valore lato server deve essere regolato, impostare il numero di slot di sessione come descritto in link:saphana-fas-nfs_storage_controller_setup.html#nfs-configuration-for-nfsv4["Configurazione NFS per NFSv4."]
 
 Per montare i file system durante l'avvio del sistema con `/etc/fstab` file di configurazione, attenersi alla seguente procedura:
 
@@ -249,10 +256,10 @@ L'esempio seguente mostra un database SAP HANA host singolo con SID=NF2 utilizza
 +
 ....
 sapcc-hana-tst-06:/ # cat /etc/fstab
-<storage-vif-data01>:/NF2_data_mnt00001 /hana/data/NF2/mnt00001 nfs rw,nfsvers=3,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
+<storage-vif-data01>:/NF2_data_mnt00001 /hana/data/NF2/mnt00001 nfs rw,nfsvers=3,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
 <storage-vif-log01>:/NF2_log_mnt00001 /hana/log/NF2/mnt00001 nfs rw,nfsvers=3,hard,timeo=600,nconnect=2,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
-<storage-vif-data01>:/NF2_shared/usr-sap /usr/sap/NF2 nfs rw,nfsvers=3,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
-<storage-vif-data01>:/NF2_shared/shared /hana/shared nfs rw,nfsvers=3,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
+<storage-vif-data01>:/NF2_shared/usr-sap /usr/sap/NF2 nfs rw,nfsvers=3,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
+<storage-vif-data01>:/NF2_shared/shared /hana/shared nfs rw,nfsvers=3,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
 ....
 . Eseguire `mount –a` per montare i file system su tutti gli host.
 
@@ -262,17 +269,17 @@ Nell'esempio successivo viene illustrato un database SAP HANA multihost con SID=
 . Aggiungere i file system richiesti a `/etc/fstab` file di configurazione su tutti gli host.
 +
 
-NOTE: Il `/usr/sap/NF2` il file system è diverso per ciascun host di database. Viene mostrato l'esempio seguente `/NF2_shared/usr- sap- host1`.
+NOTE: Il `/usr/sap/NF2` il file system è diverso per ciascun host di database. Viene mostrato l'esempio seguente `/NF2_shared/usr-sap-host1`.
 
 +
 ....
 sapcc-hana-tst-06:/ # cat /etc/fstab
-<storage-vif-data01>:/NF2_data_mnt00001 /hana/data/NF2/mnt00001 nfs  rw,nfsvers=4.1,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,lock 0 0
-<storage-vif-data02>:/NF2_data_mnt00002 /hana/data/NF2/mnt00002 nfs rw,nfsvers=4.1,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,lock 0 0
+<storage-vif-data01>:/NF2_data_mnt00001 /hana/data/NF2/mnt00001 nfs  rw,nfsvers=4.1,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,lock 0 0
+<storage-vif-data02>:/NF2_data_mnt00002 /hana/data/NF2/mnt00002 nfs rw,nfsvers=4.1,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,lock 0 0
 <storage-vif-log01>:/NF2_log_mnt00001 /hana/log/NF2/mnt00001 nfs rw,nfsvers=4.1,hard,timeo=600,nconnect=2,rsize=1048576,wsize=262144,bg,noatime,lock 0 0
 <storage-vif-log02>:/NF2_log_mnt00002 /hana/log/NF2/mnt00002 nfs rw,nfsvers=4.1,hard,timeo=600,nconnect=2,rsize=1048576,wsize=262144,bg,noatime,lock 0 0
-<storage-vif-data02>:/NF2_shared/usr-sap-host1 /usr/sap/NF2 nfs rw,nfsvers=3,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
-<storage-vif-data02>:/NF2_shared/shared /hana/shared nfs rw,nfsvers=3,hard,timeo=600,nconnect=8,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
+<storage-vif-data02>:/NF2_shared/usr-sap-host1 /usr/sap/NF2 nfs rw,nfsvers=3,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
+<storage-vif-data02>:/NF2_shared/shared /hana/shared nfs rw,nfsvers=3,hard,timeo=600,nconnect=4,rsize=1048576,wsize=262144,bg,noatime,nolock 0 0
 ....
 . Eseguire `mount –a` per montare i file system su tutti gli host.
 
