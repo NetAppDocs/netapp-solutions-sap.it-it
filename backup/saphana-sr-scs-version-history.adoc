@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: backup/saphana-backup-anf-version-history.html 
+permalink: backup/saphana-sr-scs-version-history.html 
 keywords:  
 summary:  
 ---
@@ -13,11 +13,12 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-additional-information.html["Precedente: Ulteriori informazioni."]
-
 |===
 | Versione | Data | Cronologia delle versioni del documento 
 
 
-| Versione 1.0 | Ottobre 2021 | Release iniziale. 
+| Versione 1.0 | Ottobre 2018 | Versione iniziale 
+
+
+| Versione 2.0 | Gennaio 2022 | Aggiornamento per il supporto della replica di sistema HANA di SnapCenter 4.6 
 |===

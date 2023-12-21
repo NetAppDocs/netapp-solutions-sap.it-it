@@ -13,8 +13,6 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_where_to_find_additional_information.html["Precedente: Dove trovare ulteriori informazioni."]
-
 Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pubblicazione originale.
 
 [cols="25,25,50"]

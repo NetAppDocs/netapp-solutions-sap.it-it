@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/lama-ansible-conclusion.html 
-keywords: conclusion, additional information 
+keywords: conclusion, additional information, version history 
 summary: 'L"integrazione di un framework di automazione moderno come Ansible nei flussi di lavoro di provisioning di SAP lama offre ai clienti una soluzione flessibile per soddisfare requisiti di infrastruttura standard o più complessi.' 
 ---
 = Conclusione
@@ -67,3 +67,14 @@ https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e
 https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]
 
 
+
+
+
+== Cronologia delle versioni
+
+|===
+| Versione | Data | Cronologia delle versioni del documento 
+
+
+| Versione 1.0 | Gennaio 2023 | Release iniziale 
+|===
