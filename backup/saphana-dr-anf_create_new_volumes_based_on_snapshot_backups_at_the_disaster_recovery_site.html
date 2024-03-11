@@ -1,0 +1,3498 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head class="at-element-marker">
+  <title>Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/it-it/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+	<meta property="og:description" content="A seconda della configurazione del disaster recovery (con o senza replica del backup del log), è necessario creare due o tre nuovi volumi basati sui backup s..." />
+  <meta property="og:image" content="https://docs.netapp.com/it-it/netapp-solutions-sap/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="A seconda della configurazione del disaster recovery (con o senza replica del backup del log), è necessario creare due o tre nuovi volumi basati sui backup s...">
+  <meta name="keywords" content=" create, new, volumes, snapshot, backups, disaster, recovery, site"><!-- Icons -->
+  <link rel="icon" href="/it-it/netapp-solutions-sap/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/it-it/netapp-solutions-sap/css/ie-netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/it-it/netapp-solutions-sap/css/ie-landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/it-it/netapp-solutions-sap/css/ie-tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel="canonical" href="https://docs.netapp.com/it-it/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="x-default" href="https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="it" href="https://docs.netapp.com/it-it/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="en" href="https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="ja" href="https://docs.netapp.com/ja-jp/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="ko" href="https://docs.netapp.com/ko-kr/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://docs.netapp.com/zh-cn/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://docs.netapp.com/zh-tw/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="de" href="https://docs.netapp.com/de-de/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="es" href="https://docs.netapp.com/es-es/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <link rel="alternate" hreflang="fr" href="https://docs.netapp.com/fr-fr/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" />
+  <!-- Top level site integrations -->
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/72570c5c-fe30-465f-b0e0-b77f7fb4ae34/OtAutoBlock.js"></script>
+    <script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-document-language="true" data-domain-script="72570c5c-fe30-465f-b0e0-b77f7fb4ae34"></script>
+    <script type="text/javascript">function OptanonWrapper() { }</script>
+    <script type="text/plain" class="optanon-category-C0002" src="https://assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js"></script>
+    <script class="optanon-category-C0001">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.setAttribute('class','optanon-category-C0001');j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MD73T9M');</script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      const MASTHEAD_OFFSET = 65;
+      const SECTIONS = $("main h2, main h3");
+      // PAGE NAV - Init
+      if (SECTIONS.length == 0) {
+        // remove if there is no elements
+        /*
+        $("#ie-right-navbar").remove();
+        $("#ie-right-navbar-collapse").remove();
+        */
+      } else {
+        $(".page-nav-title").css('display', 'block');
+        for (var i = 0; i < SECTIONS.length; i++) {
+          var sectionId = $(SECTIONS[i]).attr('id');
+          var sectionName = $(SECTIONS[i]).text();
+          var subClass = $(SECTIONS[i]).is("h3") ? ' page-nav__sublink' : '';
+          $("#page-menu").append('<li class="page-nav-item"><a href="#' + sectionId + '" class="page-nav__link' + subClass + '">' + sectionName + '</a></li>');
+        }
+      }
+    });
+  </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/it-it/netapp-solutions-sap/js/na-search.js'></script><script src='/it-it/netapp-solutions-sap/js/ie-clouddocs.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script>
+    /*
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+      */
+  </script>
+  <script src='/it-it/netapp-solutions-sap/js/custom-dropdown.js'></script>
+  <script src='/it-it/netapp-solutions-sap/js/FileSaver.min.js'></script>
+  <script src='/it-it/netapp-solutions-sap/js/jszip-utils.min.js'></script>
+  <script src='/it-it/netapp-solutions-sap/js/jszip.min.js'></script><script src='/it-it/netapp-solutions-sap/js/ie-pdf-ux.js'></script></head>
+
+
+  <body class role="document" data-flavor="">
+    <div class="skip-to-main">
+      <a href="#main" >Skip to main content</a>
+    </div><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD73T9M"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="page" class="">
+      <div id="ie-phone-menu" class=""></div>
+      <div id="ie-content-wrap" class="">
+        <nav id="ie-new-header">
+    <ul>
+        <li id="ie-phone-menu-button">
+            <a href="#">
+                <image id="" src="/it-it/netapp-solutions-sap/images/hamburger.svg" alt="menu" />
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.netapp.com/it">
+                <image id="ie-header-logo" src="/it-it/netapp-solutions-sap/images/netapp_logo.svg" alt="netapp" />
+            </a>
+        </li>
+        <li id="ie-header-docs">
+            <a href="https://www.netapp.com/it/support-and-training/documentation/">Documenti</a>
+        </li>
+
+        <!-- Empty container to push header left with or without lang selector -->
+        <li id="empty-container" style="margin-left: auto">
+        </li>
+        <!-- Start Language Selector --><li id="ie-language-dropdown">
+            <div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+                <div class="custom-dropdown-select custom-dropdown-select-lang">
+                    <img src="/it-it/netapp-solutions-sap/images/language_white_24dp.svg" class="n-globe__icon" />
+                    <span class="lang-name">Italiano</span>
+                    <img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu"><li>
+                        <a href="https://docs.netapp.com/it-it/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">Italiano</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">English</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ja-jp/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">日本語</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ko-kr/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">한국어</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-cn/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-tw/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/de-de/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/es-es/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">Español</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/fr-fr/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html"
+                            target="_self"><span translate="no" class="notranslate">Français</span></a>
+                    </li></ul>
+            </div>
+            </li>
+        <!-- End Language Selector -->
+
+
+        <li id="ie-allnetapp">
+            <div id="allnetapp-dropdown" class="custom-dropdown custom-dropdown-allnetapp">
+                <div class="custom-dropdown-select custom-dropdown-select-allnetapp">
+                    <img src="/it-it/netapp-solutions-sap/images/apps_white_24dp.svg" alt="" class="allnetapp-icon" />
+                    <span class="allnetapp-name">Tutto NetApp</span>
+                    <img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu allnetapp-dropdown">
+                    <li>
+                        <a href="https://bluexp.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">BlueXP</span></a>
+                    </li>
+                    <li>
+                        <a href="https://mysupport.netapp.com/site/"
+                            target="_self"><span translate="no" class="notranslate">Supporto</span></a>
+                    </li>
+                    <li>
+                        <a href="https://kb.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">Knowledge Base</span></a>
+                    </li>
+                    <li>
+                        <a href="https://www.netapp.com/it/support-and-training/netapp-learning-services/"
+                            target="_self"><span translate="no" class="notranslate">Training</span></a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+
+    </ul>
+</nav>
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+
+<div id="ie-new-sidebar-collapse" style="display: none">
+    <img id="sidebar-expand" class="ie-searchbox-icon" src="/it-it/netapp-solutions-sap/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-new-sidebar">
+    <div id="ie-product-identity-lockup">
+        <div id="sidebar-collapse" class="">
+            <img src="/it-it/netapp-solutions-sap/images/double_arrow.svg" alt="" />
+        </div>
+        <div id="ie-breadcrumb" class="">
+  <ul class="ie-breadcrumb">
+    <li class="">
+      <a href="https://docs.netapp.com">Tutti i documenti</a>
+    </li>
+    
+    
+
+    
+  </ul>
+  
+  <div class="ie-product-name" >
+    <!--<a href="/it-it/netapp-solutions-sap/">-->
+      NetApp Solutions SAP
+    <!--</a>-->
+  </div>
+</div>
+
+            
+
+        
+        
+
+<div id="ie-searchbox" class="ie-searchbox-sidebar ">
+    <img class="ie-searchbox-icon" src="/it-it/netapp-solutions-sap/images/loupe.svg" alt=""/>
+    <div id="react-search" 
+        data-search-html="/it-it/netapp-solutions-sap/search.html" 
+        data-type="widget"
+        data-placeholder="Esplora la documentazione"
+        data-no-results-found="Nessun risultato per {query}"
+        data-did-you-mean="Cerca {suggestion}."
+        data-no-results-found-did-you-mean="Nessun risultato per {query}. Intendi {suggestion}?"
+        data-results-found="{hitCount} risultati trovati"
+        data-error-message="Si è verificato un errore. Riprova."
+        data-error-reset="Reimposta ricerca"
+        data-sk-es-pf-indexes="" 
+        data-flavor="">
+    </div>
+</div>
+        
+    </div>
+    <div id="ie-new-toc"><script>
+  let sidebarAccordion = true;
+
+  /* specific css rules for Mac */
+  if(navigator.platform.match('Mac') !== null) {
+    document.body.setAttribute('class', 'OSX');
+  }
+
+</script>
+
+<div id="ie-sidebar-container">
+  <ul id="ie-sidebar-list" ><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Soluzioni SAP"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/index.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/it-it/netapp-solutions-sap/index.html">
+        Soluzioni SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Best Practice"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Best Practice</div>-->
+         Best Practice
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Guida alla configurazione di SAP HANA su sistemi NetApp AFF con FCP"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Guida alla configurazione di SAP HANA su sistemi NetApp AFF con FCP</div>-->
+         Guida alla configurazione di SAP HANA su sistemi NetApp AFF con FCP
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introduzione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_introduction.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html">
+        Introduzione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Architettura"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_architecture.html">
+        Architettura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dimensionamento dello storage"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_storage_sizing.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_storage_sizing.html">
+        Dimensionamento dello storage
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione e configurazione dell'infrastruttura"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Installazione e configurazione dell'infrastruttura</div>-->
+         Installazione e configurazione dell'infrastruttura
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica della configurazione e dell'installazione dell'infrastruttura"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_infrastructure_setup_and_configuration_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_infrastructure_setup_and_configuration_overview.html">
+        Panoramica della configurazione e dell'installazione dell'infrastruttura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione del fabric SAN"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_san_fabric_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_san_fabric_setup.html">
+        Configurazione del fabric SAN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronizzazione dell'ora"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_time_synchronization.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_time_synchronization.html">
+        Sincronizzazione dell'ora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello storage controller"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_storage_controller_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_storage_controller_setup.html">
+        Configurazione dello storage controller
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="API di SAP HANA storage Connector"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_sap_hana_storage_connector_api.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_sap_hana_storage_connector_api.html">
+        API di SAP HANA storage Connector
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dell'host"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_host_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_host_setup.html">
+        Configurazione dell'host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello stack di i/o per SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_i_o_stack_configuration_for_sap_hana.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_i_o_stack_configuration_for_sap_hana.html">
+        Configurazione dello stack di i/o per SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione del software SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_sap_hana_software_installation.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_sap_hana_software_installation.html">
+        Installazione del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiunta di partizioni di volumi di dati aggiuntive per sistemi SAP HANA a host singolo"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html">
+        Aggiunta di partizioni di volumi di dati aggiuntive per sistemi SAP HANA a host singolo
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare ulteriori informazioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_where_to_find_additional_information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_where_to_find_additional_information.html">
+        Dove trovare ulteriori informazioni
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornare la cronologia"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_fc_update_history.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_fc_update_history.html">
+        Aggiornare la cronologia
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Guida alla configurazione di SAP HANA su sistemi NetApp AFF con NFS"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Guida alla configurazione di SAP HANA su sistemi NetApp AFF con NFS</div>-->
+         Guida alla configurazione di SAP HANA su sistemi NetApp AFF con NFS
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introduzione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_introduction.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html">
+        Introduzione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Architettura"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_architecture.html">
+        Architettura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dimensionamento dello storage"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_storage_sizing.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_storage_sizing.html">
+        Dimensionamento dello storage
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione e configurazione dell'infrastruttura"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Installazione e configurazione dell'infrastruttura</div>-->
+         Installazione e configurazione dell'infrastruttura
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di rete"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_network_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_network_setup.html">
+        Configurazione di rete
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronizzazione dell'ora"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_time_synchronization.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_time_synchronization.html">
+        Sincronizzazione dell'ora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello storage controller"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_storage_controller_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_storage_controller_setup.html">
+        Configurazione dello storage controller
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dell'host"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_host_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_host_setup.html">
+        Configurazione dell'host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparazione dell'installazione di SAP HANA per NFSv4"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html">
+        Preparazione dell'installazione di SAP HANA per NFSv4
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello stack di i/o per SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html">
+        Configurazione dello stack di i/o per SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dimensioni del volume di dati SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_sap_hana_data_volume_size.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_sap_hana_data_volume_size.html">
+        Dimensioni del volume di dati SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione del software SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_sap_hana_software_installation.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_sap_hana_software_installation.html">
+        Installazione del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiunta di partizioni di volumi di dati aggiuntive"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_adding_additional_data_volume_partitions.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_adding_additional_data_volume_partitions.html">
+        Aggiunta di partizioni di volumi di dati aggiuntive
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare ulteriori informazioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_where_to_find_additional_information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_where_to_find_additional_information.html">
+        Dove trovare ulteriori informazioni
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornare la cronologia"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_aff_nfs_update_history.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_aff_nfs_update_history.html">
+        Aggiornare la cronologia
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Guida alla configurazione di SAP HANA su sistemi NetApp FAS con NFS"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Guida alla configurazione di SAP HANA su sistemi NetApp FAS con NFS</div>-->
+         Guida alla configurazione di SAP HANA su sistemi NetApp FAS con NFS
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introduzione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_introduction.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_introduction.html">
+        Introduzione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Architettura"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_architecture.html">
+        Architettura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dimensionamento dello storage"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_storage_sizing.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_storage_sizing.html">
+        Dimensionamento dello storage
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione e configurazione dell'infrastruttura"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Installazione e configurazione dell'infrastruttura</div>-->
+         Installazione e configurazione dell'infrastruttura
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di rete"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_network_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_network_setup.html">
+        Configurazione di rete
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronizzazione dell'ora"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_time_synchronization.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_time_synchronization.html">
+        Sincronizzazione dell'ora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello storage controller"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_storage_controller_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_storage_controller_setup.html">
+        Configurazione dello storage controller
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dell'host"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_host_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_host_setup.html">
+        Configurazione dell'host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparazione dell'installazione di SAP HANA per NFSv4"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_sap_hana_installation_preparations_for_nfsv4.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_sap_hana_installation_preparations_for_nfsv4.html">
+        Preparazione dell'installazione di SAP HANA per NFSv4
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello stack di i/o per SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_i_o_stack_configuration_for_sap_hana.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_i_o_stack_configuration_for_sap_hana.html">
+        Configurazione dello stack di i/o per SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dimensioni del volume di dati SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_sap_hana_data_volume_size.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_sap_hana_data_volume_size.html">
+        Dimensioni del volume di dati SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione del software SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_sap_hana_software_installation.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_sap_hana_software_installation.html">
+        Installazione del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiunta di partizioni di volumi di dati aggiuntive"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_adding_additional_data_volume_partitions.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_adding_additional_data_volume_partitions.html">
+        Aggiunta di partizioni di volumi di dati aggiuntive
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare ulteriori informazioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_where_to_find_additional_information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_where_to_find_additional_information.html">
+        Dove trovare ulteriori informazioni
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornare la cronologia"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-fas-nfs_update_history.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana-fas-nfs_update_history.html">
+        Aggiornare la cronologia
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Guida alla configurazione di SAP HANA su sistemi FAS con FCP"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Guida alla configurazione di SAP HANA su sistemi FAS con FCP</div>-->
+         Guida alla configurazione di SAP HANA su sistemi FAS con FCP
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introduzione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_introduction.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_introduction.html">
+        Introduzione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Architettura"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_architecture.html">
+        Architettura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dimensionamento dello storage"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_storage_sizing.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_storage_sizing.html">
+        Dimensionamento dello storage
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione e configurazione dell'infrastruttura"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Installazione e configurazione dell'infrastruttura</div>-->
+         Installazione e configurazione dell'infrastruttura
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica della configurazione e dell'installazione dell'infrastruttura"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_infrastructure_setup_and_configuration_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_infrastructure_setup_and_configuration_overview.html">
+        Panoramica della configurazione e dell'installazione dell'infrastruttura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione del fabric SAN"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_san_fabric_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_san_fabric_setup.html">
+        Configurazione del fabric SAN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronizzazione dell'ora"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_time_synchronization.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_time_synchronization.html">
+        Sincronizzazione dell'ora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello storage controller"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_storage_controller_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_storage_controller_setup.html">
+        Configurazione dello storage controller
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="API di SAP HANA storage Connector"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_sap_hana_storage_connector_api.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_sap_hana_storage_connector_api.html">
+        API di SAP HANA storage Connector
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dell'host"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_host_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_host_setup.html">
+        Configurazione dell'host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello stack di i/o per SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_i_o_stack_configuration_for_sap_hana.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_i_o_stack_configuration_for_sap_hana.html">
+        Configurazione dello stack di i/o per SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installazione del software SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_sap_hana_software_installation.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_sap_hana_software_installation.html">
+        Installazione del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiunta di partizioni di volumi di dati aggiuntive per sistemi SAP HANA a host singolo"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html">
+        Aggiunta di partizioni di volumi di dati aggiuntive per sistemi SAP HANA a host singolo
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare ulteriori informazioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_where_to_find_additional_information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_where_to_find_additional_information.html">
+        Dove trovare ulteriori informazioni
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornare la cronologia"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana_fas_fc_update_history.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/bp/saphana_fas_fc_update_history.html">
+        Aggiornare la cronologia
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA su sistemi IBM Power e sistemi NetApp AFF con NFS"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/saphana-ibm-aff-nfs_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/bp/saphana-ibm-aff-nfs_pdf_link.html">
+        SAP HANA su sistemi IBM Power e sistemi NetApp AFF con NFS
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP con Oracle su UNIX e NFS con NetApp ONTAP"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/sap-oracle-snapman_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/bp/sap-oracle-snapman_pdf_link.html">
+        SAP con Oracle su UNIX e NFS con NetApp ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP con Microsoft SQL Server su Windows utilizzando ONTAP"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/bp/sap-sqls-sc_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/bp/sap-sqls-sc_pdf_link.html">
+        SAP con Microsoft SQL Server su Windows utilizzando ONTAP
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup, ripristino e disaster recovery"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Backup, ripristino e disaster recovery</div>-->
+         Backup, ripristino e disaster recovery
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter</div>-->
+         SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e ripristino con Amazon FSX per ONTAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html">
+        Backup e ripristino con Amazon FSX per ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Architettura SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-snapcenter-architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-snapcenter-architecture.html">
+        Architettura SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-snapcenter-configuration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-snapcenter-configuration.html">
+        Configurazione di SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Operazioni di backup di SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-snapcenter-backup-operations.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-snapcenter-backup-operations.html">
+        Operazioni di backup di SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup di volumi non dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-backup-of-non-data-volumes.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-backup-of-non-data-volumes.html">
+        Backup di volumi non dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Replica del backup con SnapVault"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Replica del backup con SnapVault</div>-->
+         Replica del backup con SnapVault
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-backup-replication-with-snapvault_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-backup-replication-with-snapvault_overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurare le relazioni di replica su FSX per i file system ONTAP"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html">
+        Configurare le relazioni di replica su FSX per i file system ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiungere una SVM di backup a SnapCenter"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-add-a-backup-svm-to-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-add-a-backup-svm-to-snapcenter.html">
+        Aggiungere una SVM di backup a SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Creare un nuovo criterio SnapCenter per la replica del backup"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html">
+        Creare un nuovo criterio SnapCenter per la replica del backup
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiungere un criterio alla protezione delle risorse"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-add-a-policy-to-resource-protection.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-add-a-policy-to-resource-protection.html">
+        Aggiungere un criterio alla protezione delle risorse
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Creare un backup con replica"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-create-a-backup-with-replication.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-create-a-backup-with-replication.html">
+        Creare un backup con replica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ripristino e ripristino dallo storage secondario"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-restore-and-recover-from-secondary-storage.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-restore-and-recover-from-secondary-storage.html">
+        Ripristino e ripristino dallo storage secondario
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare ulteriori informazioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/amazon-fsx-where-to-find-additional-information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/amazon-fsx-where-to-find-additional-information.html">
+        Dove trovare ulteriori informazioni
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e recovery SAP HANA con SnapCenter"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Backup e recovery SAP HANA con SnapCenter</div>-->
+         Backup e recovery SAP HANA con SnapCenter
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Architettura SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-architecture.html">
+        Architettura SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Soluzione di backup SAP HANA di SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-sap-hana-backup-solution.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-sap-hana-backup-solution.html">
+        Soluzione di backup SAP HANA di SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Concetti e Best practice di SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html">
+        Concetti e Best practice di SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Setup di laboratorio utilizzato per questo report"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-lab-setup-used-for-this-report.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-lab-setup-used-for-this-report.html">
+        Setup di laboratorio utilizzato per questo report
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-configuration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-configuration.html">
+        Configurazione di SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione iniziale di SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-initial-configuration.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-initial-configuration.html">
+        Configurazione iniziale di SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione specifica delle risorse SnapCenter per i backup dei database SAP HANA"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html">
+        Configurazione specifica delle risorse SnapCenter per i backup dei database SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione specifica delle risorse SnapCenter per i backup di volumi diversi dai dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html">
+        Configurazione specifica delle risorse SnapCenter per i backup di volumi diversi dai dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup del database"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-database-backups.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-database-backups.html">
+        Backup del database
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Controllo dell'integrità del blocco"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-block-integrity-check.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-block-integrity-check.html">
+        Controllo dell'integrità del blocco
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ripristino e ripristino"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-restore-and-recovery.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-restore-and-recovery.html">
+        Ripristino e ripristino
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione e tuning avanzati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-advanced-configuration-and-tuning.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-advanced-configuration-and-tuning.html">
+        Configurazione e tuning avanzati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare informazioni aggiuntive e cronologia delle versioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-br-scs-where-to-find-additional-information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-br-scs-where-to-find-additional-information.html">
+        Dove trovare informazioni aggiuntive e cronologia delle versioni
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e recovery di BlueXP per SAP HANA - Cloud object storage come destinazione di backup"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Backup e recovery di BlueXP per SAP HANA - Cloud object storage come destinazione di backup</div>-->
+         Backup e recovery di BlueXP per SAP HANA - Cloud object storage come destinazione di backup
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e recovery di BlueXP per SAP HANA - Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/hana-hycl-backup-overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/hana-hycl-backup-overview.html">
+        Backup e recovery di BlueXP per SAP HANA - Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di BlueXP Backup and Recovery per SAP HANA"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/hana-hycl-backup-conf.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/hana-hycl-backup-conf.html">
+        Configurazione di BlueXP Backup and Recovery per SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ripristino dei backup di BlueXP per SAP HANA"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/hana-hycl-backup-restore.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/hana-hycl-backup-restore.html">
+        Ripristino dei backup di BlueXP per SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Informazioni aggiuntive e cronologia versioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/hana-hycl-backup-info-version.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/hana-hycl-backup-info-version.html">
+        Informazioni aggiuntive e cronologia versioni
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e ripristino della replica del sistema SAP HANA con SnapCenter"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Backup e ripristino della replica del sistema SAP HANA con SnapCenter</div>-->
+         Backup e ripristino della replica del sistema SAP HANA con SnapCenter
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica della replica del sistema SAP HANA"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-sap-hana-system-replication-overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html">
+        Panoramica della replica del sistema SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup Snapshot dello storage e replica del sistema SAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html">
+        Backup Snapshot dello storage e replica del sistema SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Opzioni di configurazione SnapCenter per la replica del sistema SAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html">
+        Opzioni di configurazione SnapCenter per la replica del sistema SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di SnapCenter 4.6 mediante un gruppo di risorse"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html">
+        Configurazione di SnapCenter 4.6 mediante un gruppo di risorse
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione di SnapCenter con una singola risorsa"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html">
+        Configurazione di SnapCenter con una singola risorsa
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ripristino e ripristino da un backup creato sull'altro host"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html">
+        Ripristino e ripristino da un backup creato sull'altro host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare ulteriori informazioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-where-to-find-additional-information_overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-where-to-find-additional-information_overview.html">
+        Dove trovare ulteriori informazioni
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Cronologia delle versioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-sr-scs-version-history.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-sr-scs-version-history.html">
+        Cronologia delle versioni
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Disaster recovery SAP HANA con Azure NetApp Files"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Disaster recovery SAP HANA con Azure NetApp Files</div>-->
+         Disaster recovery SAP HANA con Azure NetApp Files
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica sulla protezione dei dati"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_data_protection_overview_overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_data_protection_overview_overview.html">
+        Panoramica sulla protezione dei dati
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Confronto tra soluzioni di disaster recovery"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_disaster_recovery_solution_comparison.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_disaster_recovery_solution_comparison.html">
+        Confronto tra soluzioni di disaster recovery
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="ANF Replication cross-Region con SAP HANA"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> ANF Replication cross-Region con SAP HANA</div>-->
+         ANF Replication cross-Region con SAP HANA
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica della replica cross-region con SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html">
+        Panoramica della replica cross-region con SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Opzioni di configurazione per la replica interregionale con SAP HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html">
+        Opzioni di configurazione per la replica interregionale con SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Requisiti e Best practice"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_requirements_and_best_practices.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_requirements_and_best_practices.html">
+        Requisiti e Best practice
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Setup di laboratorio"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_lab_setup.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_lab_setup.html">
+        Setup di laboratorio
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Procedura di configurazione per la replica ANF Cross-Region"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html">
+        Procedura di configurazione per la replica ANF Cross-Region
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Monitoraggio della replica ANF tra regioni"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_monitoring_anf_cross-region_replication.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_monitoring_anf_cross-region_replication.html">
+        Monitoraggio della replica ANF tra regioni
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Test di disaster recovery"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Test di disaster recovery</div>-->
+         Test di disaster recovery
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica dei test di disaster recovery"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_disaster_recovery_testing_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_disaster_recovery_testing_overview.html">
+        Panoramica dei test di disaster recovery
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparare l'host di destinazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_prepare_the_target_host.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_prepare_the_target_host.html">
+        Preparare l'host di destinazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery"
+      data-li-level="4#" 
+      class="  ie-sidebar-selected    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html">
+        Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Montare i nuovi volumi sull'host di destinazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html">
+        Montare i nuovi volumi sull'host di destinazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ripristino del database HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_hana_database_recovery.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_hana_database_recovery.html">
+        Ripristino del database HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Failover del disaster recovery"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Failover del disaster recovery</div>-->
+         Failover del disaster recovery
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica sul failover del disaster recovery"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_disaster_recovery_failover_overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_disaster_recovery_failover_overview.html">
+        Panoramica sul failover del disaster recovery
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparare l'host di destinazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_prepare_the_target_host_01.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_prepare_the_target_host_01.html">
+        Preparare l'host di destinazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Interrompere ed eliminare il peering delle repliche"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_break_and_delete_replication_peering.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_break_and_delete_replication_peering.html">
+        Interrompere ed eliminare il peering delle repliche
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Montare i volumi sull'host di destinazione"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_mount_the_volumes_at_the_target_host.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_mount_the_volumes_at_the_target_host.html">
+        Montare i volumi sull'host di destinazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ripristino del database HANA"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_hana_database_recovery_01.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_hana_database_recovery_01.html">
+        Ripristino del database HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornare la cronologia"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-anf_update_history.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-anf_update_history.html">
+        Aggiornare la cronologia
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Disaster recovery SAP HANA con replica dello storage"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-dr-sr_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/backup/saphana-dr-sr_pdf_link.html">
+        Disaster recovery SAP HANA con replica dello storage
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e ripristino SAP HANA con Snap Creator"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-bandr-sc_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/backup/saphana-bandr-sc_pdf_link.html">
+        Backup e ripristino SAP HANA con Snap Creator
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup e ripristino SAP HANA con storage NetApp e software CommVault"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-commvault_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/backup/saphana-commvault_pdf_link.html">
+        Backup e ripristino SAP HANA con storage NetApp e software CommVault
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA su NetApp All SAN Array - SAN moderne, protezione dei dati e disaster recovery"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/backup/saphana-san_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/backup/saphana-san_pdf_link.html">
+        SAP HANA su NetApp All SAN Array - SAN moderne, protezione dei dati e disaster recovery
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Gestione del ciclo di vita"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Gestione del ciclo di vita</div>-->
+         Gestione del ciclo di vita
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp SAP Landscape Management Integration con Ansible"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> NetApp SAP Landscape Management Integration con Ansible</div>-->
+         NetApp SAP Landscape Management Integration con Ansible
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introduzione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-introduction.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-introduction.html">
+        Introduzione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scenari di cloning, copia e refresh del sistema SAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html">
+        Scenari di cloning, copia e refresh del sistema SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Casi d'utilizzo per l'aggiornamento, la copia e la clonazione del sistema"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html">
+        Casi d'utilizzo per l'aggiornamento, la copia e la clonazione del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Integrazione di NetApp SAP lama con Ansible"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-netapp-sap-lama-integration-using-ansible.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-netapp-sap-lama-integration-using-ansible.html">
+        Integrazione di NetApp SAP lama con Ansible
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Esempio di implementazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-example-implementation.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-example-implementation.html">
+        Esempio di implementazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di provisioning SAP lama - sistema clone"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-sap-lama-provisioning-workflow-clone-system.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-provisioning-workflow-clone-system.html">
+        Workflow di provisioning SAP lama - sistema clone
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di deprovisioning SAP lama - distruzione del sistema"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html">
+        Workflow di deprovisioning SAP lama - distruzione del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di provisioning SAP lama - sistema di copia"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-sap-lama-provisioning-workflow-copy-system.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-provisioning-workflow-copy-system.html">
+        Workflow di provisioning SAP lama - sistema di copia
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Workflow di provisioning SAP lama - refresh del sistema"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-sap-lama-provisioning-workflow-system-refresh.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-provisioning-workflow-system-refresh.html">
+        Workflow di provisioning SAP lama - refresh del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurazione dello script del provider e playbook Ansible"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html">
+        Configurazione dello script del provider e playbook Ansible
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Conclusione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/lama-ansible-conclusion.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/lama-ansible-conclusion.html">
+        Conclusione
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter</div>-->
+         Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introduzione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-introduction.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html">
+        Introduzione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Scenari di copia, aggiornamento e clonazione del sistema SAP"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html">
+        Scenari di copia, aggiornamento e clonazione del sistema SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Casi d'utilizzo per il refresh e la clonazione del sistema"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-use-cases-for-system-refresh-and-cloning.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-use-cases-for-system-refresh-and-cloning.html">
+        Casi d'utilizzo per il refresh e la clonazione del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica del workflow di refresh del sistema SAP con SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html">
+        Panoramica del workflow di refresh del sistema SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica del workflow di copia del sistema SAP con SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html">
+        Panoramica del workflow di copia del sistema SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica del workflow dei cloni di sistema SAP con SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html">
+        Panoramica del workflow dei cloni di sistema SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Flussi di lavoro delle operazioni di refresh del sistema SAP HANA utilizzando backup di snapshot di storage"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html">
+        Flussi di lavoro delle operazioni di refresh del sistema SAP HANA utilizzando backup di snapshot di storage
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Script di esempio di automazione"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-automation-example-scripts.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-automation-example-scripts.html">
+        Script di esempio di automazione
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornamento del sistema SAP HANA con SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html">
+        Aggiornamento del sistema SAP HANA con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Clone del sistema SAP con SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-sap-system-clone-with-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-system-clone-with-snapcenter.html">
+        Clone del sistema SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare informazioni aggiuntive e cronologia delle versioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/sc-copy-clone-where-to-find-additional-information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/sc-copy-clone-where-to-find-additional-information.html">
+        Dove trovare informazioni aggiuntive e cronologia delle versioni
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy</div>-->
+         Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Panoramica"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/libelle-sc-overview.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/libelle-sc-overview.html">
+        Panoramica
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornamento del sistema SAP HANA con LSC e SnapCenter"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html">
+        Aggiornamento del sistema SAP HANA con LSC e SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aggiornamento del sistema SAP HANA con LSC, AzAcSnap e Azure NetApp Files"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html">
+        Aggiornamento del sistema SAP HANA con LSC, AzAcSnap e Azure NetApp Files
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dove trovare informazioni aggiuntive e cronologia delle versioni"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/lifecycle/libelle-sc-where-to-find-additional-information.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/it-it/netapp-solutions-sap/lifecycle/libelle-sc-where-to-find-additional-information.html">
+        Dove trovare informazioni aggiuntive e cronologia delle versioni
+      </a></li></ul></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Integrazione dello storage NetApp con SAP Landscape Management"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="https://www.netapp.com/us/media/tr-4018.pdf" 
+    ><a class="ie-sidebar-menuitem-2 " href="https://www.netapp.com/us/media/tr-4018.pdf">
+        Integrazione dello storage NetApp con SAP Landscape Management
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Solution Brief"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/it-it/netapp-solutions-sap/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/it-it/netapp-solutions-sap/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Solution Brief</div>-->
+         Solution Brief
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Gestione del ciclo di vita SAP HANA"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/briefs/saphana-lm-sb_pdf_link.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/it-it/netapp-solutions-sap/briefs/saphana-lm-sb_pdf_link.html">
+        Gestione del ciclo di vita SAP HANA
+      </a></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Backup e ripristino SAP HANA"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="https://www.netapp.com/us/media/sb-3965.pdf" 
+    ><a class="ie-sidebar-menuitem-2 " href="https://www.netapp.com/us/media/sb-3965.pdf">
+        Backup e ripristino SAP HANA
+      </a></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Disaster recovery SAP HANA"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="https://www.netapp.com/us/media/sb-3968.pdf" 
+    ><a class="ie-sidebar-menuitem-2 " href="https://www.netapp.com/us/media/sb-3968.pdf">
+        Disaster recovery SAP HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Soluzioni SAP FlexPod"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="https://docs.netapp.com/us-en/flexpod/ent-db/index.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="https://docs.netapp.com/us-en/flexpod/ent-db/index.html">
+        Soluzioni SAP FlexPod
+      </a></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Soluzioni NetApp"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="https://docs.netapp.com/us-en/netapp-solutions/" 
+    ><a class="ie-sidebar-menuitem-1 " href="https://docs.netapp.com/us-en/netapp-solutions/">
+        Soluzioni NetApp
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Note legali"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html" 
+      dale-entry-url="/reference_legal_notices.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/it-it/netapp-solutions-sap/reference_legal_notices.html">
+        Note legali
+      </a></li></ul>
+</div>
+<script>
+
+  $(".ie-sidebar-button").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    expandedLI = $('li.ie-sidebar-expand')
+
+    const li = $(this).closest("li");
+
+    const parentsLI = $(li).parents('li');
+
+    expandedLI.map(element => {
+      if (sidebarAccordion && !li.hasClass('ie-sidebar-expand') && jQuery.inArray(expandedLI[element], parentsLI) == -1) {
+        $(expandedLI[element]).toggleClass('ie-sidebar-expand');
+        $(expandedLI[element]).children("ul").animate({ height: 'toggle' }, 400, function () {
+          $(li).children("ul").toggleClass('ie-sidebar-open');
+
+        })
+      }
+
+    })
+
+    $(li).toggleClass('ie-sidebar-expand');
+    $(li).children("ul").animate({ height: 'toggle' }, 400, function () {
+      $(li).children("ul").toggleClass('ie-sidebar-open');
+    })
+  });
+
+
+  
+    $("li.ie-sidebar-selected").parents('ul').toggleClass("ie-sidebar-open");
+    $("li.ie-sidebar-selected").toggleClass("ie-sidebar-expand")
+    $("ul.ie-sidebar-open").parent().toggleClass("ie-sidebar-expand");
+    $("li.ie-sidebar-selected").children('ul').toggleClass("ie-sidebar-open")
+  
+  
+</script>
+    </div>
+</div>
+<script>
+
+    
+    let sidebarScrollTopPosition = 0;
+    $("#ie-new-toc").on("scroll", function () {
+        if (sidebarScrollTopPosition == 0) {
+            $.cookie("sidebarScroll", $("#ie-new-toc").scrollTop(), {
+                path: "/it-it/netapp-solutions-sap"
+            });
+        }
+
+        if ($("#ie-new-toc").scrollTop() > 0) {
+            $('#ie-product-identity-lockup').addClass('ie-addShadow');
+        } else {
+            $('#ie-product-identity-lockup').removeClass('ie-addShadow');
+        }
+    });
+
+    $(function () {
+        if ($.cookie("sidebarScroll")) {
+            $("#ie-new-toc").scrollTop($.cookie("sidebarScroll"));
+        }
+    });
+
+    function setSidebarBottom() {
+        const footerGap = PXinViewport($(".n-footer"));
+        document.getElementById("ie-new-sidebar").style.bottom = Math.max(0, footerGap) + "px";
+    }
+
+    window.onscroll = () => {
+        setSidebarBottom();
+    };
+
+    $("#sidebar-collapse").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        if ($.cookie("sidebarScroll")) {
+            sidebarScrollTopPosition = $.cookie("sidebarScroll");
+        }
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 350, function () {
+            $("#ie-new-sidebar-collapse").show();
+            $("#ie-new-sidebar").removeClass("open")
+            $("#ie-new-sidebar").addClass("close")
+            $("#ie-new-sidebar").removeAttr("style")
+        });
+        $(".ie-content-pane").animate({ width: (width + sidebarWidth), marginLeft: (marginLeft - sidebarWidth) }, 350, function () {
+            resizeContent()
+        })
+
+    });
+    $("#sidebar-expand").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 250, function () {
+            $('#ie-new-sidebar').css('display', 'flex');
+            $("#ie-new-sidebar-collapse").hide();
+            $("#ie-new-sidebar").removeClass("close")
+            $("#ie-new-sidebar").addClass("open")
+            setSidebarBottom();
+
+            if (sidebarScrollTopPosition != 0) {
+                $.cookie("sidebarScroll", sidebarScrollTopPosition, {
+                    path: "/it-it/netapp-solutions-sap"
+                })
+                $("#ie-new-toc").scrollTop(sidebarScrollTopPosition);
+                sidebarScrollTopPosition = 0;
+            }
+        });
+        $(".ie-content-pane").animate({ width: (width - sidebarWidth), 'marginLeft': (marginLeft + sidebarWidth) }, 250, function () {
+            resizeContent()
+        })
+    });
+    function resizeContent() {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        const rightNavbarVisible =  $("#ie-right-navbar").css('display') && $("#ie-right-navbar").css('display') != 'none';
+        const sidebarVisible = $("#ie-new-sidebar").css('display') != 'none';
+        const rightNavbarWidth = $("#ie-right-navbar").width();
+        const rightNavbarCollapseWidth = $("#ie-right-navbar-collapse").width();
+        const rightNavbarCollapseVisible = $("#ie-right-navbar-collapse").css('display') && $("#ie-right-navbar-collapse").css('display') != 'none';
+        
+        if (rightNavbarVisible && sidebarVisible) {
+            $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarWidth}px)`)
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+        } else if (sidebarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarCollapseWidth}px)`)
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar").width()}px)`)
+            }
+
+        } else if (rightNavbarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            $(".ie-content-pane").width(`calc(100% - ${rightNavbarWidth}px)`)
+        } else {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${rightNavbarCollapseWidth}px)`);
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar-collapse").width()}px) `);
+            }
+            
+        }
+    }
+    $(window).on("resize load", function () {
+        setSidebarBottom();
+        resizeContent()
+    });
+
+
+</script>
+
+<div class="ie-content-pane ie-component-detail-content ie-component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <!-- include utility.html -->
+      <div class="ie-info-disclaimer">
+    <span>
+      <div class="ie-info-disclaimer-container">
+        <div class="ie-info-disclaimer-icon">
+          <img src="/it-it/netapp-solutions-sap/images/notification-icons.svg" class="luci-icon" alt="" />
+        </div>
+        <div class="ie-info-disclaimer-content">
+          <span> La versione in lingua italiana fornita proviene da una traduzione automatica. Per eventuali incoerenze, fare riferimento alla versione in lingua inglese. </span>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </span>
+  </div><div class="ie-component-detail-heading-wrap">
+  <h1 class="ie-component-detail-heading">Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery</h1>
+</div>
+
+<div id="ie-byline">
+  
+<div class="page-details">
+    
+        
+            <time datetime="2023-11-17 09:28:27 +0000">11/17/2023</time>
+        
+    
+    
+        <span>Collaboratori
+        </span>
+    
+    
+</div>
+<div class="page-controls">
+    <div id="contribute-dropdown" class="custom-dropdown custom-dropdown-contrib" >
+        <div class="custom-dropdown-select custom-dropdown-select-contrib">
+        <span class="contrib-name"><img src="/it-it/netapp-solutions-sap/images/discuss-sm.svg" alt="" class="github-icon" />Suggerisci modifiche</span>
+        <img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown invisible" />
+        <img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup" />
+        </div>
+        <ul class="custom-dropdown-menu suggested-changes-dropdown"><li>
+                <a target="_blank" href="https://github.com/NetAppDocs/netapp-solutions-sap.it-it/issues/new?template=new-from-page.yml&page-url=https://docs.netapp.com/it-it/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html&page-title=Creare nuovi volumi in base ai backup snapshot nel sito di disaster recovery" class="page-nav-contribute-link" role="button">Richiedi modifiche alla documentazione</a>
+            </li><li> 
+                <a target="_blank" href="https://github.com/NetAppDocs/netapp-solutions-sap/blob/main/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.adoc" class="page-nav-contribute-link" role="button">Modifica questa pagina</a>
+            </li><li><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  >Scopri come collaborare</a></li>
+        </ul>
+    </div>
+    <div id="pdf-control-container">
+        <div class="n-pdf-header">
+            <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+                <img class="adobe-icon" src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>PDF<img src="/it-it/netapp-solutions-sap/images/dropdown-arrow.svg" class="custom-icon" alt="" />
+            </a>
+        </div>
+        <div class="n-pdf-body-container">
+            <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+                    
+                    
+                    
+                    <a target="_blank" class="pdf-download-link" href="/it-it/netapp-solutions-sap/pdfs/fullsite-sidebar/SAP_Business_Application_e_SAP_HANA_Database_Solutions.pdf" >
+                    <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>PDF del sito di questa documentazione</a>
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Best_Practice.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Best Practice
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Guida_alla_configurazione_di_SAP_HANA_su_sistemi_NetApp_AFF_con_FCP.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Guida alla configurazione di SAP HANA su sistemi NetApp AFF con FCP
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Installazione_e_configurazione_dell_infrastruttura.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Installazione e configurazione dell'infrastruttura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Guida_alla_configurazione_di_SAP_HANA_su_sistemi_NetApp_AFF_con_NFS.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Guida alla configurazione di SAP HANA su sistemi NetApp AFF con NFS
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Installazione_e_configurazione_dell_infrastruttura.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Installazione e configurazione dell'infrastruttura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Guida_alla_configurazione_di_SAP_HANA_su_sistemi_NetApp_FAS_con_NFS.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Guida alla configurazione di SAP HANA su sistemi NetApp FAS con NFS
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Installazione_e_configurazione_dell_infrastruttura.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Installazione e configurazione dell'infrastruttura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Guida_alla_configurazione_di_SAP_HANA_su_sistemi_FAS_con_FCP.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Guida alla configurazione di SAP HANA su sistemi FAS con FCP
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Installazione_e_configurazione_dell_infrastruttura.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Installazione e configurazione dell'infrastruttura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Backup__ripristino_e_disaster_recovery.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Backup, ripristino e disaster recovery
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/SAP_HANA_su_Amazon_FSX_per_NetApp_ONTAP___Backup_e_recovery_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Replica_del_backup_con_SnapVault.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Replica del backup con SnapVault
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Backup_e_recovery_SAP_HANA_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Backup e recovery SAP HANA con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Backup_e_recovery_di_BlueXP_per_SAP_HANA___Cloud_object_storage_come_destinazione_di_backup.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Backup e recovery di BlueXP per SAP HANA - Cloud object storage come destinazione di backup
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Backup_e_ripristino_della_replica_del_sistema_SAP_HANA_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Backup e ripristino della replica del sistema SAP HANA con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Disaster_recovery_SAP_HANA_con_Azure_NetApp_Files.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Disaster recovery SAP HANA con Azure NetApp Files
+          </a>
+          
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/ANF_Replication_cross_Region_con_SAP_HANA.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            ANF Replication cross-Region con SAP HANA
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Test_di_disaster_recovery.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Test di disaster recovery
+          </a>
+          
+
+
+
+
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Failover_del_disaster_recovery.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Failover del disaster recovery
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Gestione_del_ciclo_di_vita.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Gestione del ciclo di vita
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/NetApp_SAP_Landscape_Management_Integration_con_Ansible.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            NetApp SAP Landscape Management Integration con Ansible
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Automazione_delle_operazioni_di_copia_e_clonazione_del_sistema_SAP_HANA_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Automazione_delle_operazioni_di_copia_del_sistema_SAP_con_libelle_SystemCopy.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/it-it/netapp-solutions-sap/pdfs/sidebar/Solution_Brief.pdf" 
+            
+          >
+            <img src="/it-it/netapp-solutions-sap/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Solution Brief
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+</li></ul>
+            <div class="zip-pdf-link-container" style="display: none;">   
+                <a href="#" id="zipPdf">
+                <img src="/it-it/netapp-solutions-sap/images/pdf-zip.png" alt="" width="16" height="16"/>
+                <pre>Raccolta di documenti PDF separati<span class="zip-size"></span></pre>
+                </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+        </div>
+    </div>        
+<script>
+$("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+$("#toggleButtonPdf").on('click', function(e){ 
+    e.stopPropagation();
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+});
+
+//hide is by clicking outside pdfcontainer
+$(document).on('click', function (e) {
+    if ($('#toggleContainerPdf').is(':visible') && !$('.n-pdf-body-container').is(e.target) && !$('.n-pdf-body-container').has(e.target).length)  {
+        
+        $("#toggleContainerPdf").toggle('display');
+        $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+        $("#toggleButtonPdf").removeClass("active");
+    }
+});
+</script>
+<script>
+    function getPdfLocation() {
+        const pdfLocation = window.scrollX + document.querySelector('#pdf-control-container').getBoundingClientRect().left
+        if (pdfLocation < 450) {
+            $(".n-pdf-body-container").addClass("block")
+        } else {
+            $(".n-pdf-body-container").removeClass("block")
+        }
+    
+    }
+    $( window ).on( "resize", function() {
+        getPdfLocation()
+} );
+</script>
+<script>
+    const pdfButtonWidth =  $(".n-pdf-header").width();
+    const pdfMenuWidth = $(".n-pdf-body-container").width();
+    $(".n-pdf-body-container").css('margin-left', `calc(${pdfButtonWidth - pdfMenuWidth}px)`);
+</script>
+</div>
+
+    
+
+</div>
+
+
+
+
+<div class="content-to-index">
+<div class="paragraph lead">
+<p>A seconda della configurazione del disaster recovery (con o senza replica del backup del log), è necessario creare due o tre nuovi volumi basati sui backup snapshot. In entrambi i casi, è necessario creare un nuovo volume dei dati e il volume condiviso HANA.</p>
+</div>
+<div class="paragraph">
+<p>Se vengono replicati anche i dati di backup del registro, è necessario creare un nuovo volume del volume di backup del registro. Nel nostro esempio, i dati e il volume di backup del log sono stati replicati nel sito di disaster recovery. La procedura seguente utilizza Azure Portal.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Uno dei backup snapshot coerenti con l'applicazione viene selezionato come origine per il nuovo volume del volume di dati HANA. L'opzione Restore to New Volume (Ripristina su nuovo volume) è selezionata per creare un nuovo volume in base al backup dello snapshot.</p>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image19.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+</li>
+<li>
+<p>Il nuovo nome del volume e la nuova quota devono essere forniti nell'interfaccia utente.</p>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image20.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+</li>
+<li>
+<p>Nella scheda Protocol (protocollo), vengono configurati il percorso del file e la policy di esportazione.</p>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image21.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+</li>
+<li>
+<p>La schermata Create and Review (Crea e rivedi) riassume la configurazione.</p>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image22.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+</li>
+<li>
+<p>È stato creato un nuovo volume in base al backup di snapshot HANA.</p>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image23.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>A questo punto, è necessario eseguire le stesse operazioni per il volume condiviso HANA e per il volume di backup del registro, come illustrato nelle due schermate seguenti. Poiché non sono stati creati snapshot aggiuntivi per il volume di backup del registro e condiviso HANA, la copia Snapshot SnapMirror più recente deve essere selezionata come origine per il nuovo volume. Si tratta di dati non strutturati e per questo caso di utilizzo è possibile utilizzare la copia Snapshot di SnapMirror.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image24.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+<div class="paragraph">
+<p>La seguente schermata mostra il volume condiviso HANA ripristinato nel nuovo volume.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-dr-anf_image25.png" alt="Errore: Immagine grafica mancante"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Se è stato utilizzato un pool di capacità con un livello di performance basso, i volumi devono ora essere spostati in un pool di capacità che fornisca le performance richieste.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Tutti e tre i nuovi volumi sono ora disponibili e possono essere montati sull'host di destinazione.</p>
+</div>
+</div>
+
+
+
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+<div id="ie-right-navbar-collapse" class="close">
+  <img id="navbar-expand" class="ie-searchbox-icon" src="/it-it/netapp-solutions-sap/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-right-navbar" class="open">
+  <div id="right-navbar-collapse">
+    <img src="/it-it/netapp-solutions-sap/images/double_arrow.svg" alt="" />
+  </div>
+  <div class="page-nav-container">
+    <nav class="page-nav-fixed">
+      <div class="page-nav-title">In questa pagina</div>
+      <div class="page-nav-links">
+        <ul class="page-nav-inner" id="page-menu"></ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+<script>
+  resizeContent();
+  function setRightBarHeight() {
+    var h = 0;
+
+    // header 1
+    h += PXinViewport($('.n-footer'));
+    h += PXinViewport($('#ie-new-header'));
+
+    if ($('#ie-right-navbar').length) {
+      $('#ie-right-navbar').css({ height: `calc(100vh - ${h}px)` });
+    }
+    if ($('.page-nav-links').length) {
+      h += 98;
+      $('.page-nav-links').css({ height: `calc(100vh - ${h}px)` });
+    }
+  }
+
+  $(document).ready(function () {
+    // PAGE NAV - Click
+    const MASTHEAD_OFFSET = 65;
+    const SECTIONS = $("main h2, main h3");
+    let calculateActiveSection = false;
+    setTimeout(() => {
+      calculateActiveSection = true;
+    }, 100)
+
+    $(".page-nav__link").click(function (event) {
+      calculateActiveSection = false;
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      var target = $(event.target);
+      target.addClass('page-nav__link--active');
+      location.hash = event.target.hash;
+      setTimeout(() => {
+        calculateActiveSection = true;
+      }, 100)
+
+    });
+
+    // PAGE NAV - Scroll
+    $(window).on('resize scroll', function () {
+      if (calculateActiveSection) {
+        var activeSection = getActiveSection(SECTIONS, MASTHEAD_OFFSET);
+        if (activeSection) {
+          var activeHref = $(activeSection).attr('id');
+          $(".page-nav__link").removeClass('page-nav__link--active');
+          $("#page-menu a[href=#" + activeHref + "]").addClass('page-nav__link--active');
+          if (location.hash != "#" + activeHref) {
+            if (history.replaceState) {
+              history.replaceState(null, null, "#" + activeHref);
+            }
+          }
+        }
+      }
+    });
+
+    $(".n-pdf-button").click(function () {
+      $(this).toggleClass("active");
+    });
+
+    $.fn.isVisibleAndInViewport = function () {
+      var elementTop = $(this).offset().top;
+      var elementBottom = elementTop + $(this).outerHeight();
+
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+
+      return elementBottom > viewportTop && elementTop < viewportBottom && $(this).is(":visible");
+    };
+
+
+    $(window).on('resize scroll', function () {
+      setRightBarHeight();
+    });
+
+    $(window).trigger('resize');
+
+
+  });
+
+  $("#right-navbar-collapse").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 350, function () {
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+    });
+    $(".ie-content-pane").animate({ width: (width + rightNavbarWidth) }, 350, function () {
+      resizeContent()
+      setSidebarBottom();
+    })
+
+  });
+  $("#navbar-expand").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 250, function () {
+      $("#ie-right-navbar-collapse").removeClass("open")
+      $("#ie-right-navbar-collapse").addClass("close")
+      $("#ie-right-navbar").removeClass("close")
+      $("#ie-right-navbar").addClass("open")
+      setRightBarHeight();
+      setSidebarBottom();
+    });
+    $(".ie-content-pane").animate({ width: (width - rightNavbarWidth) }, 250, function () {
+      resizeContent()
+    })
+  });
+
+  function navbarResize() {
+    const rightNavbarResized = $("#ie-right-navbar-collapse").hasClass('resized');
+    if (window.innerWidth < 1024) {
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+      $("#ie-right-navbar").removeAttr("style")
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar-collapse").addClass("resized")
+    } else {
+      if (rightNavbarResized) {
+        $('#ie-right-navbar').removeClass('close');
+        $('#ie-right-navbar').addClass('open');
+        $("#ie-right-navbar-collapse").removeClass("resized")
+        $("#ie-right-navbar-collapse").removeClass("open")
+        $("#ie-right-navbar-collapse").addClass("close")
+      }
+    }
+    resizeContent()
+  }
+  navbarResize();
+  $(window).on('resize load', function () {
+    navbarResize()
+  });
+
+  function getActiveSection(sections, offset) {
+    var scrollPosition = $(window).scrollTop() + offset + 5;
+    var activeSection;
+    for (var i = 0; i < sections.length; i++) {
+      var el = $(sections[i]);
+      var activePosition = el.offset().top;
+      if (activePosition > scrollPosition) {
+        break;
+      }
+
+      activeSection = sections[i];
+    }
+
+    return activeSection;
+  }
+
+  $("a[href*=#]:not([href=#])").click(function () {
+    setTimeout(() => {
+      $(window).trigger('scroll');
+    }, 105)
+  })
+
+  const hashOnLoad = location.href.split("#")[1];
+  setTimeout(function () {
+    if (hashOnLoad) {
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      $("#page-menu a[href=#" + hashOnLoad + "]").addClass('page-nav__link--active');
+    }
+  }, 100)
+
+</script>
+
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+        <div class="n-footer__left">
+          <li class="n-footer__copyright-link">
+                    <a href="https://www.netapp.com/company/legal/copyright/">© 2024 NetApp, Inc.</a>
+          </li>
+        </div>
+        <div class="n-footer__center">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">Condizioni per l'utilizzo</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">Direttiva sulla privacy</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Direttiva sui cookie</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Impostazioni cookie</a>
+            </li>
+          </ul>
+       </div>
+        <div class="n-footer__right">
+              <li class="n-footer__copyright-link">
+                <a target="_self" href="javascript:netapp_mailto()">Invia feedback su questa pagina</a>
+              </li>
+        </div>
+     </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/it-it/netapp-solutions-sap/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/it-it/netapp-solutions-sap/js/prism.js'></script>
+      <script type="text/javascript" src='/it-it/netapp-solutions-sap/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/it-it/netapp-solutions-sap/js/ie-tabbed-blocks.js'></script>
+    <script src='/it-it/netapp-solutions-sap/js/ie-sidebar.js'></script>
+  </body>
+
+</html>
