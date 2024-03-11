@@ -1,0 +1,77 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-hycl-backup-overview.html 
+keywords: BlueXP, SAP HANA, introduction, overview 
+summary: Questo report tecnico fornisce le Best practice per la data Protection di SAP HANA utilizzando il Backup nad Recovery for Application di NetApp BlueXP. Questo documento prende in esame concetti, consigli sulla configurazione e flussi di lavoro operativi, tra cui configurazione, operazioni di backup, e operazioni di ripristino. 
+---
+= Backup e recovery di BlueXP per SAP HANA - Cloud object storage come destinazione di backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+
+
+== Panoramica
+
+Questo documento descrive come configurare e configurare SAP HANA per la data Protection dagli archivi di oggetti on-premise a quelli basati sul cloud con NetApp BlueXP. Copre la parte di backup e recovery di BlueXP della soluzione. Questa soluzione è un miglioramento della soluzione di backup SAP HANA on-premise utilizzando NetApp Snap Center, che fornisce un metodo conveniente per l'archiviazione a lungo termine dei backup SAP HANA su storage a oggetti basato sul cloud e offre un tiering opzionale dello storage a oggetti verso storage di archiviazione come AWS Glacier/Deep Glacier, archiviazione BLOB di Microsoft Azure e archiviazione GCP.
+
+Il setup e la configurazione della soluzione di backup e recovery SAP HANA on-premise sono descritti in https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html#the-netapp-solution["TR-4614: Backup e recovery SAP HANA con SnapCenter (netapp.com)"].
+
+Questo TR descrive solo come migliorare la soluzione di backup e recovery SAP HANA on-premise basata su SnapCenter con il backup e recovery di BlueXP per SAP HANA utilizzando ad esempio lo storage a oggetti AWS S3. Il setup e la configurazione che utilizzano lo storage a oggetti Microsoft Azure e GCP al posto di AWS S3 sono simili, ma non vengono descritti in questo documento.
+
+
+
+== Architettura di backup e recovery di BlueXP
+
+Il backup e recovery di BlueXP è una soluzione SaaS che offre funzionalità di data Protection per le applicazioni eseguite sullo storage on-premise NetApp nel cloud. Offre una protezione efficiente, coerente con l'applicazione e basata su policy di SAP HANA utilizzando lo storage NetApp. Inoltre, il backup e recovery di BlueXP offre controllo e supervisione centralizzati, delegando al contempo la possibilità per gli utenti di gestire le operazioni di backup e ripristino specifiche dell'applicazione.
+
+Il backup e recovery di BlueXP viene eseguito come SaaS all'interno di NetApp BlueXP e sfrutta il framework e l'interfaccia utente. Il framework dell'ambiente di lavoro BlueXP viene utilizzato per configurare e gestire le credenziali per lo storage on-premise basato su NetApp ONTAP e per il server NetApp SnapCenter.
+
+È necessario implementare un connettore BlueXP nella rete virtuale del cliente. È necessaria una connessione tra l'ambiente locale e l'ambiente cloud, ad esempio una connessione VPN da sito a sito. La comunicazione tra i componenti SaaS di NetApp e l'ambiente del cliente avviene esclusivamente tramite il connettore. Il connettore sta eseguendo le operazioni di storage utilizzando le API di gestione di ONTAP e SnapCenter.
+
+Il trasferimento dei dati tra lo storage on-premise e il bucket cloud è protetto end-to-end con crittografia AES a riposo a 256 bit, crittografia TLS/HTTPS in uso e supporto della chiave gestita dal cliente (CMK). +
+I dati di backup vengono memorizzati in uno stato WORM immutabile e indelebile. L'unico modo per accedere ai dati dallo storage a oggetti è ripristinarli nello storage basato su NetApp ONTAP, incluso NetApp CVO.
+
+image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis enthält. Automatisch generierte Beschreibung,width=624,height=450"]
+
+
+
+== Panoramica delle fasi di installazione e configurazione
+
+Le fasi di installazione e configurazione richieste possono essere suddivise in tre aree. +
+Prerequisito: La configurazione del backup per SAP HANA è stata configurata in NetApp Snap Center. Per la configurazione di Snap Center per SAP HANA, il primo revisore al mondo https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-configuration.html["Configurazione SnapCenter (netapp.com)"].
+
+. Installazione e configurazione dei componenti NetApp BlueXP.
++
+Deve essere eseguita una volta durante la configurazione iniziale della soluzione per la protezione dei dati.
+
+. Fasi di preparazione in NetApp SnapCenter.
++
+Occorre fare per ogni database SAP HANA, che deve essere protetto.
+
+. Passaggi di configurazione nel backup e recovery di BlueXP.
++
+Occorre fare per ogni database SAP HANA, che deve essere protetto.
+
+
+
+
+
+=== Installazione e configurazione del backup dell'applicazione ibrida NetApp BlueXP
+
+L'installazione e la configurazione dei componenti NetApp BlueXP sono descritte nella https://docs.netapp.com/us-en/cloud-manager-backup-restore/concept-protect-app-data-to-cloud.html#requirements["Proteggi i dati delle applicazioni on-premise | documentazione NetApp"].
+
+. Registrati ad BlueXP e configura l'account NetApp all'indirizzo https://bluexp.netapp.com/[].
+. Implementa il connettore BlueXP nel tuo ambiente. La descrizione è disponibile all'indirizzo https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-connectors.html["Informazioni sui connettori | documentazione NetApp"].
+. Aggiungi/acquista una licenza Cloud Backup su BlueXP: https://docs.netapp.com/us-en/cloud-manager-backup-restore/task-licensing-cloud-backup.html[].
+. Crea un ambiente di lavoro per l'ambiente on-premise NetApp e la tua destinazione cloud in BlueXP aggiungendo lo storage on-premise.
+. Crea una nuova relazione di archivio di oggetti per lo storage on-premise in un bucket AWS S3.
+. Configura la risorsa di sistema SAP HANA su SnapCenter.
+. Aggiungi Snap Center al tuo ambiente di lavoro.
+. Creare una policy per il proprio ambiente.
+. Protezione del sistema SAP HANA.
+
