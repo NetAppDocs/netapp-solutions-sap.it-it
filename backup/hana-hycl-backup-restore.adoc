@@ -21,9 +21,9 @@ Un ripristino dal backup può essere effettuato solo su un sistema storage basat
 . Fare clic su *Visualizza dettagli* corrispondente al database che si desidera ripristinare. +
 image:hana-hycl-back-image38.jpeg["hana-hycl-back-image38, larghezza=624, altezza=305"]
 . Selezionare il backup desiderato e scegliere esportazione archiviazione. +
-image:hana-hycl-back-image39.jpeg["Ein Bild, das Text, Screenshot, Software, Computersymbol enthält. Automatisch generierte Beschreibung,width=624,height=308"]
+image:hana-hycl-back-image39.jpeg["larghezza=624,altezza=308"]
 . Fornire le opzioni desiderate: +
-image:hana-hycl-back-image40.jpeg["Ein Bild, das Text, Screenshot, Software, Computersymbol enthält. Automatisch generierte Beschreibung,width=624,height=308"]
+image:hana-hycl-back-image40.jpeg["larghezza=624,altezza=308"]
 +
 .. Per l'ambiente NAS, specificare l'FQDN o l'indirizzo IP dell'host su cui esportare i volumi ripristinati dall'archivio di oggetti.
 .. Per l'ambiente SAN, specificare gli iniziatori dell'host a cui mappare le LUN dei volumi ripristinati dall'archivio di oggetti.

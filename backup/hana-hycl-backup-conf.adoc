@@ -36,7 +36,7 @@ image:hana-hycl-back-image6.jpeg["Ein Bild, das Diagramm enthält. Automatisch g
 
 == Creare un rapporto tra il sistema storage on-premise e un bucket di storage a oggetti
 
-La relazione tra lo storage on-premise e il bucket S3 viene effettuata creando un backup per un volume o attivando un backup di un'applicazione. Se si deve utilizzare una VPN da sito a sito esistente per trasferire i dati da un sistema on-premise a S3, è necessario utilizzare un backup di volume per creare la relazione tra lo storage on-premise e il bucket S3 come endpoint VPC da utilizzare. +
+La relazione tra lo storage on-premise e il bucket S3 viene effettuata creando un backup per un volume o attivando un backup di un'applicazione. Se si deve utilizzare una VPN site-to-site esistente per trasferire i dati da un sistema on-premise a S3, è necessario utilizzare un backup di volume per creare la relazione tra lo storage on-premise e il bucket S3 come endpoint VPC da utilizzare. +
 Al momento della creazione di questa documentazione, il flusso di lavoro di backup delle applicazioni non offre la possibilità di scegliere gli endpoint VPC per accedere ai bucket S3. +
 Fare riferimento a. https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html["Endpoint del gateway per Amazon S3 - Amazon Virtual Private Cloud"] Come impostare gli endpoint VPC per S3 all'interno del VPC.
 

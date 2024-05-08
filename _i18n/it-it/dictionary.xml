@@ -4490,11 +4490,6 @@ Nuova descrizione del workflow per il refresh del sistema e le operazioni di clo
   <block id="7bff1872092b4daae129c007c84cd996" category="inline-image-macro">hana-hycl-back-image38, larghezza=624, altezza=305</block>
   <block id="14a2a4f505cd6a440ad11540cab0ac21" category="list-text">Fare clic su *Visualizza dettagli* corrispondente al database che si desidera ripristinare. +
 <block ref="6f8d75fb488649758851cccdb2cccf08" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="5f61ef6ad90ff324226ee7a59e0654e9" category="inline-image-macro">Ein Bild, das Text, Screenshot, Software, Computersymbol enthält. Automatisch generierte Beschreibung,width=624,height=308</block>
-  <block id="a8da112ff7dee33cb98f2529795ab713" category="list-text">Selezionare il backup desiderato e scegliere esportazione archiviazione. +
-<block ref="9aaddfa4a9aab7d77d4d5c4b41b52fa5" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="25ea55983026f4468585a3cae84e6791" category="list-text">Fornire le opzioni desiderate: +
-<block ref="e7942ad51c3862961e4d988dd1f7ab9f" category="inline-image-macro-rx" type="image"></block></block>
   <block id="47abe672471325a3aa63fcd85f6e3367" category="list-text">Per l'ambiente NAS, specificare l'FQDN o l'indirizzo IP dell'host su cui esportare i volumi ripristinati dall'archivio di oggetti.</block>
   <block id="831b20d8b0ff4f1e50aecadcdcdc885d" category="list-text">Per l'ambiente SAN, specificare gli iniziatori dell'host a cui mappare le LUN dei volumi ripristinati dall'archivio di oggetti.</block>
   <block id="eee7cd91c87d431eb526192fb8d8f8fa" category="list-text">Se lo snapshot si trova nello storage di archiviazione, selezionare la priorità per ripristinare i dati dallo storage di archiviazione.</block>
@@ -4509,7 +4504,6 @@ Questa operazione esegue solo l'esportazione di archiviazione del backup riprist
   <block id="e5c7ac753b7a6121d9687b3fc4c66f25" category="summary">Questa sezione descrive come configurare l'ambiente di lavoro, come configurare SnapCenter e come configurare e attivare il backup SAP HANA con BlueXP.</block>
   <block id="bba044fc5fd2c6b6b93f83b61a607e30" category="doc">Configurazione di BlueXP Backup and Recovery per SAP HANA</block>
   <block id="84e76e0953f8a5f72d754729d1eaf1ae" category="section-title">Crea un ambiente di lavoro per BlueXP</block>
-  <block id="851847077e55a1429d11ef6bceeb9643" category="paragraph">Aggiungi il sistema storage on-premise all'ambiente di lavoro.</block>
   <block id="210e8952dc88c73e56d56a168cfe0616" category="list-text">Nel menu a sinistra scegli *Storage* -&gt; *Canvas* -&gt; *My Working* Environment.</block>
   <block id="6e0b32969c38b1fb3a586b9c8bca6d29" category="inline-image-macro">hana-hycl-back-image2, larghezza=624, altezza=316</block>
   <block id="32ae0c18f23bf987a305e455c9bf4aa0" category="list-text">Premere *+ Aggiungi ambiente di lavoro*. +
@@ -4527,9 +4521,6 @@ Questa operazione esegue solo l'esportazione di archiviazione del backup riprist
 <block ref="3fa4376934b792a48a60395e9737c899" category="inline-image-macro-rx" type="image"></block></block>
   <block id="6689e50f5e4a08328fa676a7ebb07f17" category="section-title">Creare un rapporto tra il sistema storage on-premise e un bucket di storage a oggetti</block>
   <block id="eab79ca7fb49f80130fae7b1656f7ebc" category="inline-link">Endpoint del gateway per Amazon S3 - Amazon Virtual Private Cloud</block>
-  <block id="53ab440b7f0ec4307a7446fefeb714d9" category="paragraph">La relazione tra lo storage on-premise e il bucket S3 viene effettuata creando un backup per un volume o attivando un backup di un'applicazione. Se si deve utilizzare una VPN da sito a sito esistente per trasferire i dati da un sistema on-premise a S3, è necessario utilizzare un backup di volume per creare la relazione tra lo storage on-premise e il bucket S3 come endpoint VPC da utilizzare. +
-Al momento della creazione di questa documentazione, il flusso di lavoro di backup delle applicazioni non offre la possibilità di scegliere gli endpoint VPC per accedere ai bucket S3. +
-Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inline-link-rx"></block> Come impostare gli endpoint VPC per S3 all'interno del VPC.</block>
   <block id="4513d4d932152177142c02ca2a383afc" category="paragraph">Per creare un backup del primo volume, attenersi alla seguente procedura:</block>
   <block id="dd78ee4baa00b09244d3a2f25c867ae5" category="inline-image-macro">hana-hycl-back-image7, larghezza=624, altezza=308</block>
   <block id="e8467bba6a91bfb07a8de17e1fb2cd69" category="list-text">Passare a *protezione* fino a *Backup e ripristino* e scegliere *volumi*. +
@@ -4550,10 +4541,6 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="d99dcd56dcb9bfa5a2be73d532bb75b9" category="list-text">*Continua*, se esiste un criterio esistente. +
 <block ref="a6f49816c4334d116e033f526097271b" category="inline-image-macro-rx" type="image"></block></block>
   <block id="eb54efc82bc89a6f6a8a311be7a01d24" category="inline-image-macro">Ein Bild, das Text, Software, Computersymbol, Webseite enthält. Automatisch generierte Beschreibung,width=624,height=306</block>
-  <block id="386e8a09b1074de806be0b2f336aad28" category="list-text">Selezionare l'opzione *Backup* e scegliere il provider di backup desiderato. In questo esempio AWS. +
-Tenere selezionata l'opzione per i criteri già esistenti. +
-Deselezionare le opzioni che non si desidera utilizzare. +
-<block ref="e7bd64d80c923ffe89ab853777796206" category="inline-image-macro-rx" type="image"></block></block>
   <block id="75e71600dc8b519173f07bb53132cfea" category="inline-image-macro">hana-hycl-back-image14, larghezza=624, altezza=306</block>
   <block id="d32f8e0d0c2a754313935c326e667d2a" category="list-text">Creare un nuovo bucket o sceglierne uno esistente. Fornire le impostazioni dell'account AWS, la registrazione, la chiave di accesso e la chiave segreta. Premere *Avanti*. +
 <block ref="7ab51ec82c986777ece3aa7e7dd51a3b" category="inline-image-macro-rx" type="image"></block></block>
@@ -4600,8 +4587,6 @@ Deselezionare le opzioni che non si desidera utilizzare. +
 <block ref="fc9d404e0e78b01038565097a3352a8e" category="inline-image-macro-rx" type="image"></block></block>
   <block id="5a367c49e14aa13d1f3d9dbbc659e2ae" category="section-title">Creazione di un criterio di backup per il backup delle applicazioni</block>
   <block id="649a9b7aadbc8a5543b6a50f4b67635f" category="inline-image-macro">hana-hycl-back-image29, larghezza=624, altezza=316</block>
-  <block id="ee896cd41eabe060c8688c8c3c1ee36c" category="list-text">Scegliere *Criteri* dal menu delle impostazioni. +
-<block ref="185326f0812872280f0adf0e04773ab1" category="inline-image-macro-rx" type="image"></block></block>
   <block id="349ab45b449e8c58be43aa51b5414b97" category="inline-image-macro">hana-hycl-back-image30, larghezza=624, altezza=316</block>
   <block id="ade97387220d3076bec4d7eac0ac1e25" category="list-text">Se lo si desidera, creare un nuovo criterio facendo clic su *Crea criterio*. +
 <block ref="8975d915951e905f053bb8fc4a552e7e" category="inline-image-macro-rx" type="image"></block></block>
@@ -4631,20 +4616,11 @@ Il giorno successivo verrà elencato un backup giornaliero. +
   <block id="b9a6a76ee21e4b2e63f002e8171e92cb" category="doc">Backup e recovery di BlueXP per SAP HANA - Cloud object storage come destinazione di backup</block>
   <block id="b5810ff76e2c858c26eb34fd554d4cd5" category="paragraph">Questo documento descrive come configurare e configurare SAP HANA per la data Protection dagli archivi di oggetti on-premise a quelli basati sul cloud con NetApp BlueXP. Copre la parte di backup e recovery di BlueXP della soluzione. Questa soluzione è un miglioramento della soluzione di backup SAP HANA on-premise utilizzando NetApp Snap Center, che fornisce un metodo conveniente per l'archiviazione a lungo termine dei backup SAP HANA su storage a oggetti basato sul cloud e offre un tiering opzionale dello storage a oggetti verso storage di archiviazione come AWS Glacier/Deep Glacier, archiviazione BLOB di Microsoft Azure e archiviazione GCP.</block>
   <block id="efabc7b5ad8cc75eaf149a7744db8028" category="inline-link">TR-4614: Backup e recovery SAP HANA con SnapCenter (netapp.com)</block>
-  <block id="c321598c956cf1b8a4189a4449a0377e" category="paragraph">Il setup e la configurazione della soluzione di backup e recovery SAP HANA on-premise sono descritti in<block ref="15efad3574df413724673ccbc14e9c64" category="inline-link-rx"></block>.</block>
-  <block id="a9b7843d32f728ea5c5677b7fc14faa1" category="paragraph">Questo TR descrive solo come migliorare la soluzione di backup e recovery SAP HANA on-premise basata su SnapCenter con il backup e recovery di BlueXP per SAP HANA utilizzando ad esempio lo storage a oggetti AWS S3. Il setup e la configurazione che utilizzano lo storage a oggetti Microsoft Azure e GCP al posto di AWS S3 sono simili, ma non vengono descritti in questo documento.</block>
   <block id="c81a8bcb625915f9445bc27152702a6c" category="section-title">Architettura di backup e recovery di BlueXP</block>
-  <block id="51fb7f5abc70e4c20e599e9abea2bc67" category="paragraph">Il backup e recovery di BlueXP è una soluzione SaaS che offre funzionalità di data Protection per le applicazioni eseguite sullo storage on-premise NetApp nel cloud. Offre una protezione efficiente, coerente con l'applicazione e basata su policy di SAP HANA utilizzando lo storage NetApp. Inoltre, il backup e recovery di BlueXP offre controllo e supervisione centralizzati, delegando al contempo la possibilità per gli utenti di gestire le operazioni di backup e ripristino specifiche dell'applicazione.</block>
-  <block id="71e720aa42f761a270169d7e4f05cb68" category="paragraph">Il backup e recovery di BlueXP viene eseguito come SaaS all'interno di NetApp BlueXP e sfrutta il framework e l'interfaccia utente. Il framework dell'ambiente di lavoro BlueXP viene utilizzato per configurare e gestire le credenziali per lo storage on-premise basato su NetApp ONTAP e per il server NetApp SnapCenter.</block>
-  <block id="cc9fcc0e20ed73ea1c801ee52f57a449" category="paragraph">È necessario implementare un connettore BlueXP nella rete virtuale del cliente. È necessaria una connessione tra l'ambiente locale e l'ambiente cloud, ad esempio una connessione VPN da sito a sito. La comunicazione tra i componenti SaaS di NetApp e l'ambiente del cliente avviene esclusivamente tramite il connettore. Il connettore sta eseguendo le operazioni di storage utilizzando le API di gestione di ONTAP e SnapCenter.</block>
-  <block id="7335a187a88dba26e1d6b3eb60d0c796" category="paragraph">Il trasferimento dei dati tra lo storage on-premise e il bucket cloud è protetto end-to-end con crittografia AES a riposo a 256 bit, crittografia TLS/HTTPS in uso e supporto della chiave gestita dal cliente (CMK). +
-I dati di backup vengono memorizzati in uno stato WORM immutabile e indelebile. L'unico modo per accedere ai dati dallo storage a oggetti è ripristinarli nello storage basato su NetApp ONTAP, incluso NetApp CVO.</block>
   <block id="41bb765509308cdc44c413e512e52e34" category="inline-image-macro">Ein Bild, das Text, Screenshot, Diagramm, Kreis enthält. Automatisch generierte Beschreibung,width=624,height=450</block>
   <block id="796b2f89ad255115d9dff26e3177a467" category="paragraph"><block ref="796b2f89ad255115d9dff26e3177a467" category="inline-image-macro-rx" type="image"></block></block>
   <block id="b2bf2bbf7e6b4629b50b4af1483af0ba" category="section-title">Panoramica delle fasi di installazione e configurazione</block>
   <block id="f3cf1278a15cf0b578a48d8ef6a60523" category="inline-link">Configurazione SnapCenter (netapp.com)</block>
-  <block id="ca4b776daf9a467ea504999e0a127287" category="paragraph">Le fasi di installazione e configurazione richieste possono essere suddivise in tre aree. +
-Prerequisito: La configurazione del backup per SAP HANA è stata configurata in NetApp Snap Center. Per la configurazione di Snap Center per SAP HANA, il primo revisore al mondo<block ref="bc1347d79ab670cf5ad861e4a7cc0e9b" category="inline-link-rx"></block>.</block>
   <block id="a63540c81089e8aba203a4ec3fca1e34" category="list-text">Installazione e configurazione dei componenti NetApp BlueXP.</block>
   <block id="60cb8be07c4c55cabf60de71b7a9b4b2" category="paragraph">Deve essere eseguita una volta durante la configurazione iniziale della soluzione per la protezione dei dati.</block>
   <block id="d695b2f7d2eff56585ac33b59ae50cde" category="list-text">Fasi di preparazione in NetApp SnapCenter.</block>
@@ -4657,8 +4633,6 @@ Prerequisito: La configurazione del backup per SAP HANA è stata configurata in 
   <block id="44de63d2b4a3805e8a143a8425e912c6" category="inline-link">Informazioni sui connettori | documentazione NetApp</block>
   <block id="bc9a4ad171b5071191568c8006c63dc6" category="list-text">Implementa il connettore BlueXP nel tuo ambiente. La descrizione è disponibile all'indirizzo<block ref="a6131392110983029d1dff188cde678b" category="inline-link-rx"></block>.</block>
   <block id="6691a23f272bb7c1d702c8963a326dc0" category="list-text">Aggiungi/acquista una licenza Cloud Backup su BlueXP:<block ref="57c4a53c7a746551566c6506aa924ffc" category="inline-link-rx"></block>.</block>
-  <block id="9d76c9e4e9696688d77e71e00214424d" category="list-text">Crea un ambiente di lavoro per l'ambiente on-premise NetApp e la tua destinazione cloud in BlueXP aggiungendo lo storage on-premise.</block>
-  <block id="55c74f25e19f21b0e03e4642d0363930" category="list-text">Crea una nuova relazione di archivio di oggetti per lo storage on-premise in un bucket AWS S3.</block>
   <block id="d497834786aa54c08eaf2f867588d576" category="list-text">Configura la risorsa di sistema SAP HANA su SnapCenter.</block>
   <block id="465f4a123cd3df663bb4b5d781e3755f" category="list-text">Aggiungi Snap Center al tuo ambiente di lavoro.</block>
   <block id="87a323c396d1f0b11c5c63017a081d0a" category="list-text">Creare una policy per il proprio ambiente.</block>
@@ -4674,4 +4648,30 @@ Prerequisito: La configurazione del backup per SAP HANA è stata configurata in 
   <block id="c5358f17fd6fd13a64169fc38a03495f" category="paragraph">Fare riferimento a.<block ref="2a186a9053db553d8a98e2d5f86d7002" category="inline-link-rx"></block> Sul sito del supporto NetApp per verificare che le versioni esatte dei prodotti e delle funzionalità descritte in questo documento siano supportate per il tuo ambiente specifico. NetApp IMT definisce i componenti e le versioni dei prodotti che possono essere utilizzati per costruire configurazioni supportate da NetApp. I risultati specifici dipendono dall'installazione di ciascun cliente in conformità alle specifiche pubblicate.</block>
   <block id="ca996b238b1f32bd7d6b941eb3464b17" category="sidebar">Backup e recovery di BlueXP per SAP HANA - Panoramica</block>
   <block id="deac54b4ceeb072a80124bd022d78294" category="sidebar">Ripristino dei backup di BlueXP per SAP HANA</block>
+  <block id="b6b16d136a508e7a2c84cb6653cb4095" category="paragraph">Il setup e la configurazione della soluzione di backup e recovery SAP HANA on-premise vengono descritti in<block ref="15efad3574df413724673ccbc14e9c64" category="inline-link-rx"></block>.</block>
+  <block id="1605c9a8e838f67f2b16a4053e1e045d" category="paragraph">Questo TR descrive solo come migliorare la soluzione di backup e recovery SAP HANA on-premise basata su SnapCenter con il backup e recovery di BlueXP per SAP HANA utilizzando ad esempio lo storage a oggetti AWS S3. Il setup e la configurazione che utilizzano lo storage a oggetti Microsoft Azure e GCP al posto di AWS S3 sono simili, ma non vengono descritti in questo documento.</block>
+  <block id="dce65a9e030d5dbde345a046d948f2bf" category="paragraph">Il backup e recovery di BlueXP è una soluzione SaaS che offre funzionalità di data Protection per le applicazioni eseguite sullo storage on-premise NetApp nel cloud. Offre una protezione efficiente, coerente con l'applicazione e basata su policy di SAP HANA utilizzando lo storage NetApp. Inoltre, il backup e recovery di BlueXP offre controllo e supervisione centralizzati, delegando al contempo la possibilità per gli utenti di gestire le operazioni di backup e ripristino specifiche dell'applicazione.</block>
+  <block id="ef7bad3edebf99f3bb50f4d8bbaa37d6" category="paragraph">Il backup e recovery di BlueXP viene eseguito come SaaS all'interno di NetApp BlueXP e sfrutta il framework e l'interfaccia utente. Il framework dell'ambiente di lavoro BlueXP viene utilizzato per configurare e gestire le credenziali per lo storage on-premise basato su NetApp ONTAP e per il server NetApp SnapCenter.</block>
+  <block id="284528a6422c1ab87246e51dcb6b3ae5" category="paragraph">È necessario implementare un connettore BlueXP nella rete virtuale del cliente. È necessaria una connessione tra l'ambiente on-premise e l'ambiente cloud, ad esempio una connessione VPN da sito a sito. La comunicazione tra i componenti SaaS di NetApp e l'ambiente del cliente avviene esclusivamente tramite il connettore. Il connettore sta eseguendo le operazioni di storage utilizzando le API di gestione di ONTAP e SnapCenter.</block>
+  <block id="3df2c2f8f80654c02cea27e8354aee2a" category="paragraph">Il trasferimento dei dati tra lo storage on-premise e il bucket cloud è protetto end-to-end con crittografia AES a riposo a 256 bit, crittografia TLS/HTTPS in uso e supporto della chiave gestita dal cliente (CMK). +
+I dati di backup possono essere memorizzati in uno stato WORM immutabile e indelebile. L'unico modo per accedere ai dati dallo storage a oggetti è ripristinarli nello storage basato su NetApp ONTAP, incluso NetApp CVO.</block>
+  <block id="0c335c284481ec782d9a7b2a63462276" category="paragraph">Le fasi di installazione e configurazione richieste possono essere suddivise in tre aree. +
+Prerequisito: La configurazione del backup per SAP HANA è stata configurata in NetApp Snap Center. Per la configurazione di Snap Center per SAP HANA, fare riferimento a.<block ref="bc1347d79ab670cf5ad861e4a7cc0e9b" category="inline-link-rx"></block>.</block>
+  <block id="6cb139093b769a68f6abbb55400df4d8" category="list-text">Crea un ambiente di lavoro per l'ambiente on-premise NetApp e la tua destinazione cloud in BlueXP aggiungendo lo storage on-premise.</block>
+  <block id="49d37c51268190a8f072cf6f400be18f" category="list-text">Crea una nuova relazione con l'archivio di oggetti per lo storage on-premise in un bucket AWS S3.</block>
+  <block id="6cf9c506a56175d20b049edfdc810cec" category="paragraph">Aggiungi il sistema storage on-premise all'ambiente di lavoro.</block>
+  <block id="35fb81d7bc669beabd5887c5308a5374" category="paragraph">La relazione tra lo storage on-premise e il bucket S3 viene effettuata creando un backup per un volume o attivando un backup di un'applicazione. Se si deve utilizzare una VPN site-to-site esistente per trasferire i dati da un sistema on-premise a S3, è necessario utilizzare un backup di volume per creare la relazione tra lo storage on-premise e il bucket S3 come endpoint VPC da utilizzare. +
+Al momento della creazione di questa documentazione, il flusso di lavoro di backup delle applicazioni non offre la possibilità di scegliere gli endpoint VPC per accedere ai bucket S3. +
+Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inline-link-rx"></block> Come impostare gli endpoint VPC per S3 all'interno del VPC.</block>
+  <block id="e65dfed1df8f650235807ccb35c69140" category="list-text">Selezionare l'opzione *Backup* e scegliere il provider di backup desiderato. In questo esempio AWS. +
+Tenere selezionata l'opzione per i criteri già esistenti. +
+Deselezionare le opzioni che non si desidera utilizzare. +
+<block ref="e7bd64d80c923ffe89ab853777796206" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="85c328360dc7dca3cde755a63dfc19da" category="list-text">Scegliere *Criteri* dal menu delle impostazioni. +
+<block ref="185326f0812872280f0adf0e04773ab1" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a50aa712257968ee6554358d180aeec3" category="inline-image-macro">larghezza=624,altezza=308</block>
+  <block id="25a498f9a461fac6930b9d847d3a31de" category="list-text">Selezionare il backup desiderato e scegliere esportazione archiviazione. +
+<block ref="7b0ca447499fc4df8de2cc9ab6e63840" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="75f1821bffac2198de5f906db81d5550" category="list-text">Fornire le opzioni desiderate: +
+<block ref="498181ee050d357f4660daf5619ff189" category="inline-image-macro-rx" type="image"></block></block>
 </blocks>
