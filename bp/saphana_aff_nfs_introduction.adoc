@@ -4,7 +4,7 @@ permalink: bp/saphana_aff_nfs_introduction.html
 keywords: introduction, certification, AFF A220, AFF A250, AFF A300, AFF A320, AFF A400, AFF A700s, AFF A700, AFF A800A, 
 summary: 'La famiglia di sistemi NetApp AFF è stata certificata per l"utilizzo con SAP HANA in progetti TDI (Tailored Data Center Integration). Il sistema di storage aziendale certificato è caratterizzato dal software NetApp ONTAP.' 
 ---
-= TR-4435: SAP HANA su sistemi NetApp AFF con NFS - Guida alla configurazione
+= SAP HANA su sistemi NetApp AFF con NFS - Guida alla configurazione
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -13,13 +13,13 @@ summary: 'La famiglia di sistemi NetApp AFF è stata certificata per l"utilizzo 
 :imagesdir: ./../media/
 
 
-Nils Bauer e Marco Schön, NetApp
+Marco Schön, NetApp
 
 Le famiglie di prodotti NetApp AFF A-Series e AFF C-Series sono state certificate per l'uso con SAP HANA nei progetti TDI (tailored data center Integration).
 
 Questa certificazione è valida per i seguenti modelli:
 
-* AFF A150, AFF A220, AFF A250, AFF A300, AFF A320, AFF A400, AFF A700, AFF A700, AFF A800, AFF A900
+* AFF A150, AFF A250, AFF A400, AFF A70, AFF A800, AFF A900, AFF A90, AFF A1K
 * AFF C250, AFF C400, AFF C800
 +
 
