@@ -1,0 +1,131 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-considerations-for-sap-hana-system-refresh-operations-using-snapshot-backups.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: 'Le soluzioni NetApp per l"ottimizzazione del Lifecycle management SAP sono integrate nel database SAP HANA e negli strumenti di Lifecycle management, combinando una data Protection integrata con l"efficiente applicazione con il provisioning flessibile dei sistemi di test SAP.' 
+---
+= Considerazioni sulle operazioni di refresh del sistema SAP HANA utilizzando backup snapshot dello storage
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+
+
+== Nomi dei tenant nel sistema di destinazione
+
+I passaggi necessari per un refresh del sistema SAP HANA dipendono dalla configurazione del tenant del sistema di origine e dal nome richiesto del tenant nel sistema di destinazione, come mostrato nella figura sotto.
+
+Poiché il nome del tenant è configurato nel database di sistema, il nome del tenant del sistema di origine è disponibile anche nel sistema di destinazione dopo il ripristino del database di sistema. Pertanto, è possibile ripristinare il tenant del sistema di destinazione solo con lo stesso nome del tenant di origine, come illustrato nell'opzione 1. Se il nome del tenant nel sistema di destinazione deve essere diverso, il tenant deve essere recuperato con lo stesso nome del tenant di origine e quindi rinominato nel nome del tenant di destinazione richiesto. Questa è l'opzione 2.
+
+Un'eccezione di questa regola è un sistema SAP HANA con un singolo tenant, con nome del tenant identico al SID del sistema. Questa configurazione è quella predefinita dopo un'installazione SAP HANA iniziale. Questa configurazione specifica è contrassegnata dal database SAP HANA. In questo caso, il ripristino del tenant nel sistema di destinazione può essere eseguito con il nome del tenant del sistema di destinazione, che deve essere identico anche al SID di sistema del sistema di destinazione. Questo flusso di lavoro è mostrato nell'opzione 3.
+
+
+NOTE: Non appena qualsiasi operazione di creazione, ridenominazione o abbandono del tenant viene eseguita sul sistema di origine, questo flag di configurazione viene eliminato dal database SAP HANA. Pertanto, anche se la configurazione è stata riportata al tenant = SID, il flag non è più disponibile e l'eccezione relativa al ripristino del tenant con il workflow 3 non è più possibile. In questo caso, l'opzione 2 è il flusso di lavoro richiesto.
+
+image:sc-copy-clone-image10.png[""]
+
+image:sc-copy-clone-image11.png[""]
+
+
+
+== Workflow di refresh del sistema con crittografia SAP HANA abilitata
+
+Quando la crittografia di persistenza SAP HANA è abilitata, sono necessari ulteriori passaggi prima di poter recuperare il database SAP HANA nel sistema di destinazione.
+
+Nel sistema di origine è necessario creare un backup delle chiavi root di crittografia per il database del sistema e per tutti i database tenant. I file di backup devono essere copiati nel sistema di destinazione e le chiavi principali devono essere importate dal backup prima di eseguire l'operazione di ripristino.
+
+Vedere anche https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Guida all'amministrazione di SAP HANA"].
+
+
+
+=== Backup delle chiavi principali
+
+Se sono state apportate modifiche alle chiavi principali, è sempre necessario eseguire un backup delle chiavi principali. Il comando di backup richiede dbid come parametro CLI. I dbid possono essere identificati utilizzando l'istruzione SQL riportata di seguito.
+
+image:sc-copy-clone-image12.png[""]
+
+L'istruzione SQL e l'ulteriore documentazione sono disponibili nella SAP HANA Admin Guide ai https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Back Up Root Keys | Portale della Guida di SAP"] passaggi seguenti che illustrano le operazioni richieste per un sistema HANA con un singolo tenant SS1 e sono eseguite sul sistema di origine.
+
+. Impostare la password di backup per i database del sistema e del tenant (SS1) (se non è ancora stata effettuata).
+
+
+....
+hdbsql SYSTEMDB=> ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Netapp123;
+0 rows affected (overall time 3658.128 msec; server time 3657.967 msec)
+hdbsql SYSTEMDB=>
+hdbsql SS1=> ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Netapp123;
+0 rows affected (overall time 2424.236 msec; server time 2424.010 msec)
+hdbsql SS1=>
+....
+. Creare il backup delle chiavi root per database di sistemi e tenant (SS1).
+
+
+....
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -backupRootKeys root-key-backup-SS1-SYSTEMDB.rkb --dbid=1 --type='ALL'
+Exporting root key backup for database SYSTEMDB (DBID: 1) to /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -backupRootKeys root-key-backup-SS1-SS1.rkb --dbid=3 --type='ALL'
+Exporting root key backup for database SS1 (DBID: 3) to /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb
+done.
+....
+. Convalidare i backup della chiave principale (opzionali)
+
+
+....
+ss1adm@hana-1:/usr/sap/SS1/home> ls -al root*
+-rw-r----- 1 ss1adm sapsys 1440 Apr 24 07:00 root-key-backup-SS1-SS1.rkb
+-rw-r----- 1 ss1adm sapsys 1440 Apr 24 06:54 root-key-backup-SS1-SYSTEMDB.rkb
+ss1adm@hana-1:/usr/sap/SS1/home>
+
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -validateRootKeysBackup root-key-backup-SS1-SS1.rkb
+Please Enter the password:
+Successfully validated SSFS backup file /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb
+done.
+
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -validateRootKeysBackup root-key-backup-SS1-SYSTEMDB.rkb
+Please Enter the password:
+Successfully validated SSFS backup file /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+....
+
+
+=== Importazione delle chiavi principali nel sistema di destinazione
+
+L'importazione delle chiavi principali è necessaria inizialmente per la prima operazione di aggiornamento del sistema. Se le chiavi principali non vengono modificate nel sistema di origine, non è necessaria alcuna importazione aggiuntiva. Il comando import richiede dbid come parametro CLI. I dbid possono essere identificati nello stesso modo descritto per il backup della chiave root.
+
+. Nel nostro setup le chiavi root vengono copiate dal sistema di origine in una condivisione NFS
+
+
+....
+hana-1:~ # cp /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb /mnt/sapcc-share/SAP-System-Refresh/
+hana-1:~ # cp /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb /mnt/sapcc-share/SAP-System-Refresh/
+....
+. Le chiavi root possono ora essere importate usando hdbnsutil. Il dbid per il sistema e il database tenant deve essere fornito con il comando. È necessaria anche la password di backup.
+
+
+....
+qs1adm@hana-7:/usr/sap/QS1/HDB11> ./exe/hdbnsutil -recoverRootKeys /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb --dbid=1 --type=ALL
+Please Enter the password:
+Importing root keys for DBID: 1 from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb
+Successfully imported root keys from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+
+qs1adm@hana-7:/usr/sap/QS1/HDB11> ./exe/hdbnsutil -recoverRootKeys /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb --dbid=3 --type=ALL Please Enter the password:
+Importing root keys for DBID: 3 from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb
+Successfully imported root keys from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb
+done.
+qs1adm@hana-7:/usr/sap/QS1/HDB11>
+....
+
+
+=== Importazione della chiave principale, se dbid non esiste al target
+
+Come descritto nel capitolo precedente, il dbid è necessario per importare la chiave root per il sistema e per tutti i database tenant. Mentre il database del sistema è sempre dbid=0, i database tenant possono avere diversi dbid.
+
+image:sc-copy-clone-image13.png[""]
+
+La produzione sopra riportata mostra due locatari con dbid=3 e dbid=4. Se il sistema di destinazione non ha ancora ospitato un tenant con dbid=4, l'importazione della chiave root non riesce. In tal caso è necessario recuperare prima il database di sistema e quindi importare la chiave per il tenant con dbid=4.

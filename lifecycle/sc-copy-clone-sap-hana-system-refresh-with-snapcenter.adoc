@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html 
-keywords: prerequisites, lab setup, clone name, sid, clone create, clone delete 
-summary: In questa sezione viene fornita una descrizione dettagliata delle diverse opzioni di aggiornamento del sistema di un database SAP HANA. 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: 'Le soluzioni NetApp per l"ottimizzazione del Lifecycle management SAP sono integrate nel database SAP HANA e negli strumenti di Lifecycle management, combinando una data Protection integrata con l"efficiente applicazione con il provisioning flessibile dei sistemi di test SAP.' 
 ---
 = Aggiornamento del sistema SAP HANA con SnapCenter
 :hardbreaks:
@@ -13,132 +13,158 @@ summary: In questa sezione viene fornita una descrizione dettagliata delle diver
 :imagesdir: ./../media/
 
 
-[role="lead"]
 La sezione seguente fornisce una descrizione dettagliata delle diverse opzioni di aggiornamento del sistema di un database SAP HANA.
 
+image:sc-copy-clone-image7.png[""]
 
-NOTE: La configurazione e la convalida di laboratorio non includono i servizi applicativi SAP. Tuttavia, i passaggi necessari per i servizi applicativi SAP sono evidenziati nella documentazione.
+A seconda della configurazione del database di SAP HANA, vengono eseguiti o devono essere preparati altri passaggi. La tabella riportata di seguito fornisce un riepilogo.
 
+[cols="26%,30%,44%"]
+|===
+| Sistema di origine | Configurazione del sistema di origine | Operazioni SnapCenter e SAP HANA 
+
+
+| MDC single tenant + SID = nome del tenant | Configurazione standard | Operazione di cloning SnapCenter ed esecuzione opzionale dello script di recovery. 
+
+
+|  | Crittografia di persistenza di SAP HANA | Inizialmente, o se le chiavi principali sono state modificate nel sistema di origine, i backup delle chiavi principali devono essere importati nel sistema di destinazione prima di poter eseguire il ripristino. 
+
+
+|  | Origine replica sistema SAP HANA | Non sono necessari passaggi aggiuntivi. Se il sistema di destinazione non ha HSR configurato, rimarrà un sistema autonomo. 
+
+
+|  | Partizioni multiple SAP HANA | Non è necessario alcun passaggio aggiuntivo, ma i punti di montaggio per le partizioni di volume SAP HANA devono essere disponibili nel sistema di destinazione con la stessa convenzione di denominazione (solo SID è diverso). 
+
+
+ a| 
+Tenant multipli MDC
+
+O MDC single tenant + con SID <> nome tenant
+| Configurazione standard | Operazione di cloning SnapCenter ed esecuzione opzionale dello script di recovery. Script recupera tutti i tenant. Se i nomi dei tenant o dei tenant non esistono nei nomi del sistema di destinazione, le directory richieste verranno create automaticamente durante l'operazione di recovery di SAP HANA. I nomi dei tenant saranno gli stessi dell'origine e, se necessario, dovranno essere rinominati dopo il ripristino. 
+
+
+|  | Crittografia di persistenza di SAP HANA | Se un DBID del sistema di origine non esiste in precedenza nel sistema di destinazione, è necessario prima ripristinare il database di sistema, prima di poter importare il backup della chiave root di questo tenant. 
+
+
+|  | Origine replica sistema HANA | Non sono necessari passaggi aggiuntivi. Se il sistema di destinazione non ha HSR configurato, rimarrà un sistema autonomo. 
+
+
+|  | Partizioni multiple HANA | Non è necessario alcun passaggio aggiuntivo, ma i punti di montaggio per le partizioni di volume SAP HANA devono essere disponibili nel sistema di destinazione con la stessa convenzione di denominazione (solo SID è diverso). 
+|===
 In questa sezione vengono descritti i seguenti scenari.
 
 * Aggiornamento del sistema SAP HANA senza un'operazione di suddivisione dei cloni.
-+
-** Clonazione dallo storage primario con il nome del tenant uguale al SID
-** Cloning da storage di backup offsite con il nome del tenant uguale al SID
-** Clonazione dallo storage primario con il nome del tenant non uguale al SID
-** Operazione di eliminazione dei cloni
-
-
+* Clonazione dallo storage primario con nome tenant uguale al SID
+* Clonazione dallo storage per il backup off-site
+* Cloning da storage primario con tenant multipli
+* Operazione di eliminazione dei cloni
 * Aggiornamento del sistema SAP HANA con un'operazione di suddivisione dei cloni
-+
-** Clonazione dallo storage primario con il nome del tenant uguale al SID
-** Operazione di suddivisione dei cloni
+* Clonazione dallo storage primario con nome tenant uguale al SID
+* Operazione di suddivisione dei cloni
 
-
-
-
-image:sc-copy-clone-image15.png["Errore: Immagine grafica mancante"]
 
 
 
 == Prerequisiti e limitazioni
 
-I flussi di lavoro descritti nelle sezioni seguenti presentano alcuni prerequisiti e limitazioni relativi all'architettura di sistema HANA e alla configurazione di SnapCenter.
+I flussi di lavoro descritti nelle sezioni seguenti presentano alcuni prerequisiti e limitazioni relativi all'architettura di sistema SAP HANA e alla configurazione SnapCenter.
 
-* I flussi di lavoro descritti sono validi per sistemi SAP HANA MDC a host singolo con tenant singoli o multipli. I sistemi host multipli SAP HANA non sono supportati con gli script di automazione.
-* Il plug-in HANA di SnapCenter deve essere implementato sull'host di destinazione per consentire l'esecuzione di script di automazione. Non è necessario che il plug-in HANA sia installato sull'host del sistema di origine HANA.
-* Il flusso di lavoro descritto è valido solo per SnapCenter 4.6 P1 o versione successiva. Le versioni precedenti hanno flussi di lavoro leggermente diversi.
-* I flussi di lavoro sono validi per i sistemi HANA che utilizzano NFS e FCP.
+* I flussi di lavoro descritti sono validi solo per SnapCenter versione 5,0 o superiore.
+* I flussi di lavoro descritti sono validi per sistemi SAP HANA MDC a host singolo con tenant singoli o multipli. I sistemi host multipli SAP HANA non sono coperti.
+* Il plug-in SAP HANA di SnapCenter deve essere implementato sull'host di destinazione per consentire il rilevamento automatico di SnapCenter e l'esecuzione degli script di automazione.
+* I flussi di lavoro sono validi per i sistemi SAP HANA che utilizzano NFS o FCP su host fisici o per host virtuali utilizzando i mount NFS in-guest.
 
 
 
 
 == Setup di laboratorio
 
-La figura seguente mostra la configurazione di laboratorio utilizzata per le diverse opzioni di aggiornamento del sistema.
+La figura riportata di seguito mostra la configurazione di laboratorio utilizzata per le diverse opzioni di aggiornamento del sistema.
 
-. Clonazione dallo storage primario o da uno storage di backup fuori sede; il nome del tenant è uguale al SID.
+* Clonazione da storage primario o storage di backup off-site; il nome del tenant è uguale al SID.
 +
-.. Sistema HANA di origine: SS1 con SS1 tenant
-.. Sistema HANA di destinazione: QS1 con QS1 tenant
+** Sistema SAP HANA di origine: SS1 con tenant SS1
+** Sistema SAP HANA di destinazione: QS1 con tenant QS1
 
 
-. Cloning dallo storage primario; il nome del tenant non è uguale al SID.
+* Cloning da storage primario; tenant multipli.
 +
-.. Sistema HANA di origine: SM1 con Tanant1 e Tenant2
-.. Sistema HANA di destinazione: QS1 con Tenant1
+** Sistema SAP HANA di origine: SM1 con Tenant1 e Tenant2
+** Sistema SAP HANA di destinazione: QS1 con Tenant1 e Tenant2
 
 
 
 
 Sono state utilizzate le seguenti versioni software:
 
-* SnapCenter 4.6 P1
-* Sistemi HANA: HANA 2.0 SPS6 rev.61 e HANA 2.0 SPS5 rev.52
-* VMware 6.7.0
-* SLES 15 SP2
-* ONTAP 9.7P7
+* SnapCenter 5,0
+* Sistemi SAP HANA: HANA 2,0 SPS7 rev,73
+* SLES 15
+* ONTAP 9.14P1
 
 
-Tutti i sistemi HANA sono stati configurati in base alla guida alla configurazione https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA su sistemi NetApp AFF con NFS"^]. SnapCenter e le risorse HANA sono state configurate sulla base della guida alle Best practice https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Backup e ripristino SAP HANA con SnapCenter"^].
+Tutti i sistemi SAP HANA devono essere configurati in base alla guida alla configurazione https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA su sistemi NetApp AFF con NFS"]. SnapCenter e le risorse SAP HANA sono state configurate in base alla guida alle Best practice https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Backup e ripristino SAP HANA con SnapCenter"].
 
-image:sc-copy-clone-image16.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image16.png[""]
 
 
 
 == Fasi iniziali di preparazione una tantum
 
-Per la fase iniziale, è necessario installare il sistema HANA di destinazione e i servizi applicativi SAP, quindi configurare il sistema HANA in SnapCenter.
+Come passaggio iniziale, è necessario configurare il sistema SAP HANA di destinazione all'interno di SnapCenter.
 
-. Installazione del sistema di destinazione HANA e dei servizi applicativi SAP
-. Configurazione del sistema HANA in SnapCenter come descritto in https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^]
+. Installazione del sistema di destinazione SAP HANA
+. Configurazione del sistema SAP HANA in SnapCenter, come descritto in https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"]
 +
-.. Configurazione dell'utente del database HANA per le operazioni di backup di SnapCenter. Questo utente deve essere identico nel sistema di origine e nel sistema di destinazione.
-.. Configurazione della chiave hdbuserstore con l'utente di backup sopra indicato.
-.. Implementazione del plug-in SnapCenter HANA nell'host di destinazione. Il sistema HANA viene rilevato automaticamente da SnapCenter.
-.. Configurazione della protezione delle risorse HANA (opzionale).
+.. Configurazione dell'utente del database SAP HANA per le operazioni di backup SnapCenter questo utente deve essere identico sul sistema di origine e di destinazione.
+.. Configurazione della chiave hdbuserstore per il server di base <sid> con l'utente di backup sopra indicato. Se lo script di automazione viene utilizzato per il ripristino, il nome della chiave deve essere <SID> 10
+.. Implementazione del plug-in SAP HANA SnapCenter sull'host di destinazione. Il sistema SAP HANA è scoperto automaticamente da SnapCenter.
+.. Configurazione della protezione delle risorse di SAP HANA (opzionale)
 
 
 
 
 La prima operazione di refresh del sistema SAP dopo l'installazione iniziale viene preparata con i seguenti passaggi:
 
-. Arrestare i servizi applicativi SAP e il sistema HANA di destinazione.
-. Smontare il volume di dati HANA.
+. Chiudi il sistema SAP HANA di destinazione
+. Disinstalla volume di dati SAP HANA.
 
 
+È necessario aggiungere gli script che devono essere eseguiti sul sistema di destinazione al file di configurazione dei comandi consentiti da SnapCenter.
+
+....
+hana-7:/opt/NetApp/snapcenter/scc/etc # cat /opt/NetApp/snapcenter/scc/etc/allowed_commands.config
+command: mount
+command: umount
+command: /mnt/sapcc-share/SAP-System-Refresh/sc-system-refresh.sh
+hana-7:/opt/NetApp/snapcenter/scc/etc #
+....
 
 
 == Clonazione dallo storage primario con nome tenant uguale a SID
 
-Questa sezione descrive il flusso di lavoro di refresh del sistema HANA in cui il nome del tenant all'origine e il sistema di destinazione sono identici al SID. La clonazione dello storage viene eseguita sullo storage primario e ulteriormente automatizzata utilizzando lo script `sc-system-refresh.sh`.
+Questa sezione descrive il workflow di refresh del sistema SAP HANA, in cui il nome del tenant sul sistema di origine e di destinazione è identico al SID. La clonazione dello storage viene eseguita nello storage primario e il ripristino viene automatizzato con lo script `sc-system-refresh.sh`.
 
-La figura seguente mostra la clonazione dallo storage primario con nome del tenant = SID.
-
-image:sc-copy-clone-image17.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image17.png[""]
 
 Il flusso di lavoro è costituito dai seguenti passaggi:
 
-. Se il sistema HANA di destinazione è stato protetto in SnapCenter, è necessario prima rimuovere la protezione.
-. Aprire la procedura guidata di clonazione SnapCenter.
+. Se la crittografia di persistenza SAP HANA è abilitata sul sistema di origine, le chiavi root di crittografia devono essere importate una volta. Un'importazione è necessaria anche se le chiavi sono state modificate nel sistema di origine. Vedere il capitolo link:sc-copy-clone-considerations-for-sap-hana-system-refresh-operations-using-snapshot-backups.html[""Considerazioni per le operazioni di refresh del sistema SAP HANA utilizzando i backup delle snapshot di storage""]
+. Se il sistema SAP HANA di destinazione è stato protetto in SnapCenter, occorre rimuovere per primo la protezione.
+. Workflow di creazione dei cloni SnapCenter.
 +
-.. Selezionare Snapshot backup dal sistema HANA di origine SS1.
-.. Selezionare l'host di destinazione e fornire l'interfaccia di rete per lo storage.
-.. Fornire il SID del sistema di destinazione (nel nostro esempio, QS1).
-.. Fornire lo script per l'operazione di montaggio e post-clone.
+.. Seleziona il backup Snapshot dal sistema SAP HANA di origine SS1.
+.. Seleziona l'host di destinazione e fornisci un'interfaccia di storage network dell'host di destinazione.
+.. Fornire il SID del sistema di destinazione, nell'esempio QS1
+.. In alternativa, fornire script per il recovery come operazione post-clone.
 
 
-. Per eseguire un'operazione di cloning SnapCenter, attenersi alla seguente procedura:
+. Operazione di cloning SnapCenter.
 +
-.. Creare un volume FlexClone in base al backup Snapshot selezionato del sistema HANA di origine.
-.. Esportare il volume FlexClone nell'interfaccia di rete dello storage host di destinazione.
-.. Eseguire lo script dell'operazione di montaggio.
-+
-*** Il volume FlexClone viene montato sull'host di destinazione come volume di dati.
-*** Modificare la proprietà in qs1adm.
-
-
-.. Eseguire lo script dell'operazione post-clone.
+.. Crea un volume FlexClone in base al backup Snapshot selezionato del sistema SAP HANA di origine.
+.. Esporta il volume FlexClone nell'interfaccia o igroup della rete di storage host di destinazione.
+.. Esegue l'operazione di montaggio del volume FlexClone di Monts sull'host di destinazione.
+.. Esegue lo script di ripristino dell'operazione post-clone, se configurato in precedenza. In caso contrario, il ripristino deve essere eseguito manualmente al termine del flusso di lavoro SnapCenter.
 +
 *** Ripristino del database di sistema.
 *** Ripristino del database tenant con nome tenant = QS1.
@@ -146,135 +172,195 @@ Il flusso di lavoro è costituito dai seguenti passaggi:
 
 
 
-. Avviare i servizi dell'applicazione SAP.
-. Facoltativamente, proteggere la risorsa HANA di destinazione in SnapCenter.
+. In alternativa, proteggi la risorsa SAP HANA di destinazione in SnapCenter.
 
 
 Le seguenti schermate mostrano i passaggi necessari.
 
-. Selezionare un backup Snapshot dal sistema di origine SS1 e fare clic su Clone from Backup (Clona da backup).
-+
-image:sc-copy-clone-image18.png["Errore: Immagine grafica mancante"]
+. Selezionare un backup Snapshot dal sistema di origine SS1 e fare clic su Clone (Clona).
+
+
+image:sc-copy-clone-image18.png[""]
 
 . Selezionare l'host in cui è installato il sistema di destinazione QS1. Inserire QS1 come SID di destinazione. L'indirizzo IP di esportazione NFS deve essere l'interfaccia di rete dello storage dell'host di destinazione.
 +
 
-NOTE: Il SID di destinazione immesso qui controlla il modo in cui SnapCenter gestisce il clone. Se il SID di destinazione è già configurato in SnapCenter sull'host di destinazione, SnapCenter assegna semplicemente il clone all'host. Se il SID non è configurato sull'host di destinazione, SnapCenter crea una nuova risorsa.
+NOTE: Il SID di destinazione immesso controlla il modo in cui SnapCenter gestisce la risorsa clonata. Se una risorsa con il SID di destinazione è già configurata in SnapCenter e corrisponde all'host del plug-in, SnapCenter assegna semplicemente il clone a questa risorsa. Se il SID non è configurato sull'host di destinazione, SnapCenter crea una nuova risorsa.
 
 +
-image:sc-copy-clone-image19.png["Errore: Immagine grafica mancante"]
 
-. Inserire gli script mount e post-clone con le opzioni della riga di comando richieste.
-+
-image:sc-copy-clone-image20.png["Errore: Immagine grafica mancante"]
+NOTE: Prima di avviare il workflow di cloning, è fondamentale che la risorsa e l'host del sistema di destinazione siano stati configurati in SnapCenter. In caso contrario, la nuova risorsa creata da SnapCenter non supporterà il rilevamento automatico e i flussi di lavoro descritti non funzioneranno.
 
-. La schermata Dettagli lavoro in SnapCenter mostra lo stato di avanzamento dell'operazione. I dettagli del processo mostrano inoltre che il runtime complessivo, incluso il ripristino del database, è stato inferiore a 2 minuti.
-+
-image:sc-copy-clone-image21.png["Errore: Immagine grafica mancante"]
 
-. Il file di log di `sc-system-refresh.sh` script mostra le diverse istruzioni eseguite per l'operazione di montaggio e ripristino. Lo script ha rilevato automaticamente che il sistema di origine aveva un singolo tenant e che il nome era identico al SID SS1 del sistema di origine. Lo script ha quindi recuperato il tenant con il nome del tenant QS1.
-+
 
-NOTE: Se il nome del tenant di origine è identico al SID del tenant di origine ma al flag di configurazione del tenant predefinito, come descritto nella sezione link:sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups[""I flussi di lavoro delle operazioni di refresh del sistema SAP HANA utilizzando i backup delle snapshot dello storage","] non è più impostato, l'operazione di ripristino non riesce e deve essere eseguita manualmente.
+image:sc-copy-clone-image19.png[""]
 
-+
+In una configurazione Fibre Channel SAN non è richiesto alcun indirizzo IP per l'esportazione, ma è necessario fornire il protocollo utilizzato nella schermata successiva.
+
+
+NOTE: Le schermate mostrano una diversa configurazione di laboratorio utilizzando una connettività FibreChannel.
+
+image:sc-copy-clone-image20.png[""]
+
+image:sc-copy-clone-image21.png[""]
+
+Grazie a Azure NetApp Files e a un pool di capacità QoS manuale, devi offrire il throughput massimo per il nuovo volume. Assicurati che il pool di capacità abbia spazio sufficiente, altrimenti il workflow di cloning fallirà.
+
+
+NOTE: Le schermate mostrano una diversa configurazione di laboratorio eseguita in Microsoft Azure con Azure NetApp Files.
+
+image:sc-copy-clone-image22.png[""]
+
+. Immettere gli script post-clone opzionali con le opzioni della riga di comando richieste. Con il nostro esempio utilizziamo uno script post-clone per eseguire il recovery del database SAP HANA.
+
+
+image:sc-copy-clone-image23.png[""]
+
+
+NOTE: Come discusso in precedenza, l'utilizzo dello script di ripristino è facoltativo. Il recovery può essere eseguito anche manualmente al termine del workflow di cloning di SnapCenter.
+
+
+NOTE: Lo script per l'operazione di recovery recupera il database SAP HANA fino al point-in-time della Snapshot utilizzando l'operazione di clear logs e non esegue alcun recovery in avanti. Se è necessario un ripristino in avanti a un determinato momento, il ripristino deve essere eseguito manualmente. Un forward recovery manuale richiede inoltre che i backup del log dal sistema di origine siano disponibili sull'host di destinazione.
+
+. La schermata Dettagli lavoro in SnapCenter mostra lo stato di avanzamento dell'operazione. I dettagli del processo mostrano inoltre che il runtime complessivo, incluso il ripristino del database, è stato inferiore a 3 minuti.
+
+
+image:sc-copy-clone-image24.png[""]
+
+. Il file di log dello `sc-system-refresh` script mostra le diverse istruzioni eseguite per l'operazione di ripristino. Lo script legge l'elenco dei tenant dal database di sistema ed esegue un ripristino di tutti i tenant esistenti.
+
+
 ....
-20220421045731###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421045731###hana-7###sc-system-refresh.sh: Unmounting data volume.
-20220421045731###hana-7###sc-system-refresh.sh: umount /hana/data/QS1/mnt00001
-20220421045731###hana-7###sc-system-refresh.sh: Deleting /etc/fstab entry.
-20220421045731###hana-7###sc-system-refresh.sh: Data volume unmounted successfully.
-20220421052009###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421052009###hana-7###sc-system-refresh.sh: Adding entry in /etc/fstab.
-20220421052009###hana-7###sc-system-refresh.sh: 192.168.175.117:/SS1_data_mnt00001_Clone_0421220520054605 /hana/data/QS1/mnt00001 nfs rw,vers=3,hard,timeo=600,rsize=1048576,wsize=1048576,intr,noatime,nolock 0 0
-20220421052009###hana-7###sc-system-refresh.sh: Mounting data volume: mount /hana/data/QS1/mnt00001.
-20220421052009###hana-7###sc-system-refresh.sh: Data volume mounted successfully.
-20220421052009###hana-7###sc-system-refresh.sh: Change ownership to qs1adm.
-20220421052019###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421052019###hana-7###sc-system-refresh.sh: Recover system database.
-20220421052019###hana-7###sc-system-refresh.sh: /usr/sap/QS1/HDB11/exe/Python/bin/python /usr/sap/QS1/HDB11/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG"
-20220421052049###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is started ....
-20220421052049###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421052059###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421052110###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421052120###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421052130###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421052130###hana-7###sc-system-refresh.sh: SAP HANA database is started.
-20220421052130###hana-7###sc-system-refresh.sh: Source Tenant: SS1
-20220421052130###hana-7###sc-system-refresh.sh: Source SID: SS1
-20220421052130###hana-7###sc-system-refresh.sh: Source system has a single tenant and tenant name is identical to source SID: SS1
-20220421052130###hana-7###sc-system-refresh.sh: Target tenant will have the same name as target SID: QS1.
-20220421052130###hana-7###sc-system-refresh.sh: Recover tenant database QS1.
-20220421052130###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY RECOVER DATA FOR QS1 USING SNAPSHOT CLEAR LOG
-0 rows affected (overall time 35.259489 sec; server time 35.257522 sec)
-20220421052206###hana-7###sc-system-refresh.sh: Checking availability of Indexserver for tenant QS1.
-20220421052206###hana-7###sc-system-refresh.sh: Recovery of tenant database QS1 succesfully finished.
-20220421052206###hana-7###sc-system-refresh.sh: Status: GREEN
+20240425112328###hana-7###sc-system-refresh.sh: Script version: 3.0
+hana-7:/mnt/sapcc-share/SAP-System-Refresh # cat sap-system-refresh-QS1.log
+20240425112328###hana-7###sc-system-refresh.sh: ******************* Starting script: recovery operation **************************
+20240425112328###hana-7###sc-system-refresh.sh: Recover system database.
+20240425112328###hana-7###sc-system-refresh.sh: /usr/sap/QS1/HDB11/exe/Python/bin/python /usr/sap/QS1/HDB11/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG"
+20240425112346###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is started ....
+20240425112347###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425112357###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425112407###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425112417###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425112428###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425112438###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425112448###hana-7###sc-system-refresh.sh: Status: GREEN
+20240425112448###hana-7###sc-system-refresh.sh: HANA system database started.
+20240425112448###hana-7###sc-system-refresh.sh: Checking connection to system database.
+20240425112448###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY 'select * from sys.m_databases;'
+DATABASE_NAME,DESCRIPTION,ACTIVE_STATUS,ACTIVE_STATUS_DETAILS,OS_USER,OS_GROUP,RESTART_MODE,FALLBACK_SNAPSHOT_CREATE_TIME
+"SYSTEMDB","SystemDB-QS1-11","YES","","","","DEFAULT",?
+"QS1","QS1-11","NO","ACTIVE","","","DEFAULT",?
+2 rows selected (overall time 16.225 msec; server time 860 usec)
+20240425112448###hana-7###sc-system-refresh.sh: Succesfully connected to system database.
+20240425112449###hana-7###sc-system-refresh.sh: Tenant databases to recover: QS1
+20240425112449###hana-7###sc-system-refresh.sh: Found inactive tenants(QS1) and starting recovery
+20240425112449###hana-7###sc-system-refresh.sh: Recover tenant database QS1.
+20240425112449###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY RECOVER DATA FOR QS1 USING SNAPSHOT CLEAR LOG
+0 rows affected (overall time 22.138599 sec; server time 22.136268 sec)
+20240425112511###hana-7###sc-system-refresh.sh: Checking availability of Indexserver for tenant QS1.
+20240425112511###hana-7###sc-system-refresh.sh: Recovery of tenant database QS1 succesfully finished.
+20240425112511###hana-7###sc-system-refresh.sh: Status: GREEN
+20240425112511###hana-7###sc-system-refresh.sh: ******************* Finished script: recovery operation **************************
+hana-7:/mnt/sapcc-share/SAP-System-Refresh
 ....
 . Al termine del lavoro SnapCenter, il clone è visibile nella vista topologia del sistema di origine.
-+
-image:sc-copy-clone-image22.png["Errore: Immagine grafica mancante"]
-
-. Il database HANA è in esecuzione ed è possibile avviare i servizi applicativi SAP.
-. Per proteggere il sistema HANA di destinazione, è necessario configurare la protezione delle risorse in SnapCenter.
-+
-image:sc-copy-clone-image23.png["Errore: Immagine grafica mancante"]
 
 
+image:sc-copy-clone-image25.png[""]
+
+. Il database SAP HANA è ora in esecuzione.
+. Per proteggere il sistema SAP HANA di destinazione, è necessario eseguire il rilevamento automatico facendo clic sulla risorsa di sistema di destinazione.
 
 
+image:sc-copy-clone-image26.png[""]
 
-== Clonazione da storage di backup offsite con nome tenant uguale a SID
+Al termine del processo di auto-Discovery, il nuovo volume clonato è elencato nella sezione relativa all'ingombro dello storage.
 
-Questa sezione descrive il flusso di lavoro di refresh del sistema HANA per il quale il nome del tenant all'origine e il sistema di destinazione sono identici al SID. La clonazione dello storage viene eseguita nello storage di backup offsite e ulteriormente automatizzata utilizzando lo script `sc-system-refresh.sh`.
+image:sc-copy-clone-image27.png[""]
 
-image:sc-copy-clone-image24.png["Errore: Immagine grafica mancante"]
+Facendo nuovamente clic sulla risorsa, è possibile configurare la protezione dei dati per il sistema QS1 aggiornato.
 
-L'unica differenza nel flusso di lavoro di refresh del sistema HANA tra la clonazione dello storage di backup primario e offsite è la selezione del backup Snapshot in SnapCenter. Per il cloning dello storage di backup fuori sede, è necessario selezionare prima i backup secondari.
-
-image:sc-copy-clone-image25.png["Errore: Immagine grafica mancante"]
-
-Se sono presenti più posizioni di storage secondarie per il backup selezionato, è necessario selezionare il volume di destinazione desiderato.
-
-image:sc-copy-clone-image26.png["Errore: Immagine grafica mancante"]
-
-Tutti i passaggi successivi sono identici al flusso di lavoro per la clonazione dallo storage primario, come descritto nella sezione "<<Clonazione dallo storage primario con nome tenant uguale a SID>>."
+image:sc-copy-clone-image28.png[""]
 
 
 
-== Clonazione dallo storage primario con nome tenant non uguale a SID
+== Clonazione dallo storage per il backup off-site
 
-Questa sezione descrive il flusso di lavoro di refresh del sistema HANA in cui il nome del tenant all'origine non è uguale al SID. La clonazione dello storage viene eseguita sullo storage primario e ulteriormente automatizzata utilizzando lo script `sc-system-refresh.sh`.
+Questa sezione descrive il workflow di refresh del sistema SAP HANA per il quale il nome del tenant sul sistema di origine e di destinazione è identico al SID. La clonazione dello storage viene eseguita nello storage di backup off-site e ulteriormente automatizzata utilizzando lo script sc-system-refresh.sh.
 
-image:sc-copy-clone-image27.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image29.png[""] L'unica differenza nel workflow di refresh del sistema SAP HANA tra il cloning dello storage di backup primario e off-site è la selezione del backup Snapshot in SnapCenter. Per il cloning dello storage di backup off-site, occorre selezionare prima i backup secondari, quindi selezionare il backup Snapshot.
 
-I passaggi richiesti in SnapCenter sono identici a quelli descritti nella sezione "<<Clonazione dallo storage primario con nome tenant uguale a SID>>."] La differenza risiede nell'operazione di ripristino del tenant all'interno dello script `sc-system-refresh.sh`.
+image:sc-copy-clone-image30.png[""]
 
-Se lo script rileva che il nome del tenant del sistema di origine è diverso dal SID del sistema di origine, il ripristino del tenant nel sistema di destinazione viene eseguito utilizzando lo stesso nome del tenant di origine. Se il nome del tenant di destinazione deve avere un nome diverso, il tenant deve essere rinominato manualmente in seguito.
+Se sono presenti più posizioni di storage secondario per il backup selezionato, è necessario scegliere il volume di destinazione richiesto.
+
+image:sc-copy-clone-image31.png[""]
+
+Tutti i passaggi successivi sono identici al flusso di lavoro per il cloning dallo storage primario.
 
 
-NOTE: Se il sistema di origine dispone di più tenant, lo script ripristina solo il primo tenant. I tenant aggiuntivi devono essere ripristinati manualmente.
+
+== Cloning di un sistema SAP HANA con tenant multipli
+
+Questa sezione descrive il workflow di refresh del sistema SAP HANA con tenant multipli. La clonazione dello storage viene eseguita nello storage primario e ulteriormente automatizzata utilizzando lo script `sc-system-refresh.sh`.
+
+image:sc-copy-clone-image32.png[""]
+
+La procedura necessaria in SnapCenter è identica a quella descritta nella sezione "clonazione dello storage primario con nome tenant uguale a SID". L'unica differenza è nell'operazione di recupero del tenant all'interno dello script `sc-system-refresh.sh`, dove tutti i tenant vengono recuperati.
 
 ....
-20201118121320###hana-7###sc-system-refresh.sh: Adding entry in /etc/fstab.
-20201118121320###hana-7###sc-system-refresh.sh: 192.168.175.117:/Scc71107fe-3211-498a-b6b3-d7d3591d7448 /hana/data/QS1/mnt00001 nfs rw,vers=3,hard,timeo=600,rsize=1048576,wsize=1048576,intr,noatime,nolock 0 0
-20201118121320###hana-7###sc-system-refresh.sh: Mounting data volume: mount /hana/data/QS1/mnt00001.
-20201118121320###hana-7###sc-system-refresh.sh: Data volume mounted successfully.
-20201118121320###hana-7###sc-system-refresh.sh: Change ownership to qs1adm.
-20201118121330###hana-7###sc-system-refresh.sh: Recover system database.
-20201118121330###hana-7###sc-system-refresh.sh: /usr/sap/QS1/HDB11/exe/Python/bin/python /usr/sap/QS1/HDB11/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG"
-20201118121402###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is started ....
-20201118121402###hana-7###sc-system-refresh.sh: Status:  GRAY
-20201118121412###hana-7###sc-system-refresh.sh: Status:  GREEN
-20201118121412###hana-7###sc-system-refresh.sh: SAP HANA database is started.
-20201118121412###hana-7###sc-system-refresh.sh: Source system contains more than one tenant, recovery will only be executed for the first tenant.
-20201118121412###hana-7###sc-system-refresh.sh: List of tenants: TENANT1,TENANT2
-20201118121412###hana-7###sc-system-refresh.sh: Recover tenant database TENANT1.
-20201118121412###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY RECOVER DATA FOR TENANT1 USING SNAPSHOT CLEAR LOG
-0 rows affected (overall time 34.777174 sec; server time 34.775540 sec)
-20201118121447###hana-7###sc-system-refresh.sh: Checking availability of Indexserver for tenant TENANT1.
-20201118121447###hana-7###sc-system-refresh.sh: Recovery of tenant database TENANT1 succesfully finished.
-20201118121447###hana-7###sc-system-refresh.sh: Status: GREEN
+20240430070214###hana-7###sc-system-refresh.sh: **********************************************************************************
+20240430070214###hana-7###sc-system-refresh.sh: Script version: 3.0
+20240430070214###hana-7###sc-system-refresh.sh: ******************* Starting script: recovery operation **************************
+20240430070214###hana-7###sc-system-refresh.sh: Recover system database.
+20240430070214###hana-7###sc-system-refresh.sh: /usr/sap/QS1/HDB11/exe/Python/bin/python /usr/sap/QS1/HDB11/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG"
+[140310725887808, 0.008] >> starting recoverSys (at Tue Apr 30 07:02:15 2024)
+[140310725887808, 0.008] args: ()
+[140310725887808, 0.008] keys: \{'command': 'RECOVER DATA USING SNAPSHOT CLEAR LOG'}
+using logfile /usr/sap/QS1/HDB11/hana-7/trace/backup.log
+recoverSys started: ============2024-04-30 07:02:15 ============
+testing master: hana-7
+hana-7 is master
+shutdown database, timeout is 120
+stop system
+stop system on: hana-7
+stopping system: 2024-04-30 07:02:15
+stopped system: 2024-04-30 07:02:15
+creating file recoverInstance.sql
+restart database
+restart master nameserver: 2024-04-30 07:02:20
+start system: hana-7
+sapcontrol parameter: ['-function', 'Start']
+sapcontrol returned successfully:
+2024-04-30T07:02:32-04:00 P0023828 18f2eab9331 INFO RECOVERY RECOVER DATA finished successfully
+recoverSys finished successfully: 2024-04-30 07:02:33
+[140310725887808, 17.548] 0
+[140310725887808, 17.548] << ending recoverSys, rc = 0 (RC_TEST_OK), after 17.540 secs
+20240430070233###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is started ....
+20240430070233###hana-7###sc-system-refresh.sh: Status: GRAY
+20240430070243###hana-7###sc-system-refresh.sh: Status: GRAY
+20240430070253###hana-7###sc-system-refresh.sh: Status: GRAY
+20240430070304###hana-7###sc-system-refresh.sh: Status: GRAY
+20240430070314###hana-7###sc-system-refresh.sh: Status: GREEN
+20240430070314###hana-7###sc-system-refresh.sh: HANA system database started.
+20240430070314###hana-7###sc-system-refresh.sh: Checking connection to system database.
+20240430070314###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY 'select * from sys.m_databases;'
+20240430070314###hana-7###sc-system-refresh.sh: Succesfully connected to system database.
+20240430070314###hana-7###sc-system-refresh.sh: Tenant databases to recover: TENANT2
+TENANT1
+20240430070314###hana-7###sc-system-refresh.sh: Found inactive tenants(TENANT2
+TENANT1) and starting recovery
+20240430070314###hana-7###sc-system-refresh.sh: Recover tenant database TENANT2.
+20240430070314###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY RECOVER DATA FOR TENANT2 USING SNAPSHOT CLEAR LOG
+20240430070335###hana-7###sc-system-refresh.sh: Checking availability of Indexserver for tenant TENANT2.
+20240430070335###hana-7###sc-system-refresh.sh: Recovery of tenant database TENANT2 succesfully finished.
+20240430070335###hana-7###sc-system-refresh.sh: Status: GREEN
+20240430070335###hana-7###sc-system-refresh.sh: Recover tenant database TENANT1.
+20240430070335###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY RECOVER DATA FOR TENANT1 USING SNAPSHOT CLEAR LOG
+20240430070349###hana-7###sc-system-refresh.sh: Checking availability of Indexserver for tenant TENANT1.
+20240430070350###hana-7###sc-system-refresh.sh: Recovery of tenant database TENANT1 succesfully finished.
+20240430070350###hana-7###sc-system-refresh.sh: Status: GREEN
+20240430070350###hana-7###sc-system-refresh.sh: ******************* Finished script: recovery operation **************************
 ....
 
 
@@ -282,50 +368,48 @@ NOTE: Se il sistema di origine dispone di più tenant, lo script ripristina solo
 
 Una nuova operazione di refresh del sistema SAP HANA viene avviata mediante la pulizia del sistema di destinazione mediante l'operazione di eliminazione del clone SnapCenter.
 
+Se il sistema SAP HANA di destinazione è stato protetto in SnapCenter, occorre rimuovere per primo la protezione. Nella vista della topologia del sistema di destinazione, fare clic su Remove Protection (Rimuovi protezione).
 
-NOTE: I servizi dell'applicazione SAP non vengono interrotti con il flusso di lavoro di eliminazione dei cloni SnapCenter. Lo script può essere esteso all'interno della funzione di shutdown oppure i servizi dell'applicazione devono essere arrestati manualmente.
+Il flusso di lavoro di eliminazione dei cloni viene eseguito mediante la seguente procedura.
 
-Se il sistema HANA di destinazione è stato protetto in SnapCenter, la protezione deve essere rimossa per prima. Nella vista della topologia del sistema di destinazione, fare clic su Remove Protection (Rimuovi protezione).
+. Selezionare il clone all'interno della vista topologica del sistema di origine e fare clic su Elimina.
 
-image:sc-copy-clone-image28.png["Errore: Immagine grafica mancante"]
 
-image:sc-copy-clone-image29.png["Errore: Immagine grafica mancante"]
-
-Il flusso di lavoro di eliminazione dei cloni viene ora eseguito con i seguenti passaggi:
-
-. Selezionare il clone nella vista topologia del sistema di origine e fare clic su Delete (Elimina).
-+
-image:sc-copy-clone-image30.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image33.png[""]
 
 . Immettere gli script pre-clone e dismount con le opzioni della riga di comando richieste.
-+
-image:sc-copy-clone-image31.png["Errore: Immagine grafica mancante"]
+
+
+image:sc-copy-clone-image34.png[""]
 
 . La schermata dei dettagli del lavoro in SnapCenter mostra lo stato di avanzamento dell'operazione.
-+
-image:sc-copy-clone-image32.png["Errore: Immagine grafica mancante"]
 
-. Il file di log di `sc-system-refresh.sh` lo script mostra le istruzioni per l'arresto e lo smontaggio.
-+
+
+image:sc-copy-clone-image35.png[""]
+
+. Il file di registro dello `sc-system-refresh` script mostra le istruzioni per l'operazione di arresto e smontaggio.
+
+
 ....
-20220421070643###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421070643###hana-7###sc-system-refresh.sh: Stopping HANA database.
-20220421070643###hana-7###sc-system-refresh.sh: sapcontrol -nr 11 -function StopSystem HDB
-21.04.2022 07:06:43
+20240425111042###hana-7###sc-system-refresh.sh: **********************************************************************************
+20240425111042###hana-7###sc-system-refresh.sh: Script version: 3.0
+20240425111042###hana-7###sc-system-refresh.sh: ******************* Starting script: shutdown operation **************************
+20240425111042###hana-7###sc-system-refresh.sh: Stopping HANA database.
+20240425111042###hana-7###sc-system-refresh.sh: sapcontrol -nr 11 -function StopSystem HDB
+25.04.2024 11:10:42
 StopSystem
 OK
-20220421070643###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is stopped ....
-20220421070643###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421070653###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421070703###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421070714###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421070724###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421070724###hana-7###sc-system-refresh.sh: SAP HANA database is stopped.
-20220421070728###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421070728###hana-7###sc-system-refresh.sh: Unmounting data volume.
-20220421070728###hana-7###sc-system-refresh.sh: umount /hana/data/QS1/mnt00001
-20220421070728###hana-7###sc-system-refresh.sh: Deleting /etc/fstab entry.
-20220421070728###hana-7###sc-system-refresh.sh: Data volume unmounted successfully.
+20240425111042###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is stopped ....
+20240425111042###hana-7###sc-system-refresh.sh: Status: GREEN
+20240425111052###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425111103###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425111113###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425111123###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425111133###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425111144###hana-7###sc-system-refresh.sh: Status: YELLOW
+20240425111154###hana-7###sc-system-refresh.sh: Status: GRAY
+20240425111154###hana-7###sc-system-refresh.sh: SAP HANA database is stopped.
+20240425111154###hana-7###sc-system-refresh.sh: ******************* Finished script: shutdown operation **************************
 ....
 . L'operazione di refresh SAP HANA può ora essere riavviata utilizzando l'operazione di creazione del clone SnapCenter.
 
@@ -334,141 +418,40 @@ OK
 
 == Aggiornamento del sistema SAP HANA con operazione di suddivisione dei cloni
 
-Se il sistema di destinazione dell'operazione di refresh del sistema viene utilizzato per un periodo di tempo più lungo (più di 1-2 settimane), in genere non vi sono risparmi di capacità di FlexClone. Inoltre, il backup Snapshot dipendente del sistema di origine viene bloccato e non eliminato dalla gestione della conservazione di SnapCenter.
-
-Pertanto, nella maggior parte dei casi è opportuno suddividere il volume FlexClone come parte dell'operazione di refresh del sistema.
+Se si prevede di utilizzare il sistema di destinazione dell'operazione di refresh del sistema per un periodo di tempo più lungo, conviene suddividere il volume FlexClone nell'ambito dell'operazione di refresh del sistema.
 
 
-NOTE: L'operazione di suddivisione dei cloni non blocca l'utilizzo del volume clonato e può quindi essere eseguita in qualsiasi momento mentre il database HANA è in uso.
+NOTE: L'operazione clone split non blocca l'utilizzo del volume clonato e può quindi essere eseguita in qualsiasi momento mentre il database SAP HANA è in uso.
 
 
-NOTE: Con un'operazione di suddivisione dei cloni, SnapCenter elimina tutti i backup creati nel sistema di destinazione nel repository SnapCenter. Per i sistemi NetApp AFF, un'operazione di suddivisione dei cloni mantiene le copie Snapshot sul volume; è solo per i sistemi FAS che le copie Snapshot vengono eliminate da ONTAP. Si tratta di un bug noto in SnapCenter che verrà risolto nelle release future.
+NOTE: Con Azure NetApp Files, l'operazione di clone split non è disponibile, poiché Azure NetApp Files suddivide sempre il clone dopo la creazione.
 
 Il flusso di lavoro di divisione dei cloni in SnapCenter viene avviato nella vista topologia del sistema di origine selezionando il clone e facendo clic su divisione dei cloni.
 
-image:sc-copy-clone-image33.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image36.png[""]
 
 Nella schermata successiva viene visualizzata un'anteprima che fornisce informazioni sulla capacità richiesta per il volume suddiviso.
 
-image:sc-copy-clone-image34.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image37.png[""]
 
 Il log dei lavori di SnapCenter mostra lo stato di avanzamento dell'operazione di suddivisione dei cloni.
 
-image:sc-copy-clone-image35.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image38.png[""]
 
-Quando si torna alla vista della topologia del sistema di origine, il clone non è più visibile. Il volume suddiviso è ora indipendente dal backup Snapshot del sistema di origine.
+Nella vista delle risorse in SnapCenter il sistema target QS1 non è ora più contrassegnato come una risorsa clonata. Quando si torna alla vista della topologia del sistema di origine, il clone non è più visibile. Il volume suddiviso è ora indipendente dal backup Snapshot del sistema di origine.
 
-image:sc-copy-clone-image36.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image39.png[""]
 
-image:sc-copy-clone-image37.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image40.png[""]
 
-Il flusso di lavoro di refresh dopo un'operazione di suddivisione dei cloni appare leggermente diverso rispetto all'operazione senza suddivisione dei cloni. Dopo un'operazione di suddivisione dei cloni, non è richiesta alcuna operazione di eliminazione dei cloni, in quanto il volume di dati di destinazione non è più un volume FlexClone.
+Il flusso di lavoro di refresh dopo un'operazione di suddivisione dei cloni appare leggermente diverso rispetto all'operazione senza suddivisione dei cloni. Dopo un'operazione di cloning split, non è più necessaria alcuna operazione di eliminazione dei cloni, poiché il volume dei dati di destinazione non è più un volume FlexClone.
 
 Il flusso di lavoro è costituito dai seguenti passaggi:
 
-. Se il sistema HANA di destinazione è stato protetto in SnapCenter, la protezione deve essere rimossa per prima.
-. Accedere alla procedura guidata di clonazione SnapCenter.
-+
-.. Selezionare il backup Snapshot dal sistema HANA di origine SS1.
-.. Selezionare l'host di destinazione e fornire l'interfaccia di rete dello storage dell'host di destinazione.
-.. Fornire lo script per le operazioni pre-clone, mount e post-clone.
-
-
-. Operazione di cloning SnapCenter.
-+
-.. Creare un volume FlexClone in base al backup Snapshot selezionato del sistema HANA di origine.
-.. Esportare il volume FlexClone nell'interfaccia di rete dello storage host di destinazione.
-.. Eseguire lo script dell'operazione di montaggio.
-+
-*** Il volume FlexClone viene montato sull'host di destinazione come volume di dati.
-*** Modificare la proprietà in qs1adm.
-
-
-.. Eseguire lo script dell'operazione post-clone.
-+
-*** Ripristinare il database di sistema.
-*** Ripristinare il database tenant con il nome tenant = QS1.
-
-
-
-
-. Eliminare manualmente il vecchio volume di destinazione suddiviso.
-. Facoltativamente, proteggere la risorsa HANA di destinazione in SnapCenter.
-
-
-Le seguenti schermate mostrano i passaggi necessari.
-
-. Selezionare un backup Snapshot dal sistema di origine SS1 e fare clic su Clone from backup (Clona da backup).
-+
-image:sc-copy-clone-image38.png["Errore: Immagine grafica mancante"]
-
-. Selezionare l'host in cui è installato il sistema di destinazione QS1. Inserire QS1 come SID di destinazione. L'indirizzo IP di esportazione NFS deve essere l'interfaccia di rete dello storage dell'host di destinazione.
-+
-
-NOTE: Il SID di destinazione, inserito in questo campo, controlla il modo in cui SnapCenter gestisce il clone. Se il SID di destinazione è già configurato in SnapCenter sull'host di destinazione, SnapCenter assegna semplicemente il clone all'host. Se il SID non è configurato sull'host di destinazione, SnapCenter crea una nuova risorsa.
-
-+
-image:sc-copy-clone-image39.png["Errore: Immagine grafica mancante"]
-
-. Immettere gli script pre-clone, mount e post-clone con le opzioni della riga di comando richieste. Nell'istruzione pre-clone, lo script viene utilizzato per arrestare il database HANA e smontare il volume di dati.
-+
-image:sc-copy-clone-image40.png["Errore: Immagine grafica mancante"]
-
-. La schermata dei dettagli del lavoro in SnapCenter mostra lo stato di avanzamento dell'operazione. I dettagli del processo mostrano inoltre che il runtime complessivo, incluso il ripristino del database, era inferiore a 2 minuti.
-+
-image:sc-copy-clone-image41.png["Errore: Immagine grafica mancante"]
-
-. Il file di log di `sc-system-refresh.sh` script mostra le diverse istruzioni eseguite per le operazioni di shutdown, disinstallazione, montaggio e ripristino. Lo script ha rilevato automaticamente che il sistema di origine aveva un singolo tenant e che il nome era identico al SID SS1 del sistema di origine. Lo script ha quindi recuperato il tenant con il nome del tenant QS1.
-+
-....
-20220421080553###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421080553###hana-7###sc-system-refresh.sh: Stopping HANA database.
-20220421080553###hana-7###sc-system-refresh.sh: sapcontrol -nr 11 -function StopSystem HDB
-21.04.2022 08:05:53
-StopSystem
-OK
-20220421080553###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is stopped ….
-20220421080554###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421080604###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421080614###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421080624###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421080624###hana-7###sc-system-refresh.sh: SAP HANA database is stopped.
-20220421080628###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421080628###hana-7###sc-system-refresh.sh: Unmounting data volume.
-20220421080628###hana-7###sc-system-refresh.sh: umount /hana/data/QS1/mnt00001
-20220421080628###hana-7###sc-system-refresh.sh: Deleting /etc/fstab entry.
-20220421080628###hana-7###sc-system-refresh.sh: Data volume unmounted successfully.
-20220421080639###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421080639###hana-7###sc-system-refresh.sh: Adding entry in /etc/fstab.
-20220421080639###hana-7###sc-system-refresh.sh: 192.168.175.117:/SS1_data_mnt00001_Clone_0421220806358029 /hana/data/QS1/mnt00001 nfs rw,vers=3,hard,timeo=600,rsize=1048576,wsize=1048576,intr,noatime,nolock 0 0
-20220421080639###hana-7###sc-system-refresh.sh: Mounting data volume: mount /hana/data/QS1/mnt00001.
-20220421080639###hana-7###sc-system-refresh.sh: Data volume mounted successfully.
-20220421080639###hana-7###sc-system-refresh.sh: Change ownership to qs1adm.
-20220421080649###hana-7###sc-system-refresh.sh: Version: 1.1
-20220421080649###hana-7###sc-system-refresh.sh: Recover system database.
-20220421080649###hana-7###sc-system-refresh.sh: /usr/sap/QS1/HDB11/exe/Python/bin/python /usr/sap/QS1/HDB11/exe/python_support/recoverSys. – --comma“d "RECOVER DATA USING SNAPSHOT CLEAR ”OG"
-20220421080719###hana-7###sc-system-refresh.sh: Wait until SAP HANA database is started ....
-20220421080719###hana-7###sc-system-refresh.sh: Status:  GRAY
-20220421080730###hana-7###sc-system-refresh.sh: Status:  YELLOW
-20220421080740###hana-7###sc-system-refresh.sh: Status:  YELLOW
-20220421080750###hana-7###sc-system-refresh.sh: Status:  YELLOW
-20220421080800###hana-7###sc-system-refresh.sh: Status:  YELLOW
-20220421080810###hana-7###sc-system-refresh.sh: Status:  YELLOW
-20220421080821###hana-7###sc-system-refresh.sh: Status:  YELLOW
-20220421080831###hana-7###sc-system-refresh.sh: Status:  GREEN
-20220421080831###hana-7###sc-system-refresh.sh: SAP HANA database is started.
-20220421080831###hana-7###sc-system-refresh.sh: Source Tenant: SS1
-20220421080831###hana-7###sc-system-refresh.sh: Source SID: SS1
-20220421080831###hana-7###sc-system-refresh.sh: Source system has a single tenant and tenant name is identical to source SID: SS1
-20220421080831###hana-7###sc-system-refresh.sh: Target tenant will have the same name as target SID: QS1.
-20220421080831###hana-7###sc-system-refresh.sh: Recover tenant database QS1.
-20220421080831###hana-7###sc-system-refresh.sh: /usr/sap/QS1/SYS/exe/hdb/hdbsql -U QS1KEY RECOVER DATA FOR QS1 USING SNAPSHOT CLEAR LOG
-0 rows affected (overall time 37.900516 sec; server time 37.897472 sec)
-20220421080909###hana-7###sc-system-refresh.sh: Checking availability of Indexserver for tenant QS1.
-20220421080909###hana-7###sc-system-refresh.sh: Recovery of tenant database QS1 succesfully finished.
-20220421080909###hana-7###sc-system-refresh.sh: Status: GREEN
-....
-. Dopo l'operazione di refresh, il vecchio volume di dati di destinazione esiste ancora e deve essere eliminato manualmente, ad esempio con Gestore di sistema di ONTAP.
+. Se il sistema SAP HANA di destinazione è stato protetto in SnapCenter, occorre rimuovere per primo la protezione.
+. Il database SAP HANA deve essere arrestato, il volume di dati deve essere smontato e la voce fstab creata da SnapCenter deve essere rimossa. Questi passaggi devono essere eseguiti manualmente.
+. Ora il workflow di creazione dei cloni di SnapCenter può essere eseguito come descritto in precedenza nelle sezioni.
+. Dopo l'operazione di refresh, il vecchio volume di dati di destinazione esiste ancora e deve essere eliminato manualmente con, ad esempio, Gestore di sistema di ONTAP.
 
 
 
@@ -479,10 +462,11 @@ Nelle sezioni precedenti, i diversi flussi di lavoro sono stati eseguiti utilizz
 
 * Creare un clone
 * Elimina clone
-
-
++
 
 NOTE: Gli script di esempio vengono forniti così come sono e non sono supportati da NetApp.
+
+
 
 Tutti gli script devono essere eseguiti in una finestra di comando PowerShell. Prima di poter eseguire gli script, è necessario stabilire una connessione al server SnapCenter utilizzando `Open-SmConnection` comando.
 
@@ -493,14 +477,14 @@ Tutti gli script devono essere eseguiti in una finestra di comando PowerShell. P
 Il semplice script riportato di seguito mostra come è possibile eseguire un'operazione di creazione di un clone SnapCenter utilizzando i comandi PowerShell. SnapCenter `New-SmClone` il comando viene eseguito con l'opzione della riga di comando richiesta per l'ambiente di laboratorio e lo script di automazione discusso in precedenza.
 
 ....
-$BackupName='SnapCenter_LocalSnap_Hourly_05-16-2022_11.00.01.0153'
-$JobInfo=New-SmClone -AppPluginCode hana -BackupName $BackupName -Resources @{"Host"="hana-1.sapcc.stl.netapp.com";"UID"="MDC\SS1"} -CloneToInstance hana-7.sapcc.stl.netapp.com -mountcommand '/mnt/sapcc-share/SAP-System-Refresh/sc-system-refresh.sh mount QS1' -postclonecreatecommands '/mnt/sapcc-share/SAP-System-Refresh/sc-system-refresh.sh recover QS1' -NFSExportIPs 192.168.175.75 -CloneUid 'MDC\QS1'
+$BackupName='SnapCenter_hana-1_LocalSnap_Hourly_06-25-2024_03.00.01.8458'
+$JobInfo=New-SmClone -AppPluginCode hana -BackupName $BackupName -Resources @\{"Host"="hana-1.sapcc.stl.netapp.com";"UID"="MDC\SS1"} -CloneToInstance hana-7.sapcc.stl.netapp.com -postclonecreatecommands '/mnt/sapcc-share/SAP-System-Refresh/sc-system-refresh.sh recover' -NFSExportIPs 192.168.175.75 -CloneUid 'MDC\QS1'
 # Get JobID of clone create job
-$Job=Get-SmJobSummaryReport | ?{$_.JobType -eq "Clone" } | ?{$_.JobName -Match $BackupName} | ?{$_.Status -eq "Running"}
+$Job=Get-SmJobSummaryReport | ?\{$_.JobType -eq "Clone" } | ?\{$_.JobName -Match $BackupName} | ?\{$_.Status -eq "Running"}
 $JobId=$Job.SmJobId
 Get-SmJobSummaryReport -JobId $JobId
 # Wait until job is finished
-do { $Job=Get-SmJobSummaryReport -JobId $JobId; write-host $Job.Status; sleep 20 } while ( $Job.Status -Match "Running" )
+do \{ $Job=Get-SmJobSummaryReport -JobId $JobId; write-host $Job.Status; sleep 20 } while ( $Job.Status -Match "Running" )
 Write-Host " "
 Get-SmJobSummaryReport -JobId $JobId
 Write-Host "Clone create job has been finshed."
@@ -508,19 +492,23 @@ Write-Host "Clone create job has been finshed."
 L'output della schermata mostra l'esecuzione dello script di creazione del clone PowerShell.
 
 ....
-PS C:\NetApp> .\clone-create.ps1
-SmJobId            : 31887
+PS C:\Windows\system32> C:\NetApp\clone-create.ps1
+SmJobId : 110382
 JobCreatedDateTime :
-JobStartDateTime   : 5/17/2022 3:19:06 AM
-JobEndDateTime     :
-JobDuration        :
-JobName            : Clone from backup 'SnapCenter_LocalSnap_Hourly_05-13-2022_03.00.01.8016'
-JobDescription     :
-Status             : Running
-IsScheduled        : False
-JobError           :
-JobType            : Clone
-PolicyName         :
+JobStartDateTime : 6/26/2024 9:55:34 AM
+JobEndDateTime :
+JobDuration :
+JobName : Clone from backup 'SnapCenter_hana-1_LocalSnap_Hourly_06-25-2024_03.00.01.8458'
+JobDescription :
+Status : Running
+IsScheduled : False
+JobError :
+JobType : Clone
+PolicyName :
+JobResultData :
+Running
+Running
+Running
 Running
 Running
 Running
@@ -529,21 +517,20 @@ Running
 Running
 Running
 Completed
-
-SmJobId            : 31887
+SmJobId : 110382
 JobCreatedDateTime :
-JobStartDateTime   : 5/17/2022 3:19:06 AM
-JobEndDateTime     : 5/17/2022 3:21:14 AM
-JobDuration        : 00:02:07.7530310
-JobName            : Clone from backup 'SnapCenter_LocalSnap_Hourly_05-13-2022_03.00.01.8016'
-JobDescription     :
-Status             : Completed
-IsScheduled        : False
-JobError           :
-JobType            : Clone
-PolicyName         :
+JobStartDateTime : 6/26/2024 9:55:34 AM
+JobEndDateTime : 6/26/2024 9:58:50 AM
+JobDuration : 00:03:16.6889170
+JobName : Clone from backup 'SnapCenter_hana-1_LocalSnap_Hourly_06-25-2024_03.00.01.8458'
+JobDescription :
+Status : Completed
+IsScheduled : False
+JobError :
+JobType : Clone
+PolicyName :
+JobResultData :
 Clone create job has been finshed.
-PS C:\NetApp>
 ....
 
 
@@ -552,51 +539,51 @@ PS C:\NetApp>
 Il semplice script riportato di seguito mostra come è possibile eseguire un'operazione di eliminazione dei cloni di SnapCenter utilizzando i comandi PowerShell. SnapCenter `Remove-SmClone` il comando viene eseguito con l'opzione della riga di comando richiesta per l'ambiente di laboratorio e lo script di automazione discusso in precedenza.
 
 ....
-$CloneInfo=Get-SmClone |?{$_.CloneName -Match "hana-1_sapcc_stl_netapp_com_hana_MDC_SS1" }
+$CloneInfo=Get-SmClone |?\{$_.CloneName -Match "hana-1_sapcc_stl_netapp_com_hana_MDC_SS1" }
 $JobInfo=Remove-SmClone -CloneName $CloneInfo.CloneName -PluginCode hana -PreCloneDeleteCommands '/mnt/sapcc-share/SAP-System-Refresh/sc-system-refresh.sh shutdown QS1' -UnmountCommands '/mnt/sapcc-share/SAP-System-Refresh/sc-system-refresh.sh umount QS1' -Confirm: $False
 Get-SmJobSummaryReport -JobId $JobInfo.Id
 # Wait until job is finished
-do { $Job=Get-SmJobSummaryReport -JobId $JobInfo.Id; write-host $Job.Status; sleep 20 } while ( $Job.Status -Match "Running" )
+do \{ $Job=Get-SmJobSummaryReport -JobId $JobInfo.Id; write-host $Job.Status; sleep 20 } while ( $Job.Status -Match "Running" )
 Write-Host " "
 Get-SmJobSummaryReport -JobId $JobInfo.Id
 Write-Host "Clone delete job has been finshed."
 PS C:\NetApp>
 ....
-L'output della schermata mostra l'esecuzione dello script cloni DELETE PowerShell.
+L'output della schermata mostra l'esecuzione dello script PowerShell clone –delete.ps1.
 
 ....
-PS C:\NetApp> .\clone-delete.ps1
-SmJobId            : 31888
+PS C:\Windows\system32> C:\NetApp\clone-delete.ps1
+SmJobId : 110386
 JobCreatedDateTime :
-JobStartDateTime   : 5/17/2022 3:24:29 AM
-JobEndDateTime     :
-JobDuration        :
-JobName            : Deleting clone 'hana-1_sapcc_stl_netapp_com_hana_MDC_SS1__clone__31887_MDC_SS1_05-17-2022_03.19.14'
-JobDescription     :
-Status             : Running
-IsScheduled        : False
-JobError           :
-JobType            : DeleteClone
-PolicyName         :
-Running
+JobStartDateTime : 6/26/2024 10:01:33 AM
+JobEndDateTime :
+JobDuration :
+JobName : Deleting clone 'hana-1_sapcc_stl_netapp_com_hana_MDC_SS1__clone__110382_MDC_SS1_04-22-2024_09.54.34'
+JobDescription :
+Status : Running
+IsScheduled : False
+JobError :
+JobType : DeleteClone
+PolicyName :
+JobResultData :
 Running
 Running
 Running
 Running
 Completed
-
-SmJobId            : 31888
+SmJobId : 110386
 JobCreatedDateTime :
-JobStartDateTime   : 5/17/2022 3:24:29 AM
-JobEndDateTime     : 5/17/2022 3:25:57 AM
-JobDuration        : 00:01:27.7598430
-JobName            : Deleting clone 'hana-1_sapcc_stl_netapp_com_hana_MDC_SS1__clone__31887_MDC_SS1_05-17-2022_03.19.14'
-JobDescription     :
-Status             : Completed
-IsScheduled        : False
-JobError           :
-JobType            : DeleteClone
-PolicyName         :
+JobStartDateTime : 6/26/2024 10:01:33 AM
+JobEndDateTime : 6/26/2024 10:02:38 AM
+JobDuration : 00:01:05.5658860
+JobName : Deleting clone 'hana-1_sapcc_stl_netapp_com_hana_MDC_SS1__clone__110382_MDC_SS1_04-22-2024_09.54.34'
+JobDescription :
+Status : Completed
+IsScheduled : False
+JobError :
+JobType : DeleteClone
+PolicyName :
+JobResultData :
 Clone delete job has been finshed.
-PS C:\NetApp>
+PS C:\Windows\system32>
 ....

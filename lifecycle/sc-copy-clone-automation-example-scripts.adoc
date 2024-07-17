@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/sc-copy-clone-automation-example-scripts.html 
-keywords: example script, automation, clone create, clone delete 
-summary: In questo documento vengono utilizzati due script per automatizzare ulteriormente le operazioni di creazione e cancellazione dei cloni SnapCenter. 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: 'Le soluzioni NetApp per l"ottimizzazione del Lifecycle management SAP sono integrate nel database SAP HANA e negli strumenti di Lifecycle management, combinando una data Protection integrata con l"efficiente applicazione con il provisioning flessibile dei sistemi di test SAP.' 
 ---
 = Script di esempio di automazione
 :hardbreaks:
@@ -13,45 +13,42 @@ summary: In questo documento vengono utilizzati due script per automatizzare ult
 :imagesdir: ./../media/
 
 
-[role="lead"]
 In questo documento vengono utilizzati due script per automatizzare ulteriormente le operazioni di creazione e cancellazione dei cloni SnapCenter.
 
-* Lo script `sc-system-refresh.sh` Viene utilizzato per il refresh del sistema e per il workflow dei cloni del sistema per eseguire operazioni di montaggio e smontaggio del volume di dati HANA, nonché per le operazioni di recovery e shutdown del database HANA.
-* Lo script `sc-mount-volume.sh` Viene utilizzato per il flusso di lavoro dei cloni di sistema per eseguire operazioni di montaggio e disinstallazione per il volume condiviso HANA.
+* Lo script `sc-system-refresh`.sh viene utilizzato per l'aggiornamento del sistema e il flusso di lavoro del clone del sistema per eseguire operazioni di ripristino e arresto del database SAP HANA.
+* Lo script `sc-mount-volume.sh` viene utilizzato per il workflow di cloni del sistema per eseguire operazioni di montaggio e smontaggio per il volume condiviso SAP HANA.
++
+
+NOTE: Gli script di esempio vengono forniti così come sono e non sono supportati da NetApp. È possibile richiedere gli script tramite e-mail all'indirizzo ng-sapcc@netapp.com.
 
 
-
-NOTE: Gli script di esempio vengono forniti così come sono e non sono supportati da NetApp. Puoi richiedere gli script via email a mailto:ng-sapcc@netapp.com[ng-sapcc@netapp.com^].
 
 
 
 == Script sc-system-refresh.sh
 
-Lo script di esempio `sc-system-refresh.sh` Viene utilizzato per eseguire operazioni di montaggio e smontaggio per volumi di dati SAP HANA, nonché operazioni di recovery e shutdown. Lo script viene chiamato con opzioni specifiche della riga di comando all'interno dei flussi di lavoro SnapCenter, creare e clonare delete, come illustrato nella figura seguente.
+Lo script di esempio `sc-system-refresh.sh` viene utilizzato per eseguire operazioni di ripristino e arresto. Lo script viene chiamato con opzioni specifiche della riga di comando all'interno dei flussi di lavoro SnapCenter che clonano la creazione e l'eliminazione dei cloni, come illustrato nella figura sotto.
 
-Lo script è generico ed è configurato con un file di configurazione specifico del SID e variabili di ambiente, che vengono rese disponibili da SnapCenter durante l'esecuzione dello script. Lo script e il file di configurazione devono essere disponibili sull'host di destinazione dell'operazione di aggiornamento del sistema. Se lo script viene utilizzato per più host di destinazione, è possibile fornire una condivisione NFS da cui lo script viene reso disponibile per tutti gli host di destinazione.
+Lo script è generico e legge tutti i parametri richiesti, come il SID dal sistema di destinazione. Lo script deve essere disponibile nell'host di destinazione dell'operazione di aggiornamento del sistema. È necessario configurare una chiave di memorizzazione utente hdb per il punto di vista <SID> dell'utente nel sistema di destinazione. La chiave deve consentire l'accesso al database del sistema SAP HANA e fornire i privilegi per le operazioni di recovery. La chiave deve avere il nome <TARGET-SID> (Avanti).
+
+Lo script scrive un file di registro `sc-system-refresh-SID.log``nella stessa directory in cui viene eseguito.
 
 
-NOTE: La versione corrente dello script supporta sistemi host singoli con un singolo container, un singolo tenant MDC o configurazioni di tenant multipli MDC. Non supporta sistemi SAP HANA con host multipli.
+NOTE: La versione corrente dello script supporta sistemi host singoli MDC single tenant o configurazioni multi tenant MDC. Non supporta sistemi SAP HANA con host multipli.
 
-
-NOTE: Lo script supporta i sistemi HANA che utilizzano NFS o Fibre Channel (FC) come protocollo storage.
-
-image:sc-copy-clone-image13.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image14.png[""]
 
 
 
 === Operazioni di recovery tenant supportate
 
-Come descritto nella sezione link:sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html[""Flussi di lavoro delle operazioni di refresh del sistema SAP HANA utilizzando i backup delle snapshot dello storage""] le possibili operazioni di ripristino del tenant sul sistema di destinazione dipendono dalla configurazione del tenant del sistema di origine. Lo script `sc-system-refresh.sh` supporta tutte le operazioni di recovery del tenant, possibili a seconda della configurazione del sistema di origine, come illustrato nella tabella seguente.
+Come descritto nella sezione "i workflow delle operazioni di refresh del sistema SAP HANA usando la snapshot dello storage" le possibili operazioni di recovery del tenant nel sistema di destinazione dipendono dalla configurazione del tenant del sistema di origine. Lo script `sc-system-refresh.sh` supporta tutte le operazioni di recovery dei tenant, possibili in base alla configurazione del sistema di origine, come illustrato nella tabella seguente.
 
 Se nel sistema di destinazione è richiesto un nome tenant diverso, il tenant deve essere rinominato manualmente dopo l'operazione di ripristino.
 
+[cols="29%,35%,36%"]
 |===
-| Sistema HANA | Configurazione del tenant nel sistema di origine | Configurazione del tenant nel sistema di destinazione 
-
-
-| Container singolo | NA | NA 
+| Sistema SAP HANA | Configurazione tenant + nel sistema di origine | Configurazione del tenant risultante + sul sistema di destinazione 
 
 
 | Tenant singolo MDC | Nome del tenant di origine uguale al SID di origine | Il nome del tenant di destinazione è uguale al SID di destinazione 
@@ -60,80 +57,18 @@ Se nel sistema di destinazione è richiesto un nome tenant diverso, il tenant de
 | Tenant singolo MDC | Il nome del tenant di origine non corrisponde al SID di origine | Il nome del tenant di destinazione è uguale al nome del tenant di origine 
 
 
-| Tenant multipli MDC | Qualsiasi nome tenant | Viene recuperato solo il primo tenant con lo stesso nome del tenant di origine. 
+| Tenant multipli MDC | Qualsiasi nome tenant | Tutti i locatari vengono recuperati e avranno lo stesso nome dei locatari di origine. 
 |===
-
-
-=== File di configurazione specifico del SID
-
-Questo script utilizza un file di configurazione per configurare alcuni parametri specifici del sistema di destinazione. Il file di configurazione deve avere un nome file specifico del SID `sc-system-refresh- SID.cfg`.
-
-
-NOTE: L'utente del database, configurato con la chiave hdbuserstore per il sistema di destinazione, deve esistere nel database di origine e disporre dei diritti corretti per consentire il ripristino del database.
-
-I parametri del file di configurazione sono mostrati nella tabella seguente.
-
-|===
-| Parametro |  | Descrizione 
-
-
-| CHIAVE | Ad esempio:QS1KEY | Chiave SAP HANA hdbuserstore, da utilizzare per l'operazione di recovery del database SAP HANA di destinazione. La chiave deve essere configurata per l'utente <SID> lessm sull'host di destinazione. 
-
-
-| PROTOCOLLO | NFS o FCP | Protocollo storage, utilizzato per connettere il volume di dati del database HANA. 
-|===
-Il seguente output mostra un file di configurazione di esempio per un sistema SAP HANA con `SID=QS1`.
-
-....
-ss1adm@hana-1:/mnt/sapcc-share/SAP-System-Refresh> cat sc-system-refresh-QS1.cfg
-# ---------------------------------------------
-# Target database specific parameters
-# ---------------------------------------------
-# hdbuserstore key, which should be used to connect to the target database
-KEY="QS1KEY"
-# Used storage protocol, NFS or FCP
-PROTOCOL="NFS"
-ss1adm@hana-1:/mnt/sapcc-share/SAP-System-Refresh>
-....
-
-
-=== Variabili di ambiente SnapCenter
-
-SnapCenter fornisce un insieme di variabili di ambiente disponibili all'interno dello script eseguito sull'host di destinazione. Lo script utilizza queste variabili per determinare le impostazioni di configurazione pertinenti.
-
-* La variabile script `HANA_ARCHITECTURE` Viene utilizzato per determinare l'operazione di recovery richiesta, per sistemi a container singolo o MDC.
-+
-** Derivato da `HANA_DATABASE_TYPE` variabile ambientale
-** Ad esempio: `MDC\SS1_HANA_DATABASE_TYPE=MULTIPLE_CONTAINERS`
-
-
-* le variabili dello script `TENANT_LIST, SOURCE_TENANT`, e. `SOURCE_SID` vengono utilizzati per determinare il nome del tenant di destinazione per un'operazione di ripristino.
-+
-** Derivato da `TENANT_DATABASE_NAMES` variabile ambientale
-** Ad esempio: `MDC\SM1_TENANT_DATABASE_NAMES=TENANT1,TENANT2`
-
-
-* La variabile script `STORAGE, JUNCTION_PATH` viene utilizzato per l'operazione di montaggio.
-+
-** Derivato da `CLONED_VOLUMES_MOUNT_PATH` variabile ambientale
-** Ad esempio:
-
-
-
-
-....
-CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_data_mnt00001_Clone_05112206115489411
-....
 
 
 == Script sc-mount-volume.sh
 
-Lo script di esempio `sc- mount-volume.sh` viene utilizzato per eseguire il montaggio e lo smontaggio per qualsiasi volume. Lo script viene utilizzato per montare il volume condiviso HANA con l'operazione di clone del sistema SAP HANA. Lo script viene chiamato con opzioni specifiche della riga di comando all'interno dei flussi di lavoro SnapCenter, creare e clonare delete, come illustrato nella figura seguente.
+Lo script di esempio `sc-mount-volume.sh` viene utilizzato per eseguire mount e unmount per ogni volume. Lo script viene utilizzato per montare il volume condiviso di SAP HANA con l'operazione dei cloni del sistema SAP HANA. Lo script viene chiamato con opzioni specifiche della riga di comando all'interno dei flussi di lavoro SnapCenter che clonano la creazione e l'eliminazione dei cloni, come illustrato nella figura sotto.
 
 
-NOTE: Lo script supporta i sistemi HANA che utilizzano NFS come protocollo storage.
+NOTE: Lo script supporta i sistemi SAP HANA utilizzando NFS come protocollo storage.
 
-image:sc-copy-clone-image14.png["Errore: Immagine grafica mancante"]
+image:sc-copy-clone-image15.png[""]
 
 
 
@@ -141,17 +76,12 @@ image:sc-copy-clone-image14.png["Errore: Immagine grafica mancante"]
 
 SnapCenter fornisce un insieme di variabili di ambiente disponibili all'interno dello script eseguito sull'host di destinazione. Lo script utilizza queste variabili per determinare le impostazioni di configurazione pertinenti.
 
-* La variabile script `STORAGE, JUNCTION_PATH` viene utilizzato per l'operazione di montaggio.
-+
-** Derivato da `CLONED_VOLUMES_MOUNT_PATH` variabile di ambiente.
-** Ad esempio:
+* Le variabili di script `STORAGE, JUNCTION_PATH` vengono utilizzate per l'operazione di mount.
+* Derivato da `CLONED_VOLUMES_MOUNT_PATH` variabile di ambiente.
+* `CLONED_VOLUMES_MOUNT_PATH=${STORAGE}:/${JUNCTION_PATH}`
+* Ad esempio: `CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_shared_Clone_05112206115489411`
 
 
-
-
-....
-CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_shared_Clone_05112206115489411
-....
 
 
 == Script per ottenere le variabili di ambiente SnapCenter
@@ -161,14 +91,9 @@ Se gli script di automazione non devono essere utilizzati e i passaggi devono es
 ....
 ss1adm@hana-1:/mnt/sapcc-share/SAP-System-Refresh> cat get-env.sh
 #!/bin/bash
-rm /tmp/env-from-sc.txt
 env > /tmp/env-from-sc.txt
 ss1adm@hana-1:/mnt/sapcc-share/SAP-System-Refresh>
 ....
 All'interno di `env-from-sc.txt` cercare la variabile `CLONED_VOLUMES_MOUNT_PATH` Per ottenere l'indirizzo IP del sistema storage e il percorso di giunzione del volume FlexClone.
 
-Ad esempio:
-
-....
-CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_data_mnt00001_Clone_05112206115489411
-....
+Ad esempio: `CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_data_mnt00001_Clone_05112206115489411`
