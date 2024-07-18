@@ -36,7 +36,7 @@ Lo script scrive un file di registro `sc-system-refresh-SID.log``nella stessa di
 
 NOTE: La versione corrente dello script supporta sistemi host singoli MDC single tenant o configurazioni multi tenant MDC. Non supporta sistemi SAP HANA con host multipli.
 
-image:sc-copy-clone-image14.png[""]
+image::sc-copy-clone-image14.png[copia sc clone image14]
 
 
 
@@ -68,7 +68,7 @@ Lo script di esempio `sc-mount-volume.sh` viene utilizzato per eseguire mount e 
 
 NOTE: Lo script supporta i sistemi SAP HANA utilizzando NFS come protocollo storage.
 
-image:sc-copy-clone-image15.png[""]
+image::sc-copy-clone-image15.png[copia sc clone image15]
 
 
 

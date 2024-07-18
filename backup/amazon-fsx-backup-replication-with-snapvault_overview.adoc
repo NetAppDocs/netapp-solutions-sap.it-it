@@ -18,7 +18,7 @@ Nella nostra configurazione di laboratorio, utilizziamo un secondo file system F
 
 Come discusso nel capitolo link:amazon-fsx-snapcenter-architecture.html#data-protection-strategy[""Strategia di protezione dei dati""], La destinazione della replica deve essere un secondo FSX per il file system ONTAP in un'altra zona di disponibilità per essere protetto da un errore del file system FSX primario per ONTAP. Inoltre, il volume condiviso HANA deve essere replicato nel file system FSX secondario per ONTAP.
 
-image:amazon-fsx-image8.png["Errore: Immagine grafica mancante"]
+image::amazon-fsx-image8.png[Errore: Immagine grafica mancante]
 
 
 

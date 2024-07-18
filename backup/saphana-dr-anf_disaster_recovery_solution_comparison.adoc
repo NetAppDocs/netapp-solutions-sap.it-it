@@ -22,7 +22,7 @@ Inoltre, i dati vengono replicati in modo asincrono in una regione secondaria pe
 
 In questo documento vengono illustrate le diverse opzioni di implementazione di una soluzione di disaster recovery a due regioni.
 
-image:saphana-dr-anf_image3.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image3.png[Errore: Immagine grafica mancante]
 
 
 
@@ -52,7 +52,7 @@ La figura seguente mostra la configurazione di una soluzione di disaster recover
 
 La seguente figura illustra la replica di sistema SAP HANA.
 
-image:saphana-dr-anf_image4.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image4.png[Errore: Immagine grafica mancante]
 
 
 
@@ -86,7 +86,7 @@ I server dei siti di disaster recovery possono essere utilizzati come sistemi di
 
 ANF Cross-Region Replication consente di testare il flusso di lavoro DR senza influire sull'RPO e sull'RTO. Ciò si ottiene creando cloni di volume e allegandoli al server di test del DR.
 
-image:saphana-dr-anf_image5.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image5.png[Errore: Immagine grafica mancante]
 
 
 

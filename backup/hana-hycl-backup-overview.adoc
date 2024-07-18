@@ -36,7 +36,7 @@ Il backup e recovery di BlueXP viene eseguito come SaaS all'interno di NetApp Bl
 Il trasferimento dei dati tra lo storage on-premise e il bucket cloud è protetto end-to-end con crittografia AES a riposo a 256 bit, crittografia TLS/HTTPS in uso e supporto della chiave gestita dal cliente (CMK). +
 I dati di backup possono essere memorizzati in uno stato WORM immutabile e indelebile. L'unico modo per accedere ai dati dallo storage a oggetti è ripristinarli nello storage basato su NetApp ONTAP, incluso NetApp CVO.
 
-image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis enthält. Automatisch generierte Beschreibung,width=624,height=450"]
+image::hana-hycl-back-image1.png[Bild. Ein,624,450]
 
 
 

@@ -20,7 +20,7 @@ Sono disponibili due opzioni per la configurazione della protezione dei dati con
 * Una singola risorsa SnapCenter per entrambi gli host SAP HANA che utilizzano un indirizzo IP virtuale.
 
 
-image:saphana-sr-scs-image5.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image5.png[Errore: Immagine grafica mancante]
 
 A partire da SnapCenter 4.6, SnapCenter supporta il rilevamento automatico dei sistemi HANA configurati in una relazione di replica del sistema HANA. Ciascun host viene configurato utilizzando il proprio indirizzo IP fisico (nome host) e il proprio volume di dati sul layer di storage. Le due risorse SnapCenter sono combinate in un gruppo di risorse e SnapCenter identifica automaticamente l'host primario o secondario ed esegue le operazioni di backup richieste di conseguenza. La gestione della conservazione per Snapshot e backup basati su file creati da SnapCenter viene eseguita su entrambi gli host per garantire che i vecchi backup vengano cancellati anche sull'host secondario corrente.
 

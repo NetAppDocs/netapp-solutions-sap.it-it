@@ -16,16 +16,16 @@ summary: Durante il flusso di lavoro di refresh, il clone dello storage deve ess
 [role="lead"]
 La figura seguente evidenzia i passaggi principali eseguiti con il flusso di lavoro di refresh del sistema.
 
-image:lama-ansible-image49.png["Questa immagine mostra una sequenza temporale delle fasi del flusso di lavoro di refresh del sistema. Contiene la configurazione di esportazione, arrestare il sistema, dispreparare il sistema, eliminare il clone dello storage, clonare lo storage, preparare il sistema, attivare l'isolamento, rinominare il sistema, avviare il sistema, importare la configurazione, automazione post-copia e disattivazione dell'isolamento."]
+image::lama-ansible-image49.png[Questa immagine mostra una sequenza temporale delle fasi del flusso di lavoro di refresh del sistema. Contiene la configurazione di esportazione, arrestare il sistema, dispreparare il sistema, eliminare il clone dello storage, clonare lo storage, preparare il sistema, attivare l'isolamento, rinominare il sistema, avviare il sistema, importare la configurazione, automazione post-copia e disattivazione dell'isolamento.]
 
 Durante il flusso di lavoro di refresh, il clone dello storage deve essere cancellato. È possibile utilizzare lo stesso playbook Ansible del flusso di lavoro System Destroy. Tuttavia, il gancio personalizzato viene definito in base a un passo diverso, quindi il playbook viene chiamato di conseguenza. La fase del processo per il clonen´t diversa.
 
-image:lama-ansible-image50.png["Questa immagine mostra un diagramma architetturale che include le fasi contenute in questo flusso di lavoro."]
+image::lama-ansible-image50.png[Questa immagine mostra un diagramma architetturale che include le fasi contenute in questo flusso di lavoro.]
 
 Il flusso di lavoro di refresh può essere attivato attraverso la schermata di provisioning per un sistema copiato.
 
-image:lama-ansible-image51.png["Questa schermata mostra la vista del sistema di provisioning con l'elenco a discesa Refresh system (Aggiorna sistema) evidenziato."]
+image::lama-ansible-image51.png[Questa schermata mostra la vista del sistema di provisioning con l'elenco a discesa Refresh system (Aggiorna sistema) evidenziato.]
 
 Anche in questo caso, nulla differenzia le schermate di input dallo standard e l'esecuzione del workflow può essere avviata dalla schermata di riepilogo.
 
-image:lama-ansible-image52.png["Questa schermata mostra la schermata Refresh System (Aggiorna sistema), che include i dati di base del sistema da aggiornare e la selezione dell'host del sistema di destinazione."]
+image::lama-ansible-image52.png[Questa schermata mostra la schermata Refresh System (Aggiorna sistema), che include i dati di base del sistema da aggiornare e la selezione dell'host del sistema di destinazione.]

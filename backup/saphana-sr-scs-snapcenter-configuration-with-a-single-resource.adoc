@@ -23,13 +23,13 @@ Quando viene eseguito un backup con host 1 come host primario, viene creato un b
 
 Il catalogo di backup SAP HANA e la risorsa SnapCenter includono il backup creato sull'host 1.
 
-image:saphana-sr-scs-image27.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image27.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra l'operazione di backup dopo il failover sull'host 2 e la replica dall'host 2 all'host 1. SnapCenter comunica automaticamente con l'host 2 utilizzando l'indirizzo IP virtuale configurato nella risorsa SnapCenter. I backup vengono ora creati sull'host 2. SnapCenter crea due copie Snapshot: Un backup coerente con il database nel volume di dati dell'host 2 e una copia Snapshot dell'immagine di crash nel volume di dati dell'host 1. Il catalogo di backup SAP HANA e la risorsa SnapCenter ora includono il backup creato sull'host 1 e il backup creato sull'host 2.
 
 La gestione dei backup dei dati e dei log si basa sulla policy di conservazione di SnapCenter definita e i backup vengono cancellati indipendentemente dall'host primario o secondario.
 
-image:saphana-sr-scs-image28.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image28.png[Errore: Immagine grafica mancante]
 
 Come discusso nella sezione link:saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html["Backup Snapshot dello storage e replica del sistema SAP"], Un'operazione di ripristino con backup Snapshot basati sullo storage è diversa, a seconda del backup da ripristinare. È importante identificare l'host in cui è stato creato il backup per determinare se il ripristino può essere eseguito sul volume di storage locale o se il ripristino deve essere eseguito sul volume di storage dell'altro host.
 
@@ -37,7 +37,7 @@ Con la configurazione SnapCenter a singola risorsa, SnapCenter non è a conoscen
 
 La figura seguente mostra l'identificazione dell'host di backup.
 
-image:saphana-sr-scs-image29.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image29.png[Errore: Immagine grafica mancante]
 
 
 
@@ -45,7 +45,7 @@ image:saphana-sr-scs-image29.png["Errore: Immagine grafica mancante"]
 
 La figura seguente mostra la configurazione di laboratorio e una panoramica della configurazione SnapCenter richiesta.
 
-image:saphana-sr-scs-image30.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image30.png[Errore: Immagine grafica mancante]
 
 Per eseguire operazioni di backup indipendentemente dall'host SAP HANA primario e anche quando un host è inattivo, il plug-in SAP HANA di SnapCenter deve essere implementato su un host plug-in centrale. Nella nostra configurazione di laboratorio, abbiamo utilizzato il server SnapCenter come host plug-in centrale e abbiamo implementato il plug-in SAP HANA sul server SnapCenter.
 
@@ -58,18 +58,18 @@ Per ulteriori informazioni sulle opzioni di implementazione del plug-in SAP HANA
 
 In SnapCenter, la risorsa viene configurata come mostrato nella figura seguente utilizzando la chiave di memorizzazione utente, configurata in precedenza, e il server SnapCenter come `hdbsql` host di comunicazione.
 
-image:saphana-sr-scs-image31.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image31.png[Errore: Immagine grafica mancante]
 
 I volumi di dati di entrambi gli host SAP HANA sono inclusi nella configurazione del footprint dello storage, come mostrato nella figura seguente.
 
-image:saphana-sr-scs-image32.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image32.png[Errore: Immagine grafica mancante]
 
 Come discusso in precedenza, SnapCenter non è a conoscenza della posizione in cui è stato creato il backup. NetApp consiglia pertanto di aggiungere uno script di pre-backup nel flusso di lavoro di backup di SnapCenter per identificare quale host è attualmente l'host SAP HANA primario. È possibile eseguire questa identificazione utilizzando un'istruzione SQL aggiunta al flusso di lavoro di backup, come illustrato nella figura seguente.
 
 ....
 Select host from “SYS”.M_DATABASE
 ....
-image:saphana-sr-scs-image33.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image33.png[Errore: Immagine grafica mancante]
 
 
 
@@ -81,18 +81,18 @@ I log dei processi di backup includono l'output dell'istruzione SQL, che consent
 
 La figura seguente mostra il log del processo di backup con l'host 1 come host primario.
 
-image:saphana-sr-scs-image34.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image34.png[Errore: Immagine grafica mancante]
 
 Questa figura mostra il log del processo di backup con l'host 2 come host primario.
 
-image:saphana-sr-scs-image35.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image35.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra il catalogo di backup SAP HANA in SAP HANA Studio. Quando il database SAP HANA è online, l'host SAP HANA in cui è stato creato il backup è visibile in SAP HANA Studio.
 
 
 NOTE: Il catalogo di backup SAP HANA sul file system, utilizzato durante un'operazione di ripristino e ripristino, non include il nome host in cui è stato creato il backup. L'unico modo per identificare l'host quando il database è inattivo consiste nel combinare le voci del catalogo di backup con `backup.log` File di entrambi gli host SAP HANA.
 
-image:saphana-sr-scs-image36.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image36.png[Errore: Immagine grafica mancante]
 
 
 
@@ -106,7 +106,7 @@ Se è necessario eseguire un'operazione di ripristino dopo l'indicazione di data
 
 Se è necessario eseguire il ripristino utilizzando il backup creato nell'host 2 (T2), ovvero una copia Snapshot nel volume di storage dell'host 2, il backup deve essere reso disponibile per l'host 1. È possibile rendere disponibile questo backup creando una copia di NetApp FlexClone dal backup, montando la copia di FlexClone sull'host 1 e copiando i dati nella posizione originale.
 
-image:saphana-sr-scs-image37.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image37.png[Errore: Immagine grafica mancante]
 
 Con una singola configurazione delle risorse SnapCenter, le copie Snapshot vengono create su entrambi i volumi di storage di entrambi gli host di replica del sistema SAP HANA. Solo il backup Snapshot creato nel volume di storage dell'host SAP HANA primario è valido per il forward recovery. La copia Snapshot creata nel volume di storage dell'host SAP HANA secondario è un'immagine di crash che non può essere utilizzata per il forward recovery.
 
@@ -120,7 +120,7 @@ Nella sezione viene descritta un'operazione di ripristino da un backup creato su
 
 La figura seguente illustra le operazioni di ripristino con una singola configurazione delle risorse SnapCenter.
 
-image:saphana-sr-scs-image38.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image38.png[Errore: Immagine grafica mancante]
 
 
 
@@ -137,33 +137,33 @@ La figura seguente mostra una panoramica dello scenario di ripristino e ripristi
 . Viene avviato l'host 2 e viene avviata automaticamente una risincronizzazione della replica di sistema dell'host 2.
 
 
-image:saphana-sr-scs-image39.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image39.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra il catalogo di backup SAP HANA in SAP HANA Studio. Il backup evidenziato mostra il backup creato in T1 sull'host 1.
 
-image:saphana-sr-scs-image40.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image40.png[Errore: Immagine grafica mancante]
 
 Viene avviata un'operazione di ripristino e ripristino in SAP HANA Studio. Come mostrato nella figura seguente, il nome dell'host in cui è stato creato il backup non è visibile nel flusso di lavoro di ripristino e ripristino.
 
 
 NOTE: Nel nostro scenario di test, siamo stati in grado di identificare il backup corretto (il backup creato nell'host 1) in SAP HANA Studio quando il database era ancora online. Se il database non è disponibile, controllare il log del processo di backup di SnapCenter per identificare il backup corretto.
 
-image:saphana-sr-scs-image41.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image41.png[Errore: Immagine grafica mancante]
 
 In SnapCenter, viene selezionato il backup e viene eseguita un'operazione di ripristino a livello di file. Nella schermata di ripristino a livello di file, viene selezionato solo il volume host 1 in modo che venga ripristinato solo il backup valido.
 
-image:saphana-sr-scs-image42.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image42.png[Errore: Immagine grafica mancante]
 
 Dopo l'operazione di ripristino, il backup viene evidenziato in verde in SAP HANA Studio. Non è necessario inserire un'ulteriore posizione di backup del log, in quanto il percorso del file di backup del log degli host 1 e 2 è incluso nel catalogo di backup.
 
-image:saphana-sr-scs-image43.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image43.png[Errore: Immagine grafica mancante]
 
 Al termine del forward recovery, viene avviato l'host secondario (host 2) e viene avviata la risincronizzazione della replica del sistema SAP HANA.
 
 
 NOTE: Anche se l'host secondario è aggiornato (non è stata eseguita alcuna operazione di ripristino per l'host 2), SAP HANA esegue una replica completa di tutti i dati. Questo comportamento è standard dopo un'operazione di ripristino e recovery con SAP HANA System Replication.
 
-image:saphana-sr-scs-image44.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image44.png[Errore: Immagine grafica mancante]
 
 
 
@@ -180,14 +180,14 @@ La figura seguente mostra una panoramica dello scenario di ripristino e ripristi
 . Viene avviato l'host 2 e viene avviata automaticamente una risincronizzazione della replica di sistema dell'host 2.
 
 
-image:saphana-sr-scs-image45.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image45.png[Errore: Immagine grafica mancante]
 
 L'operazione di ripristino con SAP HANA Studio è identica a quella descritta nella sezione link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html#snapcenter-restore-of-the-valid-backup-only["Ripristino SnapCenter solo del backup valido"].
 
 Per eseguire l'operazione di ripristino, selezionare completa risorsa in SnapCenter. I volumi di entrambi gli host vengono ripristinati.
 
-image:saphana-sr-scs-image46.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image46.png[Errore: Immagine grafica mancante]
 
 Una volta completato il forward recovery, viene avviato l'host secondario (host 2) e viene avviata la risincronizzazione della replica del sistema SAP HANA. Viene eseguita la replica completa di tutti i dati.
 
-image:saphana-sr-scs-image47.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image47.png[Errore: Immagine grafica mancante]

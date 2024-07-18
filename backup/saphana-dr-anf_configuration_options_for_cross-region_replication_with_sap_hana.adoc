@@ -28,7 +28,7 @@ In caso di failover di emergenza, la relazione di replica deve essere interrotta
 
 La seguente figura illustra le opzioni di configurazione HANA per la replica tra regioni.
 
-image:saphana-dr-anf_image6.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image6.png[Errore: Immagine grafica mancante]
 
 Con la versione corrente di Cross-Region Replication, è possibile selezionare solo pianificazioni fisse e l'utente non può definire il tempo effettivo di aggiornamento della replica. I programmi disponibili sono giornalieri, orari e ogni 10 minuti. Utilizzando queste opzioni di pianificazione, due diverse configurazioni hanno senso a seconda dei requisiti RPO: Replica del volume di dati senza replica del backup del log e replica del backup del log con pianificazioni diverse, orarie o ogni 10 minuti. Il RPO più basso raggiungibile è di circa 20 minuti. La seguente tabella riassume le opzioni di configurazione e i valori RPO e RTO risultanti.
 

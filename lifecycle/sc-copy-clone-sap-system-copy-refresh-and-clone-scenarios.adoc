@@ -22,4 +22,4 @@ Il termine copia del sistema SAP viene spesso utilizzato come sinonimo per tre d
 
 La figura riportata di seguito illustra i principali passaggi da eseguire durante un'operazione di refresh di sistema, di copia del sistema o di clone del sistema. Le caselle blu indicano i passaggi che possono essere automatizzati con SnapCenter, mentre le caselle grigie indicano i passaggi che devono essere eseguiti al di fuori di SnapCenter, manualmente o utilizzando strumenti di terze parti.
 
-image:sc-copy-clone-image2.png[""]
+image::sc-copy-clone-image2.png[copia sc clone image2]

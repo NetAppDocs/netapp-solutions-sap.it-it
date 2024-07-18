@@ -18,6 +18,6 @@ Ogni server SAP HANA deve disporre di una connessione SAN FCP ridondante con una
 
 La figura seguente mostra un esempio con quattro host SAP HANA collegati a due storage controller. Ciascun host SAP HANA dispone di due porte FCP collegate al fabric ridondante. A livello di storage, quattro porte FCP sono configurate per fornire il throughput richiesto per ciascun host SAP HANA.
 
-image:saphana_aff_fc_image9.png["Errore: Immagine grafica mancante"]
+image::saphana_aff_fc_image9.png[Errore: Immagine grafica mancante]
 
 Oltre alla suddivisione in zone sul layer dello switch, è necessario mappare ogni LUN del sistema di storage agli host che si connettono a questo LUN. Mantenere lo zoning sullo switch semplice, ovvero definire un set di zone in cui tutti gli HBA host possano vedere tutti gli HBA dei controller.

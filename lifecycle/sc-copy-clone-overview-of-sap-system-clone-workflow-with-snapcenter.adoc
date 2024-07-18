@@ -34,6 +34,6 @@ Se il sistema non è più necessario, il processo di pulizia viene eseguito con 
 
 NOTE: Se è necessario ripristinare il sistema su un backup Snapshot diverso, i passaggi 6 e 4 sono sufficienti. Non è necessario un refresh del volume condiviso SAP HANA.
 
-image:sc-copy-clone-image9.png[""]
+image::sc-copy-clone-image9.png[copia sc clone image9]
 
 La sezione link:sc-copy-clone-sap-system-clone-with-snapcenter.html[""Clone del sistema SAP con SnapCenter""] fornisce una descrizione dettagliata del flusso di lavoro dei cloni di sistema.

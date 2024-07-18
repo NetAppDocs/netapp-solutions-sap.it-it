@@ -81,7 +81,7 @@ NOTE: SnapCenter gestisce la conservazione dello storage primario, mentre ONTAP 
 
 La figura seguente mostra una panoramica della configurazione del backup del database e del log, in cui i backup del log vengono scritti su un montaggio NFS dello storage di backup off-site.
 
-image:saphana-br-scs-image7.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image7.png[Errore: Immagine grafica mancante]
 
 Quando si esegue un backup Snapshot basato su storage di volumi non dati, SnapCenter esegue le seguenti attività:
 
@@ -121,4 +121,4 @@ SnapCenter supporta le seguenti architetture e release SAP HANA:
 
 A partire dalla versione 4.6, SnapCenter supporta il rilevamento automatico dei sistemi HANA configurati in una relazione di replica del sistema HANA. Ciascun host viene configurato utilizzando il proprio indirizzo IP fisico (nome host) e il proprio volume di dati sul layer di storage. Le due risorse SnapCenter sono combinate in un gruppo di risorse, SnapCenter identifica automaticamente l'host primario o secondario e quindi esegue le operazioni di backup richieste di conseguenza. La gestione della conservazione per Snapshot e backup basati su file creati con SnapCenter viene eseguita su entrambi gli host per garantire che i vecchi backup vengano cancellati anche sull'host secondario corrente. La figura seguente mostra una panoramica di alto livello. Per una descrizione dettagliata della configurazione e del funzionamento dei sistemi HANA abilitati alla replica del sistema in SnapCenter, consultare la sezione https://www.netapp.com/us/media/tr-4719.pdf["TR-4719 replica, backup e ripristino del sistema SAP HANA con SnapCenter"^].
 
-image:saphana-br-scs-image8.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image8.png[Errore: Immagine grafica mancante]

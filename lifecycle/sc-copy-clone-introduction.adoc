@@ -31,7 +31,7 @@ Gli approcci tradizionali di gestione del ciclo di vita SAP per il provisioning 
 
 Le soluzioni NetApp per l'ottimizzazione della gestione del ciclo di vita SAP sono integrate nei database SAP HANA e negli strumenti di gestione del ciclo di vita, combinando una protezione dei dati efficiente e integrata con l'applicazione con il provisioning flessibile dei sistemi di test SAP, come mostrato nella figura seguente. Queste soluzioni sono disponibili per SAP HANA on-premise o eseguito nel cloud su Azure NetApp Files (ANF) o Amazon FSX per NetApp ONTAP (FSX per ONTAP).
 
-image:sc-copy-clone-image1.png[""]
+image::sc-copy-clone-image1.png[copia sc clone image1]
 
 
 

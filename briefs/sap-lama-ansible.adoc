@@ -43,7 +43,7 @@ Il termine copia del sistema SAP viene spesso utilizzato come sinonimo di tre pr
 
 L'immagine seguente mostra i passaggi del workflow lama di cloning, copia e refresh del sistema SAP correlati allo storage NetApp.
 
-image:sap-lama-image1.png["Immagine che mostra le fasi del workflow lama di cloning, copia e refresh del sistema SAP correlate allo storage NetApp"]
+image::sap-lama-image1.png[Immagine che mostra le fasi del workflow lama di cloning, copia e refresh del sistema SAP correlate allo storage NetApp]
 
 
 
@@ -68,7 +68,7 @@ La soluzione globale è costituita dai seguenti componenti principali:
 
 L'immagine seguente mostra come i sistemi storage SAP lama e NetApp si integrano attraverso i Playbook Ansible su un host Ansible dedicato, attivati da shell script eseguiti da SAP host Agent.
 
-image:sap-lama-image2.png["Immagine che mostra come i sistemi storage SAP lama e NetApp si integrano attraverso i Playbook Ansible su un host Ansible dedicato, attivati da shell script eseguiti da SAP host Agent"]
+image::sap-lama-image2.png[Immagine che mostra come i sistemi storage SAP lama e NetApp si integrano attraverso i Playbook Ansible su un host Ansible dedicato, attivati da shell script eseguiti da SAP host Agent]
 
 
 
@@ -80,7 +80,7 @@ Per accelerare e automatizzare i task richiesti a livello di infrastruttura e da
 
 L'immagine seguente mostra i possibili miglioramenti dell'efficienza operativa quando si utilizza l'automazione.
 
-image:sap-lama-image3.png["Immagine che mostra possibili miglioramenti dell'efficienza operativa quando si utilizza l'automazione"]
+image::sap-lama-image3.png[Immagine che mostra possibili miglioramenti dell'efficienza operativa quando si utilizza l'automazione]
 
 
 

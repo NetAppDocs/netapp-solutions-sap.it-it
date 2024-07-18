@@ -66,27 +66,27 @@ NOTE: La quota del volume può essere impostata in base ai requisiti di capacit�
 
 NOTE: Se il pool di capacità è stato configurato con QoS manuale, è possibile configurare il throughput in aggiunta ai requisiti di capacità. Come sopra, è possibile configurare il throughput con un valore basso durante il normale funzionamento e aumentarlo in caso di failover del disaster recovery.
 
-image:saphana-dr-anf_image10.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image10.png[Errore: Immagine grafica mancante]
 
 Nella scheda Protocol (protocollo), specificare il protocollo di rete, il percorso di rete e il criterio di esportazione.
 
 
 NOTE: Il protocollo deve essere lo stesso utilizzato per il volume di origine.
 
-image:saphana-dr-anf_image11.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image11.png[Errore: Immagine grafica mancante]
 
 Nella scheda Replication (Replica), è necessario configurare l'ID del volume di origine e la pianificazione della replica. Per la replica dei volumi di dati, abbiamo configurato una pianificazione di replica giornaliera per la nostra configurazione di laboratorio.
 
 
 NOTE: L'ID del volume di origine può essere copiato dalla schermata Proprietà del volume di origine.
 
-image:saphana-dr-anf_image12.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image12.png[Errore: Immagine grafica mancante]
 
 Come fase finale, è necessario autorizzare la replica nel volume di origine fornendo l'ID del volume di destinazione.
 
 
 NOTE: È possibile copiare l'ID del volume di destinazione dalla schermata Proprietà del volume di destinazione.
 
-image:saphana-dr-anf_image13.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image13.png[Errore: Immagine grafica mancante]
 
 È necessario eseguire le stesse operazioni per il volume condiviso HANA e per il volume di backup del registro.

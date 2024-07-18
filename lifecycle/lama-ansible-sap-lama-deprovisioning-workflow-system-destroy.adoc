@@ -16,39 +16,39 @@ summary: Per decommissionare un sistema clonato, occorre arrestarlo e prepararlo
 [role="lead"]
 La figura seguente evidenzia i passaggi principali eseguiti con il flusso di lavoro System Destroy.
 
-image:lama-ansible-image32.png["Questa immagine mostra una panoramica del flusso di lavoro System Destroy. Contiene i passaggi Stop System (Arresta sistema), Unprepare System (Annulla preparazione sistema), Delete Storage Clone (Elimina clone storage) ed Delete System Configuration (Elimina configurazione sistema)."]
+image::lama-ansible-image32.png[Questa immagine mostra una panoramica del flusso di lavoro System Destroy. Contiene i passaggi Stop System (Arresta sistema), Unprepare System (Annulla preparazione sistema), Delete Storage Clone (Elimina clone storage) ed Delete System Configuration (Elimina configurazione sistema).]
 
 . Per decommissionare un sistema clonato, occorre arrestarlo e prepararlo in anticipo. In seguito, è possibile avviare il flusso di lavoro System Destroy.
 +
-image:lama-ansible-image33.png["Questo grafico contiene un diagramma architetturale combinato con il punto in cui le fasi del flusso di lavoro menzionate in precedenza si verificano nel sistema."]
+image::lama-ansible-image33.png[Questo grafico contiene un diagramma architetturale combinato con il punto in cui le fasi del flusso di lavoro menzionate in precedenza si verificano nel sistema.]
 
 . In questo esempio, eseguiamo il flusso di lavoro System Destroy per il sistema creato in precedenza. Selezioniamo il sistema nella schermata *Vista sistema* e avviamo il workflow di distruzione del sistema in *Destroy processes*.
 +
-image:lama-ansible-image34.png["Questa schermata mostra la GUI di SAP lama aperta in System > Provisioning Systems View, che consente di aprire il menu a discesa Destroy Systems."]
+image::lama-ansible-image34.png[Questa schermata mostra la GUI di SAP lama aperta in System > Provisioning Systems View, che consente di aprire il menu a discesa Destroy Systems.]
 
 . Tutti i punti di montaggio mantenuti durante la fase di provisioning vengono mostrati qui e cancellati durante il processo di workflow di system Destroy.
 +
-image:lama-ansible-image35.png["Questa schermata mostra la schermata Destroy System (Destroy System) nella scheda Destroy Storage Volumes (Destroy Storage Volumes) con tutti i punti di montaggio"]
+image::lama-ansible-image35.png[Questa schermata mostra la schermata Destroy System (Destroy System) nella scheda Destroy Storage Volumes (Destroy Storage Volumes) con tutti i punti di montaggio]
 
 +
 Nessun nome host virtuale viene cancellato perché vengono mantenuti tramite DNS e assegnati automaticamente.
 
 +
-image:lama-ansible-image36.png["Questa schermata mostra la schermata Destroy System (distruggere sistema) nella scheda Delete host Names (Elimina nomi host). Non sono elencati nomi host."]
+image::lama-ansible-image36.png[Questa schermata mostra la schermata Destroy System (distruggere sistema) nella scheda Delete host Names (Elimina nomi host). Non sono elencati nomi host.]
 
 . Per avviare l'operazione, fare clic sul pulsante Execute (Esegui).
 +
-image:lama-ansible-image37.png["Questa schermata mostra la pagina Destroy Storage Volumes Summary."]
+image::lama-ansible-image37.png[Questa schermata mostra la pagina Destroy Storage Volumes Summary.]
 
 +
 SAP lama ora esegue l'eliminazione dei cloni del volume ed elimina la configurazione del sistema clonato.
 
 . È possibile monitorare l'avanzamento del flusso di lavoro dei cloni nel menu *Monitoring*.
 +
-image:lama-ansible-image38.png["Questa schermata mostra l'avanzamento del flusso di lavoro System Destroy in tempo reale."]
+image::lama-ansible-image38.png[Questa schermata mostra l'avanzamento del flusso di lavoro System Destroy in tempo reale.]
 
 . Selezionando l'attività *Delete NetAppClone* (Elimina NetAppClone*), viene visualizzato il log dettagliato di tale operazione. L'esecuzione del manuale Ansible è illustrata qui. Come puoi vedere, il playbook Ansible `netapp_lama_ServiceConfigRemoval.yml` Viene eseguito per ogni volume di database HANA, dati, log e condiviso.
 +
-image:lama-ansible-image39.png["Questa schermata mostra la pagina di log del flusso di lavoro System Destroy."]
+image::lama-ansible-image39.png[Questa schermata mostra la pagina di log del flusso di lavoro System Destroy.]
 
 

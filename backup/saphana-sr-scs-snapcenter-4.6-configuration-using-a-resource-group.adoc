@@ -37,48 +37,48 @@ Da un punto di vista di alto livello, è necessario eseguire i seguenti passaggi
 . Creare un gruppo di risorse, inclusi entrambi gli host e configurare la protezione.
 
 
-image:saphana-sr-scs-image6.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image6.png[Errore: Immagine grafica mancante]
 
 Dopo aver installato il plug-in HANA di SnapCenter su entrambi gli host HANA, i sistemi HANA vengono visualizzati nella vista delle risorse di SnapCenter allo stesso modo delle altre risorse rilevate automaticamente. A partire da SnapCenter 4.6, viene visualizzata una colonna aggiuntiva che mostra lo stato della replica del sistema HANA (attivata/disattivata, primaria/secondaria).
 
-image:saphana-sr-scs-image7.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image7.png[Errore: Immagine grafica mancante]
 
 Facendo clic sulla risorsa, SnapCenter richiede la chiave di archivio utente HANA per il sistema HANA.
 
-image:saphana-sr-scs-image8.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image8.png[Errore: Immagine grafica mancante]
 
 Vengono eseguite ulteriori operazioni di rilevamento automatico e SnapCenter mostra i dettagli delle risorse. In SnapCenter 4.6, lo stato della replica del sistema e il server secondario sono elencati in questa vista.
 
-image:saphana-sr-scs-image9.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image9.png[Errore: Immagine grafica mancante]
 
 Dopo aver eseguito le stesse operazioni per la seconda risorsa HANA, il processo di individuazione automatica è completo e entrambe le risorse HANA sono configurate in SnapCenter.
 
-image:saphana-sr-scs-image10.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image10.png[Errore: Immagine grafica mancante]
 
 Per i sistemi abilitati alla replica del sistema HANA, è necessario configurare un gruppo di risorse SnapCenter, incluse entrambe le risorse HANA.
 
-image:saphana-sr-scs-image11.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image11.png[Errore: Immagine grafica mancante]
 
 NetApp consiglia di utilizzare un formato nome personalizzato per il nome Snapshot, che deve includere il nome host, la policy e la pianificazione.
 
-image:saphana-sr-scs-image12.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image12.png[Errore: Immagine grafica mancante]
 
 È necessario aggiungere entrambi gli host HANA al gruppo di risorse.
 
-image:saphana-sr-scs-image13.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image13.png[Errore: Immagine grafica mancante]
 
 I criteri e le pianificazioni vengono configurati per il gruppo di risorse.
 
 
 NOTE: La conservazione definita nel criterio viene utilizzata in entrambi gli host HANA. Se, ad esempio, nel criterio viene definita una conservazione di 10, la somma dei backup di entrambi gli host viene utilizzata come criterio per l'eliminazione del backup. SnapCenter elimina il backup meno recente indipendentemente se è stato creato sull'host primario o secondario corrente.
 
-image:saphana-sr-scs-image14.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image14.png[Errore: Immagine grafica mancante]
 
 La configurazione del gruppo di risorse è terminata ed è possibile eseguire i backup.
 
-image:saphana-sr-scs-image15.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image15.png[Errore: Immagine grafica mancante]
 
-image:saphana-sr-scs-image16.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image16.png[Errore: Immagine grafica mancante]
 
 
 
@@ -86,38 +86,38 @@ image:saphana-sr-scs-image16.png["Errore: Immagine grafica mancante"]
 
 Quando viene eseguita un'operazione di backup del gruppo di risorse, SnapCenter identifica l'host primario e attiva un backup solo sull'host primario. In questo modo, verrà attivato lo snap-shoting solo del volume di dati dell'host primario. Nel nostro esempio, hana-3 è l'host primario corrente e viene eseguito un backup su questo host.
 
-image:saphana-sr-scs-image17.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image17.png[Errore: Immagine grafica mancante]
 
 Il log dei lavori di SnapCenter mostra l'operazione di identificazione e l'esecuzione del backup sull'host primario corrente hana-3.
 
-image:saphana-sr-scs-image18.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image18.png[Errore: Immagine grafica mancante]
 
 È stato creato un backup Snapshot nella risorsa HANA principale. Il nome host incluso nel nome del backup mostra hana-3.
 
-image:saphana-sr-scs-image19.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image19.png[Errore: Immagine grafica mancante]
 
 Lo stesso backup Snapshot è anche visibile nel catalogo di backup HANA.
 
-image:saphana-sr-scs-image20.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image20.png[Errore: Immagine grafica mancante]
 
 Se viene eseguita un'operazione di Takeover, ulteriori backup SnapCenter identificano ora il precedente host secondario (hana-4) come primario e l'operazione di backup viene eseguita in hana-4. Anche in questo caso, viene attivato solo il volume di dati del nuovo host primario (hana-4).
 
 
 NOTE: La logica di identificazione SnapCenter copre solo gli scenari in cui gli host HANA si trovano in una relazione primaria-secondaria o quando uno degli host HANA è offline.
 
-image:saphana-sr-scs-image21.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image21.png[Errore: Immagine grafica mancante]
 
 Il log dei lavori di SnapCenter mostra l'operazione di identificazione e l'esecuzione del backup sull'host primario corrente hana-4.
 
-image:saphana-sr-scs-image22.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image22.png[Errore: Immagine grafica mancante]
 
 È stato creato un backup Snapshot nella risorsa HANA principale. Il nome host incluso nel nome del backup mostra hana-4.
 
-image:saphana-sr-scs-image23.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image23.png[Errore: Immagine grafica mancante]
 
 Lo stesso backup Snapshot è anche visibile nel catalogo di backup HANA.
 
-image:saphana-sr-scs-image24.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image24.png[Errore: Immagine grafica mancante]
 
 
 
@@ -139,7 +139,7 @@ Poiché la gestione della conservazione presso la destinazione SnapVault viene g
 
 NOTE: Non è possibile eseguire la pulizia di tutte le copie Snapshot di SnapVault, poiché una copia Snapshot viene bloccata come punto di sincronizzazione. Se è necessario eliminare anche la copia Snapshot più recente, è necessario eliminare la relazione di replica SnapVault. In questo caso, NetApp consiglia di eliminare i backup nel catalogo di backup HANA per sbloccare la gestione della conservazione dei backup dei log.
 
-image:saphana-sr-scs-image25.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image25.png[Errore: Immagine grafica mancante]
 
 
 
@@ -155,7 +155,7 @@ Se la replica di SnapVault fa parte della strategia di protezione dei dati, è n
 
 La figura seguente mostra uno scenario in cui sono stati eseguiti più takeover e sono stati creati backup Snapshot in entrambi i siti. Con lo stato corrente, l'host hana-3 è l'host primario e l'ultimo backup è T4, creato sull'host hana-3. Se è necessario eseguire un'operazione di ripristino e ripristino, i backup T1 e T4 sono disponibili per il ripristino e il ripristino in SnapCenter. I backup creati sull'host hana-4 (T2, T3) non possono essere ripristinati utilizzando SnapCenter. Questi backup devono essere copiati manualmente nel volume di dati di hana-3 per il ripristino.
 
-image:saphana-sr-scs-image26.png["Errore: Immagine grafica mancante"]
+image::saphana-sr-scs-image26.png[Errore: Immagine grafica mancante]
 
 Le operazioni di ripristino e ripristino per una configurazione del gruppo di risorse di SnapCenter 4.6 sono identiche a quelle di una configurazione della replica non di sistema rilevata automaticamente. Sono disponibili tutte le opzioni per il ripristino e il ripristino automatizzato. Per ulteriori dettagli, consultare il report tecnico https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^].
 

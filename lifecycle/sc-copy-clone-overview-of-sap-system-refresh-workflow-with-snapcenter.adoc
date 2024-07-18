@@ -45,7 +45,7 @@ Il flusso di lavoro di refresh del sistema SAP con SnapCenter consiste in cinque
 
 
 
-image:sc-copy-clone-image7.png[""]
+image::sc-copy-clone-image7.png[copia sc clone image7]
 
 Nella maggior parte dei casi, i sistemi di test/controllo qualità target vengono utilizzati per almeno un paio di settimane. Poiché il volume FlexClone blocca la Snapshot del volume di sistema di origine, questo Snapshot richiederà capacità aggiuntiva in base alla velocità di modifica dei blocchi nel volume di sistema di origine. Per i sistemi di origine della produzione e con una frequenza di modifica media del 20% al giorno, la snapshot bloccata raggiungerà il 100% dopo 5 giorni. Pertanto, NetApp consiglia di suddividere il volume FlexClone immediatamente o dopo un paio di giorni, se il clone è basato su un sistema di origine della produzione. L'operazione di suddivisione dei cloni non blocca l'utilizzo del volume clonato e può quindi essere eseguita in qualsiasi momento mentre il database HANA è in uso.
 
@@ -87,6 +87,6 @@ NOTE: Il vecchio volume di dati, precedentemente suddiviso, deve essere cancella
 
 
 
-image:sc-copy-clone-image8.png[""]
+image::sc-copy-clone-image8.png[copia sc clone image8]
 
 La sezione link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html[""Aggiornamento del sistema SAP HANA con SnapCenter""] fornisce una descrizione dettagliata passo-passo di entrambi i flussi di lavoro di refresh del sistema.

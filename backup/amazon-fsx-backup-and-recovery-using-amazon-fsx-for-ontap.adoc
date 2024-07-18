@@ -34,7 +34,7 @@ La figura seguente mostra HANA Studio di un cliente che utilizza le operazioni d
 
 La maggior parte del runtime complessivo del workflow di backup è il tempo necessario per eseguire l'operazione di salvataggio del backup HANA, che dipende dal carico sul database HANA. Il backup Snapshot dello storage viene sempre completato in un paio di secondi.
 
-image:amazon-fsx-image1.png["Errore: Immagine grafica mancante"]
+image::amazon-fsx-image1.png[Errore: Immagine grafica mancante]
 
 
 
@@ -72,7 +72,7 @@ Le prime due barre mostrano che anche con un singolo backup Snapshot al giorno, 
 
 La figura seguente mostra anche che quattro o sei backup Snapshot al giorno sono i più sensati, perché una frequenza più elevata non influisce più in modo significativo sul runtime complessivo.
 
-image:amazon-fsx-image2.png["Errore: Immagine grafica mancante"]
+image::amazon-fsx-image2.png[Errore: Immagine grafica mancante]
 
 
 
@@ -84,7 +84,7 @@ L'upgrade del sistema SAP HANA è un esempio di come un backup on-demand prima d
 
 Un altro esempio di caso d'utilizzo potrebbe essere un tipico ciclo di test, in cui il test deve essere eseguito su più iterazioni con diversi set di dati o parametri. Sfruttando le rapide operazioni di backup e ripristino, è possibile creare facilmente punti di salvataggio all'interno del ciclo di test e ripristinare il sistema a uno qualsiasi di questi punti di salvataggio precedenti se un test non riesce o deve essere ripetuto. Ciò consente di completare i test in anticipo o di eseguire più test contemporaneamente e di migliorare i risultati dei test.
 
-image:amazon-fsx-image3.png["Errore: Immagine grafica mancante"]
+image::amazon-fsx-image3.png[Errore: Immagine grafica mancante]
 
 Una volta implementati, i backup Snapshot possono essere utilizzati per gestire diversi altri casi di utilizzo, che richiedono copie di un database HANA. Con FSX per ONTAP, puoi creare un nuovo volume in base al contenuto di qualsiasi backup Snapshot disponibile. Il tempo di esecuzione di questa operazione è di alcuni secondi, indipendentemente dalle dimensioni del volume.
 
@@ -94,4 +94,4 @@ Il secondo caso di utilizzo è la creazione di un sistema di riparazione, utiliz
 
 L'ultimo caso di utilizzo è la capacità di eseguire un test di failover per il disaster recovery senza interrompere la replica e quindi senza influenzare l'RTO e l'RPO (Recovery Point Objective) della configurazione del disaster recovery. Quando la replica di NetApp SnapMirror per FSX per ONTAP viene utilizzata per replicare i dati nel sito di disaster recovery, i backup Snapshot di produzione sono disponibili anche nel sito di disaster recovery e possono quindi essere utilizzati per creare un nuovo volume per il test di disaster recovery.
 
-image:amazon-fsx-image4.png["Errore: Immagine grafica mancante"]
+image::amazon-fsx-image4.png[Errore: Immagine grafica mancante]

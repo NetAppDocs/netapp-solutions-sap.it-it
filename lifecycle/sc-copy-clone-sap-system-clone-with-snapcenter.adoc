@@ -34,7 +34,7 @@ Se il sistema non è più necessario, il processo di pulizia viene eseguito con 
 . Flusso di lavoro di eliminazione dei cloni SnapCenter per il volume condiviso SAP HANA.
 
 
-image:sc-copy-clone-image9.png[""]
+image::sc-copy-clone-image9.png[copia sc clone image9]
 
 
 
@@ -64,7 +64,7 @@ Sono state utilizzate le seguenti versioni software:
 
 Tutti i sistemi SAP HANA devono essere configurati in base alla guida alla configurazione https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA su sistemi NetApp AFF con NFS"]. SnapCenter e le risorse SAP HANA sono state configurate in base alla guida alle Best practice https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Backup e ripristino SAP HANA con SnapCenter"].
 
-image:sc-copy-clone-image41.png[""]
+image::sc-copy-clone-image41.png[copia sc clone image41]
 
 
 
@@ -172,12 +172,12 @@ hana-7:/opt/NetApp/snapcenter/scc/etc #
 . Selezionare un backup Snapshot dal volume condiviso SS1 del sistema di origine e fare clic su Clone (Clona).
 
 
-image:sc-copy-clone-image42.png[""]
+image::sc-copy-clone-image42.png[copia sc clone image42]
 
 . Selezionare l'host in cui è stato preparato il sistema di riparazione di destinazione. L'indirizzo IP di esportazione NFS deve essere l'interfaccia di rete dello storage dell'host di destinazione. Come SID di destinazione, mantenere lo stesso SID del sistema di origine. Nel nostro esempio SS1.
 
 
-image:sc-copy-clone-image43.png[""]
+image::sc-copy-clone-image43.png[copia sc clone image43]
 
 . Inserire lo script di montaggio con le opzioni della riga di comando richieste.
 +
@@ -186,12 +186,12 @@ NOTE: Il sistema SAP HANA utilizza un singolo volume per `/hana/shared` e per `/
 
 
 
-image:sc-copy-clone-image44.png[""]
+image::sc-copy-clone-image44.png[copia sc clone image44]
 
 . La schermata Dettagli lavoro in SnapCenter mostra lo stato di avanzamento dell'operazione.
 
 
-image:sc-copy-clone-image45.png[""]
+image::sc-copy-clone-image45.png[copia sc clone image45]
 
 . Il file di log dello script sc-mount-volume.sh mostra le diverse fasi eseguite per l'operazione di mount.
 
@@ -220,7 +220,7 @@ Filesystem 1K-blocks Used Available Use% Mounted on
 . In SnapCenter, è visibile una nuova risorsa per il volume clonato.
 
 
-image:sc-copy-clone-image46.png[""]
+image::sc-copy-clone-image46.png[copia sc clone image46]
 
 . Ora che il volume /HANA/condiviso è disponibile, è possibile avviare i servizi SAP HANA.
 
@@ -259,12 +259,12 @@ Vengono clonati altri servizi applicativi SAP nello stesso modo del volume condi
 . Seleziona un backup SAP HANA Snapshot dal sistema di origine SS1.
 
 
-image:sc-copy-clone-image47.png[""]
+image::sc-copy-clone-image47.png[copia sc clone image47]
 
 . Selezionare l'host in cui è stato preparato il sistema di riparazione di destinazione. L'indirizzo IP di esportazione NFS deve essere l'interfaccia di rete dello storage dell'host di destinazione. Come SID di destinazione, mantenere lo stesso SID del sistema di origine. Nel nostro esempio SS1
 
 
-image:sc-copy-clone-image48.png[""]
+image::sc-copy-clone-image48.png[copia sc clone image48]
 
 . Immettere gli script post-clone con le opzioni della riga di comando richieste.
 +
@@ -273,11 +273,11 @@ NOTE: Lo script per l'operazione di recovery recupera il database SAP HANA fino 
 
 
 
-image:sc-copy-clone-image23.png[""]
+image::sc-copy-clone-image23.png[copia sc clone image23]
 
 La schermata dei dettagli del lavoro in SnapCenter mostra lo stato di avanzamento dell'operazione.
 
-image:sc-copy-clone-image49.png[""]
+image::sc-copy-clone-image49.png[copia sc clone image49]
 
 Il file di log dello `sc-system-refresh` script mostra le diverse fasi eseguite per l'operazione di mount e di ripristino.
 

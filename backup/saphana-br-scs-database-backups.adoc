@@ -24,7 +24,7 @@ Il backup del database on-demand può essere eseguito utilizzando l'interfaccia 
 
 La topologia delle risorse di SnapCenter mostra un elenco di backup creati utilizzando SnapCenter. La figura seguente mostra i backup disponibili sullo storage primario ed evidenzia il backup più recente.
 
-image:saphana-br-scs-image82.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image82.png[Errore: Immagine grafica mancante]
 
 Quando si esegue un backup utilizzando le copie Snapshot dello storage per un sistema SAP HANA MDC, viene creata una copia Snapshot del volume di dati. Questo volume di dati contiene i dati del database di sistema e i dati di tutti i database tenant. Per riflettere questa architettura fisica, SAP HANA esegue internamente un backup combinato del database di sistema e di tutti i database tenant ogni volta che SnapCenter attiva un backup Snapshot. Ciò comporta più voci di backup separate nel catalogo di backup SAP HANA: Una per il database di sistema e una per ogni database tenant.
 
@@ -36,9 +36,9 @@ Nel catalogo di backup SAP HANA, il nome del backup SnapCenter viene memorizzato
 
 NOTE: La release HANA 2.0 SPS4 (revisione 40 e 41) mostra sempre una dimensione di backup pari a zero per i backup basati su Snapshot. Questo problema è stato risolto con la revisione 42. Per ulteriori informazioni, consulta la nota SAP https://launchpad.support.sap.com/["https://launchpad.support.sap.com/#/notes/2795010"^].
 
-image:saphana-br-scs-image83.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image83.png[Errore: Immagine grafica mancante]
 
-image:saphana-br-scs-image84.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image84.png[Errore: Immagine grafica mancante]
 
 
 NOTE: SnapCenter è consapevole solo dei propri backup. I backup aggiuntivi creati, ad esempio, con SAP HANA Studio, sono visibili nel catalogo SAP HANA, ma non in SnapCenter.
@@ -49,11 +49,11 @@ NOTE: SnapCenter è consapevole solo dei propri backup. I backup aggiuntivi crea
 
 Per visualizzare i backup sul layer di storage, utilizzare Gestione di sistema di NetApp OnCommand e selezionare il volume del database nella vista SVM - Volume. La scheda copie Snapshot inferiori visualizza le copie Snapshot del volume. La seguente schermata mostra i backup disponibili per il volume di database `SS1_data_mnt00001` allo storage primario. Il backup evidenziato è il backup mostrato in SnapCenter e SAP HANA Studio nelle immagini precedenti e ha la stessa convenzione di denominazione.
 
-image:saphana-br-scs-image85.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image85.png[Errore: Immagine grafica mancante]
 
 La seguente schermata mostra i backup disponibili per il volume di destinazione della replica `hana_SA1_data_mnt00001_dest` nel sistema di storage secondario.
 
-image:saphana-br-scs-image86.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image86.png[Errore: Immagine grafica mancante]
 
 
 
@@ -64,11 +64,11 @@ image:saphana-br-scs-image86.png["Errore: Immagine grafica mancante"]
 La vista della topologia delle risorse offre una panoramica di tutti i backup disponibili creati utilizzando SnapCenter. L'area superiore di questa vista visualizza la topologia di backup, mostrando i backup sullo storage primario (copie locali) e, se disponibile, sullo storage di backup off-site (copie del vault).
 
 +
-image:saphana-br-scs-image86.5.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image86.5.png[Errore: Immagine grafica mancante]
 
 . Nella riga superiore, selezionare l'icona Backup Now per avviare un backup on-demand. Dall'elenco a discesa, selezionare il criterio di backup `LocalSnap` Quindi fare clic su Backup per avviare il backup on-demand.
 +
-image:saphana-br-scs-image87.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image87.png[Errore: Immagine grafica mancante]
 
 +
 Viene avviato il processo di backup. Un registro dei cinque job precedenti viene visualizzato nell'area Activity (attività) sotto la vista della topologia. Al termine del backup, viene visualizzata una nuova voce nella vista della topologia. I nomi dei backup seguono la stessa convenzione di denominazione del nome Snapshot definito nella sezione link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection-configuration[""Configurazione della protezione delle risorse"."]
@@ -78,11 +78,11 @@ Viene avviato il processo di backup. Un registro dei cinque job precedenti viene
 NOTE: Per visualizzare l'elenco di backup aggiornato, è necessario chiudere e riaprire la vista della topologia.
 
 +
-image:saphana-br-scs-image88.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image88.png[Errore: Immagine grafica mancante]
 
 . I dettagli della commessa vengono visualizzati facendo clic sulla riga dell'attività della commessa nell'area Activity (attività). È possibile aprire un registro dettagliato dei processi facendo clic su View Logs (Visualizza registri).
 +
-image:saphana-br-scs-image89.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image89.png[Errore: Immagine grafica mancante]
 
 . In SAP HANA Studio, il nuovo backup è visibile nel catalogo di backup. Lo stesso nome di backup in SnapCenter viene utilizzato anche nel campo comment e EBID nel catalogo di backup.
 
@@ -94,11 +94,11 @@ image:saphana-br-scs-image89.png["Errore: Immagine grafica mancante"]
 . Nella vista delle risorse, selezionare la risorsa e fare doppio clic sulla riga per passare alla vista della topologia.
 . Nella riga superiore, selezionare l'icona Backup Now per avviare un backup on-demand. Dall'elenco a discesa, selezionare il criterio di backup `LocalSnapAndSnapVault`, Quindi fare clic su Backup per avviare il backup on-demand.
 +
-image:saphana-br-scs-image90.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image90.png[Errore: Immagine grafica mancante]
 
 . I dettagli della commessa vengono visualizzati facendo clic sulla riga dell'attività della commessa nell'area Activity (attività).
 +
-image:saphana-br-scs-image91.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image91.png[Errore: Immagine grafica mancante]
 
 . Al termine del backup, viene visualizzata una nuova voce nella vista della topologia. I nomi dei backup seguono la stessa convenzione di denominazione del nome Snapshot definito nella sezione link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection-configuration[""Configurazione della protezione delle risorse"."]
 +
@@ -106,11 +106,11 @@ image:saphana-br-scs-image91.png["Errore: Immagine grafica mancante"]
 NOTE: Per visualizzare l'elenco di backup aggiornato, è necessario chiudere e riaprire la vista della topologia.
 
 +
-image:saphana-br-scs-image92.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image92.png[Errore: Immagine grafica mancante]
 
 . Selezionando le copie del vault, vengono visualizzati i backup nello storage secondario. Il nome del backup replicato è identico al nome del backup nello storage primario.
 +
-image:saphana-br-scs-image93.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image93.png[Errore: Immagine grafica mancante]
 
 . In SAP HANA Studio, il nuovo backup è visibile nel catalogo di backup. Lo stesso nome di backup in SnapCenter viene utilizzato anche nel campo comment e EBID nel catalogo di backup.
 

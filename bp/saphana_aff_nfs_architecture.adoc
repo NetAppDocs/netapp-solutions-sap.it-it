@@ -22,11 +22,11 @@ Diversi modelli della famiglia di sistemi AFF possono essere combinati e abbinat
 
 La figura seguente mostra una configurazione di esempio con otto host SAP HANA collegati a una coppia di storage ad alta disponibilità (ha).
 
-image:saphana_aff_nfs_image2.png["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image2.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra un esempio di utilizzo di VMware vSphere come livello di virtualizzazione.
 
-image:saphana_aff_nfs_image3.jpg["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image3.jpg[Errore: Immagine grafica mancante]
 
 L'architettura può essere scalata in due dimensioni:
 
@@ -36,11 +36,11 @@ L'architettura può essere scalata in due dimensioni:
 
 La figura seguente mostra una configurazione di esempio in cui più host SAP HANA sono collegati ai controller di storage. In questo esempio, sono necessari più shelf di dischi per soddisfare i requisiti di capacità e performance dei 16 host SAP HANA. A seconda dei requisiti di throughput totale, è necessario aggiungere connessioni aggiuntive da 10 GbE o più veloci ai controller di storage.
 
-image:saphana_aff_nfs_image4.png["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image4.png[Errore: Immagine grafica mancante]
 
 Indipendentemente dal sistema AFF implementato, il panorama SAP HANA può essere scalato aggiungendo uno qualsiasi dei controller di storage certificati per soddisfare la densità di nodo desiderata, come mostrato nella figura seguente.
 
-image:saphana_aff_nfs_image5.png["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image5.png[Errore: Immagine grafica mancante]
 
 
 
@@ -54,7 +54,7 @@ La tecnologia NetApp SnapMirror consente di replicare le copie Snapshot create s
 
 È possibile eseguire il backup dei log del database direttamente sullo storage secondario utilizzando un montaggio NFS, come illustrato nella figura seguente.
 
-image:saphana_aff_nfs_image6.jpg["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image6.jpg[Errore: Immagine grafica mancante]
 
 I backup Snapshot basati su storage offrono vantaggi significativi rispetto ai backup convenzionali basati su file. Questi vantaggi includono, a titolo esemplificativo e non esaustivo, i seguenti:
 
@@ -91,7 +91,7 @@ I server dei siti DR possono essere utilizzati come sistemi di sviluppo/test dur
 
 Entrambi i metodi di replica consentono di eseguire test del workflow di DR senza influenzare l'RPO e l'RTO. I volumi FlexClone vengono creati sullo storage e collegati ai server di test del DR.
 
-image:saphana_aff_nfs_image7.png["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image7.png[Errore: Immagine grafica mancante]
 
 La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage secondario non viene completata per qualsiasi motivo, l'i/o dell'applicazione non riesce, garantendo così che i sistemi di storage primario e secondario siano identici. L'i/o dell'applicazione al primario riprende solo dopo che la relazione SnapMirror ritorna allo stato InSync. In caso di guasto dello storage primario, l'i/o dell'applicazione può essere ripristinato sullo storage secondario dopo il failover senza perdita di dati. In modalità StrictSync, l'RPO è sempre zero.
 
@@ -101,4 +101,4 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito fornisce alta disponibilità locale e viene utilizzato per il carico di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.
 
-image:saphana_aff_nfs_image8.png["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image8.png[Errore: Immagine grafica mancante]

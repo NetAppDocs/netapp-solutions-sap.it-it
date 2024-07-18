@@ -109,10 +109,10 @@ In questa sezione vengono fornite le procedure per il ripristino e il ripristino
 NOTE: È possibile selezionare il ripristino dallo storage di backup primario o esterno al sito.
 
 +
-image:saphana-br-scs-image96.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image96.png[Errore: Immagine grafica mancante]
 
 +
-image:saphana-br-scs-image97.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image97.png[Errore: Immagine grafica mancante]
 
 . Selezionare l'ambito e il tipo di ripristino.
 +
@@ -126,19 +126,19 @@ Opzioni del tipo di ripristino per il ripristino dallo storage primario.
 NOTE: L'opzione di ripristino del volume è disponibile solo per le operazioni di ripristino da primarie con NFS.
 
 +
-image:saphana-br-scs-image98.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image98.png[Errore: Immagine grafica mancante]
 
 +
 Opzioni del tipo di ripristino per il ripristino dallo storage di backup fuori sede.
 
 +
-image:saphana-br-scs-image99.jpeg["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image99.jpeg[Errore: Immagine grafica mancante]
 
 +
 Opzioni del tipo di ripristino per il ripristino dallo storage primario con SAN Fibre Channel.
 
 +
-image:saphana-br-scs-image100.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image100.png[Errore: Immagine grafica mancante]
 
 . Selezionare Recovery Scope (ambito ripristino) e specificare la posizione per il backup del registro e del catalogo.
 +
@@ -146,27 +146,27 @@ image:saphana-br-scs-image100.png["Errore: Immagine grafica mancante"]
 NOTE: SnapCenter utilizza il percorso predefinito o i percorsi modificati nel file HANA global.ini per prepopolare le posizioni di backup del registro e del catalogo.
 
 +
-image:saphana-br-scs-image101.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image101.png[Errore: Immagine grafica mancante]
 
 . Immettere i comandi opzionali di prerestore.
 +
-image:saphana-br-scs-image102.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image102.png[Errore: Immagine grafica mancante]
 
 . Immettere i comandi post-ripristino opzionali.
 +
-image:saphana-br-scs-image103.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image103.png[Errore: Immagine grafica mancante]
 
 . Immettere le impostazioni e-mail opzionali.
 +
-image:saphana-br-scs-image104.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image104.png[Errore: Immagine grafica mancante]
 
 . Per avviare l'operazione di ripristino, fare clic su fine.
 +
-image:saphana-br-scs-image105.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image105.png[Errore: Immagine grafica mancante]
 
 . SnapCenter esegue l'operazione di ripristino e ripristino. Questo esempio mostra i dettagli del processo di ripristino e ripristino.
 +
-image:saphana-br-scs-image106.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image106.png[Errore: Immagine grafica mancante]
 
 
 
@@ -214,7 +214,7 @@ hdbsql SYSTEMDB=>
 ....
 . Selezionare un backup in SnapCenter da utilizzare per l'operazione di ripristino.
 +
-image:saphana-br-scs-image107.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image107.png[Errore: Immagine grafica mancante]
 
 . Selezionare il tenant da ripristinare.
 +
@@ -222,35 +222,35 @@ image:saphana-br-scs-image107.png["Errore: Immagine grafica mancante"]
 NOTE: SnapCenter mostra un elenco di tutti i tenant inclusi nel backup selezionato.
 
 +
-image:saphana-br-scs-image108.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image108.png[Errore: Immagine grafica mancante]
 
 +
 Il ripristino single-tenant non è supportato con SnapCenter 4.3. Nessun ripristino preselezionato e non modificabile.
 
 +
-image:saphana-br-scs-image109.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image109.png[Errore: Immagine grafica mancante]
 
 . Immettere i comandi opzionali di prerestore.
 +
-image:saphana-br-scs-image110.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image110.png[Errore: Immagine grafica mancante]
 
 . Immettere comandi post-ripristino opzionali.
 +
-image:saphana-br-scs-image111.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image111.png[Errore: Immagine grafica mancante]
 
 . Immettere le impostazioni e-mail opzionali.
 +
-image:saphana-br-scs-image112.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image112.png[Errore: Immagine grafica mancante]
 
 . Per avviare l'operazione di ripristino, fare clic su fine.
 +
-image:saphana-br-scs-image113.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image113.png[Errore: Immagine grafica mancante]
 
 +
 L'operazione di ripristino viene eseguita da SnapCenter. Questo esempio mostra i dettagli del lavoro di ripristino.
 
 +
-image:saphana-br-scs-image114.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image114.png[Errore: Immagine grafica mancante]
 
 +
 
@@ -290,44 +290,44 @@ sm1adm@hana-2:/usr/sap/SM1/HDB00>
 ....
 . Avviare il ripristino con HANA Studio.
 +
-image:saphana-br-scs-image115.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image115.png[Errore: Immagine grafica mancante]
 
 . Selezionare il tenant.
 +
-image:saphana-br-scs-image116.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image116.png[Errore: Immagine grafica mancante]
 
 . Selezionare il tipo di ripristino.
 +
-image:saphana-br-scs-image117.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image117.png[Errore: Immagine grafica mancante]
 
 . Fornire la posizione del catalogo di backup.
 +
-image:saphana-br-scs-image118.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image118.png[Errore: Immagine grafica mancante]
 
 +
-image:saphana-br-scs-image119.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image119.png[Errore: Immagine grafica mancante]
 
 +
 All'interno del catalogo di backup, il backup ripristinato viene evidenziato con un'icona verde. L'ID del backup esterno mostra il nome del backup precedentemente selezionato in SnapCenter.
 
 . Selezionare la voce con l'icona verde e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image120.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image120.png[Errore: Immagine grafica mancante]
 
 . Fornire la posizione di backup del registro.
 +
-image:saphana-br-scs-image121.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image121.png[Errore: Immagine grafica mancante]
 
 . Selezionare le altre impostazioni desiderate.
 +
-image:saphana-br-scs-image122.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image122.png[Errore: Immagine grafica mancante]
 
 . Avviare l'operazione di ripristino del tenant.
 +
-image:saphana-br-scs-image123.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image123.png[Errore: Immagine grafica mancante]
 
 +
-image:saphana-br-scs-image124.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image124.png[Errore: Immagine grafica mancante]
 
 
 
@@ -381,26 +381,26 @@ La sezione seguente descrive i passaggi delle operazioni di ripristino e riprist
 
 . In SAP HANA Studio, selezionare l'opzione Recover System Database (Ripristina database di sistema) per avviare il ripristino del database di sistema.
 +
-image:saphana-br-scs-image125.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image125.png[Errore: Immagine grafica mancante]
 
 . Fare clic su OK per chiudere il database SAP HANA.
 +
-image:saphana-br-scs-image126.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image126.png[Errore: Immagine grafica mancante]
 
 +
 Il sistema SAP HANA si spegne e viene avviata la procedura guidata di ripristino.
 
 . Selezionare il tipo di ripristino e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image127.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image127.png[Errore: Immagine grafica mancante]
 
 . Fornire la posizione del catalogo di backup e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image128.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image128.png[Errore: Immagine grafica mancante]
 
 . Viene visualizzato un elenco dei backup disponibili in base al contenuto del catalogo di backup. Scegliere il backup richiesto e annotare l'ID del backup esterno: Nel nostro esempio, il backup più recente.
 +
-image:saphana-br-scs-image129.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image129.png[Errore: Immagine grafica mancante]
 
 . Smontare tutti i volumi di dati.
 +
@@ -417,7 +417,7 @@ NOTE: In una configurazione di host multipli SAP HANA con FC, l'operazione di di
 
 . Dalla GUI di SnapCenter, selezionare la vista della topologia delle risorse e selezionare il backup da ripristinare; nel nostro esempio, il backup primario più recente. Fare clic sull'icona Restore (Ripristina) per avviare il ripristino.
 +
-image:saphana-br-scs-image130.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image130.png[Errore: Immagine grafica mancante]
 
 +
 Viene avviata la procedura guidata di ripristino di SnapCenter.
@@ -427,38 +427,38 @@ Viene avviata la procedura guidata di ripristino di SnapCenter.
 Selezionare completa risorsa per utilizzare un ripristino basato su volume.
 
 +
-image:saphana-br-scs-image131.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image131.png[Errore: Immagine grafica mancante]
 
 . Selezionare livello file e tutto per utilizzare un'operazione SnapRestore a file singolo per tutti i file.
 +
-image:saphana-br-scs-image132.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image132.png[Errore: Immagine grafica mancante]
 
 +
 
 NOTE: Per un ripristino a livello di file di un sistema host multiplo SAP HANA, selezionare tutti i volumi.
 
 +
-image:saphana-br-scs-image133.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image133.png[Errore: Immagine grafica mancante]
 
 . (Facoltativo) specificare i comandi da eseguire dal plug-in SAP HANA in esecuzione sull'host del plug-in HANA centrale. Fare clic su Avanti.
 +
-image:saphana-br-scs-image134.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image134.png[Errore: Immagine grafica mancante]
 
 . Specificare i comandi opzionali e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image135.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image135.png[Errore: Immagine grafica mancante]
 
 . Specificare le impostazioni di notifica in modo che SnapCenter possa inviare un'e-mail di stato e un registro dei processi. Fare clic su Avanti.
 +
-image:saphana-br-scs-image136.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image136.png[Errore: Immagine grafica mancante]
 
 . Esaminare il riepilogo e fare clic su Finish (fine) per avviare il ripristino.
 +
-image:saphana-br-scs-image137.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image137.png[Errore: Immagine grafica mancante]
 
 . Il lavoro di ripristino viene avviato e il log dei lavori può essere visualizzato facendo doppio clic sulla riga del log nel riquadro delle attività.
 +
-image:saphana-br-scs-image138.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image138.png[Errore: Immagine grafica mancante]
 
 . Attendere il completamento del processo di ripristino. Su ciascun host di database, montare tutti i volumi di dati. Nel nostro esempio, è necessario rimontare un solo volume sull'host del database.
 +
@@ -467,63 +467,63 @@ mount /hana/data/SP1/mnt00001
 ....
 . Accedere a SAP HANA Studio e fare clic su Refresh (Aggiorna) per aggiornare l'elenco dei backup disponibili. Il backup ripristinato con SnapCenter viene visualizzato con un'icona verde nell'elenco dei backup. Selezionare il backup e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image139.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image139.png[Errore: Immagine grafica mancante]
 
 . Fornire la posizione dei backup del registro. Fare clic su Avanti.
 +
-image:saphana-br-scs-image140.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image140.png[Errore: Immagine grafica mancante]
 
 . Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
 +
-image:saphana-br-scs-image141.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image141.png[Errore: Immagine grafica mancante]
 
 . Rivedere le impostazioni di ripristino e fare clic su fine.
 +
-image:saphana-br-scs-image142.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image142.png[Errore: Immagine grafica mancante]
 
 . Viene avviato il processo di ripristino. Attendere il completamento del ripristino del database di sistema.
 +
-image:saphana-br-scs-image143.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image143.png[Errore: Immagine grafica mancante]
 
 . In SAP HANA Studio, selezionare la voce per il database di sistema e avviare Backup Recovery - Recover Tenant Database.
 +
-image:saphana-br-scs-image144.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image144.png[Errore: Immagine grafica mancante]
 
 . Selezionare il tenant da ripristinare e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image145.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image145.png[Errore: Immagine grafica mancante]
 
 . Specificare il tipo di ripristino e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image146.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image146.png[Errore: Immagine grafica mancante]
 
 . Confermare la posizione del catalogo di backup e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image147.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image147.png[Errore: Immagine grafica mancante]
 
 . Verificare che il database del tenant sia offline. Fare clic su OK per continuare.
 +
-image:saphana-br-scs-image148.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image148.png[Errore: Immagine grafica mancante]
 
 . Poiché il ripristino del volume di dati si è verificato prima del ripristino del database di sistema, il backup del tenant è immediatamente disponibile. Selezionare il backup evidenziato in verde e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image149.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image149.png[Errore: Immagine grafica mancante]
 
 . Confermare la posizione di backup del registro e fare clic su Next (Avanti).
 +
-image:saphana-br-scs-image150.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image150.png[Errore: Immagine grafica mancante]
 
 . Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
 +
-image:saphana-br-scs-image151.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image151.png[Errore: Immagine grafica mancante]
 
 . Esaminare le impostazioni di ripristino e avviare il processo di ripristino del database tenant facendo clic su Finish (fine).
 +
-image:saphana-br-scs-image152.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image152.png[Errore: Immagine grafica mancante]
 
 . Attendere il completamento del ripristino e l'avvio del database tenant.
 +
-image:saphana-br-scs-image153.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image153.png[Errore: Immagine grafica mancante]
 
 +
 Il sistema SAP HANA è operativo.

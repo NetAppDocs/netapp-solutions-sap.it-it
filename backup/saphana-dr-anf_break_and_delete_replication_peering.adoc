@@ -21,15 +21,15 @@ NOTE: Per il volume di dati HANA, è necessario ripristinare il volume all'ultim
 
 Le due schermate successive mostrano l'operazione di peering break e delete per il volume di dati HANA. Le stesse operazioni devono essere eseguite anche per il backup del log e per il volume condiviso HANA.
 
-image:saphana-dr-anf_image27.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image27.png[Errore: Immagine grafica mancante]
 
-image:saphana-dr-anf_image28.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image28.png[Errore: Immagine grafica mancante]
 
 Poiché il peering delle repliche è stato eliminato, è possibile ripristinare il volume all'ultimo backup di snapshot HANA. Se il peering non viene cancellato, la selezione del volume di revert non è selezionabile e non è selezionabile. Le due schermate seguenti mostrano l'operazione di ripristino del volume.
 
-image:saphana-dr-anf_image29.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image29.png[Errore: Immagine grafica mancante]
 
-image:saphana-dr-anf_image30.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image30.png[Errore: Immagine grafica mancante]
 
 Dopo l'operazione di revert del volume, il volume di dati si basa sul backup di snapshot HANA coerente e può ora essere utilizzato per eseguire operazioni di ripristino in avanti.
 

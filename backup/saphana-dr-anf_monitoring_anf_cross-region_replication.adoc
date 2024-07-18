@@ -22,15 +22,15 @@ La durata del trasferimento e le dimensioni del trasferimento forniscono informa
 
 La seguente schermata mostra lo stato di replica del volume di dati HANA.
 
-image:saphana-dr-anf_image14.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image14.png[Errore: Immagine grafica mancante]
 
 La seguente schermata mostra lo stato di replica del volume di backup del registro HANA.
 
-image:saphana-dr-anf_image15.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image15.png[Errore: Immagine grafica mancante]
 
 La seguente schermata mostra lo stato di replica del volume condiviso HANA.
 
-image:saphana-dr-anf_image16.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image16.png[Errore: Immagine grafica mancante]
 
 
 
@@ -41,4 +41,4 @@ Ogni volta che si aggiorna la replica dal volume di origine al volume di destina
 
 NOTE: All'interno del volume di origine e di destinazione, vengono create anche le copie Snapshot di SnapMirror, utilizzate per le operazioni di risincronizzazione e aggiornamento della replica. Queste copie Snapshot non sono coerenti con l'applicazione dal punto di vista del database HANA; solo le snapshot coerenti con l'applicazione create tramite AzaCSnap possono essere utilizzate per le operazioni di ripristino HANA.
 
-image:saphana-dr-anf_image17.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image17.png[Errore: Immagine grafica mancante]

@@ -214,4 +214,4 @@ La dimensione della RAM, la dimensione dei dati netti sul disco di ciascun host 
 
 La figura seguente riassume il processo di dimensionamento.
 
-image:saphana_aff_nfs_image9.jpg["Errore: Immagine grafica mancante"]
+image::saphana_aff_nfs_image9.jpg[Errore: Immagine grafica mancante]

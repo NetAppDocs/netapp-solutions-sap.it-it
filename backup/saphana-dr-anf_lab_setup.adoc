@@ -27,7 +27,7 @@ Nel sito DR è stato configurato un singolo pool di capacità con QoS manuale.
 
 La seguente figura illustra la configurazione di laboratorio.
 
-image:saphana-dr-anf_image7.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image7.png[Errore: Immagine grafica mancante]
 
 
 
@@ -39,8 +39,8 @@ Con la replica del volume di dati utilizzando la replica ANF Cross-Region, quest
 
 La figura seguente mostra i backup Snapshot del volume di dati HANA.
 
-image:saphana-dr-anf_image8.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image8.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra il catalogo di backup SAP HANA.
 
-image:saphana-dr-anf_image9.png["Errore: Immagine grafica mancante"]
+image::saphana-dr-anf_image9.png[Errore: Immagine grafica mancante]

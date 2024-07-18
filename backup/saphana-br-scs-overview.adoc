@@ -44,7 +44,7 @@ SnapVault offre vantaggi significativi rispetto ai backup tradizionali. Dopo un 
 
 La soluzione può anche essere facilmente estesa a un modello operativo di cloud ibrido. La replica dei dati per il disaster recovery o il backup fuori sede può essere eseguita dai sistemi NetApp ONTAP on-premise alle istanze di Cloud Volumes ONTAP in esecuzione nel cloud. È possibile utilizzare SnapCenter come strumento centrale per gestire la protezione dei dati e la replica dei dati, indipendentemente dal fatto che il sistema SAP HANA venga eseguito on-premise o nel cloud. La figura seguente mostra una panoramica della soluzione di backup.
 
-image:saphana-br-scs-image1.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image1.png[Errore: Immagine grafica mancante]
 
 
 
@@ -55,7 +55,7 @@ La schermata successiva mostra HANA Studio di un cliente che esegue SAP HANA su 
 
 NOTE: La parte più importante del runtime complessivo del workflow di backup è il tempo necessario per eseguire l'operazione di salvataggio del backup HANA, che dipende dal carico sul database HANA. Il backup Snapshot dello storage viene sempre completato in un paio di secondi.
 
-image:saphana-br-scs-image2.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image2.png[Errore: Immagine grafica mancante]
 
 
 
@@ -89,17 +89,17 @@ I backup dei dati di copia Snapshot dello storage vengono in genere pianificati 
 
 La figura seguente mostra un esempio RTO per un database da 1 TB quando vengono utilizzati backup dei dati basati su file. In questo esempio, un backup viene eseguito una volta al giorno. L'RTO varia in base al momento in cui sono stati eseguiti il ripristino e il ripristino. Se il ripristino e il ripristino sono stati eseguiti immediatamente dopo l'esecuzione di un backup, l'RTO si basa principalmente sul tempo di ripristino, che nell'esempio è di 1 ora e 10 minuti. Il tempo di ripristino è aumentato a 2 ore e 50 minuti quando il ripristino e il ripristino sono stati eseguiti immediatamente prima del backup successivo e l'RTO massimo è stato di 4 ore e 30 minuti.
 
-image:saphana-br-scs-image3.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image3.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra un esempio RTO per un database da 1 TB quando vengono utilizzati backup Snapshot. Con i backup Snapshot basati sullo storage, l'RTO dipende solo dall'ora di avvio del database e dal tempo di ripristino in avanti, in quanto il ripristino viene completato in pochi secondi, indipendentemente dalle dimensioni del database. Il tempo di recupero in avanti aumenta anche a seconda del momento in cui vengono eseguiti il ripristino e il ripristino, ma a causa della maggiore frequenza dei backup (ogni sei ore in questo esempio), il tempo di recupero in avanti è di 43 minuti al massimo. In questo esempio, l'RTO massimo è di 1 ora e 13 minuti.
 
-image:saphana-br-scs-image4.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image4.png[Errore: Immagine grafica mancante]
 
 La figura seguente mostra un confronto RTO tra backup Snapshot basati su file e storage per database di dimensioni diverse e frequenze diverse dei backup Snapshot. La barra verde mostra il backup basato su file. Le altre barre mostrano i backup delle copie Snapshot con frequenze di backup diverse.
 
 Con un singolo backup dei dati di copia Snapshot al giorno, l'RTO è già ridotto del 40% rispetto a un backup dei dati basato su file. La riduzione aumenta fino al 70% quando vengono eseguiti quattro backup Snapshot al giorno. La figura mostra inoltre che la curva si appiattire se si aumenta la frequenza di backup Snapshot a più di quattro o sei backup Snapshot al giorno. I nostri clienti configurano quindi da quattro a sei backup Snapshot al giorno.
 
-image:saphana-br-scs-image5.png["Errore: Immagine grafica mancante"]
+image::saphana-br-scs-image5.png[Errore: Immagine grafica mancante]
 
 
 NOTE: Il grafico mostra le dimensioni della RAM del server HANA. La dimensione del database in memoria è calcolata in modo da essere la metà della dimensione della RAM del server.

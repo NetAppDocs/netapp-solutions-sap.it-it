@@ -26,9 +26,9 @@ Un'eccezione di questa regola è un sistema SAP HANA con un singolo tenant, con 
 
 NOTE: Non appena qualsiasi operazione di creazione, ridenominazione o abbandono del tenant viene eseguita sul sistema di origine, questo flag di configurazione viene eliminato dal database SAP HANA. Pertanto, anche se la configurazione è stata riportata al tenant = SID, il flag non è più disponibile e l'eccezione relativa al ripristino del tenant con il workflow 3 non è più possibile. In questo caso, l'opzione 2 è il flusso di lavoro richiesto.
 
-image:sc-copy-clone-image10.png[""]
+image::sc-copy-clone-image10.png[copia sc clone image10]
 
-image:sc-copy-clone-image11.png[""]
+image::sc-copy-clone-image11.png[copia sc clone image11]
 
 
 
@@ -46,7 +46,7 @@ Vedere anche https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a1964
 
 Se sono state apportate modifiche alle chiavi principali, è sempre necessario eseguire un backup delle chiavi principali. Il comando di backup richiede dbid come parametro CLI. I dbid possono essere identificati utilizzando l'istruzione SQL riportata di seguito.
 
-image:sc-copy-clone-image12.png[""]
+image::sc-copy-clone-image12.png[copia sc clone image12]
 
 L'istruzione SQL e l'ulteriore documentazione sono disponibili nella SAP HANA Admin Guide ai https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Back Up Root Keys | Portale della Guida di SAP"] passaggi seguenti che illustrano le operazioni richieste per un sistema HANA con un singolo tenant SS1 e sono eseguite sul sistema di origine.
 
@@ -126,6 +126,6 @@ qs1adm@hana-7:/usr/sap/QS1/HDB11>
 
 Come descritto nel capitolo precedente, il dbid è necessario per importare la chiave root per il sistema e per tutti i database tenant. Mentre il database del sistema è sempre dbid=0, i database tenant possono avere diversi dbid.
 
-image:sc-copy-clone-image13.png[""]
+image::sc-copy-clone-image13.png[copia sc clone image13]
 
 La produzione sopra riportata mostra due locatari con dbid=3 e dbid=4. Se il sistema di destinazione non ha ancora ospitato un tenant con dbid=4, l'importazione della chiave root non riesce. In tal caso è necessario recuperare prima il database di sistema e quindi importare la chiave per il tenant con dbid=4.
