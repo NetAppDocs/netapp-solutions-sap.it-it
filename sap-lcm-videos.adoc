@@ -21,8 +21,6 @@ Panoramica dei video e delle demo che evidenziano SAP Lifecycle Management.
 
 == Demo e video sulla gestione del ciclo di vita SAP
 
-* link:https://media.netapp.com/video-detail/eae1f74b-6a01-5021-9d3f-96987aa08600/decrease-risk-and-increase-quality-of-sap-projects["Riduci i rischi e aumenta la qualità dei progetti SAP"^]
 * link:https://media.netapp.com/video-detail/c1229d10-fe84-58f1-9cdf-ca3c0f9d9104/ensure-continuity-for-lines-of-business-in-the-face-of-unexpected-events["Garantire continuità per le linee di business di fronte a eventi imprevisti"^]
 * link:https://media.netapp.com/video-detail/1c753169-f70d-5f2b-b798-cd09a604541c/snapcenter-use-cases["Casi di utilizzo di SnapCenter"^]
-* link:https://media.netapp.com/video-detail/5ed450f9-d66b-53d9-99de-d763ea44566c/sap-system-copy-with-libelle-and-snapcenter["Copia del sistema SAP con libelle e SnapCenter"^]
 
