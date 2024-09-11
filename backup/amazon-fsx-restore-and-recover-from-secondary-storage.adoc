@@ -18,10 +18,10 @@ Per ripristinare e ripristinare dallo storage secondario, attenersi alla seguent
 
 Per recuperare l'elenco di tutti i backup sullo storage secondario, nella vista topologia SnapCenter, fare clic su copie del vault, quindi selezionare un backup e fare clic su Ripristina.
 
-image::amazon-fsx-image92.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image92.png[amazon fsx image92]
 
 La finestra di dialogo di ripristino mostra le posizioni secondarie.
 
-image::amazon-fsx-image93.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image93.png[amazon fsx image93]
 
 Ulteriori fasi di ripristino e ripristino sono identiche a quelle precedentemente descritte per un backup Snapshot nello storage primario.

@@ -27,11 +27,11 @@ La figura seguente mostra una panoramica dello scenario di ripristino e ripristi
 . Viene avviato l'host 1 e viene avviata automaticamente una risincronizzazione della replica di sistema dell'host 1.
 
 
-image::saphana-sr-scs-image48.png[Errore: Immagine grafica mancante]
+image::saphana-sr-scs-image48.png[safana sr scs image48]
 
 La figura seguente mostra il catalogo di backup SAP HANA ed evidenzia il backup, creato sull'host 1, utilizzato per l'operazione di ripristino.
 
-image::saphana-sr-scs-image49.png[Errore: Immagine grafica mancante]
+image::saphana-sr-scs-image49.png[safana sr scs image49]
 
 L'operazione di ripristino prevede i seguenti passaggi:
 
@@ -42,7 +42,7 @@ L'operazione di ripristino prevede i seguenti passaggi:
 
 In SnapCenter, viene selezionato il backup e viene avviata l'operazione di clonazione.
 
-image::saphana-sr-scs-image50.png[Errore: Immagine grafica mancante]
+image::saphana-sr-scs-image50.png[safana sr scs image50]
 
 È necessario fornire il server clone e l'indirizzo IP di esportazione NFS.
 
@@ -51,11 +51,11 @@ NOTE: In una configurazione SnapCenter a risorsa singola, il plug-in SAP HANA no
 
 In una configurazione SnapCenter con risorse separate, l'host del database HANA viene selezionato come server clone e viene utilizzato uno script di montaggio per montare il clone sull'host di destinazione.
 
-image::saphana-sr-scs-image51.png[Errore: Immagine grafica mancante]
+image::saphana-sr-scs-image51.png[safana sr scs image51]
 
 Per determinare il percorso di giunzione richiesto per montare il volume clonato, controllare il log del lavoro di clonazione, come mostrato nella figura seguente.
 
-image::saphana-sr-scs-image52.png[Errore: Immagine grafica mancante]
+image::saphana-sr-scs-image52.png[safana sr scs image52]
 
 È ora possibile montare il volume clonato.
 

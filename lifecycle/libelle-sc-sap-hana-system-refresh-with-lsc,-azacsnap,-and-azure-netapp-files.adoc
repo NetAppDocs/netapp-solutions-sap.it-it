@@ -30,7 +30,7 @@ La figura seguente mostra un tipico workflow di alto livello di un ciclo di vita
 
 Il sistema può quindi essere utilizzato come sistema di test o QA. Quando viene richiesto un nuovo aggiornamento del sistema, il flusso di lavoro viene riavviato con il passaggio 2. Tutti i volumi clonati rimanenti devono essere cancellati manualmente.
 
-image::libelle-sc-image23.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image23.png[libelle sc image23]
 
 
 
@@ -44,7 +44,7 @@ Devono essere soddisfatti i seguenti prerequisiti.
 
 In generale, sono disponibili due opzioni di implementazione per AzAcSnap, come illustrato nella figura seguente.
 
-image::libelle-sc-image24.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image24.png[libelle sc image24]
 
 AzAcSnap può essere installato ed eseguito su una macchina virtuale Linux centrale per la quale tutti i file di configurazione del DB sono memorizzati centralmente e AzAcSnap ha accesso a tutti i database (tramite il client hdbsql) e alle chiavi dell'archivio utenti HANA configurate per tutti questi database. Con un'implementazione decentralizzata, AzAcSnap viene installato singolarmente su ciascun host di database in cui viene in genere memorizzata solo la configurazione del database locale. Entrambe le opzioni di implementazione sono supportate per l'integrazione LSC. Tuttavia, abbiamo seguito un approccio ibrido nella configurazione di laboratorio per questo documento. AzAcSnap è stato installato su una condivisione NFS centrale insieme a tutti i file di configurazione del database. Questa condivisione di installazione centrale è stata montata su tutte le macchine virtuali in `/mnt/software/AZACSNAP/snapshot-tool`. L'esecuzione dello strumento è stata quindi eseguita localmente sulle macchine virtuali DB.
 
@@ -54,7 +54,7 @@ AzAcSnap può essere installato ed eseguito su una macchina virtuale Linux centr
 
 Le implementazioni di libelle SystemCopy sono costituite dai seguenti componenti:
 
-image::libelle-sc-image25.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image25.png[libelle sc image25]
 
 * *LSC Master.* come suggerisce il nome, questo è il componente master che controlla il flusso di lavoro automatico di una copia di sistema basata su libelle.
 * *LSC Worker.* un lavoratore LSC esegue di solito sul sistema SAP di destinazione ed esegue gli script richiesti per la copia automatica del sistema.
@@ -65,7 +65,7 @@ La GUI di Libelle SystemCopy (LSC) deve essere installata su una macchina virtua
 
 Una volta installato LSC, la configurazione di base per il database di origine e di destinazione deve essere eseguita in base alle linee guida LSC. Le immagini seguenti mostrano la configurazione dell'ambiente di laboratorio per questo documento. Per ulteriori informazioni sui sistemi e i database SAP di origine e di destinazione, consulta la sezione successiva.
 
-image::libelle-sc-image26.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image26.png[libelle sc image26]
 
 È inoltre necessario configurare un elenco di attività standard adatto per i sistemi SAP. Per ulteriori informazioni sull'installazione e la configurazione di LSC, consultare il manuale utente di LSC incluso nel pacchetto di installazione di LSC.
 
@@ -85,7 +85,7 @@ Il setup di laboratorio è costituito da un sistema SAP di origine e da un siste
 
 La figura seguente mostra la configurazione del laboratorio.
 
-image::libelle-sc-image27.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image27.png[libelle sc image27]
 
 Contiene i seguenti sistemi, versioni software e volumi Azure NetApp Files:
 
@@ -107,7 +107,7 @@ Contiene i seguenti sistemi, versioni software e volumi Azure NetApp Files:
 
 Prima di eseguire il primo aggiornamento del sistema SAP, è necessario integrare le operazioni di storage basate su copia e clonazione Snapshot di Azure NetApp Files eseguite da AzAcSnap. È inoltre necessario eseguire uno script ausiliario per avviare e arrestare il database e montare o smontare i volumi Azure NetApp Files. Tutte le attività richieste vengono eseguite come attività personalizzate in LSC come parte della fase di copia. La figura seguente mostra le attività personalizzate nell'elenco di attività LSC.
 
-image::libelle-sc-image28.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image28.png[libelle sc image28]
 
 Le cinque attività di copia sono descritte in dettaglio. In alcune di queste attività, uno script di esempio `sc-system-refresh.sh` Viene utilizzato per automatizzare ulteriormente l'operazione di ripristino del database SAP HANA richiesta e il montaggio e lo smontaggio dei volumi di dati. Lo script utilizza un `LSC: success` Messaggio nell'output di sistema per indicare che l'esecuzione a LSC è riuscita. I dettagli sulle attività personalizzate e sui parametri disponibili sono disponibili nel manuale dell'utente di LSC e nella guida per gli sviluppatori di LSC. Tutte le attività in questo ambiente di laboratorio vengono eseguite sulla macchina virtuale DB di destinazione.
 
@@ -144,7 +144,7 @@ sudo /mnt/software/scripts/sc-system-refresh/sc-system-refresh.sh shutdown $_sys
 ....
 Lo script `sc-system-refresh.sh` utilizza due parametri, il `shutdown` E il DB SID, per arrestare il database SAP HANA utilizzando sapcontrol. L'output di sistema viene reindirizzato al file di log LSC standard. Come accennato in precedenza, un `LSC: success` viene utilizzato per indicare che l'esecuzione è riuscita.
 
-image::libelle-sc-image29.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image29.png[libelle sc image29]
 
 
 
@@ -175,7 +175,7 @@ NOTE: Poiché l'output del comando AzAcSnap non può essere modificato, l'impost
 
 La figura seguente mostra il messaggio di ripristino di AzAcSnap sul nuovo volume riuscito.
 
-image::libelle-sc-image30.png[Errore: Immagine grafica mancante]
+image::libelle-sc-image30.png[libelle sc image30]
 
 
 
@@ -209,34 +209,34 @@ In questa sezione, un esempio di operazione di refresh dei sistemi di laboratori
 
 Sono state create copie Snapshot regolari e on-demand per il database di origine P01, come elencato nel catalogo di backup.
 
-image::libelle-sc-image31.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image31.jpg[libelle sc image31]
 
 Per l'operazione di refresh, è stato utilizzato l'ultimo backup del 12 marzo. Nella sezione relativa ai dettagli del backup, viene elencato l'ID di backup esterno (EBID) per questo backup. Si tratta del nome della copia Snapshot del backup della copia Snapshot corrispondente sul volume di dati Azure NetApp Files, come mostrato nella figura seguente.
 
-image::libelle-sc-image32.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image32.jpg[libelle sc image32]
 
 Per avviare l'operazione di refresh, selezionare la configurazione corretta nella GUI LSC, quindi fare clic su Start Execution (Avvia esecuzione).
 
-image::libelle-sc-image33.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image33.jpg[libelle sc image33]
 
 LSC inizia a eseguire le attività della fase di verifica, seguite dalle attività configurate della fase preliminare.
 
-image::libelle-sc-image34.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image34.jpg[libelle sc image34]
 
 Come ultima fase della fase preliminare, il sistema SAP di destinazione viene arrestato. Nella fase di copia successiva, vengono eseguite le operazioni descritte nella sezione precedente. Innanzitutto, il database SAP HANA di destinazione viene arrestato e il vecchio volume Azure NetApp Files viene dismontato dal sistema operativo.
 
-image::libelle-sc-image35.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image35.jpg[libelle sc image35]
 
 L'attività ZAZACSNAPRESTORE crea quindi un nuovo volume come clone dalla copia Snapshot esistente del sistema P01. Le due immagini seguenti mostrano i log dell'attività nella GUI LSC e il volume Azure NetApp Files clonato nel portale Azure.
 
-image::libelle-sc-image36.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image36.jpg[libelle sc image36]
 
-image::libelle-sc-image37.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image37.jpg[libelle sc image37]
 
 Questo nuovo volume viene quindi montato sull'host DB di destinazione e il database di sistema e il database tenant vengono ripristinati utilizzando la copia Snapshot contenente. Una volta completato il ripristino, il database SAP HANA viene avviato automaticamente. Questo avvio del database SAP HANA occupa la maggior parte del tempo della fase di copia. Le fasi rimanenti in genere terminano in pochi secondi o pochi minuti, indipendentemente dalle dimensioni del database. L'immagine seguente mostra come il database di sistema viene recuperato utilizzando gli script di recovery python forniti da SAP.
 
-image::libelle-sc-image38.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image38.jpg[libelle sc image38]
 
 Dopo la fase di copia, l'LSC continua con tutte le fasi definite della fase successiva. Al termine del processo di aggiornamento del sistema, il sistema di destinazione è nuovamente operativo e pienamente utilizzabile. Con questo sistema di laboratorio, il runtime totale per il refresh del sistema SAP è stato di circa 25 minuti, di cui la fase di copia ha consumato poco meno di 5 minuti.
 
-image::libelle-sc-image39.jpg[Errore: Immagine grafica mancante]
+image::libelle-sc-image39.jpg[libelle sc image39]

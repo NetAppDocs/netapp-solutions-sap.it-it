@@ -15,40 +15,49 @@ summary:
 
 Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pubblicazione originale.
 
-[cols="25,25,50"]
+[cols="25,50"]
 |===
-| Versione | Data | Riepilogo degli aggiornamenti 
+| Data | Riepilogo degli aggiornamenti 
 
 
-| Versione 1.0 | Febbraio 2015 | Versione iniziale 
+| Febbraio 2015 | Versione iniziale 
 
 
-| Versione 2.0 | Ottobre 2015 | Inclusi i parametri i/o per SAP HANA e HWVAL SPS 10 e versioni successive 
+| Ottobre 2015 | Inclusi i parametri i/o per SAP HANA e HWVAL SPS 10 e versioni successive 
 
 
-| Versione 2.1 | Febbraio 2016 | Dimensionamento della capacità aggiornato 
+| Febbraio 2016 | Dimensionamento della capacità aggiornato 
 
 
-| Versione 3.0 | Febbraio 2017 | Nuovi sistemi storage e shelf di dischi NetApp nuove funzionalità di ONTAP 9 nuove release di sistemi operativi (SLES12 SP1 e Red Hat Enterprise Linux 7.2) Nuova release di SAP HANA 
+| Febbraio 2017 | Nuovi sistemi storage e shelf di dischi NetApp nuove funzionalità di ONTAP 9 nuove release di sistemi operativi (SLES12 SP1 e Red Hat Enterprise Linux 7.2) Nuova release di SAP HANA 
 
 
-| Versione 3.1 | Luglio 2017 | Aggiornamenti minori 
+| Luglio 2017 | Aggiornamenti minori 
 
 
-| Versione 4.0 | Settembre 2018 | Nuovi sistemi storage NetApp nuove release dei sistemi operativi (SLES12 SP3 e Red Hat Enterprise Linux 7.4) aggiornamenti minori aggiuntivi SAP HANA 2.0 SPS3 
+| Settembre 2018 | Nuovi sistemi storage NetApp nuove release dei sistemi operativi (SLES12 SP3 e Red Hat Enterprise Linux 7.4) aggiornamenti minori aggiuntivi SAP HANA 2.0 SPS3 
 
 
-| Versione 4.1 | Settembre 2019 | Nuove release del sistema operativo aggiornamenti minori 
+| Settembre 2019 | Nuove release del sistema operativo aggiornamenti minori 
 
 
-| Versione 4.2 | Aprile 2020 | I nuovi sistemi storage della serie AFF ASA hanno introdotto diverse funzionalità di partizione dei dati disponibili a partire da SAP HANA 2.0 SPS4 
+| Aprile 2020 | I nuovi sistemi storage della serie AFF ASA hanno introdotto diverse funzionalità di partizione dei dati disponibili a partire da SAP HANA 2.0 SPS4 
 
 
-| Versione 4.3 | Giugno 2020 | Ulteriori informazioni sulle funzionalità opzionali aggiornamenti minori 
+| Giugno 2020 | Ulteriori informazioni sulle funzionalità opzionali aggiornamenti minori 
 
 
-| Versione 5.0 | Febbraio 2021 | Supporto LVM Linux nuovi sistemi storage NetApp nuove release dei sistemi operativi (SLES15SP2, RHEL 8) 
+| Febbraio 2021 | Supporto LVM Linux nuovi sistemi storage NetApp nuove release dei sistemi operativi (SLES15SP2, RHEL 8) 
 
 
-| Versione 5.1 | Aprile 2021 | Aggiunta di informazioni specifiche su VMware vSphere 
+| Aprile 2021 | Aggiunta di informazioni specifiche su VMware vSphere 
+
+
+| Settembre 2022 | Nuove versioni del sistema operativo 
+
+
+| Agosto 2023 | Nuovi sistemi di storage (AFF serie C) 
+
+
+| Maggio 2024 | Nuovi sistemi di storage (AFF serie A) 
 |===

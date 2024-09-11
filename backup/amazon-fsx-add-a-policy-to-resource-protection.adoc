@@ -16,8 +16,8 @@ summary: In questa sezione viene descritto come aggiungere un criterio alla prot
 [role="lead"]
 È necessario aggiungere il nuovo criterio alla configurazione di protezione delle risorse HANA, come mostrato nella figura seguente.
 
-image::amazon-fsx-image86.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image86.png[amazon fsx image86]
 
 Nella nostra configurazione viene definito un programma giornaliero.
 
-image::amazon-fsx-image87.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image87.png[amazon fsx image87]

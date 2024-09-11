@@ -37,4 +37,4 @@ Per eseguire il test di disaster recovery, attenersi alla seguente procedura:
 
 Le seguenti sottosezioni descrivono in dettaglio questi passaggi.
 
-image::saphana-dr-anf_image18.png[Errore: Immagine grafica mancante]
+image::saphana-dr-anf_image18.png[safana dr anf image18]

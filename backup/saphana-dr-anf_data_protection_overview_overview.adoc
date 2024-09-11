@@ -16,7 +16,7 @@ L'esecuzione di SAP HANA su Azure NetApp Files (ANF) offre ai clienti l'accesso 
 
 Per sviluppare una policy di disaster recovery completa, i clienti devono comprendere i requisiti delle applicazioni di business e le funzionalità tecniche di cui hanno bisogno per la protezione dei dati e il disaster recovery. La figura seguente fornisce una panoramica della protezione dei dati.
 
-image::saphana-dr-anf_image2.png[Errore: Immagine grafica mancante]
+image::saphana-dr-anf_image2.png[safana dr anf image2]
 
 
 

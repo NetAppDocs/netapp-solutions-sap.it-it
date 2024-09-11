@@ -20,11 +20,11 @@ Si consiglia di utilizzare un'infrastruttura di switching ridondante per fornire
 
 Diversi modelli della famiglia di sistemi FAS possono essere combinati e abbinati a livello di storage per consentire la crescita e le diverse esigenze di performance e capacità. Il numero massimo di host SAP HANA che possono essere collegati al sistema storage è definito dai requisiti di performance SAP HANA e dal modello di controller NetApp utilizzato. Il numero di shelf di dischi richiesti è determinato solo dai requisiti di capacità e performance dei sistemi SAP HANA. La figura seguente mostra una configurazione di esempio con otto host SAP HANA collegati a una coppia di storage ad alta disponibilità (ha).
 
-image::saphana-fas-nfs_image2.png[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image2.png[safana FAS nfs image2]
 
 La figura seguente mostra un esempio di utilizzo di VMware vSphere come livello di virtualizzazione.
 
-image::saphana-fas-nfs_image3.jpg[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image3.jpg[safana FAS nfs image3]
 
 L'architettura può essere scalata in due dimensioni:
 
@@ -34,11 +34,11 @@ L'architettura può essere scalata in due dimensioni:
 
 La figura seguente mostra una configurazione di esempio in cui più host SAP HANA sono collegati ai controller di storage. In questo esempio, sono necessari più shelf di dischi per soddisfare i requisiti di capacità e performance di 16 host SAP HANA. A seconda dei requisiti di throughput totale, è necessario aggiungere ulteriori connessioni 10 GbE (o più veloci) ai controller di storage.
 
-image::saphana-fas-nfs_image4.png[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image4.png[safana FAS nfs image4]
 
 Indipendentemente dal sistema FAS implementato, il panorama SAP HANA può essere scalato aggiungendo uno qualsiasi dei controller di storage certificati per soddisfare la densità di nodo desiderata (figura seguente).
 
-image::saphana-fas-nfs_image5.png[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image5.png[safana FAS nfs image5]
 
 
 
@@ -52,7 +52,7 @@ La tecnologia NetApp SnapMirror consente di replicare le copie Snapshot create s
 
 È possibile eseguire il backup dei log del database direttamente sullo storage secondario utilizzando un montaggio NFS, come illustrato nella figura seguente.
 
-image::saphana-fas-nfs_image6.jpg[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image6.jpg[safana FAS nfs image6]
 
 I backup Snapshot basati su storage offrono vantaggi significativi rispetto ai backup convenzionali basati su file. Questi vantaggi includono, a titolo esemplificativo e non esaustivo, i seguenti:
 
@@ -62,7 +62,7 @@ I backup Snapshot basati su storage offrono vantaggi significativi rispetto ai b
 * Replica efficiente in termini di spazio e larghezza di banda sullo storage secondario in base alle modifiche dei blocchi
 
 
-Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA con SnapCenter, vedere https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^].
+Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA con SnapCenter, consultare https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^].
 
 
 
@@ -70,7 +70,7 @@ Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA con
 
 Il disaster recovery SAP HANA può essere eseguito a livello di database utilizzando la replica di sistema SAP HANA o a livello di storage utilizzando le tecnologie di replica dello storage. La sezione seguente fornisce una panoramica delle soluzioni di disaster recovery basate sulla replica dello storage.
 
-Per informazioni dettagliate sulle soluzioni di disaster recovery SAP HANA, vedere https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: Disaster recovery SAP HANA con replica dello storage"^].
+Per informazioni dettagliate sulle soluzioni di disaster recovery SAP HANA, vedere https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-dr-sr_pdf_link.html["TR-4646: Disaster recovery SAP HANA con replica dello storage"^].
 
 
 
@@ -88,7 +88,7 @@ I server dei siti di disaster recovery possono essere utilizzati come sistemi di
 
 Entrambi i metodi di replica consentono di eseguire test del workflow di disaster recovery senza influenzare RPO e RTO. I volumi FlexClone vengono creati sullo storage e collegati ai server di test del disaster recovery.
 
-image::saphana-fas-nfs_image7.png[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image7.png[safana FAS nfs image7]
 
 La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage secondario non viene completata per qualsiasi motivo, l'i/o dell'applicazione non riesce, garantendo così che i sistemi di storage primario e secondario siano identici. L'i/o dell'applicazione al primario riprende solo dopo che la relazione SnapMirror ritorna allo stato InSync. In caso di guasto dello storage primario, l'i/o dell'applicazione può essere ripristinato sullo storage secondario dopo il failover, senza perdita di dati. In modalità StrictSync, l'RPO è sempre zero.
 
@@ -98,4 +98,4 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito fornisce alta disponibilità locale e viene utilizzato per il carico di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.
 
-image::saphana-fas-nfs_image8.png[Errore: Immagine grafica mancante]
+image::saphana-fas-nfs_image8.png[safana FAS nfs image8]

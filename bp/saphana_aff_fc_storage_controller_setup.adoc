@@ -86,7 +86,7 @@ La seguente panoramica riassume i passaggi necessari per la configurazione dello
 
 NOTE: Con lo shelf di dischi DS224C, è possibile utilizzare anche il cablaggio SAS quad-path, ma non è necessario.
 
-image::saphana_aff_fc_image10.png[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image10.png[safana AFF fc image10]
 
 
 
@@ -94,7 +94,7 @@ image::saphana_aff_fc_image10.png[Errore: Immagine grafica mancante]
 
 Ogni shelf da tavolo NS224 NVMe è collegato a due porte da 100 GbE per controller, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. ADPv2 viene utilizzato anche per lo shelf di dischi NS224.
 
-image::saphana_aff_fc_image11.png[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image11.png[safana AFF fc image11]
 
 
 
@@ -104,7 +104,7 @@ In generale, è necessario configurare due aggregati per controller, indipendent
 
 La figura seguente mostra una configurazione di 12 host SAP HANA in esecuzione su uno shelf SAS da 12 GB configurato con ADPv2. Sei host SAP HANA sono collegati a ciascun controller di storage. Sono configurati quattro aggregati separati, due per ogni controller di storage. Ogni aggregato è configurato con 11 dischi con nove partizioni di dati e due di dischi di parità. Per ciascun controller sono disponibili due partizioni di riserva.
 
-image::saphana_aff_fc_image12.jpg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image12.jpg[safana AFF fc image12]
 
 
 
@@ -123,11 +123,11 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 
 All'interno della configurazione del cluster di storage, è necessario creare un'interfaccia di rete (LIF) e assegnarla a una porta FCP dedicata. Se, ad esempio, sono necessarie quattro porte FCP per motivi di performance, è necessario creare quattro LIF. La figura seguente mostra una schermata delle otto LIF (denominate `fc_*_*`) configurati su `hana` SVM.
 
-image::saphana_aff_fc_image13.jpeg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image13.jpeg[safana AFF fc image13]
 
 Durante la creazione di SVM con Gestore di sistema di ONTAP 9.8, è possibile selezionare tutte le porte FCP fisiche richieste e creare automaticamente una LIF per porta fisica.
 
-image::saphana_aff_fc_image14.jpeg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image14.jpeg[safana AFF fc image14]
 
 
 
@@ -135,7 +135,7 @@ image::saphana_aff_fc_image14.jpeg[Errore: Immagine grafica mancante]
 
 Un set di porte FCP viene utilizzato per definire quali LIF devono essere utilizzate da uno specifico gruppo di iniziatori. In genere, tutte le LIF create per i sistemi HANA vengono inserite nello stesso set di porte. La figura seguente mostra la configurazione di un set di porte denominato 32g che include le quattro LIF già create.
 
-image::saphana_aff_fc_image15.jpeg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image15.jpeg[safana AFF fc image15]
 
 
 NOTE: Con ONTAP 9.8, non è necessario un set di porte, ma è possibile crearlo e utilizzarlo dalla riga di comando.
@@ -149,7 +149,7 @@ La figura seguente mostra la configurazione dei volumi di quattro sistemi SAP HA
 
 NOTE: Se per i sistemi SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e i volumi di log possono anche essere memorizzati nello stesso storage controller.
 
-image::saphana_aff_fc_image16.jpg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image16.jpg[safana AFF fc image16]
 
 Per ogni host SAP HANA, un volume di dati, un volume di log e un volume per `/hana/shared` sono configurati. La seguente tabella mostra una configurazione di esempio con quattro sistemi SAP HANA a host singolo.
 
@@ -231,7 +231,7 @@ NOTE: Se per il sistema SAP HANA viene utilizzato un solo storage controller di 
 
 NOTE: I sistemi NetApp ASA AFF non supportano NFS come protocollo. NetApp consiglia di utilizzare un sistema AFF o FAS aggiuntivo per `/hana/shared` file system.
 
-image::saphana_aff_fc_image17.jpg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image17.jpg[safana AFF fc image17]
 
 Per ogni host SAP HANA, vengono creati un volume di dati e un volume di log. Il `/hana/shared` Il volume viene utilizzato da tutti gli host del sistema SAP HANA. La seguente tabella mostra una configurazione di esempio per un sistema SAP HANA 4+1 a host multiplo.
 
@@ -373,12 +373,12 @@ La seguente procedura mostra la configurazione di un sistema HANA 2+1 multihost 
 
 . Avviare la procedura guidata di provisioning dell'applicazione per SAP HANA in System Manager e fornire le informazioni richieste. Tutti gli iniziatori (WWPN) di tutti gli host devono essere aggiunti.
 +
-image::saphana_aff_fc_image18.jpeg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image18.jpeg[safana AFF fc image18]
 
 . Verificare che il provisioning dello storage sia stato eseguito correttamente.
 
 
-image::saphana_aff_fc_image19.jpeg[Errore: Immagine grafica mancante]
+image::saphana_aff_fc_image19.jpeg[safana AFF fc image19]
 
 
 

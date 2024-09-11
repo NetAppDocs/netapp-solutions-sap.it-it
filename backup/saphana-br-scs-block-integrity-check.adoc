@@ -20,7 +20,7 @@ Quando si pianificano i backup utilizzando questo criterio, SnapCenter crea un b
 
 SnapCenter non visualizza il controllo dell'integrità del blocco allo stesso modo dei backup basati su copia Snapshot. La scheda di riepilogo mostra invece il numero di backup basati su file e lo stato del backup precedente.
 
-image::saphana-br-scs-image94.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image94.png[safana br scs image94]
 
 Non è possibile eliminare un backup del controllo dell'integrità dei blocchi utilizzando l'interfaccia utente di SnapCenter, ma è possibile eliminarlo utilizzando i comandi di PowerShell.
 
@@ -70,7 +70,7 @@ PS C:\Users\scadmin>
 ....
 Il catalogo di backup SAP HANA mostra le voci per i database di sistema e tenant. La figura seguente mostra un controllo dell'integrità del blocco SnapCenter nel catalogo di backup del database di sistema.
 
-image::saphana-br-scs-image95.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image95.png[safana br scs image95]
 
 Un controllo dell'integrità dei blocchi consente di creare file di backup dei dati SAP HANA standard. SnapCenter utilizza il percorso di backup configurato nel database HANA per le operazioni di backup dei dati basate su file.
 

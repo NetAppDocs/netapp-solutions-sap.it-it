@@ -32,4 +32,4 @@ Per eseguire il failover del disaster recovery, attenersi alla seguente procedur
 
 Le seguenti sottosezioni descrivono in dettaglio questi passaggi e la seguente figura illustra il test di disaster failover.
 
-image::saphana-dr-anf_image26.png[Errore: Immagine grafica mancante]
+image::saphana-dr-anf_image26.png[safana dr anf image26]

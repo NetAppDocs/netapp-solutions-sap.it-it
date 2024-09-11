@@ -35,7 +35,7 @@ Le sezioni seguenti descrivono le fasi iniziali della configurazione.
 
 . Accedere alla GUI del server SnapCenter.
 +
-image::saphana-br-scs-image23.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image23.png[safana br scs image23]
 
 . Selezionare Storage Systems (sistemi storage).
 +
@@ -43,7 +43,7 @@ image::saphana-br-scs-image23.png[Errore: Immagine grafica mancante]
 NOTE: Nella schermata, è possibile selezionare il tipo di sistema storage, che può essere SVM ONTAP o cluster ONTAP. Se si configurano i sistemi storage a livello di SVM, è necessario configurare una LIF di gestione per ogni SVM. In alternativa, è possibile utilizzare un accesso di gestione SnapCenter a livello di cluster. La gestione SVM viene utilizzata nell'esempio seguente.
 
 +
-image::saphana-br-scs-image24.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image24.png[safana br scs image24]
 
 . Fare clic su New (nuovo) per aggiungere un sistema storage e fornire il nome host e le credenziali richiesti.
 +
@@ -51,7 +51,7 @@ image::saphana-br-scs-image24.png[Errore: Immagine grafica mancante]
 NOTE: L'utente SVM non deve essere l'utente vsadmin, come mostrato nella schermata. In genere, un utente viene configurato sulla SVM e assegnato i permessi necessari per eseguire le operazioni di backup e ripristino. I dettagli sui privilegi richiesti sono disponibili nella http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["Guida all'installazione di SnapCenter"^] Nella sezione intitolata "privilegi minimi ONTAP richiesti".
 
 +
-image::saphana-br-scs-image25.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image25.png[safana br scs image25]
 
 . Fare clic su More Options (altre opzioni) per configurare la piattaforma di storage.
 +
@@ -62,11 +62,11 @@ La piattaforma di storage può essere FAS, AFF, ONTAP Select o Cloud Volumes ONT
 NOTE: Per un sistema utilizzato come destinazione SnapVault o SnapMirror, selezionare l'icona secondario.
 
 +
-image::saphana-br-scs-image26.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image26.png[safana br scs image26]
 
 . Aggiungere altri sistemi storage secondo necessità. Nel nostro esempio, sono stati aggiunti uno storage aggiuntivo per il backup fuori sede e uno per il disaster recovery.
 +
-image::saphana-br-scs-image27.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image27.png[safana br scs image27]
 
 
 
@@ -76,22 +76,22 @@ image::saphana-br-scs-image27.png[Errore: Immagine grafica mancante]
 
 . Accedere a Impostazioni, selezionare credenziali e fare clic su nuovo.
 +
-image::saphana-br-scs-image28.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image28.png[safana br scs image28]
 
 . Fornire le credenziali per l'utente utilizzato per le installazioni plug-in sui sistemi Linux.
 +
-image::saphana-br-scs-image29.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image29.png[safana br scs image29]
 
 . Fornire le credenziali per l'utente che vengono utilizzate per le installazioni dei plug-in sui sistemi Windows.
 +
-image::saphana-br-scs-image30.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image30.png[safana br scs image30]
 
 +
 La figura seguente mostra le credenziali configurate.
 
 
 
-image::saphana-br-scs-image31.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image31.png[safana br scs image31]
 
 
 
@@ -104,17 +104,17 @@ NOTE: Il plug-in SAP HANA richiede Java a 64 bit versione 1.8. Java deve essere 
 
 . Accedere a hosts e fare clic su Add (Aggiungi).
 +
-image::saphana-br-scs-image32.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image32.png[safana br scs image32]
 
 . Fornire le informazioni sull'host richieste. Fare clic su Invia.
 +
-image::saphana-br-scs-image33.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image33.png[safana br scs image33]
 
 +
 La seguente figura mostra tutti gli host configurati dopo l'implementazione del plug-in HANA.
 
 +
-image::saphana-br-scs-image34.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image34.png[safana br scs image34]
 
 
 
@@ -161,31 +161,31 @@ Le sezioni seguenti descrivono la configurazione di questi tre criteri.
 
 . Accedere a Impostazioni > Criteri e fare clic su nuovo.
 +
-image::saphana-br-scs-image35.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image35.png[safana br scs image35]
 
 . Immettere il nome e la descrizione della policy. Fare clic su Avanti.
 +
-image::saphana-br-scs-image36.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image36.png[safana br scs image36]
 
 . Selezionare il tipo di backup basato su Snapshot e selezionare orario per la frequenza di pianificazione.
 +
-image::saphana-br-scs-image37.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image37.png[safana br scs image37]
 
 . Configurare le impostazioni di conservazione per i backup on-demand.
 +
-image::saphana-br-scs-image38.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image38.png[safana br scs image38]
 
 . Configurare le impostazioni di conservazione per i backup pianificati.
 +
-image::saphana-br-scs-image39.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image39.png[safana br scs image39]
 
 . Configurare le opzioni di replica. In questo caso, non è selezionato alcun aggiornamento di SnapVault o SnapMirror.
 +
-image::saphana-br-scs-image40.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image40.png[safana br scs image40]
 
 . Nella pagina Riepilogo, fare clic su fine.
 +
-image::saphana-br-scs-image41.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image41.png[safana br scs image41]
 
 
 
@@ -196,19 +196,19 @@ image::saphana-br-scs-image41.png[Errore: Immagine grafica mancante]
 . Accedere a Impostazioni > Criteri e fare clic su nuovo.
 . Immettere il nome e la descrizione della policy. Fare clic su Avanti.
 +
-image::saphana-br-scs-image42.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image42.png[safana br scs image42]
 
 . Impostare il tipo di backup su Snapshot Based (basato su snapshot) e la frequenza di pianificazione su Daily (giornaliero).
 +
-image::saphana-br-scs-image43.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image43.png[safana br scs image43]
 
 . Configurare le impostazioni di conservazione per i backup on-demand.
 +
-image::saphana-br-scs-image44.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image44.png[safana br scs image44]
 
 . Configurare le impostazioni di conservazione per i backup pianificati.
 +
-image::saphana-br-scs-image45.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image45.png[safana br scs image45]
 
 . Selezionare Aggiorna SnapVault dopo aver creato una copia Snapshot locale.
 +
@@ -216,11 +216,11 @@ image::saphana-br-scs-image45.png[Errore: Immagine grafica mancante]
 NOTE: L'etichetta del criterio secondario deve essere la stessa dell'etichetta SnapMirror nella configurazione di protezione dei dati sul layer di storage. Vedere la sezione link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#configuration-of-data-protection-to-off-site-backup-storage[""Configurazione della protezione dei dati per lo storage di backup off-site"."]
 
 +
-image::saphana-br-scs-image46.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image46.png[safana br scs image46]
 
 . Nella pagina Riepilogo, fare clic su fine.
 +
-image::saphana-br-scs-image47.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image47.png[safana br scs image47]
 
 
 
@@ -231,28 +231,28 @@ image::saphana-br-scs-image47.png[Errore: Immagine grafica mancante]
 . Accedere a Impostazioni > Criteri e fare clic su nuovo.
 . Immettere il nome e la descrizione della policy. Fare clic su Avanti.
 +
-image::saphana-br-scs-image48.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image48.png[safana br scs image48]
 
 . Impostare il tipo di backup su file-based (basato su file) e la frequenza di pianificazione su Weekly (settimanale).
 +
-image::saphana-br-scs-image49.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image49.png[safana br scs image49]
 
 . Configurare le impostazioni di conservazione per i backup on-demand.
 +
-image::saphana-br-scs-image50.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image50.png[safana br scs image50]
 
 . Configurare le impostazioni di conservazione per i backup pianificati.
 +
-image::saphana-br-scs-image50.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image50.png[safana br scs image50]
 
 . Nella pagina Riepilogo, fare clic su fine.
 +
-image::saphana-br-scs-image51.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image51.png[safana br scs image51]
 
 +
 La figura seguente mostra un riepilogo dei criteri configurati.
 
 +
-image::saphana-br-scs-image52.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image52.png[safana br scs image52]
 
 

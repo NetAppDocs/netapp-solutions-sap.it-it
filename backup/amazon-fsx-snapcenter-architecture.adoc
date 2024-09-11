@@ -24,7 +24,7 @@ SnapCenter gestisce i dati tra gli endpoint del data fabric basato su NetApp. È
 
 SnapCenter include il server SnapCenter, il pacchetto plug-in SnapCenter per Windows e il pacchetto plug-in SnapCenter per Linux. Ogni pacchetto contiene plug-in per SnapCenter per varie applicazioni e componenti dell'infrastruttura.
 
-image::amazon-fsx-image5.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image5.png[amazon fsx image5]
 
 
 
@@ -66,7 +66,7 @@ SnapCenter gestisce la conservazione dello storage primario, mentre FSX per ONTA
 
 La figura seguente mostra una panoramica delle operazioni di backup e gestione della conservazione di SnapCenter.
 
-image::amazon-fsx-image6.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image6.png[amazon fsx image6]
 
 Quando si esegue un backup Snapshot basato su storage del database SAP HANA, SnapCenter esegue le seguenti attività:
 
@@ -94,7 +94,7 @@ In questo documento, utilizziamo la console Amazon Web Services (AWS) e la CLI F
 
 La figura seguente mostra una tipica architettura di backup per SAP HANA su FSX per ONTAP. Il sistema HANA si trova nella zona di disponibilità AWS 1 e utilizza un file system FSX per ONTAP all'interno della stessa zona di disponibilità. Le operazioni di backup di Snapshot vengono eseguite per i dati e il volume condiviso del database HANA. Oltre ai backup Snapshot locali, conservati per 3-5 giorni, i backup vengono replicati anche in uno storage offsite per una conservazione a lungo termine. Lo storage di backup offsite è un secondo FSX per il file system ONTAP situato in una diversa zona di disponibilità AWS. I backup dei dati HANA e del volume condiviso vengono replicati con SnapVault nel secondo file system FSX per ONTAP e vengono conservati per 2-3 settimane.
 
-image::amazon-fsx-image7.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image7.png[amazon fsx image7]
 
 Prima di configurare SnapCenter, la strategia di protezione dei dati deve essere definita in base ai requisiti RTO e RPO dei vari sistemi SAP.
 
@@ -201,4 +201,4 @@ FSX per file system ONTAP:
 * Volume di dati HANA replicato nel secondo file system FSX per ONTAP
 
 
-image::amazon-fsx-image8.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image8.png[amazon fsx image8]

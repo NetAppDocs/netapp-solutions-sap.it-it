@@ -30,46 +30,46 @@ Per configurare le risorse non relative ai volumi di dati, attenersi alla seguen
 
 . Dalla scheda Resources (risorse), selezionare non-Data-Volume e fare clic su Add SAP HANA Database (Aggiungi database SAP HANA).
 +
-image::amazon-fsx-image60.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image60.png[amazon fsx image60]
 
 . Nella fase uno della finestra di dialogo Add SAP HANA Database (Aggiungi database SAP HANA), nell'elenco Resource Type (tipo di risorsa), selezionare non-data Volumes (volumi non dati). Specificare un nome per la risorsa, il SID associato e l'host del plug-in SAP HANA che si desidera utilizzare per la risorsa, quindi fare clic su Avanti.
 +
-image::amazon-fsx-image61.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image61.png[amazon fsx image61]
 
 . Aggiungere la SVM e il volume di storage come footprint dello storage, quindi fare clic su Next (Avanti).
 +
-image::amazon-fsx-image62.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image62.png[amazon fsx image62]
 
 . Per salvare le impostazioni, nella fase di riepilogo, fare clic su fine.
 +
-image::amazon-fsx-image63.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image63.png[amazon fsx image63]
 
 +
 Il nuovo volume non di dati viene ora aggiunto a SnapCenter. Fare doppio clic sulla nuova risorsa per eseguire la protezione delle risorse.
 
 +
-image::amazon-fsx-image64.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image64.png[amazon fsx image64]
 
 +
 La protezione delle risorse viene eseguita nello stesso modo descritto in precedenza con una risorsa di database HANA.
 
 . È ora possibile eseguire un backup facendo clic su Backup Now (Esegui backup ora).
 +
-image::amazon-fsx-image65.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image65.png[amazon fsx image65]
 
 . Selezionare il criterio e avviare l'operazione di backup.
 +
-image::amazon-fsx-image66.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image66.png[amazon fsx image66]
 
 
 
 Il log dei lavori di SnapCenter mostra le singole fasi del flusso di lavoro.
 
-image::amazon-fsx-image67.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image67.png[amazon fsx image67]
 
 Il nuovo backup è ora visibile nella vista delle risorse della risorsa non del volume di dati.
 
-image::amazon-fsx-image68.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image68.png[amazon fsx image68]
 
 
 
@@ -119,38 +119,38 @@ Per eseguire un'operazione di ripristino manuale, attenersi alla seguente proced
 
 . Selezionare un backup in SnapCenter da utilizzare per l'operazione di ripristino.
 +
-image::amazon-fsx-image69.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image69.png[amazon fsx image69]
 
 . Selezionare l'ambito e il tipo di ripristino.
 +
 Lo scenario standard per i sistemi a singolo tenant HANA MDC consiste nell'utilizzare una risorsa completa con revert di volume. Per un sistema HANA MDC con più tenant, potrebbe essere necessario ripristinare solo un tenant singolo. Per ulteriori informazioni sul ripristino del tenant singolo, vedere https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-restore-and-recovery.html["Ripristino e ripristino (netapp.com)"^].
 
 +
-image::amazon-fsx-image70.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image70.png[amazon fsx image70]
 
 . Selezionare Recovery Scope (ambito ripristino) e specificare la posizione per il backup del registro e del catalogo.
 +
 SnapCenter utilizza il percorso predefinito o i percorsi modificati nel file HANA global.ini per prepopolare le posizioni di backup del registro e del catalogo.
 
 +
-image::amazon-fsx-image71.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image71.png[amazon fsx image71]
 
 . Immettere i comandi opzionali di pre-ripristino.
 +
-image::amazon-fsx-image72.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image72.png[amazon fsx image72]
 
 . Immettere i comandi post-ripristino opzionali.
 +
-image::amazon-fsx-image73.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image73.png[amazon fsx image73]
 
 . Per avviare l'operazione di ripristino, fare clic su fine.
 +
-image::amazon-fsx-image74.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image74.png[amazon fsx image74]
 
 +
 SnapCenter esegue l'operazione di ripristino e ripristino. Questo esempio mostra i dettagli del processo di ripristino e ripristino.
 
 +
-image::amazon-fsx-image75.png[Errore: Immagine grafica mancante]
+image::amazon-fsx-image75.png[amazon fsx image75]
 
 

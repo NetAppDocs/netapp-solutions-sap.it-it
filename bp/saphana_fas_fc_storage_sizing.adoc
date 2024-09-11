@@ -215,4 +215,4 @@ Le dimensioni della RAM, le dimensioni nette dei dati sul disco di ciascun host 
 
 La figura seguente riassume il processo di dimensionamento.
 
-image::saphana_fas_fc_image8.jpg[Errore: Immagine grafica mancante]
+image::saphana_fas_fc_image8.jpg[safana FAS fc image8]

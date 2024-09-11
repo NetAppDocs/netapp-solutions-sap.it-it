@@ -34,7 +34,7 @@ Il rilevamento automatico, il ripristino e il ripristino automatici dipendono da
 
 La figura seguente riepiloga le dipendenze. Per ulteriori informazioni sulle opzioni di implementazione di HANA, consultare la sezione "Opzioni di implementazione per il plug-in SAP HANA".
 
-image::saphana-br-scs-image9.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image9.png[safana br scs image9]
 
 
 NOTE: I plug-in HANA e Linux sono attualmente disponibili solo per i sistemi basati su Intel. Se i database HANA sono in esecuzione su IBM Power Systems, è necessario utilizzare un host plug-in HANA centrale.
@@ -101,7 +101,7 @@ La figura seguente mostra la vista logica e la comunicazione tra il server SnapC
 
 Il server SnapCenter comunica tramite il plug-in SAP HANA con i database SAP HANA. Il plug-in SAP HANA utilizza il software client SAP HANA hdbsql per eseguire comandi SQL nei database SAP HANA. SAP HANA hdbuserstore viene utilizzato per fornire le credenziali dell'utente, il nome host e le informazioni sulla porta per accedere ai database SAP HANA.
 
-image::saphana-br-scs-image10.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image10.png[safana br scs image10]
 
 
 NOTE: Il plug-in SAP HANA e il software client SAP hdbsql, che includono il tool di configurazione hdbuserstore, devono essere installati insieme sullo stesso host.
@@ -122,7 +122,7 @@ Il server SnapCenter ha non è supportato se il plug-in HANA è installato sul s
 
 La figura seguente mostra una configurazione in cui il server SnapCenter viene utilizzato come host plug-in centrale. Il plug-in SAP HANA e il software client SAP hdbsql sono installati sul server SnapCenter.
 
-image::saphana-br-scs-image11.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image11.png[safana br scs image11]
 
 Poiché il plug-in HANA può comunicare con i database HANA gestiti utilizzando il client hdbattraverso la rete, non è necessario installare alcun componente SnapCenter sui singoli host di database HANA. SnapCenter può proteggere i database HANA utilizzando un plug-in host centrale HANA su cui sono configurate tutte le chiavi dell'archivio utenti per i database gestiti.
 
@@ -139,7 +139,7 @@ La figura seguente mostra una configurazione in cui un host Linux separato viene
 
 NOTE: Il plug-in host centrale separato può anche essere un host Windows.
 
-image::saphana-br-scs-image12.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image12.png[safana br scs image12]
 
 La stessa restrizione relativa alla disponibilità delle funzionalità descritta nella sezione precedente si applica anche a un host plug-in centrale separato.
 
@@ -151,7 +151,7 @@ Tuttavia, con questa opzione di implementazione, il server SnapCenter può esser
 
 La figura seguente mostra una configurazione in cui il plug-in SAP HANA è installato su ciascun host di database SAP HANA.
 
-image::saphana-br-scs-image13.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image13.png[safana br scs image13]
 
 Quando il plug-in HANA viene installato su ogni singolo host di database HANA, sono disponibili tutte le funzionalità, come il rilevamento automatico e il ripristino e ripristino automatici. Inoltre, il server SnapCenter può essere configurato in una configurazione ha.
 
@@ -165,9 +165,9 @@ NetApp consiglia di implementare il plug-in HANA sull'host del database HANA per
 
 Le due figure seguenti mostrano le implementazioni di plug-in misti con il server SnapCenter o un host Linux separato come host plug-in centrale. L'unica differenza tra queste due implementazioni è la configurazione ha opzionale.
 
-image::saphana-br-scs-image14.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image14.png[safana br scs image14]
 
-image::saphana-br-scs-image15.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image15.png[safana br scs image15]
 
 
 
@@ -299,7 +299,7 @@ Per la gestione della conservazione dei backup dei dati e della gestione del cat
 
 La figura seguente mostra una panoramica del flusso di lavoro di backup.
 
-image::saphana-br-scs-image16.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image16.png[safana br scs image16]
 
 
 
@@ -365,7 +365,7 @@ La gestione della conservazione dei backup dei dati e la gestione del backup dei
 
 La figura seguente fornisce una panoramica dei diversi flussi di lavoro e delle dipendenze di ciascuna operazione. Le sezioni seguenti descrivono in dettaglio le diverse operazioni.
 
-image::saphana-br-scs-image17.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image17.png[safana br scs image17]
 
 
 
@@ -534,7 +534,7 @@ I sistemi HANA single container e HANA MDC single tenant rilevati automaticament
 * *Completare la risorsa con il ripristino manuale.* se si seleziona No Recovery, SnapCenter arresta il database HANA ed esegue le operazioni di file system (disinstallazione, montaggio) e ripristino richieste. È necessario ripristinare manualmente il sistema e il database del tenant.
 
 
-image::saphana-br-scs-image18.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image18.png[safana br scs image18]
 
 
 
@@ -548,7 +548,7 @@ Anche se i sistemi HANA MDC con più tenant possono essere rilevati automaticame
 
 I flussi di lavoro sono gli stessi descritti nella sezione precedente.
 
-image::saphana-br-scs-image19.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image19.png[safana br scs image19]
 
 
 
@@ -558,7 +558,7 @@ Le risorse HANA configurate manualmente non sono abilitate per il ripristino e i
 
 Per le risorse HANA configurate manualmente, SnapCenter supporta solo il ripristino manuale, come illustrato nella figura seguente. Il flusso di lavoro per il ripristino manuale è lo stesso descritto nelle sezioni precedenti.
 
-image::saphana-br-scs-image20.png[Errore: Immagine grafica mancante]
+image::saphana-br-scs-image20.png[safana br scs image20]
 
 
 
