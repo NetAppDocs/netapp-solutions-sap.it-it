@@ -40,7 +40,7 @@ net.ipv4.tcp_moderate_rcvbuf = 1
 net.ipv4.tcp_window_scaling = 1
 net.ipv4.tcp_timestamps = 1
 net.ipv4.tcp_sack = 1
-options sunrpc tcp_max_slot_table_entries = 128
+sunrpc.tcp_max_slot_table_entries = 128
 ....
 
 NOTE: Saptune, incluso in SLES per le versioni di SAP OS, può essere utilizzato per impostare questi valori. Per ulteriori informazioni, vedere https://launchpad.support.sap.com/#/notes/3024346["Nota SAP 3024346"^] (Richiede l'accesso SAP).
@@ -68,7 +68,7 @@ net.ipv4.tcp_moderate_rcvbuf = 1
 net.ipv4.tcp_window_scaling = 1
 net.ipv4.tcp_timestamps = 1
 net.ipv4.tcp_sack = 1
-options sunrpc tcp_max_slot_table_entries = 128
+sunrpc.tcp_max_slot_table_entries = 128
 ....
 
 NOTE: A partire dalla versione 8.6 di RedHat Enterprise Linux, le impostazioni possono essere applicate anche utilizzando i ruoli di sistema RHEL per SAP (Ansible). Vedere https://launchpad.support.sap.com/#/notes/3024346["Nota SAP 3024346"^] (Richiede l'accesso SAP).
