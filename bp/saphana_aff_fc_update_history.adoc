@@ -57,4 +57,7 @@ Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pub
 
 
 | Maggio 2024 | Nuovi sistemi di storage (AFF serie A) 
+
+
+| Settembre 2024 | Nuovi sistemi di storage (ASA serie A) 
 |===
