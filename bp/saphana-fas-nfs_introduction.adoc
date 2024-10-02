@@ -8,9 +8,10 @@ summary: 'La famiglia di prodotti NetApp FAS è stata certificata per l"utilizzo
 :allow-uri-read: 
 
 
-Nils Bauer e Marco Schön, NetApp
-
+[role="lead"]
 La famiglia di prodotti NetApp FAS è stata certificata per l'utilizzo con SAP HANA in progetti TDI (Tailored Data Center Integration). Il sistema di storage aziendale certificato è caratterizzato dal software NetApp ONTAP.
+
+Nils Bauer e Marco Schön, NetApp
 
 Questa certificazione è attualmente valida solo per i seguenti modelli:
 
@@ -67,7 +68,7 @@ NOTE: Fare sempre riferimento alle note SAP relative alle linee guida per la con
 
 I controller di storage NetApp FAS sono certificati nel programma SAP HANA TDI utilizzando protocolli NFS (NAS) e FC (SAN). Possono essere implementati in uno qualsiasi degli scenari SAP HANA attuali, come SAP Business Suite su HANA, S/4HANA, BW/4HANA o SAP Business Warehouse su HANA, in configurazioni a host singolo o multiplo. Qualsiasi server certificato per l'utilizzo con SAP HANA può essere combinato con soluzioni di storage certificate NetApp. Vedere la figura seguente per una panoramica dell'architettura.
 
-image::saphana-fas-nfs_image1.png[safana FAS nfs image1]
+image:saphana-fas-nfs_image1.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Per ulteriori informazioni sui prerequisiti e sui consigli per i sistemi SAP HANA in produzione, consulta la seguente risorsa SAP:
 

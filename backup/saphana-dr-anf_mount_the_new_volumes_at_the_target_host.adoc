@@ -10,7 +10,7 @@ summary: 'I nuovi volumi possono ora essere montati sull"host di destinazione, i
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

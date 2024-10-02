@@ -10,7 +10,7 @@ summary: Questa sezione descrive come ripristinare un backup SAP HANA con BlueXP
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,9 +18,9 @@ Un ripristino dal backup può essere effettuato solo su un sistema storage basat
 
 . Nell'interfaccia utente di BlueXP, fai clic su   *protezione* > *Backup e ripristino* > *applicazioni* e scegli ibrido.
 . Nel  campo *Filtra per*, seleziona il filtro *tipo* e dal menu a discesa seleziona *HANA*.
-. Fare clic su *Visualizza dettagli* corrispondente al database che si desidera ripristinare. + immagine::hana-hycl-back-image38.jpeg[hana-hycl-back-image38,width=624,height=305]
-. Selezionare il backup desiderato e scegliere esportazione archiviazione. + immagine::hana-hycl-back-image39.jpeg[width=624,height=308]
-. Fornire le opzioni desiderate: + immagine::hana-hycl-back-image40.jpeg[width=624,height=308]
+. Fare clic su *Visualizza dettagli* corrispondente al database che si desidera ripristinare. + image:hana-hycl-back-image38.jpeg["hana-hycl-back-image38, larghezza=624, altezza=305"]
+. Selezionare il backup desiderato e scegliere esportazione archiviazione. + image:hana-hycl-back-image39.jpeg["larghezza=624,altezza=308"]
+. Fornire le opzioni desiderate: + image:hana-hycl-back-image40.jpeg["larghezza=624,altezza=308"]
 +
 .. Per l'ambiente NAS, specificare l'FQDN o l'indirizzo IP dell'host su cui esportare i volumi ripristinati dall'archivio di oggetti.
 .. Per l'ambiente SAN, specificare gli iniziatori dell'host a cui mappare le LUN dei volumi ripristinati dall'archivio di oggetti.
@@ -30,5 +30,5 @@ Un ripristino dal backup può essere effettuato solo su un sistema storage basat
 . Se lo spazio non è sufficiente nell'archivio di origine o l'archivio di origine non è disponibile, selezionare *Modifica posizione di archiviazione*.
 . Se si seleziona *Modifica posizione di memorizzazione*, è possibile aggiungere un suffisso al volume di destinazione. Se la casella di controllo non è stata selezionata, per impostazione predefinita *_restore* viene aggiunto al volume di destinazione. Fare clic su *Avanti*.
 . Se è stato selezionato Cambia posizione di archiviazione, specificare i dettagli della posizione di archiviazione alternativa in cui i dati ripristinati dall'archivio oggetti verranno memorizzati nella pagina mappatura archiviazione e fare clic su *Avanti*.
-. Rivedere i dettagli e fare clic su *Ripristina*. + image::hana-hycl-back-image41.jpeg[hana-hycl-back-image41,width=624,height=309] + + + questa operazione esegue solo l'esportazione di archiviazione del backup ripristinato per l'host specificato. È necessario montare manualmente il filesystem sull'host e richiamare il database. Dopo aver utilizzato il volume, l'amministratore dello storage può eliminare il volume dal cluster ONTAP.
+. Rivedere i dettagli e fare clic su *Ripristina*. + + + image:hana-hycl-back-image41.jpeg["hana-hycl-back-image41, larghezza=624, altezza=309"]+ questa operazione esegue solo l'esportazione di archiviazione del backup ripristinato per l'host specificato. È necessario montare manualmente il filesystem sull'host e richiamare il database. Dopo aver utilizzato il volume, l'amministratore dello storage può eliminare il volume dal cluster ONTAP.
 

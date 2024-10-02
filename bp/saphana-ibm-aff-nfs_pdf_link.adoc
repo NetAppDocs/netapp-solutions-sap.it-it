@@ -13,13 +13,14 @@ summary: 'IBM Power Systems è progettato per carichi di lavoro mission-critical
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Tobias Brandl, NetApp
-
-Carsten Dieterle, IBM
-
+[role="lead"]
 IBM Power Systems è progettato per carichi di lavoro mission-critical e ad uso intensivo di dati come SAP HANA. IBM Power Systems semplifica e accelera le implementazioni di SAP HANA fornendo quattro funzionalità chiave: Virtualizzazione e flessibilità superiori, provisioning più rapido, scalabilità conveniente e uptime massimizzato. La famiglia di prodotti NetApp AFF è certificata per l'utilizzo con SAP HANA in progetti TDI (Tailored Data Center Integration) e si integra perfettamente con IBM Power Systems. Questo documento descrive le Best practice per una configurazione dello storage NAS (NFS) utilizzando NetApp ONTAP con la famiglia di prodotti AFF e IBM Power Systems.
+
+Autori:
+
+Tobias Brandl, NetApp Carsten Dieterle, IBM
 
 link:https://www.netapp.com/pdf.html?item=/media/19887-TR-4821.pdf["https://www.netapp.com/pdf.html?item=/media/19887-TR-4821.pdf"]

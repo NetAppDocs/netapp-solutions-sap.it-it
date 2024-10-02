@@ -10,7 +10,7 @@ summary: 'I seguenti file di configurazione del provider, script di esecuzione e
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

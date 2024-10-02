@@ -10,7 +10,7 @@ summary: Questa sezione descrive la preparazione necessaria per installare SAP H
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

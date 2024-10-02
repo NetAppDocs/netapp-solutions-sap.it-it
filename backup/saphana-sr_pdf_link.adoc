@@ -10,11 +10,12 @@ summary: TR-4719 descrive come la tecnologia NetApp SnapCenter e il plug-in SAP 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+TR-4719 descrive come la tecnologia NetApp SnapCenter e il plug-in SAP HANA possono essere utilizzati per il backup e il ripristino in un ambiente di replica del sistema SAP HANA.
 
 Nils Bauer, NetApp
-
-TR-4719 descrive come la tecnologia NetApp SnapCenter e il plug-in SAP HANA possono essere utilizzati per il backup e il ripristino in un ambiente di replica del sistema SAP HANA.
 
 link:https://www.netapp.com/pdf.html?item=/media/17030-tr4719pdf.pdf["https://www.netapp.com/pdf.html?item=/media/17030-tr4719pdf.pdf"]

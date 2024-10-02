@@ -10,13 +10,13 @@ summary: 'L"approccio all"integrazione utilizza il provisioning personalizzato e
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
 L'approccio all'integrazione utilizza il provisioning personalizzato e gli hook operativi di SAP lama combinati con i playbook Ansible per la gestione dello storage NetApp. La figura seguente mostra una panoramica di alto livello della configurazione dal lato lama e dei componenti corrispondenti dell'implementazione dell'esempio.
 
-image::lama-ansible-image6.png[Si tratta di un'immagine piuttosto complessa con tre caselle denominate SAP lama, Ansible Control Node e storage NetApp. Ciascuna casella contiene le rispettive fasi di processo che si svolgono a ciascun livello.]
+image:lama-ansible-image6.png["Si tratta di un'immagine piuttosto complessa con tre caselle denominate SAP lama, Ansible Control Node e storage NetApp. Ciascuna casella contiene le rispettive fasi di processo che si svolgono a ciascun livello."]
 
 Un host centrale che agisce come nodo di controllo Ansible viene utilizzato per eseguire le richieste da SAP lama e per attivare le operazioni di storage NetApp utilizzando i playbook Ansible. I componenti dell'agente host SAP devono essere installati su questo host in modo che l'host possa essere utilizzato come gateway di comunicazione per SAP lama.
 

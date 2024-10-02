@@ -10,7 +10,7 @@ summary: La configurazione di laboratorio utilizzata per questo report tecnico i
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -59,4 +59,4 @@ Il server SnapCenter viene utilizzato come host plug-in HANA centrale per i sist
 
 La figura seguente mostra la configurazione del laboratorio.
 
-image::saphana-br-scs-image21.png[safana br scs image21]
+image:saphana-br-scs-image21.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

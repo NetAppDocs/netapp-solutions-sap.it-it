@@ -10,7 +10,7 @@ summary: 'A seconda della configurazione del disaster recovery (con o senza repl
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -20,33 +20,33 @@ Se vengono replicati anche i dati di backup del registro, è necessario creare u
 
 . Uno dei backup snapshot coerenti con l'applicazione viene selezionato come origine per il nuovo volume del volume di dati HANA. L'opzione Restore to New Volume (Ripristina su nuovo volume) è selezionata per creare un nuovo volume in base al backup dello snapshot.
 +
-image::saphana-dr-anf_image19.png[safana dr anf image19]
+image:saphana-dr-anf_image19.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Il nuovo nome del volume e la nuova quota devono essere forniti nell'interfaccia utente.
 +
-image::saphana-dr-anf_image20.png[safana dr anf image20]
+image:saphana-dr-anf_image20.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Nella scheda Protocol (protocollo), vengono configurati il percorso del file e la policy di esportazione.
 +
-image::saphana-dr-anf_image21.png[safana dr anf image21]
+image:saphana-dr-anf_image21.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . La schermata Create and Review (Crea e rivedi) riassume la configurazione.
 +
-image::saphana-dr-anf_image22.png[safana dr anf image22]
+image:saphana-dr-anf_image22.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . È stato creato un nuovo volume in base al backup di snapshot HANA.
 +
-image::saphana-dr-anf_image23.png[safana dr anf image23]
+image:saphana-dr-anf_image23.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
 A questo punto, è necessario eseguire le stesse operazioni per il volume condiviso HANA e per il volume di backup del registro, come illustrato nelle due schermate seguenti. Poiché non sono stati creati snapshot aggiuntivi per il volume di backup del registro e condiviso HANA, la copia Snapshot SnapMirror più recente deve essere selezionata come origine per il nuovo volume. Si tratta di dati non strutturati e per questo caso di utilizzo è possibile utilizzare la copia Snapshot di SnapMirror.
 
-image::saphana-dr-anf_image24.png[safana dr anf image24]
+image:saphana-dr-anf_image24.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 La seguente schermata mostra il volume condiviso HANA ripristinato nel nuovo volume.
 
-image::saphana-dr-anf_image25.png[safana dr anf image25]
+image:saphana-dr-anf_image25.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 NOTE: Se è stato utilizzato un pool di capacità con un livello di performance basso, i volumi devono ora essere spostati in un pool di capacità che fornisca le performance richieste.

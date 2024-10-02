@@ -10,7 +10,7 @@ summary: A partire da SAP HANA 1.0 SPS10, SAP ha introdotto i parametri per rego
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

@@ -10,7 +10,7 @@ summary: 'È necessario sincronizzare l"ora tra i controller di storage e gli ho
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

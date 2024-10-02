@@ -10,7 +10,7 @@ summary: 'SnapCenter è una piattaforma unificata e scalabile per la protezione 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -28,4 +28,4 @@ I plug-in personalizzati di SnapCenter consentono di creare plug-in personalizza
 
 La figura seguente illustra i componenti di SnapCenter.
 
-image::saphana-br-scs-image6.png[safana br scs image6]
+image:saphana-br-scs-image6.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

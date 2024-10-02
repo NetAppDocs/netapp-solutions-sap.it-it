@@ -10,7 +10,7 @@ summary: La documentazione contiene anche informazioni sulle configurazioni mult
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

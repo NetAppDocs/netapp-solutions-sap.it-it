@@ -10,7 +10,7 @@ summary: 'Questa sezione descrive la configurazione del sistema storage NetApp. 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -82,11 +82,11 @@ La seguente panoramica riassume i passaggi necessari per la configurazione dello
 
 Con gli HDD, è possibile collegare un massimo di due shelf di dischi DS2246 o quattro shelf di dischi DS224C a uno stack SAS per fornire le prestazioni richieste per gli host SAP HANA, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha.
 
-image::saphana_fas_fc_image10.png[safana FAS fc image10]
+image:saphana_fas_fc_image10.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Con gli SSD, è possibile collegare un massimo di uno shelf di dischi a uno stack SAS per fornire le prestazioni richieste per gli host SAP HANA, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. Con lo shelf di dischi DS224C, è possibile utilizzare anche il cablaggio SAS quad-path, ma non è necessario.
 
-image::saphana_fas_fc_image11.png[safana FAS fc image11]
+image:saphana_fas_fc_image11.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -100,7 +100,7 @@ In generale, è necessario configurare due aggregati per controller, indipendent
 
 La figura seguente mostra una configurazione per otto host SAP HANA. Quattro host SAP HANA sono collegati a ciascun controller di storage. Vengono configurati due aggregati separati, uno per ciascun controller di storage. Ogni aggregato è configurato con 4 × 10 = 40 dischi dati (HDD).
 
-image::saphana_fas_fc_image12.png[safana FAS fc image12]
+image:saphana_fas_fc_image12.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -110,7 +110,7 @@ In generale, è necessario configurare due aggregati per controller, indipendent
 
 La figura seguente mostra una configurazione di 12 host SAP HANA in esecuzione su uno shelf SAS da 12 GB configurato con ADPv2. Sei host SAP HANA sono collegati a ciascun controller di storage. Sono configurati quattro aggregati separati, due per ogni controller di storage. Ogni aggregato è configurato con 11 dischi con nove partizioni di dati e due di dischi di parità. Per ciascun controller sono disponibili due partizioni di riserva.
 
-image::saphana_fas_fc_image13.jpg[safana FAS fc image13]
+image:saphana_fas_fc_image13.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -124,13 +124,13 @@ Gli ambienti SAP multihost con database SAP HANA possono utilizzare una singola 
 
 All'interno della configurazione del cluster di storage, è necessario creare un'interfaccia di rete (LIF) e assegnarla a una porta FCP dedicata. Se, ad esempio, sono necessarie quattro porte FCP per motivi di performance, è necessario creare quattro LIF. La figura seguente mostra una schermata delle quattro LIF (denominate `fc_*_*)` configurati su `hana` SVM.
 
-image::saphana_fas_fc_image14.jpeg[safana FAS fc image14]
+image:saphana_fas_fc_image14.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Durante la creazione di SVM con Gestore di sistema di ONTAP 9.8, è possibile selezionare tutte le porte FCP fisiche richieste e creare automaticamente una LIF per porta fisica.
 
 La figura seguente mostra la creazione di SVM e LIFF con Gestione di sistema di ONTAP 9.8.
 
-image::saphana_fas_fc_image15.jpeg[safana FAS fc image15]
+image:saphana_fas_fc_image15.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -138,7 +138,7 @@ image::saphana_fas_fc_image15.jpeg[safana FAS fc image15]
 
 Un set di porte FCP viene utilizzato per definire quali LIF devono essere utilizzati da un igroup specifico. In genere, tutte le LIF create per i sistemi HANA vengono inserite nello stesso set di porte. La figura seguente mostra la configurazione di un set di porte denominato 32g, che include le quattro LIF già create.
 
-image::saphana_fas_fc_image16.jpeg[safana FAS fc image16]
+image:saphana_fas_fc_image16.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 NOTE: Con ONTAP 9.8, non è necessario un set di porte, ma è possibile crearlo e utilizzarlo dalla riga di comando.
@@ -164,7 +164,7 @@ NOTE: Il `sanlun` Fa parte delle utility host di NetApp e deve essere installato
 
 La figura seguente mostra l'elenco degli iniziatori per SS3_HANA. L'igroup contiene tutte le WWPN dei server e viene assegnato al set di porte del controller di storage.
 
-image::saphana_fas_fc_image17.jpeg[safana FAS fc image17]
+image:saphana_fas_fc_image17.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -175,7 +175,7 @@ La figura seguente mostra la configurazione dei volumi di quattro sistemi SAP HA
 
 NOTE: Se per i sistemi SAP HANA viene utilizzato un solo storage controller di una coppia ad alta disponibilità (ha), è possibile memorizzare volumi di dati e volumi di log nello stesso storage controller.
 
-image::saphana_fas_fc_image18.jpg[safana FAS fc image18]
+image:saphana_fas_fc_image18.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Per ogni host SAP HANA, un volume di dati, un volume di log e un volume per `/hana/shared` sono configurati. La seguente tabella mostra una configurazione di esempio con quattro sistemi SAP HANA a host singolo.
 
@@ -254,7 +254,7 @@ Il `/hana/shared` Il volume deve essere accessibile da tutti gli host HANA e vie
 
 NOTE: Se per il sistema SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e log possono essere memorizzati anche sullo stesso storage controller.
 
-image::saphana_fas_fc_image19.jpg[safana FAS fc image19]
+image:saphana_fas_fc_image19.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Per ogni host SAP HANA, vengono creati un volume di dati e un volume di log. Il `/hana/shared` Il volume viene utilizzato da tutti gli host del sistema SAP HANA. La figura seguente mostra una configurazione di esempio per un sistema SAP HANA 4+1 a host multiplo.
 
@@ -380,38 +380,38 @@ La seguente procedura mostra la configurazione di un sistema HANA 2+1 multihost 
 
 . Avviare la creazione guidata LUN in Gestione sistemi NetApp ONTAP.
 +
-image::saphana_fas_fc_image20.jpeg[safana FAS fc image20]
+image:saphana_fas_fc_image20.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Immettere il nome del LUN, selezionare il tipo di LUN e immettere le dimensioni del LUN.
 +
-image::saphana_fas_fc_image21.jpeg[safana FAS fc image21]
+image:saphana_fas_fc_image21.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Inserire il nome del volume e l'aggregato di hosting.
 +
-image::saphana_fas_fc_image22.jpeg[safana FAS fc image22]
+image:saphana_fas_fc_image22.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Selezionare gli igroups a cui devono essere mappati i LUN.
 +
-image::saphana_fas_fc_image23.jpeg[safana FAS fc image23]
+image:saphana_fas_fc_image23.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Fornire le impostazioni QoS.
 +
-image::saphana_fas_fc_image24.jpeg[safana FAS fc image24]
+image:saphana_fas_fc_image24.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Fare clic su Avanti nella pagina Riepilogo.
 +
-image::saphana_fas_fc_image25.jpeg[safana FAS fc image25]
+image:saphana_fas_fc_image25.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Fare clic su fine nella pagina completamento.
 +
-image::saphana_fas_fc_image26.jpeg[safana FAS fc image26]
+image:saphana_fas_fc_image26.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Ripetere i passaggi da 2 a 7 per ogni LUN.
 +
 La figura seguente mostra un riepilogo di tutti i LUN che devono essere creati per la configurazione di più host 2+1.
 
 +
-image::saphana_fas_fc_image27.jpeg[safana FAS fc image27]
+image:saphana_fas_fc_image27.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 

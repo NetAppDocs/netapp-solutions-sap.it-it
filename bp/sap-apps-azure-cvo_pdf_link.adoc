@@ -13,13 +13,14 @@ summary: 'TR-4757 fornisce Best practice per l"utilizzo di Azure NetApp Files pe
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Bernd Herth, Tobias Brandl, Nils Bauer, NetApp
-
-Will Bratton, Geert van Teylingen, Microsoft
-
+[role="lead"]
 TR-4757 fornisce Best practice per l'utilizzo di Azure NetApp Files per le applicazioni SAP e le implementazioni SAP HANA. Descrive inoltre i diversi casi di utilizzo dei file system condivisi SAP. Questo documento fornisce le Best practice per sfruttare NetApp Cloud Volumes ONTAP per le applicazioni SAP e le implementazioni SAP HANA. Include diversi casi di utilizzo dei file system condivisi SAP e considerazioni specifiche sulle performance con SAP HANA su Cloud Volumes ONTAP.
+
+Autori:
+
+Bernd Herth, Tobias Brandl, Nils Bauer, NetApp Will Bratton, Geert van Teylingen, Microsoft
 
 link:https://www.netapp.com/pdf.html?item=/media/17126-tr4757pdf.pdf["https://www.netapp.com/pdf.html?item=/media/17126-tr4757pdf.pdf"]

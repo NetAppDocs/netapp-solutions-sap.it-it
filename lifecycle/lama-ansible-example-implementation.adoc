@@ -10,9 +10,10 @@ summary: 'A causa dell"elevato numero di opzioni disponibili per le configurazio
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 A causa dell'elevato numero di opzioni disponibili per le configurazioni di sistema e storage, l'implementazione di esempio deve essere utilizzata come modello per i requisiti di configurazione e configurazione del sistema.
 
 
@@ -40,13 +41,13 @@ I seguenti principi sono stati applicati all'implementazione di esempio e potreb
 
 La figura seguente mostra la configurazione di laboratorio utilizzata. Il sistema SAP di origine HN9 utilizzato per l'operazione di clone del sistema era costituito dal database H09, dal SAP CS e dal SAP AS Services in esecuzione sullo stesso host (sap-lnx32) con installato https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e86f8743bdb8d1f6cf4b862c79.html["design adattivo"^] attivato. Un nodo di controllo Ansible è stato preparato secondo la https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Playbook Ansible per NetApp ONTAP"^] documentazione.
 
-Anche l'agente host SAP è stato installato su questo host. Lo script del provider NetApp e i playbook Ansible sono stati configurati sul nodo di controllo Ansible come descritto nella link:ama-ansible-appendix--provider-script-configuration-and-ansible-playbooks.html[""Appendice: Configurazione script provider.""]
+Anche l'agente host SAP è stato installato su questo host. Lo script del provider NetApp e i playbook Ansible sono stati configurati sul nodo di controllo Ansible come descritti nella link:lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html[""Appendice: Configurazione script provider.""]
 
 L'host `sap-lnx49` È stato utilizzato come destinazione per le operazioni di cloning di SAP lama ed è stata configurata la funzionalità di isolamento-ready.
 
 Sono stati utilizzati diversi sistemi SAP (HNA come origine e HN2 come destinazione) per le operazioni di copia e refresh del sistema, perché è stata abilitata l'automazione post-copia (PCA).
 
-image::lama-ansible-image7.png[Questa immagine mostra i vari agenti host SAP e il modo in cui interagiscono con lo storage NetApp tramite i montaggi NFS. Viene rappresentata anche l'istanza di SAP lama.]
+image:lama-ansible-image7.png["Questa immagine mostra i vari agenti host SAP e il modo in cui interagiscono con lo storage NetApp tramite i montaggi NFS. Viene rappresentata anche l'istanza di SAP lama."]
 
 Nella configurazione di laboratorio sono state utilizzate le seguenti versioni software:
 
@@ -70,19 +71,19 @@ Nella configurazione di laboratorio sono state utilizzate le seguenti versioni s
 
 La definizione del provider viene eseguita in Automation Studio di SAP lama, come mostrato nella seguente schermata. L'implementazione di esempio utilizza una singola definizione di provider utilizzata per diverse fasi di provisioning personalizzate e per le operazioni hook, come spiegato in precedenza.
 
-image::lama-ansible-image8.png[Schermata delle definizioni dei provider SAP nella GUI di SAP lama.]
+image:lama-ansible-image8.png["Schermata delle definizioni dei provider SAP nella GUI di SAP lama."]
 
 Il provider `netapp_clone` viene definito come script `netapp_clone.sh` Registrato presso l'agente host SAP. L'agente host SAP viene eseguito sull'host centrale `sap-jump`, Che funge anche da nodo di controllo Ansible.
 
-image::lama-ansible-image9.png[Schermata della definizione di singolo provider denominata netapp_clone nella scheda Generale. Mostra la sezione Riepilogo, la sezione usato-per e la sezione Opzioni.]
+image:lama-ansible-image9.png["Schermata della definizione di singolo provider denominata netapp_clone nella scheda Generale. Mostra la sezione Riepilogo, la sezione usato-per e la sezione Opzioni."]
 
 La scheda *utilizzato in* mostra le operazioni personalizzate per cui viene utilizzato il provider. La configurazione per il provisioning personalizzato *NetAppClone* e gli hook personalizzati *Delete NetAppClone* e *Delete NetAppClone Refresh* sono illustrati nei capitoli successivi.
 
-image::lama-ansible-image10.png[Schermata della sezione used-in con elenco delle operazioni personalizzate che utilizzano la definizione. In questo esempio, vengono visualizzati Delete NetAppClone, Delete NetAppClone Refresh e NetAppClone.]
+image:lama-ansible-image10.png["Schermata della sezione used-in con elenco delle operazioni personalizzate che utilizzano la definizione. In questo esempio, vengono visualizzati Delete NetAppClone, Delete NetAppClone Refresh e NetAppClone."]
 
 I parametri *ClonePostFix* e *SnapPostFix* vengono richiesti durante l'esecuzione del flusso di lavoro di provisioning e utilizzati per i nomi dei volumi Snapshot e FlexClone.
 
-image::lama-ansible-image11.png[Schermata della sezione Parameters (parametri) con l'elenco di due parametri: CLonePostFix e SnapPostFix.]
+image:lama-ansible-image11.png["Schermata della sezione Parameters (parametri) con l'elenco di due parametri: CLonePostFix e SnapPostFix."]
 
 
 
@@ -90,7 +91,7 @@ image::lama-ansible-image11.png[Schermata della sezione Parameters (parametri) c
 
 Nella configurazione di provisioning personalizzata di SAP lama, il provider del cliente descritto in precedenza viene utilizzato per sostituire le fasi del workflow di provisioning *Clone Volumes* e *PostCloneVolumes*.
 
-image::lama-ansible-image12.png[Schermata della configurazione di Custom Provisioning. Vengono elencati i processi CloneVolumes e FinalizeCloneVolumes.]
+image:lama-ansible-image12.png["Schermata della configurazione di Custom Provisioning. Vengono elencati i processi CloneVolumes e FinalizeCloneVolumes."]
 
 
 
@@ -98,15 +99,15 @@ image::lama-ansible-image12.png[Schermata della configurazione di Custom Provisi
 
 Se un sistema viene cancellato con il flusso di lavoro System Destroy, viene utilizzato Hook *Delete NetAppClone* per chiamare la definizione del provider `netapp_clone`. L'hook *Delete NetApp Clone Refresh* viene utilizzato durante il flusso di lavoro di refresh del sistema perché l'istanza viene conservata durante l'esecuzione.
 
-image::lama-ansible-image13.png[Schermata di Custom Hooks contenente i ganci personalizzati Elimina NetAppClone Refresh ed Elimina NetAppClone.]
+image:lama-ansible-image13.png["Schermata di Custom Hooks contenente i ganci personalizzati Elimina NetAppClone Refresh ed Elimina NetAppClone."]
 
 È importante configurare *Usa Mount Data XML* per il gancio personalizzato, in modo che SAP lama fornisca al provider le informazioni sulla configurazione del punto di montaggio.
 
-image::lama-ansible-image14.png[Schermata Delete NetAppClone General (Elimina NetAppClone generale) con]
+image:lama-ansible-image14.png["Schermata Delete NetAppClone General (Elimina NetAppClone General) con l'opzione \"Use Mount Data XML yes\" (Usa Mount Data XML sì) evidenziata."]
 
 Per garantire che il gancio personalizzato venga utilizzato ed eseguito solo quando il sistema è stato creato con un workflow di provisioning personalizzato, viene aggiunto il seguente vincolo.
 
-image::lama-ansible-image15.png[Schermata della pagina Delete NetAppClone Constraints (Elimina vincoli NetAppClone). Contiene un singolo vincolo chiamato Custom Clone Process Name (Static).]
+image:lama-ansible-image15.png["Schermata della pagina Delete NetAppClone Constraints (Elimina vincoli NetAppClone). Contiene un singolo vincolo chiamato Custom Clone Process Name (Static)."]
 
 Ulteriori informazioni sull'utilizzo di ganci personalizzati sono disponibili nella https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/139eca2f925e48738a20dbf0b56674c5.html["Documentazione SAP lama"^].
 
@@ -116,4 +117,4 @@ Ulteriori informazioni sull'utilizzo di ganci personalizzati sono disponibili ne
 
 Per abilitare il workflow di provisioning personalizzato per il sistema di origine, è necessario adattarlo nella configurazione. Selezionare la casella di controllo *Usa processo di provisioning personalizzato* con la definizione di provisioning personalizzato corrispondente.
 
-image::lama-ansible-image16.png[Schermata della schermata SAP lama Configuration > Systems> System Details. La casella di controllo Usa processo di provisioning personalizzato è evidenziata.]
+image:lama-ansible-image16.png["Schermata della configurazione di SAP lama > Systems> System Details. La casella di controllo Usa processo di provisioning personalizzato è evidenziata."]

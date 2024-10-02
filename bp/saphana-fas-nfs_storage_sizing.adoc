@@ -10,7 +10,7 @@ summary: La sezione seguente fornisce una panoramica delle considerazioni su per
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -215,4 +215,4 @@ La dimensione della RAM, la dimensione dei dati netti sul disco di ciascun host 
 
 La figura seguente riassume il processo di dimensionamento.
 
-image::saphana-fas-nfs_image9.jpg[safana FAS nfs image9]
+image:saphana-fas-nfs_image9.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

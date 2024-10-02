@@ -10,8 +10,10 @@ summary: 'Le informazioni indipendenti dall"applicazione sulla replica tra regio
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
-Le informazioni indipendenti dalle applicazioni sulla replica tra regioni sono disponibili all'indirizzo https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Documentazione Azure NetApp Files | documenti Microsoft"^] nelle sezioni concetti e guida.
+Le informazioni indipendenti dall'applicazione sulla replica tra più aree sono disponibili nella seguente posizione.
+
+link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Documentazione Azure NetApp Files | documenti Microsoft"^] nei concetti e nelle sezioni di guida.

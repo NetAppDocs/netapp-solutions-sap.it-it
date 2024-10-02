@@ -10,6 +10,8 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
+In questo documento viene descritto il setup e la configurazione dell'infrastruttura per sistemi NetApp FAS e NFS.

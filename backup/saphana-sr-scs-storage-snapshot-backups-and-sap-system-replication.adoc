@@ -10,7 +10,7 @@ summary: 'Le operazioni di backup vengono sempre eseguite sull"host SAP HANA pri
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,10 +22,10 @@ La possibilità di utilizzare qualsiasi backup per il ripristino e l'inoltro del
 
 Ogni host SAP HANA dispone di un proprio volume di storage. Quando si utilizza un'istantanea basata su storage per eseguire un backup, viene creata un'istantanea coerente con il database sul volume di storage dell'host SAP HANA primario.
 
-image::saphana-sr-scs-image3.png[safana sr scs image3]
+image:saphana-sr-scs-image3.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Quando viene eseguito un failover sull'host 2, l'host 2 diventa l'host primario, i backup vengono eseguiti sull'host 2 e i backup Snapshot vengono creati sul volume di storage dell'host 2.
 
 Il backup creato sull'host 2 può essere ripristinato direttamente al livello di storage. Se è necessario utilizzare un backup creato sull'host 1, il backup deve essere copiato dal volume di storage dell'host 1 al volume di storage dell'host 2. Forward Recovery utilizza i backup dei log di entrambi gli host.
 
-image::saphana-sr-scs-image4.png[safana sr scs image4]
+image:saphana-sr-scs-image4.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

@@ -10,12 +10,13 @@ summary: 'La famiglia di sistemi NetApp AFF è stata certificata per l"utilizzo 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+Le famiglie di prodotti NetApp AFF A-Series e AFF C-Series sono state certificate per l'uso con SAP HANA nei progetti TDI (tailored data center Integration).
 
 Marco Schön, NetApp
-
-Le famiglie di prodotti NetApp AFF A-Series e AFF C-Series sono state certificate per l'uso con SAP HANA nei progetti TDI (tailored data center Integration).
 
 Questa certificazione è valida per i seguenti modelli:
 
@@ -79,7 +80,7 @@ NOTE: Consultare le note SAP relative alle linee guida per la configurazione del
 
 I controller di storage NetApp AFF sono certificati nel programma SAP HANA TDI utilizzando protocolli NFS (NAS) e FC (SAN). Possono essere implementati in qualsiasi scenario SAP HANA, come SAP Business Suite su HANA, S/4HANA, BW/4HANA o SAP Business Warehouse su HANA in configurazioni a host singolo o multiplo. Qualsiasi server certificato per l'utilizzo con SAP HANA può essere combinato con soluzioni di storage certificate NetApp. Vedere la figura seguente per una panoramica dell'architettura di SAP HANA TDI.
 
-image::saphana_aff_nfs_image1.png[safana AFF nfs image1]
+image:saphana_aff_nfs_image1.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Per ulteriori informazioni sui prerequisiti e sui consigli per i sistemi SAP HANA prodotti, consulta la seguente risorsa:
 

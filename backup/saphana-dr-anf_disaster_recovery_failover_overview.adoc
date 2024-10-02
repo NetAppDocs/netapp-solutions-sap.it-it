@@ -10,7 +10,7 @@ summary: A seconda che la replica del backup del registro faccia parte della con
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -32,4 +32,4 @@ Per eseguire il failover del disaster recovery, attenersi alla seguente procedur
 
 Le seguenti sottosezioni descrivono in dettaglio questi passaggi e la seguente figura illustra il test di disaster failover.
 
-image::saphana-dr-anf_image26.png[safana dr anf image26]
+image:saphana-dr-anf_image26.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

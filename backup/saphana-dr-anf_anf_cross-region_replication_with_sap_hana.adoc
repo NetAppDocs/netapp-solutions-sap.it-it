@@ -10,6 +10,8 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./ent-apps-db/media/
+:imagesdir: ../media/
 
 
+[role="lead"]
+Questo documento tratta la replica ANF in più aree con SAP HANA.

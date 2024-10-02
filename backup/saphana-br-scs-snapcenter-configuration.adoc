@@ -10,7 +10,7 @@ summary: 'La configurazione di SnapCenter può essere divisa in due aree princip
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,7 +22,7 @@ La configurazione SnapCenter può essere divisa in due aree principali:
 
 La figura seguente fornisce una panoramica dei componenti di configurazione e delle relative dipendenze. Le caselle verdi mostrano i passaggi di configurazione che devono essere eseguiti al di fuori di SnapCenter; le caselle blu mostrano i passaggi che vengono eseguiti utilizzando l'interfaccia grafica di SnapCenter.
 
-image::saphana-br-scs-image22.png[safana br scs image22]
+image:saphana-br-scs-image22.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Con la configurazione iniziale, vengono installati e configurati i seguenti componenti:
 

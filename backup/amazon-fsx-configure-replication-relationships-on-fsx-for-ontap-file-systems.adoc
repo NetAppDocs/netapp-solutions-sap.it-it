@@ -10,7 +10,7 @@ summary: Questa sezione descrive come eseguire il peer di file system FSX per ON
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

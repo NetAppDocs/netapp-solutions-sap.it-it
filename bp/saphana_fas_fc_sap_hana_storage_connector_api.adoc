@@ -10,7 +10,7 @@ summary: Un connettore di storage è richiesto solo in ambienti con più host do
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

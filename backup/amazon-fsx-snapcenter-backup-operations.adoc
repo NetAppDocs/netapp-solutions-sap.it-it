@@ -10,7 +10,7 @@ summary: 'Questa sezione descrive come creare un backup Snapshot on-demand e un"
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -28,21 +28,21 @@ La vista topologia delle risorse offre una panoramica di tutti i backup disponib
 
 . Nella riga superiore, selezionare l'icona Backup Now per avviare un backup on-demand.
 +
-image::amazon-fsx-image48.png[amazon fsx image48]
+image:amazon-fsx-image48.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Dall'elenco a discesa, selezionare il criterio di backup `LocalSnap`, Quindi fare clic su Backup per avviare il backup on-demand.
 +
-image::amazon-fsx-image49.png[amazon fsx image49]
+image:amazon-fsx-image49.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image50.png[amazon fsx image50]
+image:amazon-fsx-image50.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 Un registro dei cinque job precedenti viene visualizzato nell'area Activity (attività) nella parte inferiore della vista Topology (topologia).
 
 . I dettagli della commessa vengono visualizzati facendo clic sulla riga dell'attività della commessa nell'area Activity (attività). È possibile aprire un registro dettagliato dei processi facendo clic su View Logs (Visualizza registri)
 +
-image::amazon-fsx-image51.png[amazon fsx image51]
+image:amazon-fsx-image51.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 Al termine del backup, viene visualizzata una nuova voce nella vista della topologia. I nomi dei backup seguono la stessa convenzione di denominazione del nome Snapshot definito nella sezione link:amazon-fsx-snapcenter-configuration.html#configure-and-protect-a-hana-resource[""Configurazione e protezione di una risorsa HANA"."]
@@ -51,16 +51,16 @@ Al termine del backup, viene visualizzata una nuova voce nella vista della topol
 Per visualizzare l'elenco di backup aggiornato, è necessario chiudere e riaprire la vista della topologia.
 
 +
-image::amazon-fsx-image52.png[amazon fsx image52]
+image:amazon-fsx-image52.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 Nel catalogo di backup SAP HANA, il nome del backup SnapCenter viene memorizzato come a. `Comment` oltre al campo `External Backup ID (EBID)`. Questo è mostrato nella figura seguente per il database di sistema e nella figura successiva per il database tenant PFX.
 
 +
-image::amazon-fsx-image53.png[amazon fsx image53]
+image:amazon-fsx-image53.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image54.png[amazon fsx image54]
+image:amazon-fsx-image54.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -82,19 +82,19 @@ sapcc-hana-svm::>
 
 Un'operazione di verifica dell'integrità dei blocchi on-demand viene eseguita allo stesso modo di un processo di backup Snapshot, selezionando la policy BlockIntegrityCheck. Quando si pianificano i backup utilizzando questo criterio, SnapCenter crea un backup standard del file SAP HANA per i database del sistema e del tenant.
 
-image::amazon-fsx-image55.png[amazon fsx image55]
+image:amazon-fsx-image55.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
-image::amazon-fsx-image56.png[amazon fsx image56]
+image:amazon-fsx-image56.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 SnapCenter non visualizza il controllo dell'integrità del blocco allo stesso modo dei backup basati su copia Snapshot. La scheda di riepilogo mostra invece il numero di backup basati su file e lo stato del backup precedente.
 
-image::amazon-fsx-image57.png[amazon fsx image57]
+image:amazon-fsx-image57.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Il catalogo di backup SAP HANA mostra le voci per i database di sistema e tenant. Le seguenti figure mostrano il controllo dell'integrità del blocco SnapCenter nel catalogo di backup del sistema e nel database tenant.
 
-image::amazon-fsx-image58.png[amazon fsx image58]
+image:amazon-fsx-image58.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
-image::amazon-fsx-image59.png[amazon fsx image59]
+image:amazon-fsx-image59.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Un controllo dell'integrità dei blocchi consente di creare file di backup dei dati SAP HANA standard. SnapCenter utilizza il percorso di backup configurato con il database HANA per le operazioni di backup dei dati basate su file.
 

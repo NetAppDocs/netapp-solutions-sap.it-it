@@ -10,7 +10,7 @@ summary: Esistono diversi scenari in cui i dati di un sistema di origine devono 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,11 +18,11 @@ Esistono diversi scenari in cui i dati di un sistema di origine devono essere re
 
 Queste operazioni di refresh del sistema consistono in più attività a livello di infrastruttura, database e applicazioni, che possono richiedere più giorni a seconda del livello di automazione.
 
-image::lama-ansible-image2.png[Questa immagine mostra il flusso di lavoro ambientale dal principale scenario di sviluppo alle divisioni temporanee dei progetti, ai sistemi di riparazione, ai sistemi di formazione e ai sistemi sanbox. Mostra dove vengono utilizzati System Refresh, System Copy e System Clone per questi diversi scopi.]
+image:lama-ansible-image2.png["Questa immagine mostra il flusso di lavoro ambientale dal principale scenario di sviluppo alle divisioni temporanee dei progetti, ai sistemi di riparazione, ai sistemi di formazione e ai sistemi sanbox. Mostra dove vengono utilizzati System Refresh, System Copy e System Clone per questi diversi scopi."]
 
 I flussi di lavoro di clonazione SAP lama e NetApp possono essere utilizzati per accelerare e automatizzare le attività richieste a livello di infrastruttura e database. Invece di ripristinare un backup dal sistema di origine al sistema di destinazione, SAP lama utilizza la copia Snapshot di NetApp e la tecnologia FlexClone di NetApp, in modo che le attività richieste fino a un database HANA avviato possano essere eseguite in pochi minuti invece che in ore, come mostrato nella figura seguente. Il tempo necessario per il processo di cloning è indipendente dalle dimensioni del database, pertanto è possibile creare anche sistemi molto grandi in un paio di minuti. Un'ulteriore riduzione del runtime viene ottenuta automatizzando le attività a livello di sistema operativo e database, nonché a livello di post-elaborazione SAP.
 
-image::lama-ansible-image3.png[Questa immagine mostra un confronto tra il processo di cloning con e senza le copie Snapshot di NetApp e la tecnologia FlexClone di NetApp, che accelera notevolmente il processo.]
+image:lama-ansible-image3.png["Questa immagine mostra un confronto tra il processo di cloning con e senza le copie Snapshot di NetApp e la tecnologia FlexClone di NetApp, che accelera notevolmente il processo."]
 
 
 
@@ -36,7 +36,7 @@ Invece di ripristinare il sistema SAP, l'approccio migliore consiste nel cercare
 
 Quando si configura il sistema di riparazione, la flessibilità e la velocità sono fondamentali. Con i backup Snapshot basati su storage NetApp, sono disponibili più immagini di database coerenti per creare un clone del sistema di produzione utilizzando la tecnologia NetApp FlexClone. I volumi FlexClone possono essere creati in pochi secondi anziché in più ore se per configurare il sistema di riparazione viene utilizzato un ripristino reindirizzato da un backup basato su file.
 
-image::lama-ansible-image4.png[Questa immagine mostra il processo passo per passo per la creazione di un sistema di riparazione dal sistema di cloning utilizzando la tecnologia FlexClone.]
+image:lama-ansible-image4.png["Questa immagine mostra il processo passo per passo per la creazione di un sistema di riparazione dal sistema di cloning utilizzando la tecnologia FlexClone."]
 
 
 
@@ -48,4 +48,4 @@ La replica dello storage con SnapMirror consente di eseguire test di disaster re
 
 SAP lama può essere utilizzato per orchestrare l'intera procedura di test e si occupa anche di scherma di rete, manutenzione degli host di destinazione e così via.
 
-image::lama-ansible-image5.png[Questa immagine mostra la relazione tra i sistemi storage NetApp nel data center primario, nel data center DR locale e nel data center DR remoto. Sono connessi sia da relazioni SnapMirror sincrone che da relazioni SnapMirror asincrone.]
+image:lama-ansible-image5.png["Questa immagine mostra la relazione tra i sistemi storage NetApp nel data center primario, nel data center DR locale e nel data center DR remoto. Sono connessi sia da relazioni SnapMirror sincrone che da relazioni SnapMirror asincrone."]

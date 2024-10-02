@@ -10,7 +10,7 @@ summary: Per la configurazione di base del SnapCenter e la protezione della riso
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -42,7 +42,7 @@ I privilegi richiesti vengono modificati con la release HANA 2.0 SPS5: Backup ad
 
 Per un sistema SAP HANA MDC, è necessario creare l'utente nel database di sistema perché tutti i comandi di backup per il sistema e i database tenant vengono eseguiti utilizzando il database di sistema.
 
-image::amazon-fsx-image9.png[amazon fsx image9]
+image:amazon-fsx-image9.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Il seguente comando viene utilizzato per la configurazione dell'archivio utente con `<sid>adm` utente:
 
@@ -90,31 +90,31 @@ Per configurare lo storage in SnapCenter, procedere come segue.
 
 . Nell'interfaccia utente di SnapCenter, selezionare sistemi storage.
 +
-image::amazon-fsx-image10.png[amazon fsx image10]
+image:amazon-fsx-image10.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 È possibile selezionare il tipo di sistema storage, che può essere SVM ONTAP o cluster ONTAP. Nell'esempio seguente, viene selezionata la gestione SVM.
 
 +
-image::amazon-fsx-image11.png[amazon fsx image11]
+image:amazon-fsx-image11.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Per aggiungere un sistema storage e fornire il nome host e le credenziali richiesti, fare clic su New (nuovo).
 +
 L'utente SVM non deve essere l'utente vsadmin, come mostrato nella figura seguente. In genere, un utente viene configurato sulla SVM e assegnato i permessi necessari per eseguire le operazioni di backup e ripristino. Per informazioni sui privilegi richiesti, vedere http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["Guida all'installazione di SnapCenter"^] Nella sezione intitolata "privilegi minimi ONTAP richiesti".
 
 +
-image::amazon-fsx-image12.png[amazon fsx image12]
+image:amazon-fsx-image12.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Per configurare la piattaforma di storage, fare clic su More Options (altre opzioni).
 . Selezionare All Flash FAS come sistema storage per garantire che la licenza, che fa parte di FSX per ONTAP, sia disponibile per SnapCenter.
 +
-image::amazon-fsx-image13.png[amazon fsx image13]
+image:amazon-fsx-image13.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 SVM `sapcc-hana-svm` È ora configurato in SnapCenter.
 
 +
-image::amazon-fsx-image14.png[amazon fsx image14]
+image:amazon-fsx-image14.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -126,11 +126,11 @@ Per consentire a SnapCenter di implementare i plug-in richiesti sugli host HANA,
 
 . Accedere a Impostazioni, selezionare credenziali e fare clic su nuovo.
 +
-image::amazon-fsx-image15.png[amazon fsx image15]
+image:amazon-fsx-image15.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Nella configurazione di laboratorio, abbiamo configurato un nuovo utente,  `snapcenter`, Sull'host HANA utilizzato per l'implementazione del plug-in. È necessario attivare sudo prvileges, come mostrato nella figura seguente.
 +
-image::amazon-fsx-image16.png[amazon fsx image16]
+image:amazon-fsx-image16.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -164,15 +164,15 @@ Per aggiungere l'host SAP HANA, attenersi alla seguente procedura:
 
 . Dalla scheda host, fare clic su Add (Aggiungi).
 +
-image::amazon-fsx-image17.png[amazon fsx image17]
+image:amazon-fsx-image17.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Fornire informazioni sull'host e selezionare il plug-in SAP HANA da installare. Fare clic su Invia.
 +
-image::amazon-fsx-image18.png[amazon fsx image18]
+image:amazon-fsx-image18.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Confermare l'impronta digitale.
 +
-image::amazon-fsx-image19.png[amazon fsx image19]
+image:amazon-fsx-image19.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 L'installazione di HANA e del plug-in Linux si avvia automaticamente. Al termine dell'installazione, la colonna di stato dell'host mostra Configure VMware Plug-in (Configura plug-in VMware). SnapCenter rileva se il plug-in SAP HANA è installato in un ambiente virtualizzato. Potrebbe trattarsi di un ambiente VMware o di un ambiente di un provider di cloud pubblico. In questo caso, SnapCenter visualizza un avviso per configurare l'hypervisor.
@@ -181,19 +181,19 @@ L'installazione di HANA e del plug-in Linux si avvia automaticamente. Al termine
 Per rimuovere il messaggio di avviso, procedere come segue.
 
 +
-image::amazon-fsx-image20.png[amazon fsx image20]
+image:amazon-fsx-image20.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 .. Dalla scheda Settings (Impostazioni), selezionare Global Settings (Impostazioni globali).
 .. Per le impostazioni dell'hypervisor, selezionare VM con iSCSI Direct Attached Disk o NFS per tutti gli host e aggiornare le impostazioni.
 +
-image::amazon-fsx-image21.png[amazon fsx image21]
+image:amazon-fsx-image21.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 La schermata mostra il plug-in Linux e il plug-in HANA con lo stato in esecuzione.
 
 +
-image::amazon-fsx-image22.png[amazon fsx image22]
+image:amazon-fsx-image22.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -221,35 +221,35 @@ Per configurare le policy di backup di Snapshot, procedere come segue.
 
 . Accedere a Impostazioni > Criteri e fare clic su nuovo.
 +
-image::amazon-fsx-image23.png[amazon fsx image23]
+image:amazon-fsx-image23.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Immettere il nome e la descrizione della policy. Fare clic su Avanti.
 +
-image::amazon-fsx-image24.png[amazon fsx image24]
+image:amazon-fsx-image24.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Selezionare il tipo di backup basato su Snapshot e selezionare orario per la frequenza di pianificazione.
 +
 La pianificazione viene configurata in seguito con la configurazione di protezione delle risorse HANA.
 
 +
-image::amazon-fsx-image25.png[amazon fsx image25]
+image:amazon-fsx-image25.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Configurare le impostazioni di conservazione per i backup on-demand.
 +
-image::amazon-fsx-image26.png[amazon fsx image26]
+image:amazon-fsx-image26.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Configurare le opzioni di replica. In questo caso, non è selezionato alcun aggiornamento di SnapVault o SnapMirror.
 +
-image::amazon-fsx-image27.png[amazon fsx image27]
+image:amazon-fsx-image27.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image28.png[amazon fsx image28]
+image:amazon-fsx-image28.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
 Il nuovo criterio è ora configurato.
 
-image::amazon-fsx-image29.png[amazon fsx image29]
+image:amazon-fsx-image29.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -260,22 +260,22 @@ Per configurare il criterio di controllo dell'integrità del blocco, procedere c
 . Accedere a Impostazioni > Criteri e fare clic su nuovo.
 . Immettere il nome e la descrizione della policy. Fare clic su Avanti.
 +
-image::amazon-fsx-image30.png[amazon fsx image30]
+image:amazon-fsx-image30.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Impostare il tipo di backup su file-based (basato su file) e la frequenza di pianificazione su Weekly (settimanale). La pianificazione viene configurata in seguito con la configurazione di protezione delle risorse HANA.
 +
-image::amazon-fsx-image31.png[amazon fsx image31]
+image:amazon-fsx-image31.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Configurare le impostazioni di conservazione per i backup on-demand.
 +
-image::amazon-fsx-image32.png[amazon fsx image32]
+image:amazon-fsx-image32.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Nella pagina Riepilogo, fare clic su fine.
 +
-image::amazon-fsx-image33.png[amazon fsx image33]
+image:amazon-fsx-image33.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image34.png[amazon fsx image34]
+image:amazon-fsx-image34.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -290,63 +290,63 @@ Dopo l'installazione del plug-in, il processo di rilevamento automatico della ri
 È inoltre possibile attivare manualmente il processo di rilevamento automatico nella schermata risorse facendo clic su Aggiorna risorse.
 
 +
-image::amazon-fsx-image35.png[amazon fsx image35]
+image:amazon-fsx-image35.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Fornire la chiave dell'archivio utenti per il database HANA.
 +
-image::amazon-fsx-image36.png[amazon fsx image36]
+image:amazon-fsx-image36.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 Viene avviato il processo di rilevamento automatico di secondo livello in cui vengono rilevate le informazioni relative ai dati del tenant e all'impatto dello storage.
 
 +
-image::amazon-fsx-image37.png[amazon fsx image37]
+image:amazon-fsx-image37.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Dalla scheda Resources (risorse), fare doppio clic sulla risorsa per configurare la protezione delle risorse.
 +
-image::amazon-fsx-image38.png[amazon fsx image38]
+image:amazon-fsx-image38.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Configurare un formato nome personalizzato per la copia Snapshot.
 +
 NetApp consiglia di utilizzare un nome di copia Snapshot personalizzato per identificare facilmente i backup creati con quale tipo di policy e pianificazione. Aggiungendo il tipo di pianificazione nel nome della copia Snapshot, è possibile distinguere tra backup pianificati e su richiesta. Il `schedule name` la stringa per i backup on-demand è vuota, mentre i backup pianificati includono la stringa `Hourly`, `Daily`, `or Weekly`.
 
 +
-image::amazon-fsx-image39.png[amazon fsx image39]
+image:amazon-fsx-image39.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Non è necessario impostare impostazioni specifiche nella pagina Impostazioni applicazione. Fare clic su Avanti.
 +
-image::amazon-fsx-image40.png[amazon fsx image40]
+image:amazon-fsx-image40.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Selezionare i criteri da aggiungere alla risorsa.
 +
-image::amazon-fsx-image41.png[amazon fsx image41]
+image:amazon-fsx-image41.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Definire la pianificazione per la policy di controllo dell'integrità del blocco.
 +
 In questo esempio, viene impostato per una volta alla settimana.
 
 +
-image::amazon-fsx-image42.png[amazon fsx image42]
+image:amazon-fsx-image42.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Definire la pianificazione per la policy Snapshot locale.
 +
 In questo esempio, viene impostato ogni 6 ore.
 
 +
-image::amazon-fsx-image43.png[amazon fsx image43]
+image:amazon-fsx-image43.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image44.png[amazon fsx image44]
+image:amazon-fsx-image44.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Fornire informazioni sulla notifica via email.
 +
-image::amazon-fsx-image45.png[amazon fsx image45]
+image:amazon-fsx-image45.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image46.png[amazon fsx image46]
+image:amazon-fsx-image46.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
 La configurazione delle risorse HANA è stata completata ed è possibile eseguire i backup.
 
-image::amazon-fsx-image47.png[amazon fsx image47]
+image:amazon-fsx-image47.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

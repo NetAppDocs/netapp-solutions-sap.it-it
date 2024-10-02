@@ -10,6 +10,8 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
+Questa sezione presenta una panoramica dei test di disaster recovery per SAP HANA in Azure NetApp Files (ANF).

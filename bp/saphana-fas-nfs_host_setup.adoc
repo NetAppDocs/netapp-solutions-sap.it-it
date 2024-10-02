@@ -10,7 +10,7 @@ summary: Tutti i passaggi descritti in questa sezione sono validi per gli ambien
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

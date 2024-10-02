@@ -10,9 +10,10 @@ summary: 'Le soluzioni NetApp per l"ottimizzazione del Lifecycle management SAP 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Questo documento prende in esame gli scenari di refresh e cloning del sistema SAP per sistemi SAP HANA in esecuzione su sistemi NetApp on-premise, su Amazon FSX per sistemi NetApp ONTAP e su Azure NetApp Files. Tuttavia, non tutte le funzionalità e gli scenari sono disponibili su ogni piattaforma storage. La tabella seguente riassume le configurazioni supportate.
 
 All'interno del documento, stiamo utilizzando un ambiente SAP HANA in esecuzione su sistemi NetApp on-premise con NFS come protocollo storage. La maggior parte dei passaggi del flusso di lavoro sono identici per le diverse piattaforme e, in caso di differenze, sono evidenziati in questo documento.

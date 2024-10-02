@@ -10,7 +10,7 @@ summary: Una soluzione di disaster recovery completa deve consentire ai clienti 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,7 +22,7 @@ Inoltre, i dati vengono replicati in modo asincrono in una regione secondaria pe
 
 In questo documento vengono illustrate le diverse opzioni di implementazione di una soluzione di disaster recovery a due regioni.
 
-image::saphana-dr-anf_image3.png[safana dr anf image3]
+image:saphana-dr-anf_image3.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -52,7 +52,7 @@ La figura seguente mostra la configurazione di una soluzione di disaster recover
 
 La seguente figura illustra la replica di sistema SAP HANA.
 
-image::saphana-dr-anf_image4.png[safana dr anf image4]
+image:saphana-dr-anf_image4.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -80,13 +80,13 @@ La figura seguente mostra un esempio di soluzione di disaster recovery a due reg
 
 L'RTO dipende principalmente dal tempo necessario per avviare il database HANA nel sito di disaster recovery e per caricare i dati in memoria. Supponendo che i dati siano letti con un throughput di 1000 MB/s, il caricamento di 1 TB di dati richiederebbe circa 18 minuti. A seconda della configurazione della replica, è necessario eseguire anche il ripristino in avanti e aggiungerlo al valore RTO totale.
 
-Ulteriori informazioni sulle diverse opzioni di configurazione sono fornite nel capitolo link:ent-apps-db/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Opzioni di configurazione per la replica tra regioni con SAP HANA"].
+Ulteriori informazioni sulle diverse opzioni di configurazione sono fornite nel capitolo link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Opzioni di configurazione per la replica tra regioni con SAP HANA"].
 
 I server dei siti di disaster recovery possono essere utilizzati come sistemi di sviluppo/test durante il normale funzionamento. In caso di disastro, i sistemi di sviluppo/test devono essere spenti e avviati come server di produzione DR.
 
 ANF Cross-Region Replication consente di testare il flusso di lavoro DR senza influire sull'RPO e sull'RTO. Ciò si ottiene creando cloni di volume e allegandoli al server di test del DR.
 
-image::saphana-dr-anf_image5.png[safana dr anf image5]
+image:saphana-dr-anf_image5.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 

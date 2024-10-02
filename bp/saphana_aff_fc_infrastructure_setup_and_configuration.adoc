@@ -10,6 +10,8 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./media/
+:imagesdir: ../media/
 
 
+[role="lead"]
+In questo documento viene descritta la configurazione e la configurazione dell'infrastruttura per sistemi NetApp AFF e fibre channel.

@@ -10,13 +10,12 @@ summary: TR-4711 descrive la progettazione di una soluzione NetApp e CommVault p
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Marco Schoen, NetApp
-
-Dr. Tristan DAUDE, CommVault Systems
-
+[role="lead"]
 TR-4711 descrive la progettazione di una soluzione NetApp e CommVault per SAP HANA, che include la tecnologia di gestione delle snapshot CommVault IntelliSnap e la tecnologia NetApp Snapshot. La soluzione si basa sullo storage NetApp e sulla suite di protezione dei dati CommVault.
+
+Autori: Marco Schoen, NetApp; Dr. Tristan DAUDE, CommVault Systems
 
 link:https://www.netapp.com/pdf.html?item=/media/17050-tr4711pdf.pdf["https://www.netapp.com/pdf.html?item=/media/17050-tr4711pdf.pdf"]

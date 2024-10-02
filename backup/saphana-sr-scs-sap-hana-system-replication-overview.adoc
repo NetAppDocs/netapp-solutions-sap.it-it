@@ -10,12 +10,13 @@ summary: 'SAP HANA System Replication viene comunemente utilizzato come soluzion
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Nils Bauer, NetApp
-
+[role="lead"]
 SAP HANA System Replication viene comunemente utilizzato come soluzione ad alta disponibilità o di disaster recovery per i database SAP HANA. SAP HANA System Replication offre diverse modalità operative che è possibile utilizzare in base al caso d'utilizzo o ai requisiti di disponibilità.
+
+Autore: Nils Bauer, NetApp
 
 È possibile combinare due casi di utilizzo principali:
 
@@ -35,7 +36,7 @@ Dal punto di vista dei requisiti di backup, devi essere in grado di creare backu
 
 Il resto di questo documento si concentra sulle operazioni di backup con la replica del sistema SAP configurata come soluzione ad alta disponibilità.
 
-image::saphana-sr-scs-image1.png[safana sr scs image1]
+image:saphana-sr-scs-image1.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -45,4 +46,4 @@ La replica del sistema può essere configurata con una replica asincrona senza a
 
 Per quanto riguarda i requisiti di backup, è necessario essere in grado di creare backup durante il normale funzionamento nel data center 1 e durante il disaster recovery nel data center 2. Nei data center 1 e 2 è disponibile un'infrastruttura di backup separata e le operazioni di backup vengono attivate come parte del disaster failover. L'infrastruttura di backup in genere non è condivisa e non è possibile eseguire un'operazione di ripristino di un backup creato nell'altro data center.
 
-image::saphana-sr-scs-image2.png[safana sr scs image2]
+image:saphana-sr-scs-image2.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

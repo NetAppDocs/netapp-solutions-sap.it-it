@@ -10,7 +10,7 @@ summary: In questa sezione viene descritto come configurare un criterio per la r
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,34 +18,34 @@ summary: In questa sezione viene descritto come configurare un criterio per la r
 
 . Specificare un nome per il criterio.
 +
-image::amazon-fsx-image79.png[amazon fsx image79]
+image:amazon-fsx-image79.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Selezionare Snapshot backup (Backup Snapshot) e una frequenza di pianificazione. Daily viene generalmente utilizzato per la replica del backup.
 +
-image::amazon-fsx-image80.png[amazon fsx image80]
+image:amazon-fsx-image80.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Selezionare la conservazione per i backup Snapshot.
 +
-image::amazon-fsx-image81.png[amazon fsx image81]
+image:amazon-fsx-image81.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
 Questa è la conservazione dei backup Snapshot giornalieri eseguiti sullo storage primario. La conservazione per i backup secondari nella destinazione SnapVault è già stata configurata in precedenza utilizzando il comando add rule a livello di ONTAP. Vedere "Configurazione delle relazioni di replica su FSX per file system ONTAP" (xref).
 
 +
-image::amazon-fsx-image82.png[amazon fsx image82]
+image:amazon-fsx-image82.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 . Selezionare il campo Update SnapVault (Aggiorna etichetta) e fornire un'etichetta personalizzata.
 +
 Questa etichetta deve corrispondere all'etichetta SnapMirror fornita in `add rule` Comando a livello di ONTAP.
 
 +
-image::amazon-fsx-image83.png[amazon fsx image83]
+image:amazon-fsx-image83.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 +
-image::amazon-fsx-image84.png[amazon fsx image84]
+image:amazon-fsx-image84.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
 Il nuovo criterio SnapCenter è ora configurato.
 
-image::amazon-fsx-image85.png[amazon fsx image85]
+image:amazon-fsx-image85.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

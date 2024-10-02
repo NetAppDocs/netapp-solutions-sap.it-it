@@ -10,7 +10,7 @@ summary: Tutte le fasi di configurazione degli host descritte in questa sezione 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

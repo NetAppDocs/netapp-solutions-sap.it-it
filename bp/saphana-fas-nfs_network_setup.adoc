@@ -10,7 +10,7 @@ summary: Per configurare la rete, attenersi alle seguenti indicazioni.
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -31,7 +31,7 @@ A livello di storage, quattro connessioni attive sono configurate per fornire un
 
 A livello di storage, viene configurato un dominio di broadcast con una dimensione MTU di 9000 e tutte le interfacce fisiche richieste vengono aggiunte a questo dominio di broadcast. Questo approccio assegna automaticamente queste interfacce fisiche allo stesso gruppo di failover. Tutte le interfacce logiche (LIF) assegnate a queste interfacce fisiche vengono aggiunte a questo gruppo di failover.
 
-image::saphana-fas-nfs_image10.png[safana FAS nfs image10]
+image:saphana-fas-nfs_image10.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 In generale, è anche possibile utilizzare gruppi di interfacce ha sui server (bonds) e sui sistemi storage (ad esempio, link Aggregation Control Protocol [LACP] e ifgroup). Con i gruppi di interfacce ha, verificare che il carico sia equamente distribuito tra tutte le interfacce all'interno del gruppo. La distribuzione del carico dipende dalla funzionalità dell'infrastruttura dello switch di rete.
 
@@ -46,11 +46,11 @@ Poiché tutti i dati per le istanze SAP HANA, inclusi i dati critici per le perf
 
 La figura seguente fornisce una panoramica della rete.
 
-image::saphana-fas-nfs_image11.png[safana FAS nfs image11]
+image:saphana-fas-nfs_image11.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Ogni nodo SAP HANA utilizza un gruppo di porte dedicato sullo switch distribuito VMware. Questo gruppo di porte consente di migliorare la qualità del servizio (QoS) e l'assegnazione dedicata delle schede di interfaccia di rete fisiche (NIC) sugli host ESX. Per utilizzare NIC fisiche dedicate preservando le funzionalità ha in caso di guasto alla NIC, la NIC fisica dedicata viene configurata come uplink attivo. Le schede di rete aggiuntive sono configurate come uplink in standby nelle impostazioni di teaming e failover del gruppo di porte SAP HANA. Inoltre, i jumbo frame (MTU 9,000) devono essere abilitati end-to-end sugli switch fisici e virtuali. Inoltre, disattivare il controllo di flusso su tutte le porte ethernet utilizzate per il traffico dello storage su server, switch e sistemi storage. La figura seguente mostra un esempio di tale configurazione.
 
 
 NOTE: LRO (Large receive offload) deve essere disattivato per le interfacce utilizzate per il traffico NFS. Per tutte le altre linee guida sulla configurazione di rete, consultare le rispettive guide alle Best practice VMware per SAP HANA.
 
-image::saphana-fas-nfs_image12.png[safana FAS nfs image12]
+image:saphana-fas-nfs_image12.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

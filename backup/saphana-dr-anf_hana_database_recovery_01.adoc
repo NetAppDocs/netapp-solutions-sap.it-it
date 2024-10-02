@@ -10,7 +10,7 @@ summary: Di seguito sono riportati i passaggi per il ripristino del database HAN
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

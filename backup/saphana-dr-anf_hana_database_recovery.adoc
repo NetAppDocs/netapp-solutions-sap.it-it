@@ -10,7 +10,7 @@ summary: Di seguito vengono illustrati i passaggi per il ripristino del database
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

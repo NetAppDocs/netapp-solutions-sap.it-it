@@ -10,20 +10,21 @@ summary: 'Le soluzioni NetApp per l"ottimizzazione del Lifecycle management SAP 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 :firstname: ---
 :author: ---
 :authorinitials: -
 :authors: ---
 
 
-Nils Bauer, NetApp
+[role="lead"]
+Nel dinamico ambiente di business di oggi, le aziende devono fornire innovazione continua e reagire rapidamente ai mercati in continua evoluzione. In queste circostanze competitive, le aziende che implementano una maggiore flessibilità nei propri processi di lavoro possono adattarsi alle esigenze del mercato in modo più efficace.
+
+Autore: Nils Bauer, NetApp
 
 
 
 == Introduzione
-
-Nel dinamico ambiente di business di oggi, le aziende devono fornire innovazione continua e reagire rapidamente ai mercati in continua evoluzione. In queste circostanze competitive, le aziende che implementano una maggiore flessibilità nei propri processi di lavoro possono adattarsi alle esigenze del mercato in modo più efficace.
 
 Le mutevoli esigenze di mercato influiscono anche sugli ambienti SAP di un'azienda, in modo da richiedere integrazioni, modifiche e aggiornamenti regolari. I reparti IT devono implementare queste modifiche con meno risorse e in periodi di tempo più brevi. Ridurre al minimo i rischi durante l'implementazione di tali modifiche richiede test e formazione completi che richiedono sistemi SAP aggiuntivi con dati effettivi provenienti dalla produzione.
 
@@ -31,7 +32,7 @@ Gli approcci tradizionali di gestione del ciclo di vita SAP per il provisioning 
 
 Le soluzioni NetApp per l'ottimizzazione della gestione del ciclo di vita SAP sono integrate nei database SAP HANA e negli strumenti di gestione del ciclo di vita, combinando una protezione dei dati efficiente e integrata con l'applicazione con il provisioning flessibile dei sistemi di test SAP, come mostrato nella figura seguente. Queste soluzioni sono disponibili per SAP HANA on-premise o eseguito nel cloud su Azure NetApp Files (ANF) o Amazon FSX per NetApp ONTAP (FSX per ONTAP).
 
-image::sc-copy-clone-image1.png[copia sc clone image1]
+image:sc-copy-clone-image1.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 

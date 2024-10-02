@@ -10,7 +10,7 @@ summary: Per implementare una strategia di disaster recovery efficace, è necess
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -37,4 +37,4 @@ Per eseguire il test di disaster recovery, attenersi alla seguente procedura:
 
 Le seguenti sottosezioni descrivono in dettaglio questi passaggi.
 
-image::saphana-dr-anf_image18.png[safana dr anf image18]
+image:saphana-dr-anf_image18.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

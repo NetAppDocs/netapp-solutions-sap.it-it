@@ -3,7 +3,6 @@ section: bp
 title: Best Practice
 entries:
 - title: Guida alla configurazione di SAP HANA su sistemi NetApp AFF con FCP
-  type: solutions
   entries:
   - title: Introduzione
     url: "/bp/saphana_aff_fc_introduction.html"
@@ -37,7 +36,6 @@ entries:
   - title: Aggiornare la cronologia
     url: "/bp/saphana_aff_fc_update_history.html"
 - title: Guida alla configurazione di SAP HANA su sistemi NetApp AFF con NFS
-  type: solutions
   entries:
   - title: Introduzione
     url: "/bp/saphana_aff_nfs_introduction.html"
@@ -70,7 +68,6 @@ entries:
   - title: Aggiornare la cronologia
     url: "/bp/saphana_aff_nfs_update_history.html"
 - title: Guida alla configurazione di SAP HANA su sistemi NetApp FAS con NFS
-  type: solutions
   entries:
   - title: Introduzione
     url: "/bp/saphana-fas-nfs_introduction.html"
@@ -103,7 +100,6 @@ entries:
   - title: Aggiornare la cronologia
     url: "/bp/saphana-fas-nfs_update_history.html"
 - title: Guida alla configurazione di SAP HANA su sistemi FAS con FCP
-  type: solutions
   entries:
   - title: Introduzione
     url: "/bp/saphana_fas_fc_introduction.html"

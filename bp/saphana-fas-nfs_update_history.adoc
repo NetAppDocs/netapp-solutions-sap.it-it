@@ -10,9 +10,10 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pubblicazione originale.
 
 [cols="25,50"]
