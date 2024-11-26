@@ -1002,9 +1002,6 @@
   <block id="092e6a6bc4923c6cfc72d214ce390535" category="paragraph">NetApp offre una procedura guidata automatica per SAP HANA all'interno di ONTAP System Manager 9.7 e versioni precedenti, che semplifica in modo significativo il processo di provisioning del volume e del LUN. Crea e configura automaticamente i volumi e le LUN in base alle Best practice NetApp per SAP HANA.</block>
   <block id="0c71c668e5ae926e6d75aa8bbbc09dd2" category="paragraph">Utilizzando il<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> Eseguire il seguente comando per ottenere i nomi delle porte mondiali (WWPN) di ciascun host SAP HANA:</block>
   <block id="a86be254d15f1254d56b97c8755a5b77" category="admonition">Il<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> Fa parte delle utility host di NetApp e deve essere installato su ciascun host SAP HANA. Per ulteriori informazioni, vedere la sezione "host_setup".</block>
-  <block id="3b02abc3a7dd4095cd8ef946e6bd6dd0" category="paragraph">La seguente procedura mostra la configurazione di un sistema HANA 2+1 multihost con SID SS3:</block>
-  <block id="ce30bd2bdaee34467dfdf55ea753e7ba" category="list-text">Avviare la procedura guidata di provisioning dell'applicazione per SAP HANA in System Manager e fornire le informazioni richieste. Tutti gli iniziatori (WWPN) di tutti gli host devono essere aggiunti.</block>
-  <block id="16307583508372b498160c0e90dba4d0" category="list-text">Verificare che il provisioning dello storage sia stato eseguito correttamente.</block>
   <block id="8c4751bd2d7d17062a8b536388ba69bc" category="section-title">Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori mediante la CLI</block>
   <block id="6204c72c80408db453e7fea0b62d2e36" category="paragraph">Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9.8 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:</block>
   <block id="d595b9142c1fd0d3ea19c8cd10165661" category="list-text">Creare il gruppo iniziatore per tutti i server appartenenti al sistema FC5.</block>
@@ -1065,7 +1062,6 @@
   <block id="e078b828a6bb770866173121ebdf49eb" category="paragraph">Nelle configurazioni di host multipli SAP HANA con storage NetApp, viene utilizzato il connettore di storage standard fornito da SAP. La "SAP HANA Fibre Channel Storage Connector Admin Guide" è disponibile come allegato a.<block ref="fb03c315acf5bdf850546480c01e7306" category="inline-link-rx"></block>.</block>
   <block id="0f41d05d80faf4e3a75a6b4e2292f1c0" category="summary">La famiglia di prodotti NetApp AFF è certificata per l'utilizzo con SAP HANA nei progetti TDI. La piattaforma di storage aziendale certificata è caratterizzata dal software NetApp ONTAP.</block>
   <block id="0db6b81db5bd35e1eef1e83e154c3cb5" category="doc">TR-4436: SAP HANA su sistemi NetApp AFF con protocollo Fibre Channel</block>
-  <block id="3582e9217fbd3de24b2e5ecfb0fc97b4" category="paragraph">Nils Bauer e Marco Schoen, NetApp</block>
   <block id="e4509a748ae3ce7cb528662f2f9f7e10" category="paragraph">La certificazione è valida per i seguenti modelli:</block>
   <block id="97bfb54320c9268725cfbb374a5168fb" category="paragraph">Per un elenco completo delle soluzioni di storage certificate NetApp per SAP HANA, consulta la<block ref="a3976abaebe3520fd66c465c4d7747d7" category="inline-link-rx"></block>.</block>
   <block id="171ad4663cdfb492651e0357292fbe82" category="paragraph">Questo documento descrive le configurazioni AFF che utilizzano il protocollo Fibre Channel (FCP).</block>
@@ -3441,7 +3437,6 @@
   <block id="75bdc4f45cfc79b09fa1f15e1cd83b33" category="admonition">La disattivazione degli id numerici richiede la gestione degli utenti come descritto in <block ref="7cbf1992917906c8f8c329ad679d4886" category="inline-link-macro-rx"></block></block>
   <block id="a548c9345f858c0926b5fa0db82b1d29" category="admonition">La disattivazione degli id numerici richiede la gestione dell'utente, come descritto nella sezione <block ref="19618adae76246007b68ca646cc14e2b" category="inline-link-macro-rx"></block></block>
   <block id="fcb7778cf38a196128c87d1b6e20281e" category="paragraph">Le famiglie di prodotti NetApp AFF A-Series e AFF C-Series sono state certificate per l'uso con SAP HANA nei progetti TDI (tailored data center Integration).</block>
-  <block id="7c3d41bb91a832b194d140ed72b101e7" category="list-text">AFF C250, AFF C400, AFF C800</block>
   <block id="326f77b6d7cda2b57e0f8e89a8f89959" category="admonition">NetApp AFF C-Series richiede NetApp ONTAP 9.13.1 o versione successiva</block>
   <block id="f7d09d43174d21d3203d6472d2543dc2" category="section-title">Crittografia dei volumi e degli aggregati NetApp</block>
   <block id="381cfdf4e70ff7173296a764c78e97ae" category="paragraph">L'utilizzo di NetApp Volume Encryption (NVE) e NetApp aggregate Encryption (NAE) sono supportati con SAP HANA.</block>
@@ -3588,12 +3583,10 @@ Lo stesso vale per i dischi NVMe interni dei sistemi AFF A800, AFF A70 e AFF A90
   <block id="89579d729fbef030eb0080e68e88f112" category="paragraph">Un SSD NVMe (dati) supporta fino a 5 host SAP HANA.
 Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage.
 Lo stesso vale per i dischi NVMe interni dei sistemi AFF A800, AFF A70 e AFF A90.</block>
-  <block id="aa73ef84825182521094d3998757610f" category="list-text">AFF A150, AFF A250, AFF A400, AFF A70, AFF A800, AFF A90, AFF A900, AFF A1K</block>
   <block id="9c485d8d0a0f2d60633001b05d342eed" category="doc">Guida alla configurazione di SAP HANA su sistemi NetApp FAS con NFS</block>
   <block id="b7bda169ccba06e8cbcf02ba0fab5928" category="doc">Guida alla configurazione di SAP HANA su sistemi NetApp FAS con protocollo Fibre Channel</block>
   <block id="a56f5f8ccd94f38be4e8a0f1faf81823" category="doc">SAP HANA su sistemi NetApp AFF con NFS - Guida alla configurazione</block>
   <block id="ef6ac0da06e1bd8eabd965442ae5668d" category="paragraph">Marco Schön, NetApp</block>
-  <block id="47e4a9a1322865b7fd49caaf0207408a" category="list-text">AFF A150, AFF A250, AFF A400, AFF A70, AFF A800, AFF A900, AFF A90, AFF A1K</block>
   <block id="a004afbb2c9ff596c570f05cacd1d651" category="section-title">Volumi NetApp FlexGroup</block>
   <block id="cfb6b0dd52bfc75b4646448807e41154" category="paragraph">L'utilizzo dei volumi NetApp FlexGroup non è supportato per SAP HANA. Grazie all'architettura di SAP HANA l'utilizzo di FlexGroup Volumes non fornisce alcun beneficio e potrebbe causare problemi di performance.</block>
   <block id="0500aa4516d90775e7cd20e0b45fa4ad" category="sidebar">Best practice per la configurazione</block>
@@ -4525,8 +4518,6 @@ Lo stesso vale per i dischi NVMe interni dei sistemi AFF A800, AFF A70 e AFF A90
   <block id="03595684b4248a265a5f7e534bd92c49" category="paragraph"><block ref="03595684b4248a265a5f7e534bd92c49" category="inline-image-macro-rx" type="image"></block></block>
   <block id="ade510803f2b9aad765372451fd52da2" category="paragraph"><block ref="ade510803f2b9aad765372451fd52da2" category="inline-image-macro-rx" type="image"></block></block>
   <block id="b2bc3f5a45ad0103150eddb5c0947895" category="paragraph"><block ref="b2bc3f5a45ad0103150eddb5c0947895" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="faa4100dbfa2cef1a0c4e0c3db26e5fc" category="paragraph"><block ref="faa4100dbfa2cef1a0c4e0c3db26e5fc" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="c464883cb94a3fba7db930a07cb34811" category="paragraph"><block ref="c464883cb94a3fba7db930a07cb34811" category="inline-image-macro-rx" type="image"></block></block>
   <block id="4cd082d270e30712a5d973de884f7b9f" category="paragraph"><block ref="4cd082d270e30712a5d973de884f7b9f" category="inline-image-macro-rx" type="image"></block></block>
   <block id="017e522349a0ff07067400d6b880e9df" category="paragraph">= :hardbreaks: :nofooter: :icons: font :linkattrs: :imagesdir: ../media/</block>
   <block id="2267b0943e951c31d5f31c288b6bfbe6" category="paragraph">SAP HANA su NetApp AFF con protocollo NFS.</block>
@@ -4769,4 +4760,7 @@ Lo stesso vale per i dischi NVMe interni dei sistemi AFF A800, AFF A70 e AFF A90
   <block id="9adaadfddff33c2daa546229f2809747" category="list-text">Utilizzando lo strumento di installazione SAP<block ref="b0aa3e7cad7b6222087aedbd4c799832" prefix=" " category="inline-code"></block>, avviare l'installazione eseguendo il comando seguente su uno degli host di lavoro. Utilizzare l'<block ref="9676c5ff8ed94e9d3ceba55f16dde62f" prefix=" " category="inline-code"></block>opzione per aggiungere il secondo worker <block ref="d6075976fde6718b25d21e4894d5d07d" prefix="(" category="inline-code"></block>) e l'host di standby )<block ref="7e4282317c0dcc7ce1f24f047b09f466" prefix="(" category="inline-code"></block>.</block>
   <block id="dc6dd758c7cbed933fdee36ba03835f9" category="admonition">La directory in cui è memorizzato il file preparato<block ref="1611b9881f1a590d33bbbcfdd9c55ca7" prefix=" " category="inline-code"></block> è inclusa con l'<block ref="09c9689230344c41364f0fa22da928c6" prefix=" " category="inline-code"></block>opzione CLI <block ref="1b723e0f23eac7863dadd5b0b02436e4" prefix="(" category="inline-code"></block>).</block>
   <block id="b5b2eafc66ebc94cfb50a26c15cf1f52" category="paragraph">Utilizzando lo strumento di installazione SAP<block ref="e57381f2a2aa941f8d88ba956c77d978" prefix=" " category="inline-code"></block>, avviare l'installazione eseguendo il comando seguente su uno degli host di lavoro. Utilizzare l'<block ref="9676c5ff8ed94e9d3ceba55f16dde62f" prefix=" " category="inline-code"></block>opzione per aggiungere il secondo lavoratore (sapcc-hana-tst-06) e l'host di standby (sapcc-hana-tst-07). La directory in cui è stato memorizzato il file preparato<block ref="1611b9881f1a590d33bbbcfdd9c55ca7" prefix=" " category="inline-code"></block> è inclusa con l'<block ref="09c9689230344c41364f0fa22da928c6" prefix=" " category="inline-code"></block>opzione CLI <block ref="1b723e0f23eac7863dadd5b0b02436e4" prefix="(" category="inline-code"></block>). A seconda della versione del sistema operativo in uso, potrebbe essere necessario installare phyton 2.7 prima di installare il database SAP HANA.</block>
+  <block id="1a808aae97e904d2d0d8b853c60fa475" category="list-text">AFF A150, AFF A20, AFF A250, AFF A30, AFF A400, AFF A50, AFF A70, AFF A1K, AFF A90, AFF A900, AFF A800</block>
+  <block id="19fe8eb256f35b3d5110d29e652ce432" category="list-text">AFF C250, AFF C30, AFF C400, AFF C60, AFF C800, AFF C80</block>
+  <block id="968cad2bf5c711dad5ccd0efa3e1ff9f" category="list-text">AFF A150, AFF A20, AFF A250, AFF A30, AFF A400, AFF A50, AFF A70, AFF A1K, AFF A900, AFF A90, AFF A800</block>
 </blocks>
