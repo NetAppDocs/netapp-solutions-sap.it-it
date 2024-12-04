@@ -93,7 +93,7 @@ Per ulteriori informazioni sui prerequisiti e sui consigli per i sistemi SAP HAN
 
 Sono disponibili diverse opzioni per la connessione dello storage alle macchine virtuali (VM). L'opzione preferita consiste nel connettere i volumi di storage con NFS direttamente dal sistema operativo guest. Utilizzando questa opzione, la configurazione degli host e dello storage non differisce tra host fisici e macchine virtuali.
 
-Sono supportati anche datastore NFS e datastore VVOL con NFS. Per entrambe le opzioni, è necessario memorizzare un solo volume di log o dati SAP HANA all'interno del datastore per i casi di utilizzo in produzione. Inoltre, non è possibile implementare backup e recovery basati su Snapshot orchestrati da NetApp SnapCenter e soluzioni basate su questo, come la clonazione del sistema SAP.
+Sono supportati anche datastore NFS e datastore VVOL con NFS. Per entrambe le opzioni, è necessario memorizzare un solo volume di log o dati SAP HANA all'interno del datastore per i casi di utilizzo in produzione.
 
 Questo documento descrive la configurazione consigliata con i montaggi NFS diretti dal sistema operativo guest.
 
