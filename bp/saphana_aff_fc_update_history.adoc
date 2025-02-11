@@ -61,4 +61,10 @@ Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pub
 
 
 | Settembre 2024 | Nuovi sistemi di storage (ASA serie A) 
+
+
+| Novembre 2024 | Nuovi sistemi di storage 
+
+
+| Febbraio 2025 | Nuovi sistemi di storage 
 |===

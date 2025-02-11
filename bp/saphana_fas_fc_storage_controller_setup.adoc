@@ -134,17 +134,6 @@ image:saphana_fas_fc_image15.jpeg["Figura che mostra la finestra di dialogo inpu
 
 
 
-== Set di porte FCP
-
-Un set di porte FCP viene utilizzato per definire quali LIF devono essere utilizzati da un igroup specifico. In genere, tutte le LIF create per i sistemi HANA vengono inserite nello stesso set di porte. La figura seguente mostra la configurazione di un set di porte denominato 32g, che include le quattro LIF già create.
-
-image:saphana_fas_fc_image16.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
-
-
-NOTE: Con ONTAP 9.8, non è necessario un set di porte, ma è possibile crearlo e utilizzarlo dalla riga di comando.
-
-
-
 == Gruppi di iniziatori
 
 È possibile configurare un igroup per ciascun server o per un gruppo di server che richiedono l'accesso a un LUN. La configurazione di igroup richiede i nomi delle porte mondiali (WWPN) dei server.

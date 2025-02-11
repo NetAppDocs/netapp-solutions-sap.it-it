@@ -69,7 +69,7 @@ La seguente panoramica riassume i passaggi necessari per la configurazione dello
 . Creare e configurare gli aggregati richiesti, come descritto in "<<Configurazione dell'aggregato>>."
 . Creare una macchina virtuale per lo storage (SVM), come descritto in "<<Configurazione della macchina virtuale per lo storage>>."
 . Creare interfacce logiche (LIF), come descritto in "<<Configurazione dell'interfaccia logica>>."
-. Creare un set di porte, come descritto in "<<Set di porte FCP>>."
+. Creare un set di porte, come descritto in "<<FCP port sets>>."
 . Creare gruppi iniziatori, volumi e LUN all'interno degli aggregati, come descritto in creazione di "<<Creating LUNs,E mappatura delle LUN ai gruppi iniziatori>>."
 
 
@@ -128,17 +128,6 @@ image:saphana_aff_fc_image13.jpeg["Figura che mostra la finestra di dialogo inpu
 Durante la creazione di SVM con Gestore di sistema di ONTAP 9.8, è possibile selezionare tutte le porte FCP fisiche richieste e creare automaticamente una LIF per porta fisica.
 
 image:saphana_aff_fc_image14.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
-
-
-
-== Set di porte FCP
-
-Un set di porte FCP viene utilizzato per definire quali LIF devono essere utilizzate da uno specifico gruppo di iniziatori. In genere, tutte le LIF create per i sistemi HANA vengono inserite nello stesso set di porte. La figura seguente mostra la configurazione di un set di porte denominato 32g che include le quattro LIF già create.
-
-image:saphana_aff_fc_image15.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
-
-
-NOTE: Con ONTAP 9.8, non è necessario un set di porte, ma è possibile crearlo e utilizzarlo dalla riga di comando.
 
 
 

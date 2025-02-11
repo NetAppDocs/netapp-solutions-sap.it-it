@@ -73,4 +73,7 @@ Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pub
 
 
 | Settembre 2024 | Aggiornamenti minori 
+
+
+| Novembre 2024 | Nuovi sistemi di storage 
 |===

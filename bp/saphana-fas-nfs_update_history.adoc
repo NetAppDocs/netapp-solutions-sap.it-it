@@ -81,8 +81,8 @@ Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pub
 | Dicembre 2023 | Aggiornamento della configurazione dell'host impostazioni nconnect modificate aggiunta di informazioni sulle NFSv4,1 sessioni 
 
 
-| Settembre 2024 | Aggiornamenti minori 
+| Settembre 2024 | Nuovi sistemi storage e aggiornamenti minori 
 
 
-| Settembre 2024 | Nuovi sistemi di storage 
+| Febbraio 2025 | Nuovo sistema storage 
 |===
