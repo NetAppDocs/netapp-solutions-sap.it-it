@@ -27,15 +27,13 @@ Per configurare la rete, attenersi alle seguenti indicazioni:
 * Per evitare interferenze reciproche, utilizzare percorsi di rete/io separati per l'area di log e dati.
 
 
-La figura seguente mostra un esempio con quattro host SAP HANA collegati a una coppia di ha controller storage che utilizza una rete 10 GbE. Ogni host SAP HANA dispone di una connessione Active-passive al fabric ridondante.
+La figura seguente mostra un esempio con quattro host SAP HANA collegati a una coppia di ha controller storage che utilizza una rete 10 GbE. Ogni host SAP HANA dispone di una connessione Active-Active al fabric ridondante.
 
-A livello di storage, quattro connessioni attive sono configurate per fornire un throughput di 10 GB per ciascun host SAP HANA. Inoltre, su ciascun controller di storage viene configurata un'interfaccia spare.
+A livello di storage, quattro connessioni attive sono configurate per fornire un throughput di 10 GB per ciascun host SAP HANA. A livello di storage, viene configurato un dominio di broadcast con una dimensione MTU di 9000 e tutte le interfacce fisiche richieste vengono aggiunte a questo dominio di broadcast. Questo approccio assegna automaticamente queste interfacce fisiche allo stesso gruppo di failover. Tutte le interfacce logiche (LIF) assegnate a queste interfacce fisiche vengono aggiunte a questo gruppo di failover.
 
-A livello di storage, viene configurato un dominio di broadcast con una dimensione MTU di 9000 e tutte le interfacce fisiche richieste vengono aggiunte a questo dominio di broadcast. Questo approccio assegna automaticamente queste interfacce fisiche allo stesso gruppo di failover. Tutte le interfacce logiche (LIF) assegnate a queste interfacce fisiche vengono aggiunte a questo gruppo di failover.
+image:saphana_aff_nfs_image10a.png["Panoramica della rete"]
 
-image:saphana_aff_nfs_image10.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
-
-In generale, è anche possibile utilizzare gruppi di interfacce ha sui server (bonds) e sui sistemi storage (ad esempio, link Aggregation Control Protocol [LACP] e ifgroup). Con i gruppi di interfacce ha, verificare che il carico sia equamente distribuito tra tutte le interfacce all'interno del gruppo. La distribuzione del carico dipende dalla funzionalità dell'infrastruttura dello switch di rete.
+In generale, si consiglia di utilizzare i gruppi di interfacce ha sui server (Bonds) e sui sistemi di storage (ad esempio, link Aggregation Control Protocol [LACP] e ifgroup). Con i gruppi di interfacce ha, verificare che il carico sia equamente distribuito tra tutte le interfacce all'interno del gruppo. La distribuzione del carico dipende dalla funzionalità dell'infrastruttura dello switch di rete.
 
 
 NOTE: A seconda del numero di host SAP HANA e della velocità di connessione utilizzata, sono necessari diversi numeri di porte fisiche attive. Per ulteriori informazioni, consultare la sezione link:saphana_aff_nfs_storage_controller_setup.html#lif-configuration["Configurazione LIF"].

@@ -69,7 +69,6 @@ La seguente panoramica riassume i passaggi necessari per la configurazione dello
 . Creare e configurare gli aggregati richiesti, come descritto in "<<Configurazione dell'aggregato>>."
 . Creare una macchina virtuale per lo storage (SVM), come descritto in "<<Configurazione della macchina virtuale per lo storage>>."
 . Creare interfacce logiche (LIF), come descritto in "<<Configurazione dell'interfaccia logica>>."
-. Creare un set di porte, come descritto in "<<FCP port sets>>."
 . Creare gruppi iniziatori, volumi e LUN all'interno degli aggregati, come descritto in creazione di "<<Creating LUNs,E mappatura delle LUN ai gruppi iniziatori>>."
 
 
@@ -81,30 +80,33 @@ La seguente panoramica riassume i passaggi necessari per la configurazione dello
 
 === Shelf di dischi basati su SAS
 
-È possibile collegare un massimo di uno shelf di dischi a uno stack SAS per fornire le prestazioni richieste per gli host SAP HANA, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale tra entrambi i controller della coppia ha. ADPv2 viene utilizzato con ONTAP 9 e i nuovi shelf di dischi DS224C.
+È possibile collegare un massimo di uno shelf di dischi a uno stack SAS per fornire le prestazioni richieste per gli host SAP HANA, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale tra entrambi i controller della coppia ha. ADPv2 viene utilizzato con ONTAP 9 e gli shelf di dischi DS224C.
 
 
 NOTE: Con lo shelf di dischi DS224C, è possibile utilizzare anche il cablaggio SAS quad-path, ma non è necessario.
 
-image:saphana_aff_fc_image10.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image10.png["Connessione agli shelf di dischi DS224C"]
 
 
 
 === Shelf di dischi basati su NVMe (100 GbE)
 
-Ogni shelf da tavolo NS224 NVMe è collegato a due porte da 100 GbE per controller, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. ADPv2 viene utilizzato anche per lo shelf di dischi NS224.
+Ogni shelf di dischi NS224 NVMe è collegato a due porte 100GbE per controller, come illustrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. ADPv2 viene utilizzato anche per lo shelf di dischi NS224.
 
-image:saphana_aff_fc_image11.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image11a.png["Connessione degli shelf di dischi NVMe NS224"]
 
 
 
 == Configurazione dell'aggregato
 
-In generale, è necessario configurare due aggregati per controller, indipendentemente da quale shelf di dischi o tecnologia di dischi (SSD o HDD) viene utilizzata. Questo passaggio è necessario per poter utilizzare tutte le risorse del controller disponibili. Per i sistemi della serie AFF A200, è sufficiente un aggregato di dati.
+In generale, è necessario configurare due aggregati per controller, indipendentemente da quale shelf di dischi o tecnologia di dischi (SSD o HDD) viene utilizzata. Questo passaggio è necessario per poter utilizzare tutte le risorse del controller disponibili.
+
+
+NOTE: I sistemi ASA lanciati dopo agosto 2024 non richiedono questo passaggio, come avviene automaticamente
 
 La figura seguente mostra una configurazione di 12 host SAP HANA in esecuzione su uno shelf SAS da 12 GB configurato con ADPv2. Sei host SAP HANA sono collegati a ciascun controller di storage. Sono configurati quattro aggregati separati, due per ogni controller di storage. Ogni aggregato è configurato con 11 dischi con nove partizioni di dati e due di dischi di parità. Per ciascun controller sono disponibili due partizioni di riserva.
 
-image:saphana_aff_fc_image12.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image12a.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
@@ -123,11 +125,14 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 
 All'interno della configurazione del cluster di storage, è necessario creare un'interfaccia di rete (LIF) e assegnarla a una porta FCP dedicata. Se, ad esempio, sono necessarie quattro porte FCP per motivi di performance, è necessario creare quattro LIF. La figura seguente mostra una schermata delle otto LIF (denominate `fc_*_*`) configurati su `hana` SVM.
 
-image:saphana_aff_fc_image13.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image13a.png["Overbew di interfacce logiche"]
 
-Durante la creazione di SVM con Gestore di sistema di ONTAP 9.8, è possibile selezionare tutte le porte FCP fisiche richieste e creare automaticamente una LIF per porta fisica.
+Durante la creazione delle SVM con ONTAP System Manager, è possibile selezionare tutte le porte FCP fisiche richieste e creare automaticamente una LIF per porta fisica.
 
-image:saphana_aff_fc_image14.jpeg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image14a.png["Creazione di SVM"]
+
+
+NOTE: I sistemi ASA lanciati dopo agosto 2024 non richiedono questo passaggio, come avviene automaticamente
 
 
 
@@ -138,7 +143,7 @@ La figura seguente mostra la configurazione dei volumi di quattro sistemi SAP HA
 
 NOTE: Se per i sistemi SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e i volumi di log possono anche essere memorizzati nello stesso storage controller.
 
-image:saphana_aff_fc_image16.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image16a.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Per ogni host SAP HANA, un volume di dati, un volume di log e un volume per `/hana/shared` sono configurati. La seguente tabella mostra una configurazione di esempio con quattro sistemi SAP HANA a host singolo.
 
@@ -220,7 +225,7 @@ NOTE: Se per il sistema SAP HANA viene utilizzato un solo storage controller di 
 
 NOTE: I sistemi NetApp ASA AFF non supportano NFS come protocollo. NetApp consiglia di utilizzare un sistema AFF o FAS aggiuntivo per `/hana/shared` file system.
 
-image:saphana_aff_fc_image17.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image17a.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Per ogni host SAP HANA, vengono creati un volume di dati e un volume di log. Il `/hana/shared` Il volume viene utilizzato da tutti gli host del sistema SAP HANA. La seguente tabella mostra una configurazione di esempio per un sistema SAP HANA 4+1 a host multiplo.
 
@@ -377,6 +382,10 @@ vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-po
 vol create -volume FC5_data2_mnt00002  -aggregate aggr2_1 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
 vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -space-guarantee none
 ....
++
+
+NOTE: I sistemi ASA lanciati dopo agosto 2024 non richiedono questo passaggio in quanto viene eseguito automaticamente durante _lun create_
+
 . Creare tutte le LUN.
 +
 ....
@@ -389,6 +398,10 @@ lun create -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001 -size 260g -ostype lin
 lun create -path /vol/FC5_log_mnt00002/FC5_log_mnt00002 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 lun create -path /vol/FC5_log2_mnt00002/FC5_log2_mnt00002 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 ....
++
+
+NOTE: Fornire il nome LUN solo come percorso per i sistemi ASA lanciati dopo agosto 2024. Ciò si applica anche al comando _lun map_ riportato di seguito. Inoltre, le opzioni _-space-Reserve_ e _-space-allocation_ non sono disponibili.
+
 . Creare il gruppo iniziatore per tutti i server appartenenti al sistema FC5.
 +
 ....

@@ -64,9 +64,7 @@ NOTE: Questo calcolo è indipendente dal controller di storage utilizzato. L'agg
 
 === Shelf NS224 NVMe
 
-Un SSD NVMe (dati) supporta fino a 5 host SAP HANA.
-Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage.
-Lo stesso vale per i dischi NVMe interni dei sistemi AFF A800, AFF A70 e AFF A90.
+Un SSD NVMe (dati) supporta fino a 2/5 host SAP HANA a seconda del disco NVMe specifico utilizzato. Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage. Lo stesso vale per i dischi NVMe interni dei sistemi AFF e ASA.
 
 
 NOTE: L'aggiunta di più shelf di dischi non aumenta il numero massimo di host SAP HANA supportati da uno storage controller.
@@ -217,4 +215,4 @@ La dimensione della RAM, la dimensione dei dati netti sul disco di ciascun host 
 
 La figura seguente riassume il processo di dimensionamento.
 
-image:saphana_aff_fc_image8.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_fc_image8a.png["Processo di dimensionamento di SAP HANA"]
