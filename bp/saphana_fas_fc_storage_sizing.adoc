@@ -73,6 +73,12 @@ NOTE: Questo calcolo è indipendente dal controller di storage utilizzato. L'agg
 
 
 
+=== Shelf NS224 NVMe
+
+Un SSD NVMe (dati) supporta fino a 2 host SAP HANA. Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage.
+
+
+
 == Carichi di lavoro misti
 
 Sono supportati SAP HANA e altri carichi di lavoro applicativi eseguiti sullo stesso storage controller o nello stesso aggregato di storage. Tuttavia, è una Best practice di NetApp separare i workload SAP HANA da tutti gli altri workload delle applicazioni.

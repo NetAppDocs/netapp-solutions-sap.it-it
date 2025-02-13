@@ -94,7 +94,7 @@ image:saphana_aff_nfs_image13.png["Connessioni degli shelf SAS"]
 
 === Shelf di dischi NVMe (100 GbE)
 
-Ogni shelf di dischi NS224 NVMe viene collegato utilizzando due porte 100GbE per controller. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. ADPv2, come descritto nel capitolo sulla configurazione degli aggregati, viene utilizzato anche per lo shelf di dischi NS224. La figura seguente mostra la connessione dello shelf di dischi a un'unità NVMe.
+Ogni shelf di dischi NS224 NVMe è collegato a due porte 100GbE per controller, come illustrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. ADPv2, come descritto nel capitolo sulla configurazione degli aggregati, viene utilizzato anche per lo shelf di dischi NS224.
 
 image:saphana_aff_nfs_image14a.png["Connessioni agli shelf di dischi MVMe"]
 

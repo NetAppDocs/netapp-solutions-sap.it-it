@@ -91,6 +91,14 @@ image:saphana-fas-nfs_image14.png["Figura che mostra la finestra di dialogo inpu
 
 
 
+=== Shelf di dischi NVMe (100 GbE)
+
+Ogni shelf di dischi NS224 NVMe è collegato a due porte 100GbE per controller, come illustrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha.
+
+image:saphana_fas_ns224.png["Connessioni agli shelf di dischi MVMe"]
+
+
+
 == Configurazione dell'aggregato
 
 In generale, è necessario configurare due aggregati per controller, indipendentemente dallo shelf di dischi o dalla tecnologia dei dischi (SSD o HDD) utilizzata. Per i sistemi della serie FAS2000, è sufficiente un aggregato di dati.

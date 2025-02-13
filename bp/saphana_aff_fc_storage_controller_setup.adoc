@@ -65,11 +65,13 @@ FabricPool è un'ottima opzione per spostare i backup dei log in un altro Tier d
 
 La seguente panoramica riassume i passaggi necessari per la configurazione dello storage. Ogni fase viene descritta in maggiore dettaglio nelle sezioni successive. In questa sezione, si presuppone che l'hardware di storage sia configurato e che il software ONTAP sia già installato. Inoltre, la connessione delle porte FCP dello storage al fabric SAN deve essere già attiva.
 
-. Verificare la corretta configurazione dello shelf di dischi, come descritto in "<<Connessione a shelf di dischi>>."
-. Creare e configurare gli aggregati richiesti, come descritto in "<<Configurazione dell'aggregato>>."
-. Creare una macchina virtuale per lo storage (SVM), come descritto in "<<Configurazione della macchina virtuale per lo storage>>."
-. Creare interfacce logiche (LIF), come descritto in "<<Configurazione dell'interfaccia logica>>."
-. Creare gruppi iniziatori, volumi e LUN all'interno degli aggregati, come descritto in creazione di "<<Creating LUNs,E mappatura delle LUN ai gruppi iniziatori>>."
+. Verificare la corretta configurazione degli shelf di dischi, come descritto in <<Connessione a shelf di dischi>>.
+. Creare e configurare gli aggregati richiesti, come descritto in <<Configurazione dell'aggregato>>.
+. Creare una Storage Virtual Machine (SVM), come descritto in <<Configurazione della macchina virtuale per lo storage>>.
+. Creare interfacce logiche (LIF), come descritto in <<Configurazione dell'interfaccia logica>>.
+. Creare gruppi iniziatori (igroup) con nomi globali (WWN) dei server HANA come descritto nella sezione link:safana_FAS_fc_storage_controller_setup.html#Initiator-groups <<Gruppi di iniziatori>>.
+. Creare volumi e LUN all'interno degli aggregati, come descritto nelle sezioni <<Configurazione di volumi e LUN per sistemi SAP HANA a host singolo>> e. <<Configurazione di volumi e LUN per sistemi SAP HANA con host multipli>>
+. Creare gruppi iniziatori, volumi e LUN all'interno degli aggregati, come descritto in <<#lun_create,Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori>>.
 
 
 
@@ -123,9 +125,9 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 
 == Configurazione dell'interfaccia logica
 
-All'interno della configurazione del cluster di storage, è necessario creare un'interfaccia di rete (LIF) e assegnarla a una porta FCP dedicata. Se, ad esempio, sono necessarie quattro porte FCP per motivi di performance, è necessario creare quattro LIF. La figura seguente mostra una schermata delle otto LIF (denominate `fc_*_*`) configurati su `hana` SVM.
+All'interno della configurazione del cluster di storage, è necessario creare un'interfaccia di rete (LIF) e assegnarla a una porta FCP dedicata. Se, ad esempio, sono necessarie quattro porte FCP per motivi di performance, è necessario creare quattro LIF. La figura seguente mostra uno screenshot degli otto LIF configurati nella SVM.
 
-image:saphana_aff_fc_image13a.png["Overbew di interfacce logiche"]
+image:saphana_aff_fc_image13a.png["Panoramica delle interfacce logiche"]
 
 Durante la creazione delle SVM con ONTAP System Manager, è possibile selezionare tutte le porte FCP fisiche richieste e creare automaticamente una LIF per porta fisica.
 
@@ -134,6 +136,30 @@ image:saphana_aff_fc_image14a.png["Creazione di SVM"]
 
 NOTE: I sistemi ASA lanciati dopo agosto 2024 non richiedono questo passaggio, come avviene automaticamente
 
+
+
+== Gruppi di iniziatori
+
+È possibile configurare un igroup per ciascun server o per un gruppo di server che richiedono l'accesso a un LUN. La configurazione di igroup richiede i nomi delle porte mondiali (WWPN) dei server.
+
+Utilizzando il `sanlun` Eseguire il seguente comando per ottenere le WWPN di ciascun host SAP HANA:
+
+....
+stlrx300s8-6:~ # sanlun fcp show adapter
+/sbin/udevadm
+/sbin/udevadm
+
+host0 ...... WWPN:2100000e1e163700
+host1 ...... WWPN:2100000e1e163701
+....
+
+NOTE:  `sanlun`Lo strumento fa parte delle utilità host NetApp e deve essere installato su ogni host SAP HANA. Ulteriori dettagli sono disponibili nella sezione link:saphana_aff_fc_host_setup.html["Configurazione dell'host."]
+
+I gruppi iniziatori possono essere creati utilizzando l'interfaccia CLI del cluster ONTAP.
+
+....
+lun igroup create -igroup <igroup name> -protocol fcp -ostype linux -initiator <list of initiators> -vserver <SVM name>
+....
 
 
 == Configurazione di volumi e LUN per sistemi SAP HANA a host singolo
@@ -330,7 +356,7 @@ NOTE: Con la configurazione descritta, il `/usr/sap/SID` La directory in cui è 
 
 
 
-== Opzioni del volume
+=== Opzioni del volume
 
 Le opzioni dei volumi elencate nella tabella seguente devono essere verificate e impostate su tutte le SVM.
 
@@ -345,27 +371,16 @@ Le opzioni dei volumi elencate nella tabella seguente devono essere verificate e
 |===
 
 
-=== Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori
+== Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori
 
-È possibile utilizzare Gestione di sistema NetApp ONTAP per creare volumi di storage e LUN e mapparli sui server.
+Puoi utilizzare NetApp ONTAP System Manager per creare volumi di storage e LUN e associarli agli igroup dei server e all'interfaccia a riga di comando di ONTAP. In questa guida viene descritto l'utilizzo della CLI.
 
-NetApp offre una procedura guidata automatica per SAP HANA all'interno di ONTAP System Manager 9.7 e versioni precedenti, che semplifica in modo significativo il processo di provisioning del volume e del LUN. Crea e configura automaticamente i volumi e le LUN in base alle Best practice NetApp per SAP HANA.
-
-Utilizzando il `sanlun` Eseguire il seguente comando per ottenere i nomi delle porte mondiali (WWPN) di ciascun host SAP HANA:
-
-....
-stlrx300s8-6:~ # sanlun fcp show adapter
-/sbin/udevadm
-/sbin/udevadm
-host0 ...... WWPN:2100000e1e163700
-host1 ...... WWPN:2100000e1e163701
-....
 
 NOTE: Il `sanlun` Fa parte delle utility host di NetApp e deve essere installato su ciascun host SAP HANA. Per ulteriori informazioni, vedere la sezione "host_setup".
 
 
 
-== Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori mediante la CLI
+=== Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori mediante la CLI
 
 Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9.8 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:
 
