@@ -22,10 +22,6 @@ Diversi modelli della famiglia di sistemi FAS possono essere combinati e abbinat
 
 image:saphana-fas-nfs_image2.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
-La figura seguente mostra un esempio di utilizzo di VMware vSphere come livello di virtualizzazione.
-
-image:saphana-fas-nfs_image3.jpg["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
-
 L'architettura può essere scalata in due dimensioni:
 
 * Collegando altri host SAP HANA e/o capacità di storage allo storage esistente, se i controller di storage forniscono performance sufficienti per soddisfare gli attuali indicatori chiave di performance SAP (KPI)

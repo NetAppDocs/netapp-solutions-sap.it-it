@@ -46,7 +46,7 @@ Poiché tutti i dati per le istanze SAP HANA, inclusi i dati critici per le perf
 
 La figura seguente fornisce una panoramica della rete.
 
-image:saphana-fas-nfs_image11.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana-fas-nfs_image11a.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 Ogni nodo SAP HANA utilizza un gruppo di porte dedicato sullo switch distribuito VMware. Questo gruppo di porte consente di migliorare la qualità del servizio (QoS) e l'assegnazione dedicata delle schede di interfaccia di rete fisiche (NIC) sugli host ESX. Per utilizzare NIC fisiche dedicate preservando le funzionalità ha in caso di guasto alla NIC, la NIC fisica dedicata viene configurata come uplink attivo. Le schede di rete aggiuntive sono configurate come uplink in standby nelle impostazioni di teaming e failover del gruppo di porte SAP HANA. Inoltre, i jumbo frame (MTU 9,000) devono essere abilitati end-to-end sugli switch fisici e virtuali. Inoltre, disattivare il controllo di flusso su tutte le porte ethernet utilizzate per il traffico dello storage su server, switch e sistemi storage. La figura seguente mostra un esempio di tale configurazione.
 
