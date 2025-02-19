@@ -57,7 +57,7 @@ Sono supportati anche RDM (Raw Device Mapping), datastore FCP o datastore VVOL c
 
 Per ulteriori informazioni sull'utilizzo di vSphere con SAP HANA, consultare i seguenti collegamenti:
 
-* https://wiki.scn.sap.com/wiki/display/VIRTUALIZATION/SAP+HANA+on+VMware+vSphere["SAP HANA su VMware vSphere - virtualizzazione - Wiki della community"^]
-* https://core.vmware.com/resource/sap-hana-vmware-vsphere-best-practices-and-reference-architecture-guide#introduction["Guida alle Best practice e all'architettura di riferimento di SAP HANA su VMware vSphere"^]
+* https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html["SAP HANA su VMware vSphere - virtualizzazione - Wiki della community"^]
+* https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper["Guida alle Best practice di SAP HANA su VMware vSphere"^]
 * https://launchpad.support.sap.com/["2161991 - linee guida per la configurazione di VMware vSphere - Launchpad di supporto SAP ONE (accesso richiesto)"^]
 

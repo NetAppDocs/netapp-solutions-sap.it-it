@@ -382,7 +382,7 @@ NOTE: Il `sanlun` Fa parte delle utility host di NetApp e deve essere installato
 
 === Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori mediante la CLI
 
-Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9.8 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:
+Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:
 
 . Creare tutti i volumi necessari.
 +

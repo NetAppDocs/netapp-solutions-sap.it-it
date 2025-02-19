@@ -102,11 +102,9 @@
   <block id="f7fbf8be79b2dbbf7cca7d63ea2aaa3e" category="paragraph">Questo documento descrive la configurazione consigliata con i montaggi NFS diretti dal sistema operativo guest.</block>
   <block id="5363a1e8e1763bb11c4b91b2868d5584" category="paragraph">Per ulteriori informazioni sull'utilizzo di vSphere con SAP HANA, consultare i seguenti collegamenti:</block>
   <block id="f02780ddcfc1bddf0683bf8de02155d5" category="inline-link-macro">SAP HANA su VMware vSphere - virtualizzazione - Wiki della community</block>
-  <block id="181fc43b08ba57214c4bbd2448ec470d" category="list-text"><block ref="181fc43b08ba57214c4bbd2448ec470d" category="inline-link-macro-rx"></block></block>
   <block id="685faeffbf3c0039314a5071b5798f2c" category="inline-link-macro">Best practice e consigli per implementazioni scale-up di SAP HANA su VMware vSphere</block>
   <block id="6a3ba410820602029c0289b87ca24a63" category="inline-link-macro">Best practice e consigli per implementazioni scale-out di SAP HANA su VMware vSphere</block>
   <block id="ab1b1647c4e88f4d70b589d5781012ca" category="inline-link-macro">2161991 - linee guida per la configurazione di VMware vSphere - Launchpad di supporto SAP ONE (accesso richiesto)</block>
-  <block id="302092b20c647fa4f675ff96913675f9" category="list-text"><block ref="302092b20c647fa4f675ff96913675f9" category="inline-link-macro-rx"></block></block>
   <block id="3ad7f7aed9ec06eff738c0dcda85c37c" category="summary">A partire da SAP HANA 2.0 SPS4, è possibile configurare ulteriori partizioni del volume di dati. Ciò consente di configurare due o più volumi per il volume di dati di un database tenant SAP HANA e di scalare oltre i limiti di dimensioni e performance di un singolo volume.</block>
   <block id="69a593c87ff666bb67c1207a32a24a79" category="doc">Aggiunta di partizioni di volumi di dati aggiuntive</block>
   <block id="0b3d2dc69d0ecef48ed4d97711abe783" category="admonition">L'utilizzo di due o più volumi singoli per il volume di dati è disponibile per i sistemi SAP HANA single-host e SAP HANA multi-host. È possibile aggiungere ulteriori partizioni del volume di dati in qualsiasi momento.</block>
@@ -939,7 +937,6 @@
   <block id="f7be036cddf21af55fc52689e1f3055b" category="paragraph">La seguente tabella mostra un esempio di due LUN per gruppo di volumi per un sistema host multiplo SAP HANA 2+1.</block>
   <block id="a86be254d15f1254d56b97c8755a5b77" category="admonition">Il<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> Fa parte delle utility host di NetApp e deve essere installato su ciascun host SAP HANA. Per ulteriori informazioni, vedere la sezione "host_setup".</block>
   <block id="8c4751bd2d7d17062a8b536388ba69bc" category="section-title">Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori mediante la CLI</block>
-  <block id="6204c72c80408db453e7fea0b62d2e36" category="paragraph">Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9.8 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:</block>
   <block id="d595b9142c1fd0d3ea19c8cd10165661" category="list-text">Creare il gruppo iniziatore per tutti i server appartenenti al sistema FC5.</block>
   <block id="f987b1e962233a1893b72bf1d65f3a21" category="list-text">Mappare tutti i LUN al gruppo iniziatore creato.</block>
   <block id="47c97f5b5374f82578ea21329859f8cb" category="summary">Un connettore di storage è richiesto solo in ambienti con più host dotati di funzionalità di failover.</block>
@@ -3921,8 +3918,6 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="20a0dcae2f540339bbf69dbaa7f0050a" category="list-text"><block ref="20a0dcae2f540339bbf69dbaa7f0050a" category="inline-link-macro-rx"></block></block>
   <block id="b0be0a2f6c57f7c66aa9ab049763af3a" category="paragraph">Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA con SnapCenter, consultare<block ref="7d612f806d1e07d1f3292801524311f8" category="inline-link-rx"></block>.</block>
   <block id="c2107d876323ca6269d87dd4ef892a8a" category="paragraph">Per informazioni dettagliate sulle soluzioni di disaster recovery SAP HANA, vedere<block ref="22d31f63af3553980c791e5bf538fbdd" category="inline-link-rx"></block>.</block>
-  <block id="78439f11ea8c9762eac371e8475447aa" category="inline-link">Guida alle Best practice e all'architettura di riferimento di SAP HANA su VMware vSphere</block>
-  <block id="52d5e1f1eef3e549b479feffef1c376c" category="list-text"><block ref="52d5e1f1eef3e549b479feffef1c376c" category="inline-link-rx"></block></block>
   <block id="1b70ac0a972fddf1e1a33e6ed9df49c7" category="cell">Settembre 2022</block>
   <block id="3c3691e44e6ff923dc83662b2f7e1001" category="cell">Nuove versioni del sistema operativo</block>
   <block id="6d6bbe0ff14c220c87649b72d24ad927" category="cell">Agosto 2023</block>
@@ -4748,4 +4743,7 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="c9f801c3b76e183b280276e75a8ebaea" category="list-text">Guida alle Best practice di SAP HANA su VMware vSphere</block>
   <block id="838491807b9e9689bc796a7e547fe188" category="inline-link"><block ref="838491807b9e9689bc796a7e547fe188" category="inline-link-rx"></block></block>
   <block id="b61d59281011f2681050ce1756929d77" category="paragraph"><block ref="b61d59281011f2681050ce1756929d77" category="inline-link-rx"></block></block>
+  <block id="22c7eb5619fc26c433125aab7cfd57af" category="list-text"><block ref="22c7eb5619fc26c433125aab7cfd57af" category="inline-link-rx"></block></block>
+  <block id="d8cb082280c9ef193a28bdb60d8e9779" category="list-text"><block ref="d8cb082280c9ef193a28bdb60d8e9779" category="inline-link-rx"></block></block>
+  <block id="147a64bd742e2d54a7d7a7f133c3561c" category="paragraph">Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:</block>
 </blocks>
