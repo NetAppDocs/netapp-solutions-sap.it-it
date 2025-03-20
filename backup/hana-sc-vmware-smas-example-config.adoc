@@ -1,0 +1,53 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-example-config.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Esempio di panoramica della configurazione
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+[role="lead"]
+Durante il setup in laboratorio utilizziamo una configurazione di accesso uniforme, in cui entrambi gli host ESX hanno accesso a entrambi i cluster di storage. Nelle sezioni successive descriveremo la configurazione di accesso uniforme, ma evidenzieremo anche le differenze per una configurazione non uniforme.
+
+image:sc-saphana-vmware-smas-image1.png[""]
+
+
+
+== Versioni software
+
+[cols="50%,50%"]
+|===
+| Software | Versione 
+
+
+| ONTAP | A700: 9.15.1P7, A800: 9.16.1RC1 
+
+
+| Client vSphere | 8.0.3 
+
+
+| ESXi | 8.0.3 
+
+
+| Plug-in SnapCenter per vSphere | 6.0.1 
+
+
+| OS Linux | SLES PER SAP 15 SP5 
+
+
+| SAP HANA | 2,0 SPS8 
+
+
+| SnapCenter | 6.0.1 
+|===

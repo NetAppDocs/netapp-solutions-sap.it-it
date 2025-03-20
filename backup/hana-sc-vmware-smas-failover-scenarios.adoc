@@ -1,0 +1,87 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-failover-scenarios.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Scenari di failover
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+
+
+== Impostazione dell'accesso uniforme
+
+Con una configurazione di accesso uniforme, la SAN Fibre Channel è estesa a entrambi i siti. Gli host ESX in entrambi i siti possono accedere a entrambe le copie dei set di dati. Durante il normale funzionamento, l'host ESX che esegue il sistema HANA sta accedendo alla copia locale dei dati in base alle impostazioni di prossimità nella configurazione del gruppo iniziatore. Ogni host ESX dispone di un percorso attivo ottimizzato per la copia locale e di un percorso attivo non ottimizzato per la copia con mirroring.
+
+
+
+=== Funzionamento normale
+
+Durante il normale funzionamento, il sistema HANA legge e scrive da/nella copia locale in base al percorso attivo ottimizzato dall'host ESX ESX ESX-1. Ad ogni operazione di backup, SnapCenter rileva il sito primario corrente per la relazione di replica ed esegue le operazioni di backup sul sito primario. Le snapshot vengono replicate nella copia con mirroring e sono disponibili in entrambi i siti. Un'operazione di ripristino SnapCenter viene eseguita sul sito primario.
+
+image:sc-saphana-vmware-smas-image42.png[""]
+
+
+
+=== Guasto allo storage
+
+In caso di guasto al sistema storage del sito 1, i sistemi HANA accedono alla copia mirrorata sul sito 2 e continuano a funzionare. Gli switch del sito primario al sito secondario, mentre SnapCenter ora esegue operazioni di backup e ripristino nel nuovo sito primario.
+
+image:sc-saphana-vmware-smas-image43.png[""]
+
+
+
+=== Guasto del sito
+
+In caso di guasto a un sito, la VM di HANA, SnapCenter e il plug-in VM di SnapCenter per VMware eseguiranno il failover sull'host ESX nel sito secondario, utilizzando vSphere ha. Il database HANA deve essere avviato e quindi accedere alla copia con mirroring nel secondo sito. Gli switch del sito primario al sito secondario, mentre SnapCenter ora esegue operazioni di backup e ripristino nel nuovo sito primario.
+
+image:sc-saphana-vmware-smas-image44.png[""]
+
+
+
+== Impostazione accesso non uniforme
+
+Con una configurazione di accesso non uniforme, la SAN Fibre Channel non è limitata ad entrambi i siti. Ogni host ESX di ciascun sito può accedere solo alla copia locale dei set di dati.
+
+
+
+=== Funzionamento normale
+
+Durante il normale funzionamento, il sistema HANA legge e scrive da/sulla copia locale. Ad ogni operazione di backup, SnapCenter rileva il sito primario corrente per la relazione di replica ed esegue le operazioni di backup sul sito primario. Le snapshot vengono replicate nella copia con mirroring e sono disponibili in entrambi i siti. Un'operazione di ripristino SnapCenter viene eseguita sul sito primario.
+
+image:sc-saphana-vmware-smas-image45.png[""]
+
+
+
+=== Guasto allo storage
+
+In caso di guasto dello storage, la VM HANA così come SnapCenter e il plug-in SnapCenter per VMware eseguiranno il failover sull'host ESX nel sito secondario, utilizzando vSphere ha. Il database HANA deve essere avviato e quindi accedere alla copia con mirroring nel secondo sito. Gli switch del sito primario al sito secondario, mentre SnapCenter ora esegue operazioni di backup e ripristino nel nuovo sito primario.
+
+image:sc-saphana-vmware-smas-image46.png[""]
+
+
+
+=== Guasto del sito
+
+Come per il guasto dello storage.
+
+image:sc-saphana-vmware-smas-image47.png[""]
+
+
+
+=== Trasferimento di HANA VM o sito primario
+
+Se la VM di HANA viene ricollocata sull'altro host ESX e il sito primario dello storage rimane invariato, un'operazione di ripristino con SnapCenter fallirà. Poiché SnapCenter utilizza il sito primario per eseguire le operazioni di ripristino, il clone verrà creato a sinistra, mentre la VM HANA viene eseguita a destra. Poiché non vi è alcun percorso di dati tra i siti, SnapCenter non verrà copia i dati.
+
+Per risolvere il problema, è necessario assicurarsi che il trasferimento della VM e del lato primario avvenga insieme oppure è necessario eseguire il failover del sito primario prima dell'operazione di ripristino con SnapCenter.
+
+image:sc-saphana-vmware-smas-image48.png[""]

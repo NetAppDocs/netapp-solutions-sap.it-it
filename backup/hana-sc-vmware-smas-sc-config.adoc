@@ -1,0 +1,131 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-sc-config.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Configurazione di SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+Come indicato all'inizio del documento, lo scopo del documento è quello di fornire Best practice per un ambiente HANA che utilizzi VMware con VMFS e SnapMirror Active Sync. Verranno trattati solo i dettagli e le fasi importanti relative a questa specifica soluzione e non verranno illustrati i concetti generali di SnapCenter. Questi concetti e altre informazioni aggiuntive su SnapCenter sono disponibili all'indirizzo:
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup e recovery SAP HANA con SnapCenter"]
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html["TR-4719: Replica del sistema SAP HANA - Backup e ripristino con SnapCenter"]
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"]
+
+
+
+== Prerequisiti
+
+In generale, la sincronizzazione attiva di SnapMirror deve essere configurata prima di aggiungere le risorse protette a SnapCenter. Se i backup sono stati creati prima della configurazione della sincronizzazione attiva di SnapMirror, esisteranno solo nello storage primario originale e non verranno replicati successivamente.
+
+
+
+=== La risorsa SnapCenter HANA deve essere scoperta automaticamente
+
+Le risorse configurate con VMware VMFS o le risorse protette con la sincronizzazione attiva di SnapMirror devono essere rilevate automaticamente da SnapCenter per consentire operazioni specifiche richieste per queste configurazioni.
+
+Poiché i volumi HANA non di dati sono sempre risorse configurate manualmente in SnapCenter, non sono supportati da SnapCenter out of the box. Verranno illustrate le opzioni e le soluzioni alternative per i volumi non di dati più avanti in questo documento.
+
+I sistemi host multipli SAP HANA devono essere configurati usando un plug-in HANA centrale e sono pertanto risorse configurate manualmente per impostazione predefinita. Tali sistemi HANA non sono supportati da SnapCenter, quando si utilizza la sincronizzazione attiva di VMware VMFS o SnapMirror.
+
+
+
+=== Plug-in SnapCenter per VMware vSphere
+
+Il plug-in di SnapCenter per VMware vSphere deve essere implementato nell'ambiente VMware.
+
+
+
+=== Indirizzo IP di gestione su SVM che ospitano i volumi
+
+Anche se i cluster verranno aggiunti a SnapCenter, le SVM che ospitano i volumi di origine e destinazione devono avere configurato un indirizzo IP di gestione.
+
+
+
+=== API REST per la comunicazione dello storage
+
+La gestione e il monitoring della sincronizzazione attiva di SnapMirror richiede l'accesso alle API REST. Pertanto, SnapCenter deve essere configurato per utilizzare le API REST per le comunicazioni dello storage. Il parametro "IsRestEnabledForStorageConnection" nel file di configurazione + C:++\++Program Files++\++NetApp++\++SMCore++\++SMCoreServiceHost.dll.config deve essere impostato su true.
+
+....
+<add key="IsRestEnabledForStorageConnection" value="true">
+....
+image:sc-saphana-vmware-smas-image21.png[""]
+
+Dopo la modifica del parametro, è necessario riavviare il servizio SMCore di SnapCenter.
+
+image:sc-saphana-vmware-smas-image22.png[""]
+
+
+
+== Aggiungere sistemi storage
+
+È possibile aggiungere sistemi storage dopo l'abilitazione dell'API REST per SnapCenter. È necessario aggiungere entrambi i cluster di storage, non le singole SVM.
+
+image:sc-saphana-vmware-smas-image23.png[""]
+
+image:sc-saphana-vmware-smas-image24.png[""]
+
+
+
+== Add host – plugin SnapCenter per VMware vSphere
+
+Se una risorsa in SnapCenter viene eseguita in un ambiente VMware virtualizzato, SnapCenter sfrutta il plug-in SnapCenter per VMware vSphere per estendere i flussi di lavoro di backup, ripristino e cloning di SnapCenter seguendo i passaggi richiesti a livello VMware.
+
+Prima di poter aggiungere l'host in SnapCenter, è necessario distribuire il plug-in SnapCenter per VMware vSphere all'interno dell'ambiente VMware.
+
+
+NOTE: È necessario impostare le credenziali durante il flusso di lavoro di aggiunta dell'host, in cui vSphere può essere selezionato come tipo di host.
+
+image:sc-saphana-vmware-smas-image25.png[""]
+
+image:sc-saphana-vmware-smas-image26.png[""]
+
+image:sc-saphana-vmware-smas-image27.png[""]
+
+
+NOTE: Non è necessaria alcuna configurazione aggiuntiva nel plug-in SnapCenter per vSphere.
+
+
+
+== Aggiunta di host - sistema HANA
+
+
+NOTE: Nessun requisito specifico. La distribuzione del plugin e il rilevamento automatico vengono eseguiti come di consueto.
+
+Con il processo di auto-Discovery, SnapCenter rileva che la risorsa HANA è in esecuzione virtualizzata con VMFS/VMDK. SnapCenter rileva inoltre la configurazione di sincronizzazione attiva di SnapMirror e identifica il sito primario corrente.
+
+Dopo il rilevamento automatico delle risorse, il sito primario corrente viene mostrato nella sezione Storage Footprint della vista delle risorse. Il rilevamento del sistema di storage master si basa sull'output del comando ONTAP, utilizzato da SnapCenter.
+
+....
+volume show -vserver <vs> -volume <vol> -fields smbc-consensus,is-smbc-master
+....
+image:sc-saphana-vmware-smas-image28.png[""]
+
+
+
+== Configurazione dei criteri
+
+Il criterio utilizzato per la risorsa protetta con la sincronizzazione attiva di SnapMirror deve essere configurato utilizzando la replica di SnapMirror anche se SnapCenter non attiva alcuna operazione di aggiornamento di SnapMirror.
+
+image:sc-saphana-vmware-smas-image29.png[""]
+
+image:sc-saphana-vmware-smas-image30.png[""]
+
+
+
+== Configurazione di protezione delle risorse HANA
+
+Nessun requisito specifico. La configurazione di protezione delle risorse viene eseguita come di consueto.

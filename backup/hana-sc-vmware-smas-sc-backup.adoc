@@ -1,0 +1,50 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-sc-backup.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Operazioni di backup di SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+Ad ogni operazione di backup, SnapCenter esegue il rilevamento sul lato VMware e sul rilevamento del sito primario. In caso di failover dello storage, SnapCenter rileva il nuovo sito primario non appena viene eseguito un backup per la risorsa.
+
+image:sc-saphana-vmware-smas-image31.png[""]
+
+
+
+== Vista topologia
+
+All'interno della vista della topologia, SnapCenter mostra i backup dei cluster di storage di origine e di destinazione.
+
+image:sc-saphana-vmware-smas-image32.png[""]
+
+image:sc-saphana-vmware-smas-image33.png[""]
+
+Facendo clic sul numero di conteggio nello storage secondario, viene visualizzata la relazione corrente e la direzione della replica. L'origine è sempre il sito primario corrente. In seguito a un failover dello storage, il sito primario cambierà e la visualizzazione verrà adattata di conseguenza. Tutti i backup hanno sempre la stessa relazione a seconda del sistema di storage che è attualmente il sito primario.
+
+image:sc-saphana-vmware-smas-image34.png[""]
+
+
+
+== Snapshot nei sistemi di storage
+
+I backup Snapshot creati da SnapCenter sono disponibili per entrambi i volumi di dati HANA in entrambi i sistemi storage. ONTAP crea Snapshot aggiuntive a livello di gruppo di coerenza, disponibili anche per tutti gli altri volumi HANA.
+
+La figura seguente mostra le Snapshot del volume di dati HANA nel cluster A700.
+
+image:sc-saphana-vmware-smas-image35.png[""]
+
+La figura seguente mostra le Snapshot del volume di dati HANA nel cluster A800.
+
+image:sc-saphana-vmware-smas-image36.png[""]

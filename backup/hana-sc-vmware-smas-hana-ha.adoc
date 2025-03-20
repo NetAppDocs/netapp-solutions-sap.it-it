@@ -1,0 +1,123 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-hana-ha.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Panoramica sull'high Availability di SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+[role="lead"]
+Questo capitolo offre una panoramica delle opzioni di alta disponibilità per SAP HANA confrontando la replica sul layer applicativo con la replica dello storage.
+
+
+
+== Replica del sistema SAP HANA (HSR)
+
+La replica del sistema SAP HANA offre una modalità operativa in cui i dati vengono replicati in modo sincrono, precaricati in memoria e aggiornati costantemente sull'host secondario. Questa modalità attiva valori RTO molto bassi, pari a circa 1 minuto o meno, ma richiede anche un server dedicato che viene utilizzato solo per ricevere i dati di replica dal sistema di origine. A causa del basso tempo di failover, spesso la replica del sistema SAP HANA viene utilizzata anche per operazioni di manutenzione near-zero-downtime, come gli upgrade del software HANA. Le soluzioni cluster pacemaker Linux vengono generalmente utilizzate per automatizzare le operazioni di failover.
+
+In caso di guasto nel sito primario, nello storage, nell'host o nel sito completo, il sistema HANA esegue automaticamente il failover sul sito secondario controllato dal cluster Linux Pacemaker.
+
+Per una descrizione completa di tutte le opzioni di configurazione e degli scenari di replica, vedere https://help.sap.com/docs/SAP_HANA_PLATFORM/4e9b18c116aa42fc84c7dbfd02111aba/afac7100bc6d47729ae8eae32da5fdec.html["Replica di sistema SAP HANA ++|++ Portale Guida SAP"].
+
+image:sc-saphana-vmware-smas-image2.png[""]
+
+
+
+== Sincronizzazione attiva NetApp SnapMirror
+
+SnapMirror Active Sync consente ai servizi di business di continuare a funzionare anche in caso di guasto completo del sito, supportando le applicazioni per il failover in modo trasparente con una copia secondaria. Non sono richiesti interventi manuali o script personalizzati per attivare un failover con la sincronizzazione attiva di SnapMirror. La sincronizzazione attiva SnapMirror è supportata su cluster AFF, cluster ASA (All-Flash SAN Array) e C-Series (AFF o ASA). La sincronizzazione attiva di SnapMirror protegge le applicazioni con LUN iSCSI o FCP.
+
+A partire da ONTAP 9.15.1, la sincronizzazione attiva SnapMirror supporta una funzionalità Active/Active simmetrica. Active/Active simmetrico consente operazioni di i/o in lettura e scrittura da entrambe le copie di una LUN protetta con replica sincrona bidirezionale, in modo che entrambe le copie LUN possano servire le operazioni di i/o a livello locale.
+
+Ulteriori informazioni sono disponibili all'indirizzo https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Panoramica della sincronizzazione attiva di SnapMirror in ONTAP"].
+
+
+
+=== Bare metal HANA
+
+Quando esegui SAP HANA su un server bare metal, puoi utilizzare la sincronizzazione attiva di SnapMirror per fornire una soluzione storage ad alta disponibilità. I dati vengono replicati in modo sincrono, fornendo quindi un RPO=0.
+
+In caso di guasto allo storage, il sistema HANA accederà in modo trasparente alla copia con mirroring nel sito secondario, utilizzando il secondo percorso FCP, fornendo un RTO=0.
+
+In caso di errore di un host o di un sito completo, è necessario fornire un nuovo server nel sito secondario per accedere ai dati dall'host guasto. Si tratta in genere di un sistema di test o di controllo qualità delle stesse dimensioni della produzione che verrà ora arrestato e utilizzato per eseguire il sistema di produzione. Dopo che le LUN del sito secondario sono state connesse al nuovo host, è necessario avviare il database HANA. L'RTO totale dipende quindi dal tempo necessario per il provisioning dell'host e dai tempi di avvio del database HANA.
+
+image:sc-saphana-vmware-smas-image3.png[""]
+
+
+
+=== VSphere Metro Storage Cluster (vMSC)
+
+Quando si esegue SAP HANA in un ambiente VMware utilizzando datastore collegati al protocollo FCP, è possibile utilizzare la sincronizzazione attiva di SnapMirror per creare un cluster storage VMware Metro. In questo tipo di setup, i datastore utilizzati dal sistema HANA vengono replicati in modo sincrono sul sito secondario.
+
+In caso di errore dello storage, l'host ESX accede automaticamente alla copia con mirroring nel sito secondario, fornendo un RTO=0.
+
+In caso di guasto a un host o a un sito completo, vSphere ha viene utilizzato per avviare la VM HANA sull'host ESX secondario. Quando la VM di HANA è in esecuzione, il database HANA deve essere avviato. L'RTO totale dipende quindi principalmente dal tempo di avvio del database HANA.
+
+image:sc-saphana-vmware-smas-image4.png[""]
+
+
+
+== Confronto tra soluzioni
+
+La tabella seguente fornisce un riepilogo delle caratteristiche chiave delle soluzioni descritte in precedenza.
+
+[cols="25%,^25%,^25%,^25%"]
+|===
+|  | Replica di sistema HANA | Sincronizzazione attiva di SnapMirror: Bare metal | Sincronizzazione attiva SnapMirror: VMware vMSC 
+
+
+| RPO con qualsiasi guasto | RPO=0 + replica sincrona |  |  
+
+
+| RTO con errore dello storage | RTO ++<++ 1min | RTO=0 + failover dello storage trasparente |  
+
+
+| RTO + con errore di sito o host | RTO ++<++ 1min | RTO: In base al tempo richiesto per la preparazione del server e l'avvio del database HANA. | RTO: In base al tempo richiesto per l'avvio del database HANA. 
+
+
+| Automazione del failover  a| 
+Sì,
+
+Failover automatico su host HSR secondario
+
+controllato da un gruppo pacemaker.
+ a| 
+Sì, in caso di guasto dello storage
+
+No, in caso di guasti a un host o a un sito
+
+(Provisioning dell'host, connessione delle risorse storage, avvio del database HANA)
+ a| 
+Sì, in caso di guasto dello storage
+
+Sì, in caso di guasti a un host o a un sito
+
+(Failover della VM su un altro sito automatizzato con vSphere ha, avvio del database HANA)
+
+
+
+| È richiesto un server dedicato nel sito secondario  a| 
+Sì,
+
+richiesto per precaricare i dati nella memoria e abilitare il failover rapido senza avvio del database.
+ a| 
+No,
+
+il server è necessario solo in caso di failover. In genere, il server utilizzato per il controllo qualità viene utilizzato per la produzione.
+ a| 
+No,
+
+Le risorse dell'host ESX sono necessarie solo in caso di failover. In genere, le risorse di controllo qualità vengono utilizzate per la produzione.
+
+|===
