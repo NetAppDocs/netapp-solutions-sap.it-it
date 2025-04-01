@@ -38,13 +38,36 @@ L'utilizzo di NetApp Volume Encryption (NVE) e NetApp aggregate Encryption (NAE)
 
 == Qualità del servizio
 
-La QoS può essere utilizzata per limitare il throughput dello storage per specifici sistemi SAP HANA o applicazioni no-SAP su un controller condiviso. Un caso d'utilizzo sarebbe quello di limitare il throughput dei sistemi di sviluppo e test in modo che non possano influenzare i sistemi di produzione in una configurazione mista.
+La qualità del servizio può essere utilizzata per limitare il throughput dello storage per sistemi SAP HANA o applicazioni non SAP specifici su un controller condiviso.
 
-Durante il processo di dimensionamento, è necessario determinare i requisiti di performance di un sistema non in produzione. I sistemi di sviluppo e test possono essere dimensionati con valori di performance inferiori, in genere nell'intervallo compreso tra il 20% e il 50% di un KPI del sistema di produzione come definito da SAP.
 
-A partire da ONTAP 9, la qualità del servizio viene configurata a livello di volume di storage e utilizza i valori massimi per il throughput (Mbps) e la quantità di i/o (IOPS).
 
-L'i/o di scrittura di grandi dimensioni ha il maggiore effetto sulle performance del sistema storage. Pertanto, il limite di throughput QoS deve essere impostato su una percentuale dei corrispondenti valori KPI di scrittura delle performance dello storage SAP HANA nei volumi di dati e di log.
+=== Produzione e sviluppo/test
+
+Un caso d'utilizzo sarebbe quello di limitare il throughput dei sistemi di sviluppo e test in modo che non possano influenzare i sistemi di produzione in una configurazione mista. Durante il processo di dimensionamento, è necessario determinare i requisiti di performance di un sistema non in produzione. I sistemi di sviluppo e test possono essere dimensionati con valori di performance inferiori, in genere nell'intervallo compreso tra il 20% e il 50% di un KPI del sistema di produzione come definito da SAP. L'i/o di scrittura di grandi dimensioni ha il maggiore effetto sulle performance del sistema storage. Pertanto, il limite di throughput QoS deve essere impostato su una percentuale dei corrispondenti valori KPI di scrittura delle performance dello storage SAP HANA nei volumi di dati e di log.
+
+
+
+=== Ambienti condivisi
+
+Un altro caso d'utilizzo consiste nel limitare il throughput dei carichi di lavoro intensivi in scrittura, soprattutto per evitare che questi carichi di lavoro abbiano un impatto su altri carichi di lavoro in scrittura sensibili alla latenza. In tali ambienti è consigliabile applicare una policy di gruppo QoS con un livello di throughput massimo non condiviso a ogni LUN all'interno di ciascuna Storage Virtual Machine (SVM) per limitare il throughput massimo di ciascun oggetto storage singolo a un valore dato. Questo riduce la possibilità che un singolo carico di lavoro possa influenzare negativamente altri carichi di lavoro.
+
+Per fare questo, è necessario creare una policy di gruppo utilizzando l'interfaccia a riga di comando del cluster ONTAP per ogni SVM:
+
+....
+qos policy-group create -policy-group <policy-name> -vserver <vserver name> -max-throughput 1000MB/s -is-shared false
+....
+E applicata a ogni LUN all'interno della SVM. Segue un esempio di applicazione del gruppo di policy a tutte le LUN esistenti all'interno di una SVM:
+
+....
+lun modify -vserver <vserver name>  -path * -qos-policy-group  <policy-name>
+....
+Tutto questo è necessario per ogni SVM. Il nome del gruppo di polizia della QoS per ciascuna SVM deve essere diverso. Per i nuovi LUN, la policy può essere applicata direttamente:
+
+....
+lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
+....
+Si consiglia di utilizzare 1000MB GB/s come throughput massimo per un dato LUN. Se un'applicazione richiede maggiore throughput, verranno utilizzati più LUN con striping LUN per fornire la larghezza di banda necessaria. Questa guida fornisce un esempio per SAP HANA basato su Linux LVM nella sezione https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_host_setup.html#create-lvm-volume-groups-and-logical-volumes["Host Setup (impostazione host)"].
 
 
 
