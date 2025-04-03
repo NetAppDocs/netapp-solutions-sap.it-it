@@ -10,12 +10,9 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
 
+[role="lead"]
 Le operazioni di cloning possono essere eseguite sul sito primario o sullo storage secondario.
 
 Il volume clonato non farà parte del gruppo di coerenza HANA e non verrà replicato con la sincronizzazione attiva SnapMirror.

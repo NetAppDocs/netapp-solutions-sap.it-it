@@ -11,11 +11,10 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
+
+[role="lead"]
+In questo articolo vengono descritte le fasi di configurazione necessarie per questa soluzione.
 
 
 
@@ -25,9 +24,9 @@ summary:
 
 ONTAP mediator deve essere disponibile e configurato in entrambi i cluster di storage.
 
-image:sc-saphana-vmware-smas-image10.png[""]
+image:sc-saphana-vmware-smas-image10.png["Figura che mostra i contenuti discussi"]
 
-image:sc-saphana-vmware-smas-image11.png[""]
+image:sc-saphana-vmware-smas-image11.png["Figura che mostra i contenuti discussi"]
 
 
 
@@ -41,7 +40,7 @@ Lo scopo di un gruppo di coerenza è quello di acquisire immagini snapshot simul
 
 Per la replica dei sistemi HANA, il gruppo di coerenza deve includere tutti i volumi utilizzati dal singolo sistema HANA (dati, log e condivisi). I volumi che devono far parte di un gruppo di coerenza devono essere archiviati nella stessa SVM. Le immagini del sistema operativo possono essere memorizzate in un volume separato con un proprio gruppo di coerenza. La figura seguente illustra un esempio di configurazione con due sistemi HANA.
 
-image:sc-saphana-vmware-smas-image12.png[""]
+image:sc-saphana-vmware-smas-image12.png["Figura che mostra i contenuti discussi"]
 
 
 
@@ -51,9 +50,9 @@ Durante il setup in laboratorio è stato creato un gruppo iniziatore che include
 
 Utilizzando le impostazioni di prossimità, abbiamo definito l'host ESX più vicino a quale cluster di storage. Nel nostro caso, A700 è vicino a ESX-1 e A800 è vicino a ESX-2.
 
-image:sc-saphana-vmware-smas-image13.png[""]
+image:sc-saphana-vmware-smas-image13.png["Figura che mostra i contenuti discussi"]
 
-image:sc-saphana-vmware-smas-image14.png[""]
+image:sc-saphana-vmware-smas-image14.png["Figura che mostra i contenuti discussi"]
 
 
 NOTE: In una configurazione ad accesso non uniforme, il gruppo iniziatore nel cluster di storage primario (A700) deve includere solo gli iniziatori dell'host ESX-1, poiché non è presente alcuna connessione SAN a ESX-2. Inoltre, è necessario configurare un altro gruppo iniziatore nel secondo cluster di storage (A800) che includa solo gli iniziatori dell'host ESX-2. La configurazione di prossimità e la replica del gruppo iniziatore non sono necessarie.
@@ -62,7 +61,7 @@ NOTE: In una configurazione ad accesso non uniforme, il gruppo iniziatore nel cl
 
 == Configurare la protezione con ONTAP System Manager
 
-image:sc-saphana-vmware-smas-image15.png[""]
+image:sc-saphana-vmware-smas-image15.png["Figura che mostra i contenuti discussi"]
 
 
 
@@ -75,11 +74,11 @@ Il "gruppo iniziatore di replica" è stato attivato. Il gruppo di imitator rimar
 
 NOTE: In una configurazione con accesso non uniforme, il gruppo iniziatore non deve essere replicato, poiché un gruppo iniziatore separato deve essere configurato nel secondo cluster di storage.
 
-image:sc-saphana-vmware-smas-image16.png[""]
+image:sc-saphana-vmware-smas-image16.png["Figura che mostra i contenuti discussi"]
 
 Facendo clic sulle impostazioni di prossimità, è possibile rivedere la configurazione eseguita in precedenza nell'impostazione del gruppo iniziatore.
 
-image:sc-saphana-vmware-smas-image17.png[""]
+image:sc-saphana-vmware-smas-image17.png["Figura che mostra i contenuti discussi"]
 
 È necessario configurare il cluster di storage di destinazione e attivare la funzione di inizializzazione delle relazioni.
 
@@ -89,11 +88,11 @@ image:sc-saphana-vmware-smas-image17.png[""]
 
 Nel cluster di storage A700 (origine), viene elencata la nuova relazione.
 
-image:sc-saphana-vmware-smas-image18.png[""]
+image:sc-saphana-vmware-smas-image18.png["Figura che mostra i contenuti discussi"]
 
 Nel cluster di storage A800 (destinazione) vengono elencate la nuova relazione e lo stato della replica.
 
-image:sc-saphana-vmware-smas-image19.png[""]
+image:sc-saphana-vmware-smas-image19.png["Figura che mostra i contenuti discussi"]
 
 
 
@@ -118,4 +117,4 @@ Il sito primario viene rilevato da SnapCenter e utilizzato per eseguire operazio
 
 NOTE: Ricorda che origine e destinazione non sono legate a SVM o cluster di storage, ma possono essere diverse per ogni relazione di replica.
 
-image:sc-saphana-vmware-smas-image20.png[""]
+image:sc-saphana-vmware-smas-image20.png["Figura che mostra i contenuti discussi"]

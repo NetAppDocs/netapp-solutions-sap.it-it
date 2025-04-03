@@ -10,11 +10,10 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
+
+[role="lead"]
+In questo articolo vengono forniti collegamenti a ulteriori risorse rilevanti per questa soluzione.
 
 SnapCenter:
 

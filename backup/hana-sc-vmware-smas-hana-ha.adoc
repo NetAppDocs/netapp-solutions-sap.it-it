@@ -30,7 +30,7 @@ In caso di guasto nel sito primario, nello storage, nell'host o nel sito complet
 
 Per una descrizione completa di tutte le opzioni di configurazione e degli scenari di replica, vedere https://help.sap.com/docs/SAP_HANA_PLATFORM/4e9b18c116aa42fc84c7dbfd02111aba/afac7100bc6d47729ae8eae32da5fdec.html["Replica di sistema SAP HANA ++|++ Portale Guida SAP"].
 
-image:sc-saphana-vmware-smas-image2.png[""]
+image:sc-saphana-vmware-smas-image2.png["Figura che mostra i contenuti discussi"]
 
 
 
@@ -52,7 +52,7 @@ In caso di guasto allo storage, il sistema HANA accederà in modo trasparente al
 
 In caso di errore di un host o di un sito completo, è necessario fornire un nuovo server nel sito secondario per accedere ai dati dall'host guasto. Si tratta in genere di un sistema di test o di controllo qualità delle stesse dimensioni della produzione che verrà ora arrestato e utilizzato per eseguire il sistema di produzione. Dopo che le LUN del sito secondario sono state connesse al nuovo host, è necessario avviare il database HANA. L'RTO totale dipende quindi dal tempo necessario per il provisioning dell'host e dai tempi di avvio del database HANA.
 
-image:sc-saphana-vmware-smas-image3.png[""]
+image:sc-saphana-vmware-smas-image3.png["Figura che mostra i contenuti discussi"]
 
 
 
@@ -64,7 +64,7 @@ In caso di errore dello storage, l'host ESX accede automaticamente alla copia co
 
 In caso di guasto a un host o a un sito completo, vSphere ha viene utilizzato per avviare la VM HANA sull'host ESX secondario. Quando la VM di HANA è in esecuzione, il database HANA deve essere avviato. L'RTO totale dipende quindi principalmente dal tempo di avvio del database HANA.
 
-image:sc-saphana-vmware-smas-image4.png[""]
+image:sc-saphana-vmware-smas-image4.png["Figura che mostra i contenuti discussi"]
 
 
 
