@@ -72,6 +72,9 @@ lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size 
 Si consiglia di utilizzare 1000MB GB/s come throughput massimo per un dato LUN. Se un'applicazione richiede maggiore throughput, verranno utilizzati più LUN con striping LUN per fornire la larghezza di banda necessaria. Questa guida fornisce un esempio per SAP HANA basato su Linux LVM nella sezione https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_fas_fc_host_setup.html#create-lvm-volume-groups-and-logical-volumes["Host Setup (impostazione host)"].
 
 
+NOTE: Il limite si applica anche alle letture. Pertanto, utilizza un numero sufficiente di LUN per soddisfare gli SLA richiesti per l'avvio del database SAP HANA e per i backup.
+
+
 
 == NetApp FabricPool
 
