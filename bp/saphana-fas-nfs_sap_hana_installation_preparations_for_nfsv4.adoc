@@ -16,7 +16,7 @@ summary: 'NFS versione 4 e successive richiede l"autenticazione dell"utente. Que
 [role="lead"]
 NFS versione 4 e successive richiede l'autenticazione dell'utente. Questa autenticazione può essere eseguita utilizzando uno strumento di gestione utente centrale, ad esempio un server LDAP (Lightweight Directory Access Protocol) o con account utente locali. Le sezioni seguenti descrivono come configurare gli account utente locali.
 
-L'utente di amministrazione `<sidadm>` e a. `sapsys` Il gruppo deve essere creato manualmente sugli host SAP HANA e sui controller di storage prima di iniziare l'installazione del software SAP HANA.
+Gli utenti amministrativi `<sid>adm`,`<sid>crypt` e il `sapsys` gruppo devono essere creati manualmente sugli host SAP HANA e sugli storage controller prima che venga avviata l'installazione del software SAP HANA.
 
 
 
@@ -24,9 +24,9 @@ L'utente di amministrazione `<sidadm>` e a. `sapsys` Il gruppo deve essere creat
 
 Se non esiste, il `sapsys` Il gruppo deve essere creato sull'host SAP HANA. È necessario scegliere un ID di gruppo univoco che non sia in conflitto con gli ID di gruppo esistenti sui controller di storage.
 
-L'utente `<sidadm>` Viene creato sull'host SAP HANA. È necessario scegliere un ID univoco che non sia in conflitto con gli ID utente esistenti sui controller di storage.
+Gli utenti `<sid>adm` e `<sid>crypt` vengono creati sull'host SAP HANA. È necessario scegliere ID univoci che non siano in conflitto con gli ID utente esistenti sui controller di archiviazione.
 
-Per un sistema SAP HANA con host multipli, l'ID utente e il ID gruppo devono essere identici su tutti gli host SAP HANA. Il gruppo e l'utente vengono creati sugli altri host SAP HANA copiando le linee interessate in `/etc/group` e. `/etc/passwd` Dal sistema di origine a tutti gli altri host SAP HANA.
+Per un sistema SAP HANA con host multipli, gli ID utente e gruppo devono essere gli stessi su tutti gli host SAP HANA. Il gruppo e l'utente vengono creati sugli altri host SAP HANA copiando le linee interessate da e `/etc/passwd` nel `/etc/group` sistema di origine a tutti gli altri host SAP HANA.
 
 
 NOTE: Il dominio NFSv4 deve essere impostato sullo stesso valore su tutti i server Linux  `/etc/idmapd.conf`) E SVM. Impostare il parametro di dominio "dominio = <domain-name>" nel file `/etc/idmapd.conf` Per gli host Linux.
@@ -44,7 +44,7 @@ NOTE: I kernel Linux più recenti non richiedono questo passaggio. I messaggi di
 
 == Controller di storage
 
-L'ID utente e l'ID gruppo devono essere identici negli host SAP HANA e nei controller di storage. Il gruppo e l'utente vengono creati immettendo i seguenti comandi sul cluster di storage:
+Gli ID utente e l'ID del gruppo devono essere gli stessi sugli host SAP HANA e sugli storage controller. Il gruppo e l'utente vengono creati immettendo i seguenti comandi sul cluster di storage:
 
 ....
 vserver services unix-group create -vserver <vserver> -name <group name> -id <group id>
