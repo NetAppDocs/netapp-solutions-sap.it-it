@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-time-synchronization.html 
+keywords: time, storage, database host 
+summary: 'È necessario sincronizzare l"ora tra i controller di storage e gli host del database SAP HANA. A tale scopo, impostare lo stesso server di riferimento orario per tutti i controller di storage e tutti gli host SAP HANA.' 
+---
+= Sincronizzazione dell'ora
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario sincronizzare l'ora tra i controller di storage e gli host del database SAP HANA. A tale scopo, impostare lo stesso server di riferimento orario per tutti i controller di storage e tutti gli host SAP HANA.

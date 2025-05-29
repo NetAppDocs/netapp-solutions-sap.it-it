@@ -1,0 +1,85 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-data-protection-overview.html 
+keywords:  
+summary:  
+---
+= TR-4891: Disaster recovery SAP HANA con Azure NetApp Files
+:allow-uri-read: 
+
+
+[role="lead"]
+Gli studi hanno dimostrato che il downtime delle applicazioni di business ha un impatto negativo significativo sul business delle aziende.
+
+Autori: Nils Bauer, NetApp Ralf Klahr, Microsoft
+
+Oltre all'impatto finanziario, il downtime può anche danneggiare la reputazione dell'azienda, il morale dello staff e la fedeltà del cliente. Sorprendentemente, non tutte le aziende dispongono di una policy di disaster recovery completa.
+
+L'esecuzione di SAP HANA su Azure NetApp Files (ANF) offre ai clienti l'accesso a funzionalità aggiuntive che estendono e migliorano le funzionalità integrate di protezione dei dati e disaster recovery di SAP HANA. Questa sezione panoramica illustra queste opzioni per aiutare i clienti a selezionare le opzioni che supportano le loro esigenze di business.
+
+Per sviluppare una policy di disaster recovery completa, i clienti devono comprendere i requisiti delle applicazioni di business e le funzionalità tecniche di cui hanno bisogno per la protezione dei dati e il disaster recovery. La figura seguente fornisce una panoramica della protezione dei dati.
+
+image:saphana-dr-anf_image2.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+== Requisiti delle applicazioni di business
+
+Sono disponibili due indicatori chiave per le applicazioni aziendali:
+
+* L'RPO (Recovery Point Objective) o la perdita massima tollerabile di dati
+* L'RTO (Recovery Time Objective) o il downtime massimo tollerabile delle applicazioni aziendali
+
+
+Questi requisiti sono definiti in base al tipo di applicazione utilizzata e alla natura dei dati di business. L'RPO e l'RTO potrebbero differire se si sta proteggendo dai guasti in una singola regione di Azure. Potrebbero anche differire se ti stai preparando a disastri catastrofici come la perdita di una regione Azure completa. È importante valutare i requisiti di business che definiscono l'RPO e l'RTO, perché questi requisiti hanno un impatto significativo sulle opzioni tecniche disponibili.
+
+
+
+== Alta disponibilità
+
+L'infrastruttura per SAP HANA, come macchine virtuali, rete e storage, deve disporre di componenti ridondanti per garantire che non vi sia un singolo punto di errore. MS Azure offre ridondanza per i diversi componenti dell'infrastruttura.
+
+Per garantire un'elevata disponibilità sul lato di elaborazione e applicazioni, gli host SAP HANA in standby possono essere configurati per l'alta disponibilità integrata con un sistema multihost SAP HANA. In caso di guasto di un server o di un servizio SAP HANA, il servizio SAP HANA esegue il failover sull'host di standby, causando il downtime dell'applicazione.
+
+Se il downtime dell'applicazione non è accettabile in caso di guasto di server o applicazioni, è possibile utilizzare la replica del sistema SAP HANA come soluzione ad alta disponibilità che consente il failover in tempi molto brevi. I clienti SAP utilizzano la replica del sistema HANA non solo per gestire l'alta disponibilità in caso di guasti non pianificati, ma anche per ridurre al minimo i downtime per le operazioni pianificate, come gli aggiornamenti del software HANA.
+
+
+
+== Corruzione logica
+
+La corruzione logica può essere causata da errori software, errori umani o sabotaggio. Purtroppo, spesso la corruzione logica non può essere affrontata con soluzioni standard di alta disponibilità e disaster recovery. Di conseguenza, a seconda del livello, dell'applicazione, del file system o dello storage in cui si è verificato il danneggiamento logico, i requisiti RTO e RPO talvolta non possono essere soddisfatti.
+
+Il caso peggiore è un danneggiamento logico in un'applicazione SAP. Le applicazioni SAP spesso operano in un ambiente in cui diverse applicazioni comunicano tra loro e scambiano dati. Pertanto, il ripristino e il ripristino di un sistema SAP in cui si è verificato un danneggiamento logico non è l'approccio consigliato. Il ripristino del sistema a un punto temporale prima che si verificasse il danneggiamento comporta la perdita di dati, quindi l'RPO diventa maggiore di zero. Inoltre, il panorama SAP non sarebbe più sincronizzato e richiederebbe un'ulteriore post-elaborazione.
+
+Invece di ripristinare il sistema SAP, l'approccio migliore consiste nel cercare di correggere l'errore logico all'interno del sistema, analizzando il problema in un sistema di riparazione separato. L'analisi della causa principale richiede il coinvolgimento del processo di business e del proprietario dell'applicazione. Per questo scenario, si crea un sistema di riparazione (un clone del sistema di produzione) basato sui dati memorizzati prima che si verificasse il danneggiamento logico. All'interno del sistema di riparazione, i dati richiesti possono essere esportati e importati nel sistema di produzione. Con questo approccio, non è necessario arrestare il sistema produttivo e, nel migliore dei casi, non vengono persi dati o solo una piccola parte di dati.
+
+
+NOTE: I passaggi necessari per configurare un sistema di riparazione sono identici a uno scenario di test di disaster recovery descritto in questo documento. La soluzione di disaster recovery descritta può quindi essere facilmente estesa per risolvere anche la corruzione logica.
+
+
+
+== Backup
+
+I backup vengono creati per consentire il ripristino e il ripristino da diversi set di dati point-in-time. In genere, questi backup vengono conservati per un paio di giorni o poche settimane.
+
+A seconda del tipo di danneggiamento, il ripristino e il ripristino possono essere eseguiti con o senza perdita di dati. Se l'RPO deve essere pari a zero, anche in caso di perdita dello storage primario e di backup, il backup deve essere combinato con la replica sincrona dei dati.
+
+L'RTO per il ripristino e il ripristino è definito dal tempo di ripristino richiesto, dal tempo di ripristino (incluso l'avvio del database) e dal caricamento dei dati in memoria. Per database di grandi dimensioni e approcci di backup tradizionali, l'RTO può essere facilmente di diverse ore, il che potrebbe non essere accettabile. Per ottenere valori RTO molto bassi, è necessario combinare un backup con una soluzione hot-standby, che include il precaricamento dei dati in memoria.
+
+Al contrario, una soluzione di backup deve affrontare la corruzione logica, perché le soluzioni di replica dei dati non possono coprire tutti i tipi di corruzione logica.
+
+
+
+== Replica sincrona o asincrona dei dati
+
+L'RPO determina principalmente il metodo di replica dei dati da utilizzare. Se l'RPO deve essere pari a zero, anche in caso di perdita dello storage primario e di backup, i dati devono essere replicati in modo sincrono. Tuttavia, esistono limiti tecnici per la replica sincrona, ad esempio la distanza tra due aree Azure. Nella maggior parte dei casi, la replica sincrona non è appropriata per distanze superiori a 100 km a causa della latenza, pertanto non è un'opzione per la replica dei dati tra le regioni di Azure.
+
+Se un RPO più grande è accettabile, la replica asincrona può essere utilizzata su grandi distanze. L'RPO in questo caso è definito dalla frequenza di replica.
+
+
+
+== Replica di sistema HANA con o senza precaricamento dei dati
+
+Il tempo di avvio di un database SAP HANA è molto più lungo di quello dei database tradizionali, perché è necessario caricare una grande quantità di dati in memoria prima che il database possa fornire le performance previste. Pertanto, una parte significativa dell'RTO è il tempo necessario per avviare il database. Con qualsiasi replica basata su storage e con la replica del sistema HANA senza precaricamento dei dati, il database SAP HANA deve essere avviato in caso di failover nel sito di disaster recovery.
+
+La replica del sistema SAP HANA offre una modalità operativa in cui i dati vengono precaricati e continuamente aggiornati sull'host secondario. Questa modalità consente valori RTO molto bassi, ma richiede anche un server dedicato che viene utilizzato solo per ricevere i dati di replica dal sistema di origine.

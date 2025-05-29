@@ -1,0 +1,79 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-nfs-update-history.html 
+keywords:  
+summary:  
+---
+= Aggiornare la cronologia
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pubblicazione originale.
+
+[cols="25,50"]
+|===
+| Data | Riepilogo degli aggiornamenti 
+
+
+| Ottobre 2015 | Versione iniziale 
+
+
+| Marzo 2016 | Dimensionamento della capacità aggiornato Opzioni di montaggio per `/hana/shared`Aggiornato il parametro sysctl 
+
+
+| Febbraio 2017 | Nuovi sistemi storage e shelf di dischi NetApp nuove funzionalità di ONTAP 9 supporto per le nuove release 40 GbE del sistema operativo (SUSE Linux Enterprise Server 12 SP1 e Red Hat Enterprise Linux 7.2) Nuova release di SAP HANA 
+
+
+| Luglio 2017 | Aggiornamenti minori 
+
+
+| Settembre 2018 | Nuovi sistemi di storage NetApp supporto per le nuove release 100 GbE del sistema operativo (SUSE Linux Enterprise Server 12 SP3 e Red Hat Enterprise Linux 7.4) ulteriori modifiche minori SAP HANA 2.0 SPS3 
+
+
+| Ottobre 2019 | Nuovi sistemi storage NetApp e shelf NVMe nuove release di sistemi operativi (SUSE Linux Enterprise Server 12 SP4, SUSE Linux Enterprise Server 15 e Red Hat Enterprise Linux 7.6) dimensioni del volume MAX Data piccole modifiche 
+
+
+| Dicembre 2019 | Nuovi sistemi storage NetApp Nuova release del sistema operativo SUSE Linux Enterprise Server 15 SP1 
+
+
+| Marzo 2020 | Supporto di nconnect per NFSv3 Nuova release del sistema operativo Red Hat Enterprise Linux 8 
+
+
+| Maggio 2020 | Supporto per più partizioni di volumi di dati disponibile con SAP HANA 2.0 SPS4 
+
+
+| Giugno 2020 | Ulteriori informazioni sulle funzionalità opzionali aggiornamenti minori 
+
+
+| Dicembre 2020 | Supporto di nconnect per NFSv4.1 a partire da ONTAP 9.8 nuove release del sistema operativo nuove versioni di SAP HANA 
+
+
+| Febbraio 2021 | Nuovi sistemi storage NetApp modifiche alle impostazioni della rete host modifiche minori 
+
+
+| Aprile 2021 | Aggiunta di informazioni specifiche su VMware vSphere 
+
+
+| Settembre 2022 | Nuove versioni del sistema operativo 
+
+
+| Agosto 2023 | Nuovi sistemi di storage (AFF serie C) 
+
+
+| Dicembre 2023 | Aggiornamento della configurazione dell'host impostazioni nconnect modificate aggiunta di informazioni sulle NFSv4,1 sessioni 
+
+
+| Maggio 2024 | Nuovi sistemi di storage (AFF serie A) 
+
+
+| Settembre 2024 | Aggiornamenti minori 
+
+
+| Novembre 2024 | Nuovi sistemi di storage 
+|===

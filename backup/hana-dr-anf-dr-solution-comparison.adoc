@@ -1,0 +1,140 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-dr-solution-comparison.html 
+keywords: sap, hana, system, replication, data, memory, disaster, recovery, solutions, azure 
+summary: Una soluzione di disaster recovery completa deve consentire ai clienti di eseguire il ripristino da un guasto completo del sito primario. 
+---
+= Confronto tra soluzioni di disaster recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una soluzione di disaster recovery completa deve consentire ai clienti di eseguire il ripristino da un guasto completo del sito primario. Pertanto, i dati devono essere trasferiti a un sito secondario ed è necessaria un'infrastruttura completa per eseguire i sistemi SAP HANA di produzione richiesti in caso di guasto di un sito. A seconda dei requisiti di disponibilità dell'applicazione e del tipo di disastro da cui si desidera essere protetti, è necessario prendere in considerazione una soluzione di disaster recovery a due o tre siti.
+
+La figura seguente mostra una configurazione tipica in cui i dati vengono replicati in modo sincrono all'interno della stessa regione Azure in una seconda zona di disponibilità. La breve distanza consente di replicare i dati in modo sincrono per ottenere un RPO pari a zero (generalmente utilizzato per fornire ha).
+
+Inoltre, i dati vengono replicati in modo asincrono in una regione secondaria per essere protetti da disastri, quando la regione principale è interessata. L'RPO minimo ottenibile dipende dalla frequenza di replica dei dati, che è limitata dalla larghezza di banda disponibile tra la regione primaria e la regione secondaria. Un RPO minimo tipico è nell'intervallo da 20 minuti a più ore.
+
+In questo documento vengono illustrate le diverse opzioni di implementazione di una soluzione di disaster recovery a due regioni.
+
+image:saphana-dr-anf_image3.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+== Replica di sistema SAP HANA
+
+La replica del sistema SAP HANA funziona a livello di database. La soluzione si basa su un sistema SAP HANA aggiuntivo nel sito di disaster recovery che riceve le modifiche dal sistema primario. Questo sistema secondario deve essere identico al sistema primario.
+
+La replica del sistema SAP HANA può essere utilizzata in due modalità:
+
+* Con i dati precaricati nella memoria e un server dedicato nel sito di disaster recovery:
++
+** Il server viene utilizzato esclusivamente come host secondario SAP HANA System Replication.
+** È possibile ottenere valori RTO molto bassi perché i dati sono già caricati in memoria e non è richiesto l'avvio del database in caso di failover.
+
+
+* Senza i dati precaricati nella memoria e un server condiviso nel sito di disaster recovery:
++
+** Il server è condiviso come sistema secondario SAP HANA System Replication e come sistema di sviluppo/test.
+** L'RTO dipende principalmente dal tempo necessario per avviare il database e caricare i dati in memoria.
+
+
+
+
+Per una descrizione completa di tutte le opzioni di configurazione e gli scenari di replica, vedere https://help.sap.com/saphelp_hanaplatform/helpdata/en/67/6844172c2442f0bf6c8b080db05ae7/content.htm?frameset=/en/52/08b5071e3f45d5aa3bcbb7fde10cec/frameset.htm&current_toc=/en/00/0ca1e3486640ef8b884cdf1a050fbb/plain.htm&node_id=527&show_children=f["Guida all'amministrazione di SAP HANA"^].
+
+La figura seguente mostra la configurazione di una soluzione di disaster recovery a due regioni con SAP HANA System Replication. La replica sincrona con i dati precaricati nella memoria viene utilizzata per l'ha locale nella stessa regione Azure, ma in zone di disponibilità diverse. La replica asincrona senza dati precaricati viene configurata per l'area di disaster recovery remota.
+
+La seguente figura illustra la replica di sistema SAP HANA.
+
+image:saphana-dr-anf_image4.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+=== Replica di sistema SAP HANA con dati precaricati in memoria
+
+I valori RTO molto bassi con SAP HANA possono essere ottenuti solo con la replica di sistema SAP HANA con i dati precaricati in memoria. La replica del sistema SAP HANA con un server secondario dedicato nel sito di disaster recovery consente un valore RTO di circa 1 minuto o meno. I dati replicati vengono ricevuti e precaricati in memoria nel sistema secondario. A causa di questo basso tempo di failover, la replica del sistema SAP HANA viene spesso utilizzata anche per operazioni di manutenzione con downtime quasi pari a zero, come gli aggiornamenti del software HANA.
+
+In genere, la replica del sistema SAP HANA è configurata per replicare in modo sincrono quando si sceglie il precarico dei dati. La distanza massima supportata per la replica sincrona è compresa nell'intervallo di 100 km.
+
+
+
+=== Replica del sistema SAP senza dati precaricati in memoria
+
+Per requisiti RTO meno rigorosi, è possibile utilizzare la replica del sistema SAP HANA senza precaricare i dati. In questa modalità operativa, i dati nell'area di disaster recovery non vengono caricati in memoria. Il server nell'area di DR viene ancora utilizzato per elaborare la replica del sistema SAP HANA eseguendo tutti i processi SAP HANA richiesti. Tuttavia, la maggior parte della memoria del server è disponibile per eseguire altri servizi, come i sistemi di sviluppo/test SAP HANA.
+
+In caso di disastro, il sistema di sviluppo/test deve essere spento, deve essere avviato il failover e i dati devono essere caricati in memoria. L'RTO di questo approccio di standby a freddo dipende dalle dimensioni del database e dal throughput di lettura durante il caricamento dell'archivio di righe e colonne. Supponendo che i dati siano letti con un throughput di 1000 Mbps, il caricamento di 1 TB di dati dovrebbe richiedere circa 18 minuti.
+
+
+
+== Disaster recovery SAP HANA con replica cross-Region ANF
+
+ANF la replica interregionale è integrata in ANF come soluzione di disaster recovery che utilizza la replica asincrona dei dati. ANF la replica interregionale viene configurata attraverso una relazione di protezione dei dati tra due volumi ANF su una regione Azure primaria e una secondaria. ANF Cross-Region Replication aggiorna il volume secondario utilizzando repliche delta a blocchi efficienti. È possibile definire le pianificazioni degli aggiornamenti durante la configurazione della replica.
+
+La figura seguente mostra un esempio di soluzione di disaster recovery a due regioni, utilizzando la replica ANF Cross-Region. In questo esempio, il sistema HANA è protetto con la replica del sistema HANA all'interno della regione principale, come descritto nel capitolo precedente. La replica in una regione secondaria viene eseguita utilizzando la replica ANF cross-region. L'RPO è definito dalla pianificazione della replica e dalle opzioni di replica.
+
+L'RTO dipende principalmente dal tempo necessario per avviare il database HANA nel sito di disaster recovery e per caricare i dati in memoria. Supponendo che i dati siano letti con un throughput di 1000 MB/s, il caricamento di 1 TB di dati richiederebbe circa 18 minuti. A seconda della configurazione della replica, è necessario eseguire anche il ripristino in avanti e aggiungerlo al valore RTO totale.
+
+Ulteriori informazioni sulle diverse opzioni di configurazione sono fornite nel capitolo link:hana-dr-anf-cross-region-replication-overview.html["Opzioni di configurazione per la replica tra regioni con SAP HANA"].
+
+I server dei siti di disaster recovery possono essere utilizzati come sistemi di sviluppo/test durante il normale funzionamento. In caso di disastro, i sistemi di sviluppo/test devono essere spenti e avviati come server di produzione DR.
+
+ANF Cross-Region Replication consente di testare il flusso di lavoro DR senza influire sull'RPO e sull'RTO. Ciò si ottiene creando cloni di volume e allegandoli al server di test del DR.
+
+image:saphana-dr-anf_image5.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+== Riepilogo delle soluzioni di disaster recovery
+
+Nella tabella seguente vengono messe a confronto le soluzioni di disaster recovery discusse in questa sezione e vengono evidenziati gli indicatori più importanti.
+
+I risultati principali sono i seguenti:
+
+* Se è richiesto un RTO molto basso, la replica del sistema SAP HANA con precaricamento in memoria è l'unica opzione.
++
+** Per ricevere i dati replicati e caricare i dati in memoria, è necessario un server dedicato nel sito di DR.
+
+
+* Inoltre, è necessaria la replica dello storage per i dati che risiedono all'esterno del database (ad esempio file condivisi, interfacce e così via).
+* Se i requisiti RTO/RPO sono meno rigorosi, la replica ANF Cross-Region può essere utilizzata anche per:
++
+** Combinazione di replica dei dati di database e non di database.
+** Copertura di ulteriori casi di utilizzo come test di disaster recovery e refresh di test/sviluppo.
+** Con la replica dello storage, il server del sito di DR può essere utilizzato come sistema di QA o test durante il normale funzionamento.
+
+
+* Una combinazione di SAP HANA System Replication come soluzione ha con RPO=0 con replica dello storage per lunghe distanze ha senso per soddisfare i diversi requisiti.
+
+
+La seguente tabella fornisce un confronto tra le soluzioni di disaster recovery.
+
+|===
+|  | Replica dello storage 2+| Replica di sistema SAP HANA 
+
+
+|  | *Replica tra regioni* | *Con precarico dei dati* | *Senza precaricamento dei dati* 
+
+
+| RTO | Da basso a medio, a seconda del tempo di avvio del database e del ripristino in avanti | Molto basso | Da basso a medio, a seconda del tempo di avvio del database 
+
+
+| RPO | RPO > 20 minuti di replica asincrona | RPO > 20 min di replica asincrona RPO=0 replica sincrona | RPO > 20 min di replica asincrona RPO=0 replica sincrona 
+
+
+| I server del sito DR possono essere utilizzati per lo sviluppo/test | Sì | No | Sì 
+
+
+| Replica di dati non di database | Sì | No | No 
+
+
+| I dati DR possono essere utilizzati per il refresh dei sistemi di sviluppo/test | Sì | No | No 
+
+
+| Test di DR senza influire su RTO e RPO | Sì | No | No 
+|===

@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sr-scs-system-replication-overview.html 
+keywords: tr4719, 4719, introduction, system replication, dr, snapcenter, high availability, RPO, RTO 
+summary: 'SAP HANA System Replication viene comunemente utilizzato come soluzione ad alta disponibilità o di disaster recovery per i database SAP HANA. SAP HANA System Replication offre diverse modalità operative che è possibile utilizzare in base al caso d"utilizzo o ai requisiti di disponibilità.' 
+---
+= TR-4719: Replica del sistema SAP HANA - Backup e ripristino con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+SAP HANA System Replication viene comunemente utilizzato come soluzione ad alta disponibilità o di disaster recovery per i database SAP HANA. SAP HANA System Replication offre diverse modalità operative che è possibile utilizzare in base al caso d'utilizzo o ai requisiti di disponibilità.
+
+Autore: Nils Bauer, NetApp
+
+È possibile combinare due casi di utilizzo principali:
+
+* Alta disponibilità con un obiettivo del punto di ripristino (RPO) pari a zero e un obiettivo RTO (Recovery Time Objective) minimo utilizzando un host SAP HANA secondario dedicato.
+* Disaster recovery su larga distanza. L'host SAP HANA secondario può essere utilizzato anche per lo sviluppo o il test durante il normale funzionamento.
+
+
+
+
+== Alta disponibilità con un RPO pari a zero e un RTO minimo
+
+La replica di sistema viene configurata con la replica sincrona utilizzando tabelle precaricate in memoria sull'host SAP HANA secondario. Questa soluzione ad alta disponibilità può essere utilizzata per risolvere i guasti hardware o software e per ridurre i downtime pianificati durante gli aggiornamenti del software SAP HANA (operazioni di downtime quasi pari a zero).
+
+Le operazioni di failover vengono spesso automatizzate utilizzando software di cluster di terze parti o con un semplice clic del workflow con il software SAP Landscape Management.
+
+Dal punto di vista dei requisiti di backup, devi essere in grado di creare backup indipendenti dall'host SAP HANA principale o secondario. Un'infrastruttura di backup condivisa viene utilizzata per ripristinare qualsiasi backup, indipendentemente dall'host su cui è stato creato il backup.
+
+Il resto di questo documento si concentra sulle operazioni di backup con la replica del sistema SAP configurata come soluzione ad alta disponibilità.
+
+image:saphana-sr-scs-image1.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+== Disaster recovery su larga distanza
+
+La replica del sistema può essere configurata con una replica asincrona senza alcuna tabella precaricata nella memoria dell'host secondario. Questa soluzione viene utilizzata per risolvere i guasti del data center e le operazioni di failover vengono in genere eseguite manualmente.
+
+Per quanto riguarda i requisiti di backup, è necessario essere in grado di creare backup durante il normale funzionamento nel data center 1 e durante il disaster recovery nel data center 2. Nei data center 1 e 2 è disponibile un'infrastruttura di backup separata e le operazioni di backup vengono attivate come parte del disaster failover. L'infrastruttura di backup in genere non è condivisa e non è possibile eseguire un'operazione di ripristino di un backup creato nell'altro data center.
+
+image:saphana-sr-scs-image2.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-break-delete-replication-peering.html 
+keywords: break, delete, replication, peering, disaster, failover, target, volumes 
+summary: 'In caso di failover di emergenza, i volumi di destinazione devono essere interrotti in modo che l"host di destinazione possa montare i volumi per le operazioni di lettura e scrittura.' 
+---
+= Interrompere ed eliminare il peering delle repliche
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In caso di failover di emergenza, i volumi di destinazione devono essere interrotti in modo che l'host di destinazione possa montare i volumi per le operazioni di lettura e scrittura.
+
+
+NOTE: Per il volume di dati HANA, è necessario ripristinare il volume all'ultimo backup di snapshot HANA creato con AzAcSnap. Questa operazione di revert del volume non è possibile se l'ultimo snapshot di replica è contrassegnato come occupato a causa del peering della replica. Pertanto, è necessario eliminare anche il peering delle repliche.
+
+Le due schermate successive mostrano l'operazione di peering break e delete per il volume di dati HANA. Le stesse operazioni devono essere eseguite anche per il backup del log e per il volume condiviso HANA.
+
+image:saphana-dr-anf_image27.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+image:saphana-dr-anf_image28.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Poiché il peering delle repliche è stato eliminato, è possibile ripristinare il volume all'ultimo backup di snapshot HANA. Se il peering non viene cancellato, la selezione del volume di revert non è selezionabile e non è selezionabile. Le due schermate seguenti mostrano l'operazione di ripristino del volume.
+
+image:saphana-dr-anf_image29.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+image:saphana-dr-anf_image30.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Dopo l'operazione di revert del volume, il volume di dati si basa sul backup di snapshot HANA coerente e può ora essere utilizzato per eseguire operazioni di ripristino in avanti.
+
+
+NOTE: Se è stato utilizzato un pool di capacità con un livello di performance basso, i volumi devono ora essere spostati in un pool di capacità in grado di fornire le performance richieste.

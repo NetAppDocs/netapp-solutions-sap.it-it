@@ -1,0 +1,122 @@
+---
+sidebar: sidebar 
+permalink: backup/fsxn-snapcenter-backup-operations.html 
+keywords: snapshot backup, block integrity check, 
+summary: 'Questa sezione descrive come creare un backup Snapshot on-demand e un"operazione di verifica dell"integrità dei blocchi on-demand.' 
+---
+= Operazioni di backup di SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puoi creare un backup Snapshot on-demand e un'operazione di controllo dell'integrità dei blocchi on-demand.
+
+
+
+== Crea un backup Snapshot on-demand
+
+Segui questi passaggi per creare backup Snapshot on-demand.
+
+. Nella vista Resource (risorse), selezionare la risorsa e fare doppio clic sulla riga per passare alla vista Topology (topologia).
++
+La vista topologia delle risorse offre una panoramica di tutti i backup disponibili creati utilizzando SnapCenter. L'area superiore di questa vista visualizza la topologia di backup che mostra i backup sullo storage primario (copie locali) e, se disponibile, sullo storage di backup off-site (copie del vault).
+
+. Nella riga superiore, selezionare l'icona Backup Now per avviare un backup on-demand.
++
+image:amazon-fsx-image48.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Dall'elenco a discesa, selezionare il criterio di backup `LocalSnap`, Quindi fare clic su Backup per avviare il backup on-demand.
++
+image:amazon-fsx-image49.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+image:amazon-fsx-image50.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Un registro dei cinque job precedenti viene visualizzato nell'area Activity (attività) nella parte inferiore della vista Topology (topologia).
+
+. I dettagli della commessa vengono visualizzati facendo clic sulla riga dell'attività della commessa nell'area Activity (attività). È possibile aprire un registro dettagliato dei processi facendo clic su View Logs (Visualizza registri)
++
+image:amazon-fsx-image51.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Al termine del backup, viene visualizzata una nuova voce nella vista della topologia. I nomi dei backup seguono la stessa convenzione di denominazione del nome dell'istantanea definita nella sezione link:fsxn-snapcenter-config.html#configure-and-protect-a-hana-resource[""Configurazione e protezione di una risorsa HANA"."]
+
++
+Per visualizzare l'elenco di backup aggiornato, è necessario chiudere e riaprire la vista della topologia.
+
++
+image:amazon-fsx-image52.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Nel catalogo di backup SAP HANA, il nome del backup SnapCenter viene memorizzato come a. `Comment` oltre al campo `External Backup ID (EBID)`. Questo è mostrato nella figura seguente per il database di sistema e nella figura successiva per il database tenant PFX.
+
++
+image:amazon-fsx-image53.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+image:amazon-fsx-image54.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+Nel file system FSX per ONTAP, è possibile elencare i backup Snapshot collegandosi alla console di SVM.
+
+....
+sapcc-hana-svm::> snapshot show -volume PFX_data_mnt00001                                        ---Blocks---
+Vserver  Volume   Snapshot                                  Size Total% Used%
+-------- -------- ------------------------------------- -------- ------ -----
+sapcc-hana-svm
+         PFX_data_mnt00001
+                  SnapCenter_hana-1_LocalSnap_Hourly_02-22-2022_12.08.54.4516
+                                                         126.6MB     0%    2%
+sapcc-hana-svm::>
+....
+
+
+== Creare un'operazione di verifica dell'integrità dei blocchi on-demand
+
+Un'operazione di verifica dell'integrità dei blocchi on-demand viene eseguita allo stesso modo di un processo di backup Snapshot, selezionando la policy BlockIntegrityCheck. Quando si pianificano i backup utilizzando questo criterio, SnapCenter crea un backup standard del file SAP HANA per i database del sistema e del tenant.
+
+image:amazon-fsx-image55.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+image:amazon-fsx-image56.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+SnapCenter non visualizza il controllo dell'integrità del blocco allo stesso modo dei backup basati su copia Snapshot. La scheda di riepilogo mostra invece il numero di backup basati su file e lo stato del backup precedente.
+
+image:amazon-fsx-image57.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Il catalogo di backup SAP HANA mostra le voci per i database di sistema e tenant. Le seguenti figure mostrano il controllo dell'integrità del blocco SnapCenter nel catalogo di backup del sistema e nel database tenant.
+
+image:amazon-fsx-image58.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+image:amazon-fsx-image59.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Un controllo dell'integrità dei blocchi consente di creare file di backup dei dati SAP HANA standard. SnapCenter utilizza il percorso di backup configurato con il database HANA per le operazioni di backup dei dati basate su file.
+
+....
+hana-1:~ # ls -al /backup/data/*
+/backup/data/DB_PFX:
+total 7665384
+drwxr-xr-- 2 pfxadm sapsys       4096 Feb 22 12:56 .
+drwxr-xr-x 4 pfxadm sapsys       4096 Feb 21 15:02 ..
+-rw-r----- 1 pfxadm sapsys     155648 Feb 21 15:02 COMPLETE_DATA_BACKUP_databackup_0_1
+-rw-r----- 1 pfxadm sapsys   83894272 Feb 21 15:02 COMPLETE_DATA_BACKUP_databackup_2_1
+-rw-r----- 1 pfxadm sapsys 3825213440 Feb 21 15:02 COMPLETE_DATA_BACKUP_databackup_3_1
+-rw-r----- 1 pfxadm sapsys     155648 Feb 22 12:55 SnapCenter_SnapCenter_hana-1_BlockIntegrityCheck_Weekly_02-22-2022_12.55.18.7966_databackup_0_1
+-rw-r----- 1 pfxadm sapsys   83894272 Feb 22 12:55 SnapCenter_SnapCenter_hana-1_BlockIntegrityCheck_Weekly_02-22-2022_12.55.18.7966_databackup_2_1
+-rw-r----- 1 pfxadm sapsys 3825213440 Feb 22 12:56 SnapCenter_SnapCenter_hana-1_BlockIntegrityCheck_Weekly_02-22-2022_12.55.18.7966_databackup_3_1
+/backup/data/SYSTEMDB:
+total 7500880
+drwxr-xr-- 2 pfxadm sapsys       4096 Feb 22 12:55 .
+drwxr-xr-x 4 pfxadm sapsys       4096 Feb 21 15:02 ..
+-rw-r----- 1 pfxadm sapsys     159744 Feb 21 15:01 COMPLETE_DATA_BACKUP_databackup_0_1
+-rw-r----- 1 pfxadm sapsys 3825213440 Feb 21 15:02 COMPLETE_DATA_BACKUP_databackup_1_1
+-rw-r----- 1 pfxadm sapsys     159744 Feb 22 12:55 SnapCenter_SnapCenter_hana-1_BlockIntegrityCheck_Weekly_02-22-2022_12.55.18.7966_databackup_0_1
+-rw-r----- 1 pfxadm sapsys 3825213440 Feb 22 12:55 SnapCenter_SnapCenter_hana-1_BlockIntegrityCheck_Weekly_02-22-2022_12.55.18.7966_databackup_1_1
+hana-1:~ #
+....

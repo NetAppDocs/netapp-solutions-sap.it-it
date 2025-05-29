@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-cross-region-replication.html 
+keywords:  
+summary:  
+---
+= ANF Replication cross-Region con SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questo documento tratta la replica ANF in più aree con SAP HANA.

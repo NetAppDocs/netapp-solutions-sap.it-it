@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-failover.html 
+keywords:  
+summary:  
+---
+= Failover del disaster recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questa sezione presenta una panoramica sul disaster recovery per SAP HANA in Azure NetApp Files (ANF).

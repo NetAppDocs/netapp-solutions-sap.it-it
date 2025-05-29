@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-update-history.html 
+keywords:  
+summary:  
+---
+= Aggiornare la cronologia
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pubblicazione originale.
+
+[cols="25,25,50"]
+|===
+| Versione | Data | Riepilogo degli aggiornamenti 
+
+
+| Versione 1.0 | Aprile 2021 | Versione iniziale 
+|===

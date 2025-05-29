@@ -1,0 +1,93 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-overview-sys-refresh-wf-sc.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: 'Le soluzioni NetApp per l"ottimizzazione del Lifecycle management SAP sono integrate nel database SAP HANA e negli strumenti di Lifecycle management, combinando una data Protection integrata con l"efficiente applicazione con il provisioning flessibile dei sistemi di test SAP.' 
+---
+= Panoramica del workflow di refresh del sistema SAP con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapCenter offre workflow che consentono di gestire cloni di set di dati da qualsiasi backup Snapshot esistente. Questo set di dati clonato, un volume FlexClone, può essere utilizzato per eseguire rapidamente il provisioning di un volume di dati HANA da un sistema di origine e collegarlo a un sistema di destinazione. Si tratta quindi di una soluzione perfetta per eseguire operazioni di refresh del sistema per QA, test, sandbox o sistemi di training.
+
+I flussi di lavoro di cloning di SnapCenter gestiscono tutte le operazioni richieste sul layer di storage e possono essere estesi utilizzando script per eseguire operazioni specifiche dell'host e del database HANA. In questo documento, utilizziamo uno script per eseguire operazioni di recovery e shutdown del database HANA. I flussi di lavoro SnapCenter con ulteriore automazione utilizzando lo script gestiscono tutte le operazioni di database HANA richieste, ma non coprono alcuna procedura di post-elaborazione SAP richiesta. La post-elaborazione SAP deve essere eseguita manualmente o con strumenti di terze parti.
+
+Il flusso di lavoro di refresh del sistema SAP con SnapCenter consiste in cinque passaggi principali, come illustrato nella figura seguente.
+
+. Installazione iniziale e preparazione del sistema di destinazione
++
+.. Il plug-in SnapCenter HANA deve essere installato sul nuovo sistema di destinazione e il sistema HANA deve essere configurato in SnapCenter
+.. Il sistema di destinazione deve essere arrestato e il volume di dati HANA deve essere smontato
+
+
+. Il flusso di lavoro di creazione del clone di SnapCenter
++
+.. SnapCenter crea un volume FlexClone della Snapshot selezionata del sistema di origine
+.. SnapCenter monta il volume FlexClone sul sistema di destinazione
+.. Il recovery del database HANA di destinazione può essere automatizzato usando `sc-system-refresh` lo script come post-script o può essere eseguito manualmente
+
+
+. Post-elaborazione SAP (manuale o con uno strumento di terze parti)
+. Il sistema può ora essere utilizzato come sistema di test/QA.
+. Quando viene richiesto un nuovo refresh di sistema, il flusso di lavoro di eliminazione dei cloni SnapCenter viene utilizzato per rimuovere il volume FlexClone
++
+.. Se il sistema HANA di destinazione è stato protetto in SnapCenter, la protezione deve essere rimossa prima di avviare il workflow di eliminazione dei cloni.
+.. Il sistema HANA deve essere arrestato manualmente o automaticamente, usando `sc-system-refresh` lo script come pre-script di SnapCenter
+.. SnapCenter sblocca il volume di dati HANA
+.. SnapCenter elimina il volume FlexClone
+.. Un aggiornamento viene riavviato con il passaggio 2.
+
+
+
+
+image:sc-copy-clone-image7.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Nella maggior parte dei casi, i sistemi di test/controllo qualità target vengono utilizzati per almeno un paio di settimane. Poiché il volume FlexClone blocca la Snapshot del volume di sistema di origine, questo Snapshot richiederà capacità aggiuntiva in base alla velocità di modifica dei blocchi nel volume di sistema di origine. Per i sistemi di origine della produzione e con una frequenza di modifica media del 20% al giorno, la snapshot bloccata raggiungerà il 100% dopo 5 giorni. Pertanto, NetApp consiglia di suddividere il volume FlexClone immediatamente o dopo un paio di giorni, se il clone è basato su un sistema di origine della produzione. L'operazione di suddivisione dei cloni non blocca l'utilizzo del volume clonato e può quindi essere eseguita in qualsiasi momento mentre il database HANA è in uso.
+
+
+NOTE: Quando si suddivide il volume FlexClone, SnapCenter elimina tutti i backup creati nel sistema di destinazione.
+
+
+NOTE: Con SnapCenter e Azure NetApp Files, l'operazione di clone split non è disponibile, poiché Azure NetApp Files divide sempre il clone dopo la creazione.
+
+L'operazione di refresh, incluso il clone split, consiste nei seguenti passaggi.
+
+. Installazione iniziale e preparazione del sistema di destinazione
++
+.. Il plug-in SnapCenter HANA deve essere installato sul nuovo sistema di destinazione e il sistema HANA deve essere configurato in SnapCenter
+.. Il sistema di destinazione deve essere arrestato e il volume di dati HANA deve essere smontato
+
+
+. Il flusso di lavoro di creazione del clone di SnapCenter
++
+.. SnapCenter crea un volume FlexClone della Snapshot selezionata del sistema di origine
+.. SnapCenter monta il volume FlexClone sul sistema di destinazione
+.. Il recovery del database HANA di destinazione può essere automatizzato usando `sc-system-refresh` lo script come post-script o può essere eseguito manualmente
+
+
+. Il volume FlexClone viene diviso utilizzando il workflow dello split dei cloni di SnapCenter.
+. Post-elaborazione SAP (manuale o con uno strumento di terze parti)
+. Il sistema può ora essere utilizzato come sistema di test/QA.
+. Quando viene richiesto un nuovo aggiornamento del sistema, la pulizia viene eseguita con i seguenti passaggi manuali
++
+.. Se il sistema HANA di destinazione è stato protetto in SnapCenter, la protezione deve essere rimossa.
+.. Il sistema HANA deve essere arrestato manualmente
+.. È necessario smontare il volume di dati HANA e rimuovere la voce fstab da SnapCenter (task manuale)
+.. Un aggiornamento viene riavviato con il passaggio 2.
++
+
+NOTE: Il vecchio volume di dati, precedentemente suddiviso, deve essere cancellato manualmente sul sistema di storage.
+
+
+
+
+
+image:sc-copy-clone-image8.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+La sezione link:sc-copy-clone-hana-sys-refresh-with-sc.html[""Aggiornamento del sistema SAP HANA con SnapCenter""] fornisce una descrizione dettagliata di entrambi i flussi di lavoro di aggiornamento del sistema.

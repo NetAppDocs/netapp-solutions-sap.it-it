@@ -1,0 +1,535 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-br-scs-restore-recovery.html 
+keywords: automated, restore, recovery, single-tenant, manual recovery 
+summary: Le sezioni seguenti descrivono i flussi di lavoro di ripristino e ripristino di tre scenari diversi e configurazioni di esempio. 
+---
+= Ripristino e ripristino
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le sezioni seguenti descrivono i flussi di lavoro di ripristino e ripristino di tre scenari diversi e configurazioni di esempio.
+
+* Ripristino e ripristino automatici:
++
+** Sistema HANA rilevato automaticamente SS1
+** Sistema single-tenant SAP HANA host, MDC con NFS
+
+
+* Ripristino e ripristino single-tenant:
++
+** Sistema HANA rilevato automaticamente SM1
+** Sistema multi-tenant SAP HANA singolo host, MDC con NFS
+
+
+* Ripristino con ripristino manuale:
++
+** Sistema HANA configurato manualmente SS2
+** Sistema multi-tenant SAP HANA singolo host, MDC con NFS
+
+
+
+
+Nelle sezioni seguenti vengono evidenziate le differenze tra host singolo e host multipli SAP HANA e sistemi HANA collegati FIBRE Channel SAN.
+
+Gli esempi mostrano SAP HANA Studio come uno strumento per eseguire il ripristino manuale. È inoltre possibile utilizzare istruzioni SAP HANA Cockpit o HANA SQL.
+
+
+
+== Ripristino e ripristino automatici
+
+Con SnapCenter 4.3, le operazioni di ripristino e ripristino automatizzate sono supportate per i sistemi HANA single container o MDC single tenant che sono stati rilevati automaticamente da SnapCenter.
+
+È possibile eseguire un'operazione di ripristino e ripristino automatica con i seguenti passaggi:
+
+. Selezionare il backup da utilizzare per l'operazione di ripristino. Il backup può essere selezionato tra le seguenti opzioni di storage:
++
+** Storage primario
+** Storage di backup offsite (destinazione SnapVault)
+
+
+. Selezionare il tipo di ripristino. Selezionare Ripristino completo con ripristino del volume o senza ripristino del volume.
++
+
+NOTE: L'opzione di ripristino del volume è disponibile solo per le operazioni di ripristino dallo storage primario e se il database HANA utilizza NFS come protocollo di storage.
+
+. Selezionare il tipo di ripristino tra le seguenti opzioni:
++
+** Allo stato più recente
+** Point-in-time
+** A backup di dati specifici
+** Nessun ripristino
++
+
+NOTE: Il tipo di ripristino selezionato viene utilizzato per il ripristino del sistema e del database tenant.
+
+
+
+
+
+Successivamente, SnapCenter esegue le seguenti operazioni:
+
+. Interrompe il database HANA.
+. Ripristina il database.
++
+A seconda del tipo di ripristino selezionato e del protocollo di storage utilizzato, vengono eseguite diverse operazioni.
+
++
+** Se sono selezionati NFS e revert volume, SnapCenter smonta il volume, ripristina il volume utilizzando SnapRestore basato sul volume sul layer di storage e monta il volume.
+** Se si seleziona NFS e l'opzione di ripristino del volume non è selezionata, SnapCenter ripristina tutti i file utilizzando operazioni SnapRestore a file singolo sul layer di storage.
+** Se si seleziona SAN Fibre Channel, SnapCenter dismonta i LUN, ripristina i LUN utilizzando operazioni SnapRestore a file singolo sul layer di storage e rileva e monta i LUN.
+
+
+. Recupera il database:
++
+.. Recupera il database di sistema.
+.. Recupera il database del tenant.
++
+In alternativa, per i sistemi container singoli HANA, il ripristino viene eseguito in un'unica fase:
+
+.. Avvia il database HANA.
+
+
+
+
+
+NOTE: Se si seleziona No Recovery (Nessun ripristino), SnapCenter viene chiuso e l'operazione di ripristino del sistema e del database tenant deve essere eseguita manualmente.
+
+In questa sezione vengono fornite le procedure per il ripristino e il ripristino automatici del sistema HANA rilevato automaticamente SS1 (host singolo SAP HANA, sistema tenant singolo MDC che utilizza NFS).
+
+. Selezionare un backup in SnapCenter da utilizzare per l'operazione di ripristino.
++
+
+NOTE: È possibile selezionare il ripristino dallo storage di backup primario o esterno al sito.
+
++
+image:saphana-br-scs-image96.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+image:saphana-br-scs-image97.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare l'ambito e il tipo di ripristino.
++
+Le tre schermate seguenti mostrano le opzioni di ripristino per il ripristino da primario con NFS, il ripristino da secondario con NFS e il ripristino da primario con SAN Fibre Channel.
+
++
+Opzioni del tipo di ripristino per il ripristino dallo storage primario.
+
++
+
+NOTE: L'opzione di ripristino del volume è disponibile solo per le operazioni di ripristino da primarie con NFS.
+
++
+image:saphana-br-scs-image98.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Opzioni del tipo di ripristino per il ripristino dallo storage di backup fuori sede.
+
++
+image:saphana-br-scs-image99.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Opzioni del tipo di ripristino per il ripristino dallo storage primario con SAN Fibre Channel.
+
++
+image:saphana-br-scs-image100.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare Recovery Scope (ambito ripristino) e specificare la posizione per il backup del registro e del catalogo.
++
+
+NOTE: SnapCenter utilizza il percorso predefinito o i percorsi modificati nel file HANA global.ini per prepopolare le posizioni di backup del registro e del catalogo.
+
++
+image:saphana-br-scs-image101.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere i comandi opzionali di prerestore.
++
+image:saphana-br-scs-image102.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere i comandi post-ripristino opzionali.
++
+image:saphana-br-scs-image103.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere le impostazioni e-mail opzionali.
++
+image:saphana-br-scs-image104.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Per avviare l'operazione di ripristino, fare clic su fine.
++
+image:saphana-br-scs-image105.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. SnapCenter esegue l'operazione di ripristino e ripristino. Questo esempio mostra i dettagli del processo di ripristino e ripristino.
++
+image:saphana-br-scs-image106.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+== Operazioni di ripristino e ripristino single-tenant
+
+Con SnapCenter 4.3, le operazioni di ripristino single-tenant sono supportate per i sistemi HANA MDC con un singolo tenant o con più tenant rilevati automaticamente da SnapCenter.
+
+È possibile eseguire un'operazione di ripristino e ripristino con un singolo tenant seguendo la procedura riportata di seguito:
+
+. Arrestare il tenant da ripristinare e ripristinare.
+. Ripristinare il tenant con SnapCenter.
++
+** Per un ripristino dallo storage primario, SnapCenter esegue le seguenti operazioni:
++
+*** *NFS.* Storage operazioni Single file SnapRestore per tutti i file del database tenant.
+*** *SAN.* Clona e connetti il LUN all'host del database, quindi copia tutti i file del database tenant.
+
+
+** Per un ripristino dallo storage secondario, SnapCenter esegue le seguenti operazioni:
++
+*** *NFS.* Storage SnapVault Ripristina le operazioni per tutti i file del database tenant
+*** *SAN.* Clona e connetti il LUN all'host del database, quindi copia tutti i file del database tenant
+
+
+
+
+. Ripristinare il tenant con l'istruzione HANA Studio, Cockpit o SQL.
+
+
+In questa sezione vengono fornite le procedure per l'operazione di ripristino dallo storage primario del sistema HANA SMI (sistema single-host SAP HANA, multi-tenant MDC con NFS) rilevato automaticamente. Dal punto di vista dell'input dell'utente, i flussi di lavoro sono identici per un ripristino da un ripristino secondario o da un ripristino in un'installazione SAN Fibre Channel.
+
+. Arrestare il database tenant.
++
+....
+sm1adm@hana-2:/usr/sap/SM1/HDB00> hdbsql -U SYSKEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+hdbsql=>
+hdbsql SYSTEMDB=> alter system stop database tenant2;
+0 rows affected (overall time 14.215281 sec; server time 14.212629 sec)
+hdbsql SYSTEMDB=>
+....
+. Selezionare un backup in SnapCenter da utilizzare per l'operazione di ripristino.
++
+image:saphana-br-scs-image107.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare il tenant da ripristinare.
++
+
+NOTE: SnapCenter mostra un elenco di tutti i tenant inclusi nel backup selezionato.
+
++
+image:saphana-br-scs-image108.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Il ripristino single-tenant non è supportato con SnapCenter 4.3. Nessun ripristino preselezionato e non modificabile.
+
++
+image:saphana-br-scs-image109.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere i comandi opzionali di prerestore.
++
+image:saphana-br-scs-image110.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere comandi post-ripristino opzionali.
++
+image:saphana-br-scs-image111.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere le impostazioni e-mail opzionali.
++
+image:saphana-br-scs-image112.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Per avviare l'operazione di ripristino, fare clic su fine.
++
+image:saphana-br-scs-image113.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+L'operazione di ripristino viene eseguita da SnapCenter. Questo esempio mostra i dettagli del lavoro di ripristino.
+
++
+image:saphana-br-scs-image114.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+
+NOTE: Al termine dell'operazione di ripristino del tenant, vengono ripristinati solo i dati rilevanti del tenant. Sul file system dell'host del database HANA, sono disponibili il file di dati ripristinato e il file ID di backup Snapshot del tenant.
+
++
+....
+sm1adm@hana-2:/usr/sap/SM1/HDB00> ls -al /hana/data/SM1/mnt00001/*
+-rw-r--r-- 1 sm1adm sapsys   17 Dec  6 04:01 /hana/data/SM1/mnt00001/nameserver.lck
+/hana/data/SM1/mnt00001/hdb00001:
+total 3417776
+drwxr-x--- 2 sm1adm sapsys       4096 Dec  6 01:14 .
+drwxr-x--- 6 sm1adm sapsys       4096 Nov 20 09:35 ..
+-rw-r----- 1 sm1adm sapsys 3758096384 Dec  6 03:59 datavolume_0000.dat
+-rw-r----- 1 sm1adm sapsys          0 Nov 20 08:36 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r----- 1 sm1adm sapsys         36 Nov 20 08:37 landscape.id
+/hana/data/SM1/mnt00001/hdb00002.00003:
+total 67772
+drwxr-xr-- 2 sm1adm sapsys      4096 Nov 20 08:37 .
+drwxr-x--- 6 sm1adm sapsys      4096 Nov 20 09:35 ..
+-rw-r--r-- 1 sm1adm sapsys 201441280 Dec  6 03:59 datavolume_0000.dat
+-rw-r--r-- 1 sm1adm sapsys         0 Nov 20 08:37 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+/hana/data/SM1/mnt00001/hdb00002.00004:
+total 3411836
+drwxr-xr-- 2 sm1adm sapsys       4096 Dec  6 03:57 .
+drwxr-x--- 6 sm1adm sapsys       4096 Nov 20 09:35 ..
+-rw-r--r-- 1 sm1adm sapsys 3758096384 Dec  6 01:14 datavolume_0000.dat
+-rw-r--r-- 1 sm1adm sapsys          0 Nov 20 09:35 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r----- 1 sm1adm sapsys     155648 Dec  6 01:14 snapshot_databackup_0_1
+/hana/data/SM1/mnt00001/hdb00003.00003:
+total 3364216
+drwxr-xr-- 2 sm1adm sapsys       4096 Dec  6 01:14 .
+drwxr-x--- 6 sm1adm sapsys       4096 Nov 20 09:35 ..
+-rw-r--r-- 1 sm1adm sapsys 3758096384 Dec  6 03:59 datavolume_0000.dat
+-rw-r--r-- 1 sm1adm sapsys          0 Nov 20 08:37 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+sm1adm@hana-2:/usr/sap/SM1/HDB00>
+....
+. Avviare il ripristino con HANA Studio.
++
+image:saphana-br-scs-image115.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare il tenant.
++
+image:saphana-br-scs-image116.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare il tipo di ripristino.
++
+image:saphana-br-scs-image117.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire la posizione del catalogo di backup.
++
+image:saphana-br-scs-image118.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+image:saphana-br-scs-image119.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+All'interno del catalogo di backup, il backup ripristinato viene evidenziato con un'icona verde. L'ID del backup esterno mostra il nome del backup precedentemente selezionato in SnapCenter.
+
+. Selezionare la voce con l'icona verde e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image120.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire la posizione di backup del registro.
++
+image:saphana-br-scs-image121.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare le altre impostazioni desiderate.
++
+image:saphana-br-scs-image122.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Avviare l'operazione di ripristino del tenant.
++
+image:saphana-br-scs-image123.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+image:saphana-br-scs-image124.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+=== Ripristino con ripristino manuale
+
+Per ripristinare e ripristinare un sistema single-tenant SAP HANA MDC utilizzando SAP HANA Studio e SnapCenter, attenersi alla seguente procedura:
+
+. Preparare il processo di ripristino con SAP HANA Studio:
++
+.. Selezionare Recover System Database (Ripristina database di sistema) e confermare l'arresto del sistema SAP HANA.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
+.. Viene visualizzato l'elenco dei backup dei dati. Selezionare Backup per visualizzare l'ID del backup esterno.
+
+
+. Eseguire il processo di ripristino con SnapCenter:
++
+.. Nella vista della topologia della risorsa, selezionare copie locali da ripristinare dallo storage primario o dalle copie del vault se si desidera eseguire il ripristino da uno storage di backup off-site.
+.. Selezionare il backup SnapCenter che corrisponde all'ID di backup esterno o al campo del commento di SAP HANA Studio.
+.. Avviare il processo di ripristino.
++
+
+NOTE: Se si sceglie un ripristino basato su volume dallo storage primario, i volumi di dati devono essere smontati da tutti gli host di database SAP HANA prima del ripristino e rimontati al termine del processo di ripristino.
+
++
+
+NOTE: In una configurazione di host multipli SAP HANA con FC, le operazioni di dismount e mount vengono eseguite dal name server SAP HANA come parte del processo di shutdown e startup del database.
+
+
+
+. Eseguire il processo di ripristino del database di sistema con SAP HANA Studio:
++
+.. Fare clic su Refresh (Aggiorna) dall'elenco dei backup e selezionare il backup disponibile per il ripristino (indicato da un'icona verde).
+.. Avviare il processo di ripristino. Al termine del processo di ripristino, viene avviato il database di sistema.
+
+
+. Eseguire il processo di ripristino del database tenant con SAP HANA Studio:
++
+.. Selezionare Recover tenant Database (Ripristina database tenant) e selezionare il tenant da ripristinare.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
++
+Viene visualizzato un elenco di backup dei dati. Poiché il volume di dati è già stato ripristinato, il backup del tenant viene indicato come disponibile (in verde).
+
+.. Selezionare questo backup e avviare il processo di ripristino. Al termine del processo di ripristino, il database del tenant viene avviato automaticamente.
+
+
+
+
+La sezione seguente descrive i passaggi delle operazioni di ripristino e ripristino del sistema HANA SS2 configurato manualmente (host singolo SAP HANA, sistema tenant multiplo MDC che utilizza NFS).
+
+. In SAP HANA Studio, selezionare l'opzione Recover System Database (Ripristina database di sistema) per avviare il ripristino del database di sistema.
++
+image:saphana-br-scs-image125.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fare clic su OK per chiudere il database SAP HANA.
++
+image:saphana-br-scs-image126.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Il sistema SAP HANA si spegne e viene avviata la procedura guidata di ripristino.
+
+. Selezionare il tipo di ripristino e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image127.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire la posizione del catalogo di backup e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image128.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Viene visualizzato un elenco dei backup disponibili in base al contenuto del catalogo di backup. Scegliere il backup richiesto e annotare l'ID del backup esterno: Nel nostro esempio, il backup più recente.
++
+image:saphana-br-scs-image129.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Smontare tutti i volumi di dati.
++
+....
+umount /hana/data/SS2/mnt00001
+....
++
+
+NOTE: Per un sistema host SAP HANA multiplo con NFS, tutti i volumi di dati su ciascun host devono essere smontati.
+
++
+
+NOTE: In una configurazione di host multipli SAP HANA con FC, l'operazione di disinstallazione viene eseguita dal name server SAP HANA come parte del processo di arresto.
+
+. Dalla GUI di SnapCenter, selezionare la vista della topologia delle risorse e selezionare il backup da ripristinare; nel nostro esempio, il backup primario più recente. Fare clic sull'icona Restore (Ripristina) per avviare il ripristino.
++
+image:saphana-br-scs-image130.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Viene avviata la procedura guidata di ripristino di SnapCenter.
+
+. Selezionare il tipo di ripristino complete Resource (risorsa completa) o file Level (livello file).
++
+Selezionare completa risorsa per utilizzare un ripristino basato su volume.
+
++
+image:saphana-br-scs-image131.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare livello file e tutto per utilizzare un'operazione SnapRestore a file singolo per tutti i file.
++
+image:saphana-br-scs-image132.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+
+NOTE: Per un ripristino a livello di file di un sistema host multiplo SAP HANA, selezionare tutti i volumi.
+
++
+image:saphana-br-scs-image133.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. (Facoltativo) specificare i comandi da eseguire dal plug-in SAP HANA in esecuzione sull'host del plug-in HANA centrale. Fare clic su Avanti.
++
+image:saphana-br-scs-image134.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Specificare i comandi opzionali e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image135.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Specificare le impostazioni di notifica in modo che SnapCenter possa inviare un'e-mail di stato e un registro dei processi. Fare clic su Avanti.
++
+image:saphana-br-scs-image136.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Esaminare il riepilogo e fare clic su Finish (fine) per avviare il ripristino.
++
+image:saphana-br-scs-image137.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Il lavoro di ripristino viene avviato e il log dei lavori può essere visualizzato facendo doppio clic sulla riga del log nel riquadro delle attività.
++
+image:saphana-br-scs-image138.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Attendere il completamento del processo di ripristino. Su ciascun host di database, montare tutti i volumi di dati. Nel nostro esempio, è necessario rimontare un solo volume sull'host del database.
++
+....
+mount /hana/data/SP1/mnt00001
+....
+. Accedere a SAP HANA Studio e fare clic su Refresh (Aggiorna) per aggiornare l'elenco dei backup disponibili. Il backup ripristinato con SnapCenter viene visualizzato con un'icona verde nell'elenco dei backup. Selezionare il backup e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image139.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire la posizione dei backup del registro. Fare clic su Avanti.
++
+image:saphana-br-scs-image140.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
++
+image:saphana-br-scs-image141.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Rivedere le impostazioni di ripristino e fare clic su fine.
++
+image:saphana-br-scs-image142.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Viene avviato il processo di ripristino. Attendere il completamento del ripristino del database di sistema.
++
+image:saphana-br-scs-image143.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. In SAP HANA Studio, selezionare la voce per il database di sistema e avviare Backup Recovery - Recover Tenant Database.
++
+image:saphana-br-scs-image144.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare il tenant da ripristinare e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image145.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Specificare il tipo di ripristino e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image146.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Confermare la posizione del catalogo di backup e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image147.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Verificare che il database del tenant sia offline. Fare clic su OK per continuare.
++
+image:saphana-br-scs-image148.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Poiché il ripristino del volume di dati si è verificato prima del ripristino del database di sistema, il backup del tenant è immediatamente disponibile. Selezionare il backup evidenziato in verde e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image149.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Confermare la posizione di backup del registro e fare clic su Next (Avanti).
++
+image:saphana-br-scs-image150.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
++
+image:saphana-br-scs-image151.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Esaminare le impostazioni di ripristino e avviare il processo di ripristino del database tenant facendo clic su Finish (fine).
++
+image:saphana-br-scs-image152.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Attendere il completamento del ripristino e l'avvio del database tenant.
++
+image:saphana-br-scs-image153.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Il sistema SAP HANA è operativo.
+
++
+
+NOTE: Per un sistema SAP HANA MDC con più tenant, è necessario ripetere i passaggi 20–29 per ciascun tenant.
+
+

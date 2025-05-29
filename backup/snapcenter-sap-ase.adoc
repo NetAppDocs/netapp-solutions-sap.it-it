@@ -440,7 +440,7 @@ Per ulteriori informazioni sulle informazioni descritte in questo documento, con
 ** 1585981 - SYB: Garanzia di recuperabilità per SAP ASE: https://me.sap.com/notes/1585981/E[]
 ** 1588316 - SYB: Configurare i backup automatici di database e log: https://me.sap.com/notes/1588316/E[]
 ** Documentazione del prodotto NetApp: https://www.netapp.com/support-and-training/documentation/[]
-** Soluzioni SAP di NetApp – informazioni su casi d'utilizzo, Best practice e vantaggi: https://docs.netapp.com/us-en/netapp-solutions-sap[]
+** link:../index.html["Soluzioni SAP di NetApp – informazioni su casi d'utilizzo, Best practice e vantaggi"]
 
 
 

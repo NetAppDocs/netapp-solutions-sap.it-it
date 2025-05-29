@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-infra-setup-config.html 
+keywords:  
+summary:  
+---
+= Installazione e configurazione dell'infrastruttura
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In questo documento viene descritta la configurazione e la configurazione dell'infrastruttura per sistemi NetApp AFF e fibre channel.

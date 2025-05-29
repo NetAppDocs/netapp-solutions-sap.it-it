@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-nfs-infra-setup-config.html 
+keywords:  
+summary:  
+---
+= Installazione e configurazione dell'infrastruttura
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In questo documento viene descritto il setup e la configurazione dell'infrastruttura per sistemi NetApp FAS e NFS.

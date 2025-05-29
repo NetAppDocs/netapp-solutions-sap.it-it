@@ -41,7 +41,7 @@ I seguenti principi sono stati applicati all'implementazione di esempio e potreb
 
 La figura seguente mostra la configurazione di laboratorio utilizzata. Il sistema SAP di origine HN9 utilizzato per l'operazione di clone del sistema era costituito dal database H09, dal SAP CS e dal SAP AS Services in esecuzione sullo stesso host (sap-lnx32) con installato https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e86f8743bdb8d1f6cf4b862c79.html["design adattivo"^] attivato. Un nodo di controllo Ansible è stato preparato secondo la https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Playbook Ansible per NetApp ONTAP"^] documentazione.
 
-Anche l'agente host SAP è stato installato su questo host. Lo script del provider NetApp e i playbook Ansible sono stati configurati sul nodo di controllo Ansible come descritti nella link:lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html[""Appendice: Configurazione script provider.""]
+Anche l'agente host SAP è stato installato su questo host. Lo script del provider NetApp e i playbook Ansible sono stati configurati sul nodo di controllo Ansible come descritti nella link:lama-ansible-appendix.html[""Appendice: Configurazione script provider.""]
 
 L'host `sap-lnx49` È stato utilizzato come destinazione per le operazioni di cloning di SAP lama ed è stata configurata la funzionalità di isolamento-ready.
 

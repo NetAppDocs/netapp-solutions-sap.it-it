@@ -1,0 +1,258 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-br-scs-snapcenter-initial-config.html 
+keywords: configuration, storage system, plug-in, hdbsql client 
+summary: Questa sezione descrive la configurazione iniziale di SnapCenter, inclusi il sistema storage, le credenziali, gli host, il client hdbsql e i criteri. 
+---
+= Configurazione iniziale di SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configurazione iniziale include i seguenti passaggi:
+
+. Configurazione del sistema storage
+. Configurazione delle credenziali per l'installazione del plug-in
+. Per un host plug-in HANA centrale:
++
+.. Configurazione dell'host e implementazione del plug-in SAP HANA
+.. Installazione e configurazione del software client SAP HANA hdbsql
+
+
+. Configurazione dei criteri
+
+
+Le sezioni seguenti descrivono le fasi iniziali della configurazione.
+
+
+
+== Configurazione del sistema storage
+
+. Accedere alla GUI del server SnapCenter.
++
+image:saphana-br-scs-image23.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare Storage Systems (sistemi storage).
++
+
+NOTE: Nella schermata, è possibile selezionare il tipo di sistema storage, che può essere SVM ONTAP o cluster ONTAP. Se si configurano i sistemi storage a livello di SVM, è necessario configurare una LIF di gestione per ogni SVM. In alternativa, è possibile utilizzare un accesso di gestione SnapCenter a livello di cluster. La gestione SVM viene utilizzata nell'esempio seguente.
+
++
+image:saphana-br-scs-image24.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fare clic su New (nuovo) per aggiungere un sistema storage e fornire il nome host e le credenziali richiesti.
++
+
+NOTE: L'utente SVM non deve essere l'utente vsadmin, come mostrato nella schermata. In genere, un utente viene configurato sulla SVM e assegnato i permessi necessari per eseguire le operazioni di backup e ripristino. I dettagli sui privilegi richiesti sono disponibili nella http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["Guida all'installazione di SnapCenter"^] Nella sezione intitolata "privilegi minimi ONTAP richiesti".
+
++
+image:saphana-br-scs-image25.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fare clic su More Options (altre opzioni) per configurare la piattaforma di storage.
++
+La piattaforma di storage può essere FAS, AFF, ONTAP Select o Cloud Volumes ONTAP.
+
++
+
+NOTE: Per un sistema utilizzato come destinazione SnapVault o SnapMirror, selezionare l'icona secondario.
+
++
+image:saphana-br-scs-image26.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Aggiungere altri sistemi storage secondo necessità. Nel nostro esempio, sono stati aggiunti uno storage aggiuntivo per il backup fuori sede e uno per il disaster recovery.
++
+image:saphana-br-scs-image27.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+== Configurazione delle credenziali
+
+. Accedere a Impostazioni, selezionare credenziali e fare clic su nuovo.
++
+image:saphana-br-scs-image28.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire le credenziali per l'utente utilizzato per le installazioni plug-in sui sistemi Linux.
++
+image:saphana-br-scs-image29.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire le credenziali per l'utente che vengono utilizzate per le installazioni dei plug-in sui sistemi Windows.
++
+image:saphana-br-scs-image30.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+La figura seguente mostra le credenziali configurate.
+
+
+
+image:saphana-br-scs-image31.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+== Installazione del plug-in SAP HANA su un host plug-in centrale
+
+Nella configurazione di laboratorio, il server SnapCenter viene utilizzato anche come host plug-in HANA centrale. L'host Windows su cui viene eseguito il server SnapCenter viene aggiunto come host e il plug-in SAP HANA viene installato sull'host Windows.
+
+
+NOTE: Il plug-in SAP HANA richiede Java a 64 bit versione 1.8. Java deve essere installato sull'host prima di implementare il plug-in SAP HANA.
+
+. Accedere a hosts e fare clic su Add (Aggiungi).
++
+image:saphana-br-scs-image32.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire le informazioni sull'host richieste. Fare clic su Invia.
++
+image:saphana-br-scs-image33.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+La seguente figura mostra tutti gli host configurati dopo l'implementazione del plug-in HANA.
+
++
+image:saphana-br-scs-image34.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+=== Installazione e configurazione del software client SAP HANA hdbsql
+
+Il software client SAP HANA hdbsql deve essere installato sullo stesso host su cui è installato il plug-in SAP HANA. Il software può essere scaricato da https://support.sap.com/en/index.html["Portale di supporto SAP"^].
+
+L'utente del sistema operativo HDBSQL configurato durante la configurazione delle risorse deve essere in grado di eseguire l'eseguibile hdbsql. Il percorso dell'eseguibile hdbsql deve essere configurato in `hana.properties` file.
+
+* Finestre:
+
+
+....
+C:\More C:\Program Files\NetApp\SnapCenter\Snapcenter Plug-in Creator\etc\hana.properties
+HANA_HDBSQL_CMD=C:\\Program Files\\sap\\hdbclient\\hdbsql.exe
+....
+* Linux:
+
+
+....
+cat /opt/NetApp/snapcenter/scc/etc/hana.properties
+HANA_HDBSQL_CMD=/usr/sap/hdbclient/hdbsql
+....
+
+
+== Configurazione dei criteri
+
+Come discusso nella sezione, link:hana-br-scs-concepts-best-practices.html#data-protection-strategy[""Strategia di protezione dei dati","]le policy sono di solito configurate indipendentemente dalla risorsa e possono essere utilizzate da più database SAP HANA.
+
+Una configurazione minima tipica è costituita dai seguenti criteri:
+
+* Policy per backup orari senza replica: `LocalSnap`
+* Policy per backup giornalieri con replica SnapVault: `LocalSnapAndSnapVault`
+* Policy per il controllo settimanale dell'integrità dei blocchi utilizzando un backup basato su file: `BlockIntegrityCheck`
+
+
+Le sezioni seguenti descrivono la configurazione di questi tre criteri.
+
+
+
+=== Policy per backup Snapshot orari
+
+. Accedere a Impostazioni > Criteri e fare clic su nuovo.
++
+image:saphana-br-scs-image35.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Immettere il nome e la descrizione della policy. Fare clic su Avanti.
++
+image:saphana-br-scs-image36.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare il tipo di backup basato su Snapshot e selezionare orario per la frequenza di pianificazione.
++
+image:saphana-br-scs-image37.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le impostazioni di conservazione per i backup on-demand.
++
+image:saphana-br-scs-image38.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le impostazioni di conservazione per i backup pianificati.
++
+image:saphana-br-scs-image39.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le opzioni di replica. In questo caso, non è selezionato alcun aggiornamento di SnapVault o SnapMirror.
++
+image:saphana-br-scs-image40.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Nella pagina Riepilogo, fare clic su fine.
++
+image:saphana-br-scs-image41.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+=== Policy per backup Snapshot giornalieri con replica SnapVault
+
+. Accedere a Impostazioni > Criteri e fare clic su nuovo.
+. Immettere il nome e la descrizione della policy. Fare clic su Avanti.
++
+image:saphana-br-scs-image42.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Impostare il tipo di backup su Snapshot Based (basato su snapshot) e la frequenza di pianificazione su Daily (giornaliero).
++
+image:saphana-br-scs-image43.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le impostazioni di conservazione per i backup on-demand.
++
+image:saphana-br-scs-image44.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le impostazioni di conservazione per i backup pianificati.
++
+image:saphana-br-scs-image45.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare Aggiorna SnapVault dopo aver creato una copia Snapshot locale.
++
+
+NOTE: L'etichetta del criterio secondario deve essere la stessa dell'etichetta SnapMirror nella configurazione di protezione dei dati sul layer di storage. Vedere la sezione link:hana-br-scs-resource-config-hana-database-backups.html#configuration-of-data-protection-to-off-site-backup-storage[""Configurazione della protezione dei dati per lo storage di backup off-site"."]
+
++
+image:saphana-br-scs-image46.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Nella pagina Riepilogo, fare clic su fine.
++
+image:saphana-br-scs-image47.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+=== Policy per il controllo settimanale dell'integrità del blocco
+
+. Accedere a Impostazioni > Criteri e fare clic su nuovo.
+. Immettere il nome e la descrizione della policy. Fare clic su Avanti.
++
+image:saphana-br-scs-image48.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Impostare il tipo di backup su file-based (basato su file) e la frequenza di pianificazione su Weekly (settimanale).
++
+image:saphana-br-scs-image49.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le impostazioni di conservazione per i backup on-demand.
++
+image:saphana-br-scs-image50.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Configurare le impostazioni di conservazione per i backup pianificati.
++
+image:saphana-br-scs-image50.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Nella pagina Riepilogo, fare clic su fine.
++
+image:saphana-br-scs-image51.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+La figura seguente mostra un riepilogo dei criteri configurati.
+
++
+image:saphana-br-scs-image52.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+

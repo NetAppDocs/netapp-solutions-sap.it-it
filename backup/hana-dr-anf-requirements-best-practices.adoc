@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-requirements-best-practices.html 
+keywords: requirements, best, practices, microsoft, azure, virtual, machine, vm 
+summary: 'Microsoft Azure non garantisce la disponibilità di un tipo specifico di macchina virtuale (VM) al momento della creazione o all"avvio di una macchina virtuale disallocata.' 
+---
+= Requisiti e Best practice
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Microsoft Azure non garantisce la disponibilità di un tipo specifico di macchina virtuale (VM) al momento della creazione o all'avvio di una macchina virtuale disallocata. In particolare, in caso di guasto di una regione, molti client potrebbero richiedere macchine virtuali aggiuntive nell'area di disaster recovery. Si consiglia pertanto di utilizzare attivamente una macchina virtuale con le dimensioni richieste per il failover di emergenza come sistema di test o di QA nell'area di disaster recovery per allocare il tipo di macchina virtuale richiesto.
+
+Per l'ottimizzazione dei costi, è opportuno utilizzare un pool di capacità ANF con un Tier di performance inferiore durante il normale funzionamento. La replica dei dati non richiede performance elevate e potrebbe quindi utilizzare un pool di capacità con un Tier di performance standard. Per i test di disaster recovery o se è necessario un failover di emergenza, i volumi devono essere spostati in un pool di capacità con un Tier ad alte performance.
+
+Se un secondo pool di capacità non è un'opzione, i volumi di destinazione della replica devono essere configurati in base ai requisiti di capacità e non ai requisiti di performance durante le normali operazioni. La quota o il throughput (per la QoS manuale) possono quindi essere adattati per il test di disaster recovery in caso di disaster failover.
+
+Ulteriori informazioni sono disponibili all'indirizzo https://docs.microsoft.com/en-us/azure/azure-netapp-files/cross-region-replication-requirements-considerations["Requisiti e considerazioni per l'utilizzo della replica cross-region dei volumi Azure NetApp Files | documenti Microsoft"^].

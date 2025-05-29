@@ -1,0 +1,399 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-br-scs-resource-config-hana-database-backups.html 
+keywords: resource-specific, backup user, hdbuserstore, off-site backup storage, automatic discovery, fibre channel SAN 
+summary: In questa sezione vengono descritte le procedure di configurazione per due configurazioni di esempio, SS2 e SS1. 
+---
+= Configurazione specifica delle risorse SnapCenter per i backup dei database SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In questa sezione vengono descritte le fasi di configurazione per due configurazioni di esempio.
+
+* *SS2.*
++
+** Sistema single-tenant SAP HANA MDC a host singolo che utilizza NFS per l'accesso allo storage
+** La risorsa viene configurata manualmente in SnapCenter.
+** La risorsa è configurata per creare backup Snapshot locali ed eseguire controlli di integrità dei blocchi per il database SAP HANA utilizzando un backup settimanale basato su file.
+
+
+* *SS1.*
++
+** Sistema single-tenant SAP HANA MDC a host singolo che utilizza NFS per l'accesso allo storage
+** La risorsa viene rilevata automaticamente con SnapCenter.
+** La risorsa è configurata per creare backup Snapshot locali, replicare su uno storage di backup off-site utilizzando SnapVault ed eseguire controlli di integrità dei blocchi per il database SAP HANA utilizzando un backup settimanale basato su file.
+
+
+
+
+Le differenze per un sistema collegato A SAN, a singolo container o a più host si riflettono nelle corrispondenti fasi di configurazione o flusso di lavoro.
+
+
+
+== Configurazione di SAP HANA backup user e hdbuserstore
+
+NetApp consiglia di configurare un utente di database dedicato nel database HANA per eseguire le operazioni di backup con SnapCenter. Nella seconda fase, per questo utente di backup viene configurata una chiave di archivio utente SAP HANA, che viene utilizzata nella configurazione del plug-in SAP HANA di SnapCenter.
+
+La figura seguente mostra SAP HANA Studio attraverso il quale è possibile creare l'utente di backup.
+
+
+NOTE: I privilegi richiesti sono stati modificati con la release HANA 2.0 SPS5: Backup admin, lettura catalogo, database backup admin e database recovery operator. Per le versioni precedenti, sono sufficienti l'amministratore del backup e la lettura del catalogo.
+
+
+NOTE: Per un sistema SAP HANA MDC, l'utente deve essere creato nel database di sistema perché tutti i comandi di backup per il sistema e i database tenant vengono eseguiti utilizzando il database di sistema.
+
+image:saphana-br-scs-image53.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Nell'host del plug-in HANA, su cui sono installati il plug-in SAP HANA e il client SAP hdbsql, è necessario configurare una chiave userstore.
+
+
+
+=== Configurazione dell'archivio utenti sul server SnapCenter utilizzato come host plug-in HANA centrale
+
+Se il plug-in SAP HANA e il client SAP hdbsql sono installati su Windows, l'utente del sistema locale esegue i comandi hdbsql e viene configurato per impostazione predefinita nella configurazione delle risorse. Poiché l'utente di sistema non è un utente di accesso, la configurazione dell'archivio utente deve essere eseguita con un altro utente e con `-u <User>` opzione.
+
+....
+hdbuserstore.exe -u SYSTEM set <key> <host>:<port> <database user> <password>
+....
+
+NOTE: Il software SAP HANA hdbclient deve essere prima installato sull'host Windows.
+
+
+
+=== La configurazione dell'utente viene memorizzata su un host Linux separato utilizzato come host plug-in HANA centrale
+
+Se il plug-in SAP HANA e il client SAP hdbsql sono installati su un host Linux separato, viene utilizzato il seguente comando per la configurazione dell'archivio utente con l'utente definito nella configurazione delle risorse:
+
+....
+hdbuserstore set <key> <host>:<port> <database user> <password>
+....
+
+NOTE: Il software SAP HANA hdbclient deve essere prima installato sull'host Linux.
+
+
+
+=== Configurazione dell'archivio utenti sull'host del database HANA
+
+Se il plug-in SAP HANA viene implementato sull'host del database HANA, viene utilizzato il seguente comando per la configurazione dell'archivio utente con `<sid>adm` utente:
+
+....
+hdbuserstore set <key> <host>:<port> <database user> <password>
+....
+
+NOTE: SnapCenter utilizza `<sid>adm` Per comunicare con il database HANA. Pertanto, la chiave di memorizzazione utente deve essere configurata utilizzando l'utente <`sid>adm` sull'host del database.
+
+
+NOTE: In genere, il software client SAP HANA hdbsql viene installato insieme all'installazione del server di database. In caso contrario, installare prima hdbclient.
+
+
+
+=== Configurazione dell'archivio utenti in base all'architettura del sistema HANA
+
+In una configurazione single-tenant SAP HANA MDC, porta `3<instanceNo>13` È la porta standard per l'accesso SQL al database di sistema e deve essere utilizzata nella configurazione hdbuserstore.
+
+Per una configurazione di container singolo SAP HANA, porta `3<instanceNo>15` È la porta standard per l'accesso SQL all'index server e deve essere utilizzata nella configurazione hdbuserstore.
+
+Per una configurazione di più host SAP HANA, è necessario configurare le chiavi di memorizzazione utente per tutti gli host. SnapCenter tenta di connettersi al database utilizzando ciascuna delle chiavi fornite e può quindi funzionare in modo indipendente dal failover di un servizio SAP HANA su un host diverso.
+
+
+
+=== Esempi di configurazione dell'archivio utenti
+
+Nella configurazione di laboratorio, viene utilizzata un'implementazione mista del plug-in SAP HANA. Il plug-in HANA viene installato sul server SnapCenter per alcuni sistemi HANA e distribuito sui singoli server di database HANA per altri sistemi.
+
+*Sistema SAP HANA SS1, tenant singolo MDC, istanza 00*
+
+Il plug-in HANA è stato implementato sull'host del database. Pertanto, la chiave deve essere configurata sull'host del database con l'utente ss1adm.
+
+....
+hana-1:/ # su - ss1adm
+ss1adm@hana-1:/usr/sap/SS1/HDB00>
+ss1adm@hana-1:/usr/sap/SS1/HDB00>
+ss1adm@hana-1:/usr/sap/SS1/HDB00> hdbuserstore set SS1KEY hana-1:30013 SnapCenter password
+ss1adm@hana-1:/usr/sap/SS1/HDB00> hdbuserstore list
+DATA FILE       : /usr/sap/SS1/home/.hdb/hana-1/SSFS_HDB.DAT
+KEY FILE        : /usr/sap/SS1/home/.hdb/hana-1/SSFS_HDB.KEY
+KEY SS1KEY
+  ENV : hana-1:30013
+  USER: SnapCenter
+KEY SS1SAPDBCTRLSS1
+  ENV : hana-1:30015
+  USER: SAPDBCTRL
+ss1adm@hana-1:/usr/sap/SS1/HDB00>
+....
+*Sistema SAP HANA MS1, tenant singolo MDC multi-host, istanza 00*
+
+Per i sistemi host HANA multipli, è necessario un host plug-in centrale, nella nostra configurazione abbiamo utilizzato il server SnapCenter. Pertanto, la configurazione dell'archivio utente deve essere eseguita sul server SnapCenter.
+
+....
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST1 hana-4:30013 SNAPCENTER password
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST2 hana-5:30013 SNAPCENTER password
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST3 hana-6:30013 SNAPCENTER password
+C:\Program Files\sap\hdbclient>hdbuserstore.exe -u SYSTEM list
+DATA FILE       : C:\ProgramData\.hdb\SNAPCENTER-43\S-1-5-18\SSFS_HDB.DAT
+KEY FILE        : C:\ProgramData\.hdb\SNAPCENTER-43\S-1-5-18\SSFS_HDB.KEY
+KEY MS1KEYHOST1
+  ENV : hana-4:30013
+  USER: SNAPCENTER
+KEY MS1KEYHOST2
+  ENV : hana-5:30013
+  USER: SNAPCENTER
+KEY MS1KEYHOST3
+  ENV : hana-6:30013
+  USER: SNAPCENTER
+KEY SS2KEY
+  ENV : hana-3:30013
+  USER: SNAPCENTER
+C:\Program Files\sap\hdbclient>
+....
+
+
+== Configurazione della protezione dei dati per lo storage di backup off-site
+
+La configurazione della relazione di protezione dei dati e il trasferimento iniziale dei dati devono essere eseguiti prima che gli aggiornamenti di replica possano essere gestiti da SnapCenter.
+
+La figura seguente mostra la relazione di protezione configurata per il sistema SAP HANA SS1. Con il nostro esempio, il volume di origine `SS1_data_mnt00001` Alla SVM `hana-primary` Viene replicato su SVM `hana-backup` e il volume di destinazione `SS1_data_mnt00001_dest`.
+
+
+NOTE: La pianificazione della relazione deve essere impostata su Nessuno, perché SnapCenter attiva l'aggiornamento di SnapVault.
+
+image:saphana-br-scs-image54.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+La seguente figura mostra il criterio di protezione. Il criterio di protezione utilizzato per la relazione di protezione definisce l'etichetta SnapMirror e la conservazione dei backup nello storage secondario. Nel nostro esempio, l'etichetta utilizzata è `Daily`e la conservazione è impostata su 5.
+
+
+NOTE: L'etichetta SnapMirror nel criterio creato deve corrispondere all'etichetta definita nella configurazione del criterio SnapCenter. Per ulteriori informazioni, fare riferimento alla link:hana-br-scs-snapcenter-initial-config.html#snapshot-policy["Policy per backup Snapshot giornalieri con replica SnapVault"].
+
+
+NOTE: La conservazione dei backup nello storage di backup off-site è definita nella policy e controllata da ONTAP.
+
+image:saphana-br-scs-image55.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+== Configurazione manuale delle risorse HANA
+
+Questa sezione descrive la configurazione manuale delle risorse SAP HANA SS2 e MS1.
+
+* SS2 è un sistema single-tenant MDC a host singolo
+* MS1 è un sistema single-tenant MDC multihost.
++
+.. Dalla scheda Resources (risorse), selezionare SAP HANA e fare clic su Add SAP HANA Database (Aggiungi database SAP HANA).
+.. Inserire le informazioni per la configurazione del database SAP HANA e fare clic su Next (Avanti).
++
+Selezionare il tipo di risorsa nel nostro esempio, Container di database multi-tenant.
+
++
+
+NOTE: Per un sistema container singolo HANA, è necessario selezionare il tipo di risorsa container singolo. Tutte le altre fasi di configurazione sono identiche.
+
++
+Per il nostro sistema SAP HANA, il SID è SS2.
+
++
+L'host del plug-in HANA nel nostro esempio è il server SnapCenter.
+
++
+La chiave hdbuserstore deve corrispondere alla chiave configurata per il database HANA SS2. Nel nostro esempio è SS2KEY.
+
++
+image:saphana-br-scs-image56.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+
+NOTE: Per un sistema SAP HANA con host multipli, è necessario includere le chiavi hdbuserstore per tutti gli host, come mostrato nella figura seguente. SnapCenter tenterà di connettersi con la prima chiave dell'elenco e continuerà con l'altro caso, nel caso in cui la prima chiave non funzioni. Questo è necessario per supportare il failover HANA in un sistema con più host con host di lavoro e di standby.
+
++
+image:saphana-br-scs-image57.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+.. Selezionare i dati richiesti per il sistema di storage (SVM) e il nome del volume.
++
+image:saphana-br-scs-image58.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+
+NOTE: Per una configurazione SAN Fibre Channel, è necessario selezionare anche il LUN.
+
++
+
+NOTE: Per un sistema host multiplo SAP HANA, è necessario selezionare tutti i volumi di dati del sistema SAP HANA, come mostrato nella figura seguente.
+
++
+image:saphana-br-scs-image59.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Viene visualizzata la schermata di riepilogo della configurazione delle risorse.
+
+.. Fare clic su Finish (fine) per aggiungere il database SAP HANA.
++
+image:saphana-br-scs-image60.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+.. Al termine della configurazione delle risorse, eseguire la configurazione della protezione delle risorse come descritto nella sezione link:hana-br-scs-resource-config-hana-database-backups.html#resource-protection["Configurazione della protezione delle risorse"].
+
+
+
+
+
+
+== Rilevamento automatico dei database HANA
+
+Questa sezione descrive il rilevamento automatico della risorsa SAP HANA SS1 (sistema single-tenant MDC host con NFS). Tutti i passaggi descritti sono identici per un singolo container HANA, per i sistemi di tenant multipli HANA MDC e per un sistema HANA che utilizza SAN Fibre Channel.
+
+
+NOTE: Il plug-in SAP HANA richiede Java a 64 bit versione 1.8. Java deve essere installato sull'host prima di implementare il plug-in SAP HANA.
+
+. Dalla scheda host, fare clic su Add (Aggiungi).
+. Fornire informazioni sull'host e selezionare il plug-in SAP HANA da installare. Fare clic su Invia.
++
+image:saphana-br-scs-image61.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Confermare l'impronta digitale.
++
+image:saphana-br-scs-image62.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+L'installazione del plug-in HANA e del plug-in Linux si avvia automaticamente. Al termine dell'installazione, la colonna di stato dell'host mostra in esecuzione. La schermata mostra inoltre che il plug-in Linux è installato insieme al plug-in HANA.
+
++
+image:saphana-br-scs-image63.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Dopo l'installazione del plug-in, il processo di rilevamento automatico della risorsa HANA viene avviato automaticamente. Nella schermata Resources (risorse) viene creata una nuova risorsa, contrassegnata come bloccata con l'icona del lucchetto rosso.
+
+. Selezionare e fare clic sulla risorsa per continuare la configurazione.
++
+
+NOTE: È inoltre possibile attivare manualmente il processo di rilevamento automatico nella schermata risorse, facendo clic su Aggiorna risorse.
+
++
+image:saphana-br-scs-image64.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire la chiave dell'archivio utenti per il database HANA.
++
+image:saphana-br-scs-image65.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Viene avviato il processo di rilevamento automatico di secondo livello in cui vengono rilevate le informazioni relative ai dati del tenant e all'impatto dello storage.
+
+. Fare clic su Details (Dettagli) per esaminare le informazioni di configurazione delle risorse HANA nella vista della topologia delle risorse.
++
+image:saphana-br-scs-image66.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+image:saphana-br-scs-image67.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
++
+Al termine della configurazione delle risorse, la configurazione di protezione delle risorse deve essere eseguita come descritto nella sezione seguente.
+
+
+
+
+
+== Configurazione della protezione delle risorse
+
+Questa sezione descrive la configurazione della protezione delle risorse. La configurazione di protezione delle risorse è la stessa, indipendentemente dal fatto che la risorsa sia stata rilevata o configurata manualmente. È identico anche per tutte le architetture HANA, host singoli o multipli, container singolo o sistemi MDC.
+
+. Dalla scheda risorse, fare doppio clic sulla risorsa.
+. Configurare un formato nome personalizzato per la copia Snapshot.
++
+
+NOTE: NetApp consiglia di utilizzare un nome di copia Snapshot personalizzato per identificare facilmente i backup creati con quale tipo di policy e pianificazione. Aggiungendo il tipo di pianificazione nel nome della copia Snapshot, è possibile distinguere tra backup pianificati e su richiesta. Il `schedule name` la stringa per i backup on-demand è vuota, mentre i backup pianificati includono la stringa `Hourly`,  `Daily`, `or Weekly`.
+
++
+Nella configurazione illustrata nella figura seguente, i nomi delle copie Snapshot e di backup hanno il seguente formato:
+
++
+** Backup orario pianificato:  `SnapCenter_LocalSnap_Hourly_<time_stamp>`
+** Backup giornaliero pianificato:  `SnapCenter_LocalSnapAndSnapVault_Daily_<time_stamp>`
+** Backup orario on-demand:  `SnapCenter_LocalSnap_<time_stamp>`
+** Backup giornaliero on-demand:  `SnapCenter_LocalSnapAndSnapVault_<time_stamp>`
++
+
+NOTE: Anche se viene definita una conservazione per i backup on-demand nella configurazione dei criteri, la pulizia viene eseguita solo quando viene eseguito un altro backup on-demand. Di conseguenza, i backup on-demand devono in genere essere cancellati manualmente in SnapCenter per assicurarsi che questi backup vengano eliminati anche nel catalogo di backup SAP HANA e che la manutenzione del backup del log non sia basata su un vecchio backup on-demand.
+
++
+image:saphana-br-scs-image68.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+. Non è necessario impostare impostazioni specifiche nella pagina Impostazioni applicazione. Fare clic su Avanti.
++
+image:saphana-br-scs-image69.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Selezionare i criteri da aggiungere alla risorsa.
++
+image:saphana-br-scs-image70.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Definire la pianificazione per il criterio LocalSnap (in questo esempio, ogni quattro ore).
++
+image:saphana-br-scs-image71.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Definire la pianificazione per la policy LocalSnapAndSnapVault (in questo esempio, una volta al giorno).
++
+image:saphana-br-scs-image72.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Definire la pianificazione per la policy di controllo dell'integrità del blocco (in questo esempio, una volta alla settimana).
++
+image:saphana-br-scs-image73.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Fornire informazioni sulla notifica via email.
++
+image:saphana-br-scs-image74.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. Nella pagina Riepilogo, fare clic su fine.
++
+image:saphana-br-scs-image75.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+. È ora possibile creare backup on-demand nella pagina della topologia. I backup pianificati vengono eseguiti in base alle impostazioni di configurazione.
++
+image:saphana-br-scs-image76.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+
+
+
+
+== Ulteriori procedure di configurazione per ambienti SAN Fibre Channel
+
+A seconda della versione di HANA e dell'implementazione del plug-in HANA, sono necessarie ulteriori procedure di configurazione per gli ambienti in cui i sistemi SAP HANA utilizzano Fibre Channel e il file system XFS.
+
+
+NOTE: Questi passaggi di configurazione aggiuntivi sono necessari solo per le risorse HANA, che sono configurate manualmente in SnapCenter. È inoltre necessario solo per le release HANA 1.0 e HANA 2.0 fino a SPS2.
+
+Quando un punto di salvataggio di backup HANA viene attivato da SnapCenter in SAP HANA, SAP HANA scrive i file ID Snapshot per ogni tenant e servizio di database come ultima fase (ad esempio, `/hana/data/SID/mnt00001/hdb00001/snapshot_databackup_0_1`). Questi file fanno parte del volume di dati dello storage e fanno quindi parte della copia Snapshot dello storage. Questo file è obbligatorio quando si esegue un ripristino in una situazione in cui il backup viene ripristinato. A causa del caching dei metadati con il file system XFS sull'host Linux, il file non è immediatamente visibile a livello di storage. La configurazione XFS standard per il caching dei metadati è di 30 secondi.
+
+
+NOTE: Con HANA 2.0 SPS3, SAP ha modificato l'operazione di scrittura di questi file ID Snapshot in modo sincrono, in modo che il caching dei metadati non sia un problema.
+
+
+NOTE: Con SnapCenter 4.3, se il plug-in HANA viene implementato sull'host del database, il plug-in Linux esegue un'operazione di svuotamento del file system sull'host prima che venga attivata l'istantanea dello storage. In questo caso, il caching dei metadati non è un problema.
+
+In SnapCenter, è necessario configurare un `postquiesce` Comando che attende fino a quando la cache dei metadati XFS non viene scaricata nel livello del disco.
+
+La configurazione effettiva del caching dei metadati può essere verificata utilizzando il seguente comando:
+
+....
+stlrx300s8-2:/ # sysctl -A | grep xfssyncd_centisecs
+fs.xfs.xfssyncd_centisecs = 3000
+....
+NetApp consiglia di utilizzare un tempo di attesa pari al doppio del valore di `fs.xfs.xfssyncd_centisecs` parametro. Poiché il valore predefinito è 30 secondi, impostare il comando di sospensione su 60 secondi.
+
+Se il server SnapCenter viene utilizzato come host plug-in HANA centrale, è possibile utilizzare un file batch. Il file batch deve avere il seguente contenuto:
+
+....
+@echo off
+waitfor AnyThing /t 60 2>NUL
+Exit /b 0
+....
+Il file batch può essere salvato, ad esempio, come `C:\Program Files\NetApp\Wait60Sec.bat`. Nella configurazione di protezione delle risorse, il file batch deve essere aggiunto come comando Post Quiesce.
+
+Se un host Linux separato viene utilizzato come host plug-in HANA centrale, è necessario configurare il comando `/bin/sleep 60` Come il comando Post Quiesce nell'interfaccia utente di SnapCenter.
+
+La figura seguente mostra il comando Post Quiesce nella schermata di configurazione della protezione delle risorse.
+
+image:saphana-br-scs-image77.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
