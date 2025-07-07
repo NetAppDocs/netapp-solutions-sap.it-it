@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: bp/hana-aff-fc-additional-info.html 
+permalink: bp/hana-asa-fc-additional-info.html 
 keywords:  
 summary:  
 ---
@@ -18,6 +18,7 @@ Per ulteriori informazioni sulle informazioni descritte in questo documento, con
 
 * link:../index.html["Soluzioni software SAP HANA"]
 * link:../backup/hana-dr-sr-pdf-link.html["TR-4646: Disaster recovery SAP HANA con replica dello storage"]
+* link:../backup/hana-sc-vmware-smas-scope.html["Data Protection e high Availability di SAP HANA con SnapCenter, SnapMirror Active Sync e VMware Metro Storage Cluster"^]
 * link:../backup/hana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"]
 * link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"]
 * Centri di documentazione NetApp

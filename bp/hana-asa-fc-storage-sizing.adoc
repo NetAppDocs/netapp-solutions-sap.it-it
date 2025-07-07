@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
-permalink: bp/hana-aff-nfs-storage-sizing.html 
-keywords: storage, sizing, performance, sas disk shelf, ns224 nvme, test tool, 
-summary: La sezione seguente fornisce una panoramica delle considerazioni su performance e capacità richieste per il dimensionamento di un sistema storage per SAP HANA. 
+permalink: bp/hana-asa-fc-storage-sizing.html 
+keywords:  
+summary:  
 ---
 = Dimensionamento dello storage
 :hardbreaks:
@@ -14,21 +14,21 @@ summary: La sezione seguente fornisce una panoramica delle considerazioni su per
 
 
 [role="lead"]
-La sezione seguente fornisce una panoramica delle considerazioni su performance e capacità richieste per il dimensionamento di un sistema storage per SAP HANA.
+La sezione seguente fornisce una panoramica delle considerazioni relative a performance e capacità necessarie per il dimensionamento di un sistema storage per SAP HANA.
 
 
-NOTE: Contatta NetApp o il tuo partner commerciale NetApp per aiutarti a creare un ambiente di storage di dimensioni adeguate.
+NOTE: Contatta il tuo commerciale NetApp o il tuo partner NetApp per supportare il processo di dimensionamento dello storage e per aiutarti a creare un ambiente di storage di dimensioni adeguate.
 
 
 
 == Considerazioni sulle performance
 
-SAP ha definito un set statico di KPI relativi allo storage. Questi KPI sono validi per tutti gli ambienti SAP HANA in produzione, indipendentemente dalle dimensioni della memoria degli host di database e delle applicazioni che utilizzano il database SAP HANA. Questi KPI sono validi per ambienti a host singolo, host multiplo, Business Suite su HANA, Business Warehouse su HANA, S/4HANA e BW/4HANA. Pertanto, l'attuale approccio al dimensionamento delle performance dipende solo dal numero di host SAP HANA attivi collegati al sistema storage.
+SAP ha definito un set statico di indicatori di performance chiave dello storage (KPI). Questi KPI sono validi per tutti gli ambienti SAP HANA in produzione, indipendentemente dalle dimensioni della memoria degli host di database e delle applicazioni che utilizzano il database SAP HANA. Questi KPI sono validi per ambienti a host singolo, host multiplo, Business Suite su HANA, Business Warehouse su HANA, S/4HANA e BW/4HANA. Pertanto, l'attuale approccio al dimensionamento delle performance dipende solo dal numero di host SAP HANA attivi collegati al sistema storage.
 
 
 NOTE: I KPI relativi alle performance dello storage sono richiesti solo per i sistemi SAP HANA in produzione, ma è possibile implementarli in tutti i sistemi HANA.
 
-SAP offre uno strumento di test delle performance che deve essere utilizzato per convalidare le performance del sistema storage per gli host SAP HANA attivi collegati allo storage.
+SAP offre uno strumento di test delle performance che deve essere utilizzato per convalidare le performance dei sistemi storage per gli host SAP HANA attivi collegati allo storage.
 
 NetApp ha testato e predefinito il numero massimo di host SAP HANA che possono essere collegati a un modello di storage specifico, pur continuando a soddisfare i KPI di storage richiesti da SAP per i sistemi SAP HANA basati sulla produzione.
 
@@ -36,38 +36,12 @@ Il numero massimo di host SAP HANA che possono essere eseguiti su uno shelf di d
 
 
 
-=== Shelf di dischi SAS
-
-Con lo shelf di dischi SAS (Serial-Attached SCSI) da 12 GB (DS224C), il dimensionamento delle performance viene eseguito utilizzando le seguenti configurazioni di shelf di dischi fissi:
-
-* Shelf di dischi a metà carico con 12 SSD
-* Shelf di dischi completamente caricati con 24 SSD
-
-
-
-NOTE: Entrambe le configurazioni utilizzano la partizione avanzata dei dischi (ADPv2). Uno shelf di dischi a metà carico supporta fino a nove host SAP HANA, mentre uno shelf a pieno carico supporta fino a 14 host in un singolo shelf di dischi. Gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage. Lo stesso vale per i dischi interni di un sistema AFF A700s. Lo shelf di dischi DS224C deve essere connesso utilizzando SAS da 12 GB per supportare il numero di host SAP HANA.
-
-Lo shelf di dischi SAS da 6 GB (DS2246) supporta un massimo di quattro host SAP HANA. Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage.
-
-La seguente tabella riassume il numero di host SAP HANA supportati per shelf di dischi.
-
-|===
-|  | Shelf SAS da 6 GB (DS2246) con 24 SSD completamente caricati | Shelf SAS da 12 GB (DS224C) a metà carico con 12 SSD e ADPv2 | Shelf SAS da 12 GB (DS224C) completamente caricati con 24 SSD e ADPv2 
-
-
-| Numero massimo di host SAP HANA per shelf di dischi | 4 | 9 | 14 
-|===
-
-NOTE: Questo calcolo è indipendente dal controller di storage utilizzato. L'aggiunta di più shelf di dischi non aumenta la quantità massima di host SAP HANA supportati da uno storage controller.
-
-
-
 === Shelf NS224 NVMe
 
-Un SSD NVMe (dati) supporta fino a 2/5 host SAP HANA a seconda dei dischi NVMe utilizzati. Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage. Lo stesso vale per i dischi NVMe interni dei sistemi AFF.
+Un SSD NVMe (dati) supporta fino a 2/5 host SAP HANA a seconda del disco NVMe specifico utilizzato.
 
 
-NOTE: L'aggiunta di più shelf di dischi non aumenta la quantità massima di host SAP HANA supportata da uno storage controller.
+NOTE: L'aggiunta di più shelf di dischi non aumenta il numero massimo di host SAP HANA supportati da uno storage controller.
 
 
 
@@ -77,11 +51,11 @@ Sono supportati SAP HANA e altri carichi di lavoro applicativi eseguiti sullo st
 
 Potresti decidere di implementare workload SAP HANA e altri workload applicativi sullo stesso storage controller o sullo stesso aggregato. In tal caso, è necessario assicurarsi che le performance di SAP HANA siano adeguate all'interno dell'ambiente di workload misto. NetApp consiglia inoltre di utilizzare i parametri della qualità del servizio (QoS) per regolare l'effetto che queste altre applicazioni potrebbero avere sulle applicazioni SAP HANA e per garantire il throughput per le applicazioni SAP HANA.
 
-Il tool di test delle performance SAP deve essere utilizzato per verificare se è possibile eseguire altri host SAP HANA su uno storage controller esistente già in uso per altri carichi di lavoro. I server applicativi SAP possono essere posizionati in modo sicuro sullo stesso storage controller e/o aggregato dei database SAP HANA.
+Il tool di test SAP HCMT deve essere utilizzato per verificare se è possibile eseguire altri host SAP HANA su uno storage controller esistente già in uso per altri carichi di lavoro. I server applicativi SAP possono essere posizionati in modo sicuro sullo stesso storage controller e/o aggregato dei database SAP HANA.
 
 
 
-=== Considerazioni sulla capacità
+== Considerazioni sulla capacità
 
 Una descrizione dettagliata dei requisiti di capacità per SAP HANA è disponibile nella https://launchpad.support.sap.com/#/notes/1900823["Nota SAP 1900823"^] white paper.
 
@@ -92,9 +66,9 @@ NOTE: Il dimensionamento della capacità del panorama SAP complessivo con più s
 
 == Configurazione dello strumento di test delle performance
 
-A partire da SAP HANA 1.0 SPS10, SAP ha introdotto i parametri per regolare il comportamento di i/o e ottimizzare il database per il file e il sistema storage utilizzati. Questi parametri devono essere impostati anche per lo strumento di test delle performance di SAP quando le performance dello storage vengono testate con lo strumento di test delle performance di SAP.
+A partire da SAP HANA 1.0 SPS10, SAP ha introdotto i parametri per regolare il comportamento di i/o e ottimizzare il database per il file e il sistema storage utilizzati. Questi parametri devono essere impostati anche per lo strumento di test delle performance di SAP quando le performance dello storage vengono testate con lo strumento di test SAP.
 
-NetApp ha condotto test delle performance per definire i valori ottimali. La seguente tabella elenca i parametri che devono essere impostati nel file di configurazione dello strumento di test delle prestazioni SAP.
+NetApp ha condotto test delle performance per definire i valori ottimali. La seguente tabella elenca i parametri che devono essere impostati nel file di configurazione dello strumento di test SAP.
 
 |===
 | Parametro | Valore 
@@ -111,12 +85,13 @@ NetApp ha condotto test delle performance per definire i valori ottimali. La seg
 
 | async_write_submit_blocks | tutto 
 |===
-Per ulteriori informazioni sulla configurazione dei diversi strumenti di test SAP, vedere https://service.sap.com/sap/support/notes/1943937["Nota SAP 1943937"^] Per HWCCT (SAP HANA 1.0) e. https://launchpad.support.sap.com/["Nota SAP 2493172"^] PER HCMT/HCOT (SAP HANA 2.0).
+Per ulteriori informazioni sulla configurazione dello strumento di test SAP, vedere https://service.sap.com/sap/support/notes/1943937["Nota SAP 1943937"^] Per HWCCT (SAP HANA 1.0) e. https://launchpad.support.sap.com/["Nota SAP 2493172"^] PER HCMT/HCOT (SAP HANA 2.0).
 
 Nell'esempio seguente viene illustrato come impostare le variabili per il piano di esecuzione HCMT/HCOT.
 
 ....
-…{
+…
+{
          "Comment": "Log Volume: Controls whether read requests are submitted asynchronously, default is 'on'",
          "Name": "LogAsyncReadSubmit",
          "Value": "on",
@@ -199,13 +174,14 @@ Queste variabili devono essere utilizzate per la configurazione del test. Questo
                   "ExtNumSubmitQueues": "${LogExtNumSubmitQueues}",
                   "ExtSizeKernelIoQueue": "${ExtSizeKernelIoQueue}"
                }
-            }, …
+            },
+…
 ....
 
 
 == Panoramica del processo di dimensionamento dello storage
 
-Il numero di dischi per host HANA e la densità host SAP HANA per ciascun modello di storage sono stati determinati con lo strumento di test delle performance.
+Il numero di dischi per host HANA e la densità host SAP HANA per ciascun modello di storage sono stati determinati utilizzando il tool di test SAP HANA.
 
 Il processo di dimensionamento richiede dettagli come il numero di host SAP HANA in produzione e non in produzione, la dimensione della RAM di ciascun host e la conservazione del backup delle copie Snapshot basate sullo storage. Il numero di host SAP HANA determina il controller dello storage e il numero di dischi necessari.
 
@@ -213,4 +189,4 @@ La dimensione della RAM, la dimensione dei dati netti sul disco di ciascun host 
 
 La figura seguente riassume il processo di dimensionamento.
 
-image:saphana_aff_nfs_image9b.png["Processo di dimensionamento dello storage SAP HANA"]
+image:saphana_asa_fc_image8a.png["Processo di dimensionamento di SAP HANA"]

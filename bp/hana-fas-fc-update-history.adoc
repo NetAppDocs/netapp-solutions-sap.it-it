@@ -61,4 +61,7 @@ Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pub
 
 
 | Febbraio 2025 | Nuovo sistema storage 
+
+
+| Luglio 2025 | Aggiornamenti minori 
 |===

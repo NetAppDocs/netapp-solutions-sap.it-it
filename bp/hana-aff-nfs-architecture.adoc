@@ -22,7 +22,7 @@ Diversi modelli della famiglia di sistemi AFF possono essere combinati e abbinat
 
 La figura seguente mostra una configurazione di esempio con otto host SAP HANA collegati a una coppia di storage ad alta disponibilità (ha).
 
-image:saphana_aff_nfs_image2a.png["Otto host SAP HANA collegati a una coppia di ha (High Availability) dello storage"]
+image:saphana_aff_nfs_image2b.png["Otto host SAP HANA collegati a una coppia di ha (High Availability) dello storage"]
 
 L'architettura può essere scalata in due dimensioni:
 
@@ -32,11 +32,11 @@ L'architettura può essere scalata in due dimensioni:
 
 La figura seguente mostra una configurazione di esempio in cui più host SAP HANA sono collegati ai controller di storage. In questo esempio, sono necessari più shelf di dischi per soddisfare i requisiti di capacità e performance dei 16 host SAP HANA. A seconda dei requisiti di throughput totale, è necessario aggiungere connessioni aggiuntive da 10 GbE o più veloci ai controller di storage.
 
-image:saphana_aff_nfs_image3a.png["Host SAP HANA aggiuntivi per una coppia ha dello storage controller in uso"]
+image:saphana_aff_nfs_image3b.png["Host SAP HANA aggiuntivi per una coppia ha dello storage controller in uso"]
 
 Indipendentemente dal sistema AFF implementato, il panorama SAP HANA può essere scalato aggiungendo uno qualsiasi dei controller di storage certificati per soddisfare la densità di nodo desiderata, come mostrato nella figura seguente.
 
-image:saphana_aff_nfs_image4a.png["Aggiunta di una coppia ha aggiuntiva"]
+image:saphana_aff_nfs_image4b.png["Aggiunta di una coppia ha aggiuntiva"]
 
 
 
@@ -50,7 +50,7 @@ La tecnologia NetApp SnapMirror consente di replicare le copie Snapshot create s
 
 È possibile eseguire il backup dei log del database direttamente sullo storage secondario utilizzando un montaggio NFS, come illustrato nella figura seguente.
 
-image:saphana_aff_nfs_image6.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_asa_fc_image5a.png["Panoramica di SnapCenter"]
 
 I backup Snapshot basati su storage offrono vantaggi significativi rispetto ai backup convenzionali basati su file. Questi vantaggi includono, a titolo esemplificativo e non esaustivo, i seguenti:
 
