@@ -1,0 +1,100 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-sc-config.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery 
+summary:  
+---
+= Configurazione di SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+== Prerequisiti
+
+
+
+=== La risorsa SnapCenter HANA deve essere scoperta automaticamente
+
+Le risorse configurate con VMware VMFS devono essere rilevate automaticamente da SnapCenter per abilitare le operazioni specifiche richieste per queste configurazioni.
+
+Poiché i volumi non dati HANA sono sempre risorse configurate manualmente in SnapCenter, non sono supportati da SnapCenter con VMFS.
+
+I sistemi host multipli SAP HANA devono essere configurati utilizzando un plugin HANA centrale e, pertanto, vengono configurati manualmente per impostazione predefinita. Tali sistemi non sono supportati da SnapCenter quando si utilizza VMware VMFS.
+
+
+
+=== Plug-in SnapCenter per VMware vSphere
+
+Il plug-in di SnapCenter per VMware vSphere deve essere implementato nell'ambiente VMware.
+
+
+
+=== IP di gestione SVM di archiviazione
+
+Le SVM di archiviazione che ospitano le LUN devono avere un'interfaccia di gestione configurata, altrimenti le SVM non verranno elencate in SnapCenter quando si aggiunge l'archiviazione con l'opzione "Aggiungi cluster" e l'operazione di rilevamento automatico fallirà.
+
+image:sc-hana-asrr2-vmfs-image9.png["Figura che mostra i contenuti discussi"]
+
+image:sc-hana-asrr2-vmfs-image10.png["Figura che mostra i contenuti discussi"]
+
+
+
+=== Parametro del disco VM
+
+Il parametro deve essere impostato come descritto nel capitolo link:hana-sc-vmfs-asar2-hana-prov.html#vm-parameter-disk-enableuuid[""Parametro VM disk.EnableUUID""] , altrimenti il ​​rilevamento automatico del database SnapCenter fallirà.
+
+image:sc-hana-asrr2-vmfs-image11.png["Figura che mostra i contenuti discussi"]
+
+
+
+=== Configurare SnapCenter per utilizzare le API REST per la comunicazione di archiviazione
+
+SnapCenter deve essere configurato per utilizzare le API REST per le comunicazioni di storage. In caso contrario, l'operazione di creazione dello Snapshot fallirà e verrà visualizzato il messaggio di errore riportato di seguito.
+
+image:sc-hana-asrr2-vmfs-image12.png["Figura che mostra i contenuti discussi"]
+
+Il parametro "IsRestEnabledForStorageConnection" nel file di configurazione + C:++\++Program Files++\++NetApp++\++SMCore++\++SMCoreServiceHost.dll.config deve essere impostato su "true".
+
+++<++aggiungi chiave="IsRestEnabledForStorageConnection" valore="vero" /++>++
+
+image:sc-hana-asrr2-vmfs-image13.png["Figura che mostra i contenuti discussi"]
+
+Dopo aver apportato la modifica, è necessario arrestare e riavviare il servizio SnapCenter SMCore.
+
+image:sc-hana-asrr2-vmfs-image14.png["Figura che mostra i contenuti discussi"]
+
+
+
+== Aggiungi il plugin VMware a SnapCenter
+
+Prima di poter aggiungere l'host in SnapCenter, è necessario distribuire il plug-in SnapCenter per VMware vSphere all'interno dell'ambiente VMware. Vedere anche https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere.html["Implementare il plug-in SnapCenter per VMware vSphere"].
+
+
+NOTE: È necessario impostare le credenziali durante il flusso di lavoro di aggiunta dell'host, in cui vSphere può essere selezionato come tipo di host.
+
+image:sc-hana-asrr2-vmfs-image15.png["Figura che mostra i contenuti discussi"]
+
+
+
+== Aggiungi host HANA
+
+
+NOTE: Nessun requisito specifico. La distribuzione del plugin e il rilevamento automatico vengono eseguiti come di consueto.
+
+image:sc-hana-asrr2-vmfs-image16.png["Figura che mostra i contenuti discussi"]
+
+Grazie al processo di rilevamento automatico, SnapCenter rileva che la risorsa HANA è in esecuzione virtualizzata con VMFS.
+
+image:sc-hana-asrr2-vmfs-image17.png["Figura che mostra i contenuti discussi"]
+
+
+
+== Configurazione della protezione delle risorse e delle policy
+
+Niente di specifico per VMware con VMFS.

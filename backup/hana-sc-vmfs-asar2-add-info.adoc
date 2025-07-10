@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-add-info.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery 
+summary:  
+---
+= Informazioni aggiuntive e cronologia delle versioni
+:allow-uri-read: 
+
+
+Buone pratiche HANA:
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-asa-fc-introduction.html["SAP HANA su sistemi NetApp ASA con protocollo Fibre Channel"].
+
+
+SnapCenter:
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-br-scs-overview.html["TR-4614: Backup e recovery SAP HANA con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sr-scs-system-replication-overview.html["TR-4719: Replica del sistema SAP HANA - Backup e ripristino con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-scope.html["Protezione dei dati SAP HANA e alta disponibilità con SnapCenter, SnapMirror ActiveSync e VMware Metro Storage Cluster"]
+* https://docs.netapp.com/us-en/snapcenter/index.html["Documentazione del software SnapCenter"]
+
+
+Cronologia versioni:
+
+[cols="25%,25%,50%"]
+|===
+| Versione | Data | Commento 
+
+
+| Versione 1.0 | 07/2025 | Versione iniziale 
+|===
