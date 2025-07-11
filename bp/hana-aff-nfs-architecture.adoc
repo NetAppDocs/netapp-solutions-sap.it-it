@@ -87,7 +87,7 @@ I server dei siti DR possono essere utilizzati come sistemi di sviluppo/test dur
 
 Entrambi i metodi di replica consentono di eseguire test del workflow di DR senza influenzare l'RPO e l'RTO. I volumi FlexClone vengono creati sullo storage e collegati ai server di test del DR.
 
-image:saphana_aff_nfs_image7.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_nfs_image7b.png["SnapMirror di NetApp"]
 
 La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage secondario non viene completata per qualsiasi motivo, l'i/o dell'applicazione non riesce, garantendo così che i sistemi di storage primario e secondario siano identici. L'i/o dell'applicazione al primario riprende solo dopo che la relazione SnapMirror ritorna allo stato InSync. In caso di guasto dello storage primario, l'i/o dell'applicazione può essere ripristinato sullo storage secondario dopo il failover senza perdita di dati. In modalità StrictSync, l'RPO è sempre zero.
 
@@ -97,4 +97,4 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito fornisce alta disponibilità locale e viene utilizzato per il carico di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.
 
-image:saphana_aff_nfs_image8.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:saphana_aff_image7a.png["IP NetApp MetroCluster"]

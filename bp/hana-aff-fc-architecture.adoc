@@ -72,21 +72,17 @@ Per informazioni dettagliate sulle soluzioni di disaster recovery SAP HANA, vede
 
 === Replica dello storage basata su SnapMirror
 
-La figura seguente mostra una soluzione di disaster recovery a tre siti che utilizza la replica sincrona di SnapMirror nel data center di DR locale e SnapMirror asincrono per replicare i dati nel data center di DR remoto.
+La figura seguente mostra una soluzione di disaster recovery a tre siti che utilizza la sincronizzazione attiva sincrona di SnapMirror con il data center di disaster recovery locale e la sincronizzazione asincrona di SnapMirror per replicare i dati sul data center di disaster recovery remoto. La sincronizzazione attiva di SnapMirror consente ai servizi aziendali di continuare a funzionare anche in caso di guasto completo del sito, supportando il failover trasparente delle applicazioni utilizzando una copia secondaria (RPO=0 e RTO=0). Non sono richiesti interventi manuali o script personalizzati per attivare un failover con la sincronizzazione attiva di SnapMirror. A partire da ONTAP 9.15.1, la sincronizzazione attiva SnapMirror supporta una funzionalità Active/Active simmetrica. Active/Active simmetrico consente operazioni di i/o in lettura e scrittura da entrambe le copie di una LUN protetta con replica sincrona bidirezionale, in modo che entrambe le copie LUN possano servire le operazioni di i/o a livello locale.
 
-La replica dei dati con SnapMirror sincrono fornisce un RPO pari a zero. La distanza tra il data center DR principale e quello locale è limitata a circa 100 km.
+Maggiori dettagli possono essere trovati su  https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Panoramica della sincronizzazione attiva di SnapMirror in ONTAP"] ..
 
-La protezione dai guasti del sito di DR primario e locale viene eseguita replicando i dati in un terzo data center di DR remoto utilizzando SnapMirror asincrono. L'RPO dipende dalla frequenza degli aggiornamenti di replica e dalla velocità di trasferimento. In teoria, la distanza è illimitata, ma il limite dipende dalla quantità di dati da trasferire e dalla connessione disponibile tra i data center. I valori RPO tipici sono compresi nell'intervallo da 30 minuti a più ore.
-
-L'RTO per entrambi i metodi di replica dipende principalmente dal tempo necessario per avviare il database HANA nel sito di DR e caricare i dati in memoria. Supponendo che i dati siano letti con un throughput di 1000 Mbps, il caricamento di 1 TB di dati richiederebbe circa 18 minuti.
+L'RTO per la replica asincrona di SnapMirror dipende principalmente dal tempo necessario per avviare il database HANA nel sito DR e caricare i dati nella memoria. Supponendo che i dati siano letti con un throughput di 1000 Mbps, il caricamento di 1 TB di dati richiederebbe circa 18 minuti.
 
 I server dei siti DR possono essere utilizzati come sistemi di sviluppo/test durante il normale funzionamento. In caso di disastro, i sistemi di sviluppo/test devono essere spenti e avviati come server di produzione DR.
 
 Entrambi i metodi di replica consentono di eseguire test del workflow di DR senza influenzare l'RPO e l'RTO. I volumi FlexClone vengono creati sullo storage e collegati ai server di test del DR.
 
-image:saphana_aff_fc_image6.png["Soluzione SnapMirror"]
-
-La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage secondario non viene completata per qualsiasi motivo, l'i/o dell'applicazione non riesce, garantendo così che i sistemi di storage primario e secondario siano identici. L'i/o dell'applicazione al primario riprende solo dopo che la relazione SnapMirror ritorna allo stato InSync. In caso di guasto dello storage primario, l'i/o dell'applicazione può essere ripristinato sullo storage secondario dopo il failover senza perdita di dati. In modalità StrictSync, l'RPO è sempre zero.
+image:saphana_aff_fc_image6a.png["Soluzione SnapMirror"]
 
 
 
@@ -94,4 +90,4 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito fornisce alta disponibilità locale e viene utilizzato per il carico di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.
 
-image:saphana_aff_fc_image7.png["NetApp MetroCluster"]
+image:saphana_aff_image7a.png["NetApp MetroCluster"]

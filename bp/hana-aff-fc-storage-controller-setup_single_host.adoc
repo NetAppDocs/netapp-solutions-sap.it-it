@@ -1,0 +1,131 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-storage-controller-setup_single_host.html 
+keywords: storage efficiency, netapp volume encryption, quality of service, qos, fabricpool, Disk shelf, sas, fcp port sets, linux lvm, 
+summary: 'Questa sezione descrive la configurazione del sistema storage NetApp. È necessario completare l"installazione e la configurazione primaria in base alle corrispondenti guide di configurazione e configurazione di Data ONTAP.' 
+---
+= Configurazione del controller di archiviazione - singolo host
+:allow-uri-read: 
+
+
+
+
+== Configurazione del controller di archiviazione - singolo host
+
+[role="lead"]
+Questa sezione descrive la configurazione del sistema di archiviazione NetApp specifico per i sistemi SAP HANA a host singolo
+
+
+
+== Configurazione di volumi e LUN per sistemi SAP HANA a host singolo
+
+La figura seguente mostra la configurazione dei volumi di quattro sistemi SAP HANA a host singolo. I volumi di dati e log di ciascun sistema SAP HANA vengono distribuiti a diversi storage controller. Ad esempio, volume `SID1_data_mnt00001` È configurato sul controller A e sul volume `SID1_log_mnt00001` È configurato sul controller B. All'interno di ciascun volume viene configurato un singolo LUN.
+
+
+NOTE: Se per i sistemi SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e i volumi di log possono anche essere memorizzati nello stesso storage controller.
+
+image:saphana_aff_fc_image16a.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Per ogni host SAP HANA, un volume di dati, un volume di log e un volume per `/hana/shared` sono configurati. La seguente tabella mostra una configurazione di esempio con quattro sistemi SAP HANA a host singolo.
+
+|===
+| Scopo | Aggregato 1 al controller A. | Aggregato 2 al controller A. | Aggregato 1 al controller B. | Aggregato 2 al controller B. 
+
+
+| Dati, log e volumi condivisi per il sistema SID1 | Volume di dati: SID1_data_mnt00001 | Volume condiviso: SID1_shared | – | Volume di log: SID1_log_mnt00001 
+
+
+| Dati, log e volumi condivisi per il sistema SID2 | – | Volume di log: SID2_log_mnt00001 | Volume di dati: SID2_data_mnt00001 | Volume condiviso: SID2_shared 
+
+
+| Dati, log e volumi condivisi per il sistema SID3 | Volume condiviso: SID3_shared | Volume di dati: SID3_data_mnt00001 | Volume di log: SID3_log_mnt00001 | – 
+
+
+| Dati, log e volumi condivisi per il sistema SID4 | Volume di log: SID4_log_mnt00001 | – | Volume condiviso: SID4_shared | Volume di dati: SID4_data_mnt00001 
+|===
+La seguente tabella mostra un esempio di configurazione del punto di montaggio per un sistema a host singolo.
+
+|===
+| LUN | Punto di montaggio sull'host SAP HANA | Nota 
+
+
+| SID1_data_mnt00001 | /hana/data/SID1/mnt00001 | Montato usando /etc/fstab entry 
+
+
+| SID1_log_mnt00001 | /hana/log/SID1/mnt00001 | Montato usando /etc/fstab entry 
+
+
+| SID1_shared | /hana/shared/SID1 | Montato usando /etc/fstab entry 
+|===
+
+NOTE: Con la configurazione descritta, il `/usr/sap/SID1` La directory in cui è memorizzata la home directory predefinita dell'utente SID1adm si trova sul disco locale. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di `SID1_shared` volume per `/usr/sap/SID1` directory in modo che tutti i file system si trovino nello storage centrale.
+
+
+
+== Configurazione di volumi e LUN per sistemi SAP HANA a host singolo che utilizzano Linux LVM
+
+Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso. La seguente tabella mostra un esempio di due LUN per gruppo di volumi.
+
+
+NOTE: Non è necessario utilizzare LVM con più LUN per soddisfare i KPI SAP HANA. Una singola configurazione del LUN soddisfa i KPI richiesti.
+
+|===
+| Scopo | Aggregato 1 al controller A. | Aggregato 2 al controller A. | Aggregato 1 al controller B. | Aggregato 2 al controller B. 
+
+
+| Dati, log e volumi condivisi per sistemi basati su LVM | Volume di dati: SID1_data_mnt00001 | Volume condiviso: Volume SID1_shared log2: SID1_log2_mnt00001 | Volume Data2: SID1_data2_mnt00001 | Volume di log: SID1_log_mnt00001 
+|===
+Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici, come indicato nella tabella seguente.
+
+|===
+| Volume logico/LUN | Punto di montaggio sull'host SAP HANA | Nota 
+
+
+| LV: SID1_data_mnt0000-vol | /hana/data/SID1/mnt00001 | Montato usando /etc/fstab entry 
+
+
+| LV: SID1_log_mnt00001-vol | /hana/log/SID1/mnt00001 | Montato usando /etc/fstab entry 
+
+
+| LUN: SID1_shared | /hana/shared/SID1 | Montato usando /etc/fstab entry 
+|===
+
+NOTE: Con la configurazione descritta, il `/usr/sap/SID1` La directory in cui è memorizzata la home directory predefinita dell'utente SID1adm si trova sul disco locale. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di `SID1_shared` volume per `/usr/sap/SID1` directory in modo che tutti i file system si trovino nello storage centrale.
+
+
+
+=== Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori tramite la CLI
+
+Questa sezione mostra un esempio di configurazione mediante la riga di comando con ONTAP 9 per un sistema host singolo SAP HANA con SID FC5 mediante LVM e due LUN per gruppo di volumi LVM:
+
+. Creare tutti i volumi necessari.
++
+....
+vol create -volume FC5_data_mnt00001 -aggregate aggr1_1 -size 1200g  -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
+vol create -volume FC5_log_mnt00001  -aggregate aggr1_2 -size 280g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
+vol create -volume FC5_data2_mnt00001 -aggregate aggr1_2 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
+vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
+vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -space-guarantee none
+....
+. Creare tutte le LUN.
++
+....
+lun create -path  /vol/FC5_data_mnt00001/FC5_data_mnt00001   -size 1t -ostype linux -space-reserve disabled -space-allocation disabled -class regular
+lun create -path /vol/FC5_data2_mnt00001/FC5_data2_mnt00001 -size 1t -ostype linux -space-reserve disabled -space-allocation disabled -class regular
+lun create -path /vol/FC5_log_mnt00001/FC5_log_mnt00001 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
+lun create -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
+....
+. Creare il gruppo iniziatore per tutte le porte appartenenti agli host sythe di FC5.
++
+....
+lun igroup create -igroup HANA-FC5 -protocol fcp -ostype linux -initiator 10000090fadcc5fa,10000090fadcc5fb -vserver hana
+....
+. Mappare tutti i LUN al gruppo iniziatore creato.
++
+....
+lun map -path /vol/FC5_data_mnt00001/FC5_data_mnt00001    -igroup HANA-FC5
+lun map -path /vol/FC5_data2_mnt00001/FC5_data2_mnt00001  -igroup HANA-FC5
+lun map -path /vol/FC5_log_mnt00001/FC5_log_mnt00001  -igroup HANA-FC5
+lun map -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001  -igroup HANA-FC5
+....
+
