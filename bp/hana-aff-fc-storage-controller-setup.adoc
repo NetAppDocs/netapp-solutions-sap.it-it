@@ -96,12 +96,12 @@ La seguente panoramica riassume i passaggi necessari per la configurazione dello
 . Creare una Storage Virtual Machine (SVM), come descritto in <<Configurazione della macchina virtuale per lo storage>>.
 . Creare interfacce logiche (LIF), come descritto in <<Configurazione dell'interfaccia logica>>.
 . Creare gruppi di iniziatori (igroup) con nomi mondiali (WWN) dei server HANA come descritto nella sezione <<Gruppi di iniziatori>> .
-. Creare e configurare volumi e LUN all'interno degli aggregati come descritto nella sezione link:hana-aff-fc-host-setup_single_host.html["Configurazione host singolo"] per singoli host o in sezione link:hana-aff-fc-host-setup_multiple_hosts.html["Configurazione host multipli"]
+. Creare e configurare volumi e LUN all'interno degli aggregati come descritto nella sezione link:hana-aff-fc-storage-controller-setup_single_host.html["Configurazione host singolo"] per singoli host o in sezione link:hana-aff-fc-storage-controller-setup_multiple_hosts.html["Configurazione host multipli"]
 
 
 
 
-== Connessione a shelf di dischi
+== Collegamenti del ripiano del disco
 
 
 
@@ -116,7 +116,7 @@ image:saphana_aff_fc_image10.png["Connessione agli shelf di dischi DS224C"]
 
 
 
-=== Shelf di dischi basati su NVMe (100 GbE)
+=== Shelf dei dischi basati su NVMe
 
 Ogni shelf di dischi NS224 NVMe è collegato a due porte 100GbE per controller, come illustrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha. ADPv2 viene utilizzato anche per lo shelf di dischi NS224.
 

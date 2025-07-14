@@ -5,12 +5,13 @@ keywords: multipathing, fcp, hba, configure
 summary: 'Prima di configurare l"host, le utility host SAN di NetApp devono essere scaricate dal sito del supporto NetApp e installate sui server HANA. La documentazione dell"utility host include informazioni sul software aggiuntivo che deve essere installato in base all"HBA FCP utilizzato.' 
 ---
 = Configurazione dell'host
+:hardbreaks:
 :allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
 
-
-
-
-== Configurazione dell'host
 
 [role="lead"]
 Prima di configurare l'host, è necessario scaricare le utility host NETAPP SAN da http://mysupport.netapp.com/["Supporto NetApp"^] E installato sui server HANA. La documentazione dell'utility host include informazioni sul software aggiuntivo che deve essere installato in base all'HBA FCP utilizzato.

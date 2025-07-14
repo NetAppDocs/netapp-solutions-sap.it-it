@@ -74,10 +74,7 @@ NOTE: I comandi di esempio di host multipli mostrano un sistema HANA a host mult
 
 === Creare punti di montaggio
 
-Per creare le directory dei punti di montaggio richieste, eseguire una delle seguenti operazioni:
-
-* Per un sistema a host singolo, impostare le autorizzazioni e creare punti di montaggio sull'host del database.
-
+Creare le directory dei punti di montaggio richiesti e impostare le autorizzazioni sull'host del database:
 
 ....
 sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001
@@ -91,21 +88,15 @@ sapcc-hana-tst:/ # chmod 777 /hana/shared
 
 === Montare i file system
 
-Per montare i file system durante l'avvio del sistema utilizzando `/etc/fstab` file di configurazione, attenersi alla seguente procedura:
+Per montare i file system durante l'avvio del sistema utilizzando  `/etc/fstab` file di configurazione, aggiungere i file system richiesti al  `/etc/fstab` file di configurazione:
 
-* Per un sistema a host singolo, aggiungere i file system richiesti a `/etc/fstab` file di configurazione.
-+
 ....
 # cat /etc/fstab
 /dev/mapper/hana-FC5_shared /hana/shared xfs defaults 0 0
 /dev/mapper/FC5_log_mnt00001-vol /hana/log/FC5/mnt00001 xfs relatime,inode64 0 0
 /dev/mapper/FC5_data_mnt00001-vol /hana/data/FC5/mnt00001 xfs relatime,inode64 0 0
 ....
-+
 
 NOTE: I file system XFS per i LUN di dati e log devono essere montati con `relatime` e. `inode64` opzioni di montaggio.
 
-+
 Per montare i file system, eseguire il comando  `mount –a` comando sull'host.
-
-

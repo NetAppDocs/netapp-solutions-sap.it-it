@@ -66,14 +66,14 @@ NOTE: Il limite si applica anche alle letture. Pertanto, utilizza un numero suff
 
 La seguente panoramica riassume i passaggi necessari per la configurazione dello storage. Ogni fase viene descritta in maggiore dettaglio nelle sezioni successive. In questa sezione, si presuppone che l'hardware di storage sia configurato e che il software ONTAP sia già installato. Inoltre, la connessione delle porte FCP dello storage al fabric SAN deve essere già attiva.
 
-. Verificare la corretta configurazione degli shelf di dischi, come descritto in <<Shelf di dischi basati su NVMe (100 GbE)>>.
+. Verificare la corretta configurazione degli shelf di dischi, come descritto in <<Shelf dei dischi basati su NVMe>>.
 . Creare gruppi di iniziatori (igroup) con nomi mondiali (WWN) dei server HANA come descritto nella sezione link:saphana-asa-fc-storage-controller-setup.html#initiator-groups <<Gruppi di iniziatori>> .
 . Crea LUN e mappali sui server descritti nella sezione link:hana-asa-fc-storage-controller-setup_single_host.html["Configurazione LUN per sistemi SAP HANA a host singolo"] E link:hana-asa-fc-storage-controller-setup_multiple_hosts.html["Configurazione LUN per sistemi multi-host SAP HANA"]
 
 
 
 
-=== Shelf di dischi basati su NVMe (100 GbE)
+=== Shelf dei dischi basati su NVMe
 
 Ogni shelf di dischi NS224 NVMe è collegato a due porte 100GbE per controller, come illustrato nella figura seguente. I dischi vengono distribuiti automaticamente a entrambi i controller della coppia HA.
 
