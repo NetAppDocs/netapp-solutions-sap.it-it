@@ -525,15 +525,10 @@
   <block id="d8ee68f6803fad6b40fde1bf30891d5c" category="cell">/hana/shared/SID1</block>
   <block id="8d4e658f528a31efe4237fe11774716f" category="section-title">Configurazione di volumi e LUN per sistemi SAP HANA a host singolo che utilizzano Linux LVM</block>
   <block id="4f2eb711021dab33e5ff7c3395979045" category="paragraph">Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso. La seguente tabella mostra un esempio di due LUN per gruppo di volumi.</block>
-  <block id="414644d9944d8acf448d00964757d116" category="admonition">Non è necessario utilizzare LVM con più LUN per soddisfare i KPI SAP HANA. Una singola configurazione del LUN soddisfa i KPI richiesti.</block>
   <block id="50c8a736d0d7665eb46c9696d32e54b3" category="cell">Dati, log e volumi condivisi per sistemi basati su LVM</block>
   <block id="e419668a145069bd5df27d1d94e5bf5a" category="cell">Volume condiviso: Volume SID1_shared log2: SID1_log2_mnt00001</block>
   <block id="c5a46bab63449b2e1afaed056128e704" category="cell">Volume Data2: SID1_data2_mnt00001</block>
-  <block id="6ca08fbeb2f69e5ac6d7d31de1c0d50e" category="paragraph">Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici. La tabella seguente elenca i punti di montaggio per i sistemi a host singolo che utilizzano LVM.</block>
   <block id="20c772a627871f53550c990cac40e436" category="cell">Volume logico/LUN</block>
-  <block id="4dbf191e4ed6b7c6ecc5f37903313222" category="cell">LV: SID1_data_mnt0000-vol</block>
-  <block id="45cf28b4bb0bed9fa061ae20911813ad" category="cell">LV: SID1_log_mnt00001-vol</block>
-  <block id="0a0eb6344c43262455dfef7dd783c9a2" category="cell">LUN: SID1_shared</block>
   <block id="b25b558581b55b9f2fe2ef166b8c7153" category="section-title">Configurazione di volumi e LUN per sistemi SAP HANA con host multipli</block>
   <block id="159562ba9c8d36ce5afba352e4de35a9" category="paragraph">Il<block ref="b61595b5b7b716bd6b8bd21e4fa4a3bf" prefix=" " category="inline-code"></block> Il volume deve essere accessibile da tutti gli host HANA e viene quindi esportato utilizzando NFS. Anche se non sono disponibili KPI specifici per le performance per<block ref="b61595b5b7b716bd6b8bd21e4fa4a3bf" prefix=" " category="inline-code"></block> File system, NetApp consiglia di utilizzare una connessione Ethernet a 10 GB.</block>
   <block id="11862afda87479323583a609effa0913" category="admonition">Se per il sistema SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e log possono essere memorizzati anche sullo stesso storage controller.</block>
@@ -553,15 +548,9 @@
   <block id="7e81644459f05c7fe5ef716463a0b0fd" category="cell">Montato su tutti gli host usando NFS e /etc/fstab entry</block>
   <block id="c054b3fc8b39c77b600c774805522378" category="section-title">Configurazione di volumi e LUN per sistemi SAP HANA con host multipli che utilizzano Linux LVM</block>
   <block id="ea15b968cdc22cb1b865eba6daa0eae0" category="paragraph">Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso. La seguente tabella mostra un esempio di due LUN per gruppo di volumi per un sistema host multiplo SAP HANA 2+1.</block>
-  <block id="7e819a8bd73b862fc9b80deb044fa7da" category="admonition">Non è necessario utilizzare LVM per combinare diversi LUN per soddisfare i KPI SAP HANA. Una singola configurazione del LUN soddisfa i KPI richiesti.</block>
   <block id="4d9935e6cd83034a64b5ac62866a0738" category="cell">Volume log2: SID_log2_mnt00001</block>
   <block id="ce92b52ec6796984f134f3d663d31dd9" category="cell">Volume log2: SID_log2_mnt00002</block>
-  <block id="70993f32e0c2ae5000f9a5a9cbf641e4" category="paragraph">Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici:</block>
   <block id="120bb07a74c62db6e646c3e4c6894343" category="cell">Volume logico (LV) o volume</block>
-  <block id="e0aca5a9c63604d53aca20804da97330" category="cell">LV: SID_data_mnt00001-vol</block>
-  <block id="e865dd471095d94a2e4b63c8a0f33860" category="cell">LV: SID_log_mnt00001-vol</block>
-  <block id="711212cf75d514aac51d33222c3265b1" category="cell">LV: SID_data_mnt00002-vol</block>
-  <block id="57d1d1afeed57e5be9d3694589233736" category="cell">LV: SID_log_mnt00002-vol</block>
   <block id="b61595b5b7b716bd6b8bd21e4fa4a3bf" category="cell">/hana/shared</block>
   <block id="941ad2feba868268ee283fe1886c4440" category="paragraph">Le opzioni dei volumi elencate nella tabella seguente devono essere verificate e impostate su tutte le SVM.</block>
   <block id="203165a49e3a391bdbc44e3a05d54279" category="cell">ONTAP 9</block>
@@ -854,18 +843,14 @@
   <block id="a2ab47e506561509501f3015dfd353bb" category="admonition">Se per i sistemi SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e i volumi di log possono anche essere memorizzati nello stesso storage controller.</block>
   <block id="bf2694976353bf0fd87866d930f0f42d" category="paragraph">La seguente tabella mostra un esempio di configurazione del punto di montaggio per un sistema a host singolo.</block>
   <block id="f26f6073b7776e8f86f6bf13d02a97ca" category="admonition">Con la configurazione descritta, il<block ref="1c6e4d45ea710f75ef527bf5644cf69e" prefix=" " category="inline-code"></block> La directory in cui è memorizzata la home directory predefinita dell'utente SID1adm si trova sul disco locale. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di<block ref="ab07e4bbf6e507a26a731683320de6e3" prefix=" " category="inline-code"></block> volume per<block ref="1c6e4d45ea710f75ef527bf5644cf69e" prefix=" " category="inline-code"></block> directory in modo che tutti i file system si trovino nello storage centrale.</block>
-  <block id="bf2b73e5a1069f54823f3690829c44f7" category="admonition">Non è necessario utilizzare LVM con più LUN per soddisfare i KPI SAP HANA. Una singola configurazione del LUN soddisfa i KPI richiesti.</block>
   <block id="f077106d32b9bc50fe9eeac1cd3d7c18" category="paragraph">Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici, come indicato nella tabella seguente.</block>
   <block id="6b7ff1a28666a16440c8c6ea6637d7a5" category="paragraph">La figura seguente mostra la configurazione di un volume di un sistema SAP HANA 4+1 multihost. I volumi di dati e i volumi di log di ciascun host SAP HANA vengono distribuiti a diversi storage controller. Ad esempio, il volume<block ref="bd8e6b40602529d6e57fdd885a48d151" prefix=" " category="inline-code"></block> È configurato sul controller A e sul volume<block ref="b0344f7eade7f841bc1eb24d9175cad3" prefix=" " category="inline-code"></block> È configurato sul controller B. Viene configurato un LUN per ciascun volume.</block>
-  <block id="453b8497395d5bbd79a0c8e798f0c9cc" category="admonition">I sistemi NetApp ASA AFF non supportano NFS come protocollo. NetApp consiglia di utilizzare un sistema AFF o FAS aggiuntivo per<block ref="b61595b5b7b716bd6b8bd21e4fa4a3bf" prefix=" " category="inline-code"></block> file system.</block>
   <block id="f4674e3b297184ff65e01cfe3e66e78c" category="paragraph">Per ogni host SAP HANA, vengono creati un volume di dati e un volume di log. Il<block ref="b61595b5b7b716bd6b8bd21e4fa4a3bf" prefix=" " category="inline-code"></block> Il volume viene utilizzato da tutti gli host del sistema SAP HANA. La seguente tabella mostra una configurazione di esempio per un sistema SAP HANA 4+1 a host multiplo.</block>
   <block id="8bb34960315f3235a2496b26df78d447" category="paragraph">La seguente tabella mostra la configurazione e i punti di montaggio di un sistema a più host con quattro host SAP HANA attivi.</block>
   <block id="18eff1c18c750a16e21791332618bb66" category="cell">LUN o volume</block>
   <block id="3e7047d2bf94461f14196805112df4f5" category="admonition">Con la configurazione descritta, il<block ref="e049803e41fabe0f53c4ead4b0f14350" prefix=" " category="inline-code"></block> La directory in cui è memorizzata la home directory predefinita di user sidadm si trova sul disco locale di ciascun host HANA. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare altre quattro sottodirectory in<block ref="07fe7fc9aa3cd33458708758a4a5854e" prefix=" " category="inline-code"></block> volume per<block ref="e049803e41fabe0f53c4ead4b0f14350" prefix=" " category="inline-code"></block> file system in modo che ogni host di database disponga di tutti i file system sullo storage centrale.</block>
   <block id="fb98d6eb62d89d96b064be4fe17f583e" category="paragraph">Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso.</block>
-  <block id="3ba3509b7579ef045ff4c77476c7cf11" category="admonition">Non è necessario utilizzare LVM per combinare diversi LUN per soddisfare i KPI SAP HANA. Una singola configurazione del LUN soddisfa i KPI richiesti.</block>
   <block id="f7be036cddf21af55fc52689e1f3055b" category="paragraph">La seguente tabella mostra un esempio di due LUN per gruppo di volumi per un sistema host multiplo SAP HANA 2+1.</block>
-  <block id="a86be254d15f1254d56b97c8755a5b77" category="admonition">Il<block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block> Fa parte delle utility host di NetApp e deve essere installato su ciascun host SAP HANA. Per ulteriori informazioni, vedere la sezione "host_setup".</block>
   <block id="8c4751bd2d7d17062a8b536388ba69bc" category="section-title">Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori mediante la CLI</block>
   <block id="d595b9142c1fd0d3ea19c8cd10165661" category="list-text">Creare il gruppo iniziatore per tutti i server appartenenti al sistema FC5.</block>
   <block id="f987b1e962233a1893b72bf1d65f3a21" category="list-text">Mappare tutti i LUN al gruppo iniziatore creato.</block>
@@ -3164,8 +3149,6 @@
   <block id="be89498d2f8a22ce47c02ba9795fe2af" category="section-title">Brevetti</block>
   <block id="d0b19d36be2c5f16e9aef46c8a452d3d" category="paragraph">Un elenco aggiornato dei brevetti di proprietà di NetApp è disponibile all'indirizzo:</block>
   <block id="56c34c6410dd45c5cec44149ad0ce037" category="section-title">Direttiva sulla privacy</block>
-  <block id="c0227cef6f07a8cd2ac72f2945b031aa" category="section-title">Open source</block>
-  <block id="9b73989307c1975dfa4d5e1581e4afe8" category="paragraph">I file di avviso forniscono informazioni sul copyright e sulle licenze di terze parti utilizzate nel software NetApp.</block>
   <block id="8c0446786df20f3bab9e76c7238785bb" category="summary">Strumenti e suggerimenti per le Best practice di configurazione SAP</block>
   <block id="c22c310ff34da15c4cf9e24071a8d99a" category="doc">Strumenti per le Best practice di configurazione SAP</block>
   <block id="37efeba04a4ec5b4f483120771d49605" category="paragraph">Panoramica degli strumenti per il materiale di supporto sulle soluzioni e le Best practice per la configurazione SAP.</block>
@@ -5489,7 +5472,6 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="2ecd8267df97e61a6026b9d97834abe5" category="admonition"><block ref="3a8e4afa851609127d534b04e7d29c08" prefix=" " category="inline-code"></block>Lo strumento fa parte delle utilità host NetApp e deve essere installato su ogni host SAP HANA. Ulteriori dettagli sono disponibili nella sezione <block ref="651d6af67f47799de3de7127400bd073" category="inline-link-macro-rx"></block></block>
   <block id="8db99fa5fe9e83e6fc301d2677a74c9e" category="summary">Questa sezione descrive come creare LUN per un sistema host multiplo</block>
   <block id="d5395e37adfb8bd3cabb8db1bdb0abee" category="paragraph">Questa sezione descrive la configurazione del sistema di archiviazione NetApp specifico per i sistemi multi-host SAP HANA</block>
-  <block id="b28af8f8515ecce98f0a5be7515b2b61" category="section-title">Configurazione LUN per sistemi multi-host SAP HANA</block>
   <block id="ca896343d41b326aec5877cfd4d956dd" category="paragraph">Linux LVM viene utilizzato per aumentare le prestazioni e risolvere i limiti delle dimensioni LUN.</block>
   <block id="5e6b40484940ec07f5b5ecf3e4918dfc" category="cell">Volume logico (LV)</block>
   <block id="7cad490ec2fc5e1b8cbade09d487d514" category="cell">LV: FC5_data_mnt00001-vol</block>
@@ -5505,7 +5487,6 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="5b10d0b1272d218e55f6473abcfbae9d" category="admonition">Con la configurazione descritta, il <block ref="ea6f2eb226c57300be10268ea33e50e3" prefix=" " category="inline-code"></block> La directory in cui è memorizzata la directory home predefinita dell'utente FC5adm si trova sul disco locale di ciascun host HANA. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di utilizzare quattro LUN aggiuntive per <block ref="ea6f2eb226c57300be10268ea33e50e3" prefix=" " category="inline-code"></block> file system di ciascun host in modo che ogni host del database abbia tutti i suoi file system sullo storage centrale.</block>
   <block id="d4f54d18b3b1b7422185c0c71038ff15" category="section-title">Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori</block>
   <block id="b54a0f5023cc826b59cab28cc23f22cc" category="section-title">Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori tramite la CLI</block>
-  <block id="2d39c77b49ea3785a21a4c7b0c611e44" category="paragraph">Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9 per un sistema host multiplo SAP HANA 2+1 con FC5 FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:</block>
   <block id="cf92b7cb5d4dd0e7883961b1bc9e7ab9" category="paragraph">Questa sezione descrive la configurazione del sistema di archiviazione NetApp specifico per i sistemi SAP HANA a host singolo</block>
   <block id="943a742a82131a53ada69df9430a1877" category="paragraph">Linux LVM viene utilizzato per aumentare le prestazioni e risolvere i limiti delle dimensioni LUN. Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici, come indicato nella tabella seguente.</block>
   <block id="f8f9e88eaa58d2028a8b1e060e5cf04d" category="cell">LV: FC5_data_mnt0000-vol</block>
@@ -5725,4 +5706,88 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="b46c19227accdcf131acd89ec837d719" category="list-text">Verificare la corretta configurazione degli shelf di dischi, come descritto in <block ref="03b6386ad6a1dc10d9baa30820f92e6f" category="inline-xref-macro-rx"></block>.</block>
   <block id="5fd1fe4406610035d26bddd7285e2208" category="list-text">Creare e configurare volumi e LUN all'interno degli aggregati come descritto nella sezione <block ref="5cdae6b5e4c2b7c1786a252c1b2db361" category="inline-link-macro-rx"></block> per singoli host o in sezione <block ref="576df1336ee1cb2a072bb64be834429d" category="inline-link-macro-rx"></block> per più host</block>
   <block id="fe19c797763ffd518a9713847adadc9f" category="section-title">Scaffali per dischi NVMe</block>
+  <block id="ea13b0292be295ca3a3610f1baba7af5" category="cell">Volume: FC5_shared</block>
+  <block id="74a45bc8a76dc8851afe39b96fb0a96a" category="admonition">Con la configurazione descritta, il<block ref="ea6f2eb226c57300be10268ea33e50e3" prefix=" " category="inline-code"></block> La directory in cui è memorizzata la directory home predefinita dell'utente FC5adm si trova sul disco locale di ciascun host HANA.  In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare quattro sottodirectory aggiuntive in<block ref="9bfe65825cda87178edc3ba9f8299b5b" prefix=" " category="inline-code"></block> volume per il<block ref="ea6f2eb226c57300be10268ea33e50e3" prefix=" " category="inline-code"></block> file system in modo che ogni host del database abbia tutti i suoi file system sullo storage centrale.</block>
+  <block id="731029fe8023134b7b2cfe0f6b60a062" category="paragraph">In questo capitolo viene descritta la configurazione di un singolo host SAP HANA utilizzando LINUX LVM.</block>
+  <block id="1347f8e1e71f136f4775e716ea4ffe79" category="cell">/hana/data/FC51/mnt00001</block>
+  <block id="8605d3de78deff9736f57392e34596e6" category="admonition">Con la configurazione descritta, il<block ref="ea6f2eb226c57300be10268ea33e50e3" prefix=" " category="inline-code"></block> la directory in cui è memorizzata la directory home predefinita dell'utente FC5adm si trova sul disco locale.  In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di<block ref="9bfe65825cda87178edc3ba9f8299b5b" prefix=" " category="inline-code"></block> volume per il<block ref="ea6f2eb226c57300be10268ea33e50e3" prefix=" " category="inline-code"></block> directory in modo che tutti i file system siano nella memoria centrale.</block>
+  <block id="96b45d8155e675bfeba1a557f8d2c076" category="admonition">I sistemi NetApp ASA non supportano NFS come protocollo.  NetApp consiglia di utilizzare un sistema AFF o FAS aggiuntivo per<block ref="b61595b5b7b716bd6b8bd21e4fa4a3bf" prefix=" " category="inline-code"></block> sistema di file.</block>
+  <block id="af7dc91d6c9878ceafb1b3fda7b49ff6" category="admonition">Non è necessario utilizzare LVM per combinare più LUN per soddisfare i KPI di SAP HANA, ma è consigliato</block>
+  <block id="b4421a31caaf211d702cdbef54c45f59" category="admonition">Non è necessario utilizzare LVM con più LUN per soddisfare i KPI di SAP HANA, ma è consigliato.</block>
+  <block id="c3b8b3942717ccdfa536ffb850c19eec" category="paragraph">È possibile utilizzare NetApp ONTAP System Manager per creare volumi di storage e LUN e mapparli agli igroup dei server e alla CLI ONTAP .</block>
+  <block id="67890e88e0e5160d6cb44b90f45ea61a" category="section-title">Creazione di LUN e mappatura di LUN su gruppi di iniziatori tramite GUI</block>
+  <block id="bc68290108b8ab51d23362d1aaf94562" category="paragraph">Questa sezione mostra un esempio di configurazione utilizzando<block ref="6ad5e0a20f49ad6a370454bb3afc9a9e" prefix=" " category="inline-code"></block> per un sistema host multiplo SAP HANA 2+1 con SID FC5 che utilizza LVM e due LUN per gruppo di volumi LVM:</block>
+  <block id="7c626127bb2a06954519c34045e302b6" category="list-text">Accedi al<block ref="6ad5e0a20f49ad6a370454bb3afc9a9e" prefix=" " category="inline-code"></block> del tuo cluster ONTAP e scegli<block ref="8c4aa541ee911e8d80451ef8cc304806" prefix=" " category="inline-code"></block> dal menu a sinistra.</block>
+  <block id="caf7f785e92060870ad044cd4c58f8a5" category="list-text">Premere<block ref="ec211f7c20af43e742bf2570c3cb84f9" prefix=" " category="inline-code"></block></block>
+  <block id="e74f72bcf292db134a76557e398076c6" category="inline-image-macro">ONTAP System Manager - Archiviazione</block>
+  <block id="b99cc12d14d7f93f9644ebbe4e251423" category="paragraph"><block ref="b99cc12d14d7f93f9644ebbe4e251423" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="2f034fb82312475c2c86eaa7b37b2866" category="list-text">Scegliere<block ref="4dab36ac83853282fc0d7bae20c19e90" prefix=" " category="inline-code"></block></block>
+  <block id="28c9d0da97b681e3f4240f98eba3ef1f" category="inline-image-macro">ONTAP System Manager - Aggiungi storage</block>
+  <block id="896e6fb48e70839293cee9df98db83d9" category="paragraph"><block ref="896e6fb48e70839293cee9df98db83d9" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="06b97c41aa527667da7e7e745c867d3c" category="list-text">Fornire le informazioni richieste:</block>
+  <block id="07fdaa28fad4bbade25878098189637f" category="list-text">nome dei LUN dei dati, ad esempio<block ref="0732d94c1b058c8ff29a0e7586908d15" prefix="." category="inline-code"></block></block>
+  <block id="a0a9fead14f8e9bd6beb766196fe2750" category="list-text">la quantità di LUN da combinare con LVM, ad esempio 2</block>
+  <block id="fb963521d62e8baca5de6b2b0ffd1ccd" category="list-text">la dimensione di ogni LUN, ad esempio 1000 GB</block>
+  <block id="4d6cedb4bd1ccde77fefd2a974d71de0" category="list-text">scegliere<block ref="b6af823402873717782ba4f4608767e7" prefix=" " category="inline-code"></block></block>
+  <block id="302ecbd4c9f6f6c0488e8731852f7154" category="list-text">scegliere<block ref="edc9f0a5a5d57797bf68e37364743831" prefix=" " category="inline-code"></block> COME<block ref="f707c24bf34b82cbda7ce1afab8b5e26" prefix=" " category="inline-code"></block></block>
+  <block id="ad87f81d298f3904424a68b483982bca" category="list-text">scegliere<block ref="e906379c0f98afa688062e92ac0d94cb" prefix=" " category="inline-code"></block> per il<block ref="1ccf75762b2e153de8560735dcafec7b" prefix=" " category="inline-code"></block> opzione, fornire un nome, ad esempio<block ref="7ec1cfc1baa5aeab43433af3f4c2d35a" prefix=" " category="inline-code"></block> , seleziona o aggiungi gli iniziatori desiderati</block>
+  <block id="59a31f7c91f0fb3d50c4d50c2dcae323" category="list-text">Mantenere<block ref="e31a3e7ac59a5476665c7f7c45e14c31" prefix=" " category="inline-code"></block> non selezionato</block>
+  <block id="8457eef1aadf48a34435b86b7aaa16f0" category="list-text">premere<block ref="ec211f7c20af43e742bf2570c3cb84f9" prefix=" " category="inline-code"></block></block>
+  <block id="8784d5f647146dfe70b10b214a3a2fdd" category="inline-image-macro">ONTAP System Manager - Crea LUN dati</block>
+  <block id="f90a85d8f2219069e101b79e10ac325e" category="paragraph"><block ref="f90a85d8f2219069e101b79e10ac325e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="45d66fdb36c8c84bf6b708d035e41853" category="list-text">Creare i LUN dati per il prossimo host worker premendo<block ref="ec211f7c20af43e742bf2570c3cb84f9" prefix=" " category="inline-code"></block></block>
+  <block id="02ed70f96574f1017b25ff4f367ac4ff" category="inline-image-macro">ONTAP System Manager - Crea LUN dati aggiuntivi</block>
+  <block id="ae58399fc2b6cdb9a23d039c605755e9" category="paragraph"><block ref="ae58399fc2b6cdb9a23d039c605755e9" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="c281fd6a54589cdc5d837aef73b36268" category="list-text">il nome dei LUN di dati aggiuntivi, ad esempio<block ref="6ce7d5981e394c99f64f1b0215329269" prefix=" " category="inline-code"></block></block>
+  <block id="5f62ac587839660fa2ea6a6c3b5d7999" category="list-text">scegli la mappatura creata in precedenza<block ref="7ec1cfc1baa5aeab43433af3f4c2d35a" prefix=" " category="inline-code"></block> per il<block ref="1ccf75762b2e153de8560735dcafec7b" prefix=" " category="inline-code"></block> opzione</block>
+  <block id="4cbebe53efcb8e9b23e0f55ac0aa03e0" category="inline-image-macro">ONTAP System Manager - Crea LUN dati</block>
+  <block id="f49ebf8541cfd6e434663646a0751828" category="paragraph"><block ref="f49ebf8541cfd6e434663646a0751828" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="5d3d2618bef5d8e4c274a84e35aa6f58" category="list-text">Ripetere i passaggi 4 e 5 per ogni host worker aggiuntivo</block>
+  <block id="07d3bacb52cc5cfae2b95ad38024bc61" category="list-text">Dopo aver creato correttamente i LUN dei dati, creare i LUN del registro premendo<block ref="ec211f7c20af43e742bf2570c3cb84f9" prefix=" " category="inline-code"></block></block>
+  <block id="14146bfdc8a39f564cd77fb78ac56230" category="inline-image-macro">ONTAP System Manager - Crea LUN di registro</block>
+  <block id="54892c3762fa9e40f2abfb8ace716ce4" category="paragraph"><block ref="54892c3762fa9e40f2abfb8ace716ce4" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="38d3bfe58a56c277581bf554d58567bb" category="list-text">il nome del registro LUN da combinare con LVM, ad esempio<block ref="65c06cc2828e391723bfb5cf196d549d" prefix=" " category="inline-code"></block></block>
+  <block id="f2f463cdd25cba04bd03ae9c978fcf8a" category="list-text">la dimensione di ogni LUN, ad esempio 260 GB</block>
+  <block id="ec3ba9cd272dc2bace8316ea5b74f511" category="paragraph"><block ref="ec3ba9cd272dc2bace8316ea5b74f511" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="0aecf7c695760ec27de2589c7174b43c" category="list-text">Creare i LUN di registro per il prossimo host worker premendo<block ref="ec211f7c20af43e742bf2570c3cb84f9" prefix=" " category="inline-code"></block></block>
+  <block id="040534489cc3ab96d2b9c1a9b4dd3584" category="inline-image-macro">ONTAP System Manager - Crea LUN di registro aggiuntivi</block>
+  <block id="967b5bf37f794d92b79fc703d07d677a" category="paragraph"><block ref="967b5bf37f794d92b79fc703d07d677a" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="1460ee577c37a9641ceef15f4ebd5a99" category="list-text">il nome dei LUN di registro aggiuntivi, ad esempio<block ref="e5a5a4aa7eb1d1dc60047ec06e0714ba" prefix=" " category="inline-code"></block></block>
+  <block id="530da82f791224fdf4ed02ce35f16033" category="paragraph"><block ref="530da82f791224fdf4ed02ce35f16033" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="e77ae688820ea0899797f6e8a2fd2341" category="list-text">Ripetere i passaggi 9 e 10 per ogni host worker aggiuntivo</block>
+  <block id="a7da894b87be1b2a1f2e6e550fbfae86" category="paragraph">Sono stati creati tutti i LUN necessari per un sistema SAP HANA multi-host.</block>
+  <block id="a19492c01beba75d08e3918c3bad4afa" category="inline-image-macro">ONTAP System Manager - Panoramica LUN</block>
+  <block id="f71c442cde1008bd67ecfdb3508bb658" category="paragraph"><block ref="f71c442cde1008bd67ecfdb3508bb658" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="6c4ed775692b60dfa35324a5b3f4d7bf" category="paragraph">Questa sezione mostra un esempio di configurazione utilizzando<block ref="6ad5e0a20f49ad6a370454bb3afc9a9e" prefix=" " category="inline-code"></block> per un sistema host singolo SAP HANA con SID FC5 che utilizza LVM e due LUN per gruppo di volumi LVM:</block>
+  <block id="e37757a957452864d513d8119c467b6a" category="list-text">il nome dei LUN dei dati, ad esempio<block ref="0732d94c1b058c8ff29a0e7586908d15" prefix="." category="inline-code"></block></block>
+  <block id="ffbf4bb11063e63557383f1fa010045d" category="paragraph"><block ref="ffbf4bb11063e63557383f1fa010045d" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="fa118acc2526207f6cb46749535ef468" category="list-text">il nome dei LUN di registro, ad esempio<block ref="65c06cc2828e391723bfb5cf196d549d" prefix=" " category="inline-code"></block></block>
+  <block id="2faf52143dd721486f45c996e0ded500" category="paragraph"><block ref="2faf52143dd721486f45c996e0ded500" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="0dde6a8a986ffedc56f4ed820236f7bb" category="list-text">Dopo aver creato correttamente i LUN di registro, creare il LUN condiviso premendo<block ref="ec211f7c20af43e742bf2570c3cb84f9" prefix=" " category="inline-code"></block></block>
+  <block id="b1cce5cd0b4d46f2a45882a434783853" category="inline-image-macro">ONTAP System Manager - Crea LUN condivisa</block>
+  <block id="17aee1cfb8dac57978b091627cecc5aa" category="paragraph"><block ref="17aee1cfb8dac57978b091627cecc5aa" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="cd4fc94119743ee614fc111808abd9e5" category="list-text">il nome del LUN condiviso, ad esempio<block ref="9bfe65825cda87178edc3ba9f8299b5b" prefix="." category="inline-code"></block></block>
+  <block id="97bb7629e83ed16ce51e71ab96d81f22" category="list-text">la quantità di LUN, ad esempio 1</block>
+  <block id="ac2b98385f9bdb4cda106d130486c553" category="list-text">la dimensione del LUN, ad esempio 520 GB</block>
+  <block id="e202505305253e821c52be15bf346b91" category="inline-image-macro">ONTAP System Manager - Crea LUN condivisi</block>
+  <block id="bf816653c9d3731a9ca6adeba22f606f" category="paragraph"><block ref="bf816653c9d3731a9ca6adeba22f606f" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a0e6aba914a6fff1219af2df9f67a134" category="paragraph">Sono stati creati tutti i LUN necessari per un sistema SAP HANA a host singolo.</block>
+  <block id="53a66df77c3b6f05620f5351b866d122" category="paragraph"><block ref="53a66df77c3b6f05620f5351b866d122" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a390eaee29bd03c83e6cee2fc64b8974" category="paragraph">In questo capitolo viene descritta la configurazione di un singolo host SAP HANA utilizzando Linux LVM.</block>
+  <block id="f1facf724edfec93ca90bbae3b165c87" category="admonition">Non è necessario utilizzare LVM per combinare più LUN per soddisfare i KPI di SAP HANA, ma è consigliato.</block>
+  <block id="1f75ae545cb5470642699c7eb92843b0" category="admonition">Non è necessario utilizzare LVM con più LUN per soddisfare i KPI SAP HANA, ma è consigliato</block>
+  <block id="cdaef5754ea3f6c219a21dfee90c7848" category="summary">Questo documento si concentra sul backup e sul ripristino per SAP HANA.</block>
+  <block id="495da755b58883e2ca5e4985ee3f602e" category="doc">SB-3965: Backup e ripristino per SAP HANA</block>
+  <block id="235cb526e2c6b642c718f0d78e3ae92e" category="section-title">La sfida</block>
+  <block id="3c4ac70408381221e011d1b8eb9ca8ce" category="paragraph">Con le operazioni di backup e ripristino di SAP HANA, la tua organizzazione deve affrontare le seguenti sfide: • Operazioni di backup prolungate con degrado delle prestazioni sui sistemi SAP di produzione • Tempi di inattività del sistema inaccettabili dovuti a lunghe operazioni di ripristino e recupero • Finestre di backup ridotte a causa della criticità delle applicazioni • La necessità di una soluzione flessibile per mitigare la corruzione logica</block>
+  <block id="34e74b1c7f4aad91715567cf698912f6" category="section-title">La soluzione</block>
+  <block id="b230779de102682fe4be587788f9b085" category="paragraph">Con le soluzioni di storage NetApp® che utilizzano il software di gestione dati NetApp ONTAP®, in combinazione con il software di protezione dati NetApp SnapCenter®, puoi affrontare tutte queste sfide.  Grazie alla tecnologia NetApp Snapshot™ inclusa nel software ONTAP , è possibile creare backup o eseguire operazioni di ripristino di set di dati di qualsiasi dimensione in pochi secondi.  SAP HANA supporta l'utilizzo di copie Snapshot basate sull'archiviazione come operazione di backup valida.</block>
+  <block id="07d632c80bac8a4755255f5e335d8974" category="inline-link-macro"><block ref="07d632c80bac8a4755255f5e335d8974" category="inline-link-rx"></block></block>
+  <block id="e3d55b357098828096098ba417d3c90c" category="paragraph"><block ref="e3d55b357098828096098ba417d3c90c" category="inline-link-macro-rx"></block></block>
+  <block id="9446c7c84986f94f08b68900006bb1e5" category="summary">Questo documento si concentra sul Disaster Recovery per SAP HANA.</block>
+  <block id="bf6723a5d293af775d564a8960e50265" category="doc">SB-3968: Disaster Recovery per SAP HANA</block>
+  <block id="24226245cbb8f6448d2fc2fad9d6d847" category="paragraph">La continuità aziendale è essenziale nelle organizzazioni IT.  Devono essere in grado di fornire servizi ad alta disponibilità per le applicazioni mission-critical di cui i loro clienti hanno bisogno per gestire le loro attività.  In caso contrario, i loro clienti subiranno un calo di produttività e le aziende di e-commerce potrebbero subire un impatto diretto sui loro ricavi.</block>
+  <block id="d9bb80ae32f686bbae368979a76f86d7" category="paragraph">NetApp ha sviluppato un portafoglio completo di tecnologie e strumenti per aiutare le organizzazioni IT a creare o adattare i propri piani di disaster recovery per rispondere a tutte le esigenze aziendali:</block>
+  <block id="6a9c098947d8b811552347f2ed990ebd" category="inline-link-macro"><block ref="6a9c098947d8b811552347f2ed990ebd" category="inline-link-rx"></block></block>
+  <block id="702c9bfa6d3b8d8b923fbeba4db3625f" category="paragraph"><block ref="702c9bfa6d3b8d8b923fbeba4db3625f" category="inline-link-macro-rx"></block></block>
 </blocks>

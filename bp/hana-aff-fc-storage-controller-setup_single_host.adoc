@@ -67,7 +67,7 @@ NOTE: Con la configurazione descritta, il `/usr/sap/SID1` La directory in cui è
 Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso. La seguente tabella mostra un esempio di due LUN per gruppo di volumi.
 
 
-NOTE: Non è necessario utilizzare LVM con più LUN per soddisfare i KPI SAP HANA. Una singola configurazione del LUN soddisfa i KPI richiesti.
+NOTE: Non è necessario utilizzare LVM con più LUN per soddisfare i KPI di SAP HANA, ma è consigliato.
 
 |===
 | Scopo | Aggregato 1 al controller A. | Aggregato 2 al controller A. | Aggregato 1 al controller B. | Aggregato 2 al controller B. 
@@ -75,23 +75,6 @@ NOTE: Non è necessario utilizzare LVM con più LUN per soddisfare i KPI SAP HAN
 
 | Dati, log e volumi condivisi per sistemi basati su LVM | Volume di dati: SID1_data_mnt00001 | Volume condiviso: Volume SID1_shared log2: SID1_log2_mnt00001 | Volume Data2: SID1_data2_mnt00001 | Volume di log: SID1_log_mnt00001 
 |===
-Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici, come indicato nella tabella seguente.
-
-|===
-| Volume logico/LUN | Punto di montaggio sull'host SAP HANA | Nota 
-
-
-| LV: SID1_data_mnt0000-vol | /hana/data/SID1/mnt00001 | Montato usando /etc/fstab entry 
-
-
-| LV: SID1_log_mnt00001-vol | /hana/log/SID1/mnt00001 | Montato usando /etc/fstab entry 
-
-
-| LUN: SID1_shared | /hana/shared/SID1 | Montato usando /etc/fstab entry 
-|===
-
-NOTE: Con la configurazione descritta, il `/usr/sap/SID1` La directory in cui è memorizzata la home directory predefinita dell'utente SID1adm si trova sul disco locale. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di `SID1_shared` volume per `/usr/sap/SID1` directory in modo che tutti i file system si trovino nello storage centrale.
-
 
 
 == Opzioni del volume

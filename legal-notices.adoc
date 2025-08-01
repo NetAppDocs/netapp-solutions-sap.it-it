@@ -40,9 +40,3 @@ link:https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf["https://
 == Direttiva sulla privacy
 
 link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.com/company/legal/privacy-policy/"^]
-
-
-
-== Open source
-
-I file di avviso forniscono informazioni sul copyright e sulle licenze di terze parti utilizzate nel software NetApp.

@@ -17,62 +17,27 @@ Questa sezione descrive la configurazione del sistema di archiviazione NetApp sp
 
 
 
-== Configurazione LUN per sistemi multi-host SAP HANA
-
-Linux LVM viene utilizzato per aumentare le prestazioni e risolvere i limiti delle dimensioni LUN.
-
-Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici, come indicato nella tabella seguente.
-
-|===
-| Volume logico (LV) | Punto di montaggio sull'host SAP HANA | Nota 
-
-
-| LV: FC5_data_mnt00001-vol | /hana/data/FC5/mnt00001 | Montato utilizzando un connettore storage 
-
-
-| LV: FC5_log_mnt00001-vol | /hana/log/FC5/mnt00001 | Montato utilizzando un connettore storage 
-
-
-| LV: FC5_data_mnt00002-vol | /hana/data/FC5/mnt00002 | Montato utilizzando un connettore storage 
-
-
-| LV: FC5_log_mnt00002-vol | /hana/log/FC5/mnt00002 | Montato utilizzando un connettore storage 
-
-
-| Condivisione NFS esterna: FC5_shared | /hana/shared | Montato su tutti gli host usando NFS e /etc/fstab entry 
-|===
-
-NOTE: I sistemi multi-host SAP HANA richiedono  `/hana/shared` File system connesso a tutti gli host di un sistema. Solitamente si tratta di una condivisione NFS fornita da un server NFS. Si consiglia di utilizzare un server NFS ad alta disponibilità, ad esempio un sistema NetApp FAS o AFF. Un'altra opzione è quella di utilizzare il server NFS integrato di un host LINUX.
-
-
-NOTE: Con la configurazione descritta, il  `/usr/sap/FC5` La directory in cui è memorizzata la directory home predefinita dell'utente FC5adm si trova sul disco locale di ciascun host HANA. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di utilizzare quattro LUN aggiuntive per  `/usr/sap/FC5` file system di ciascun host in modo che ogni host del database abbia tutti i suoi file system sullo storage centrale.
-
-
-
 == Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori
 
-Puoi utilizzare NetApp ONTAP System Manager per creare volumi di storage e LUN e associarli agli igroup dei server e all'interfaccia a riga di comando di ONTAP. In questa guida viene descritto l'utilizzo della CLI.
-
-
-NOTE: Il `sanlun` Fa parte delle utility host di NetApp e deve essere installato su ciascun host SAP HANA. Per ulteriori informazioni, vedere la sezione "host_setup".
+È possibile utilizzare NetApp ONTAP System Manager per creare volumi di storage e LUN e mapparli agli igroup dei server e alla CLI ONTAP .
 
 
 
 === Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori tramite la CLI
 
-Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9 per un sistema host multiplo SAP HANA 2+1 con FC5 FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:
+Questa sezione mostra un esempio di configurazione utilizzando la riga di comando con ONTAP 9 per un sistema host 2+1 SAP HANA con SID FC5 utilizzando LVM e due LUN per gruppo di volumi LVM:
 
 . Creare tutte le LUN.
 +
 ....
-lun create -path FC5_data_mnt00001   -size 1t -ostype linux  -class regular
-lun create -path FC5_data2_mnt00001 -size 1t -ostype linux  -class regular
-lun create -path FC5_data_mnt00002 -size 1t -ostype linux  -class regular
-lun create -path FC5_data2_mnt00002 -size 1t -ostype linux  -class regular
-lun create -path FC5_log_mnt00001 -size 260g -ostype linux  -class regular
-lun create -path FC5_log2_mnt00001 -size 260g -ostype linux  -class regular
-lun create -path FC5_log_mnt00002 -size 260g -ostype linux  -class regular
-lun create -path FC5_log2_mnt00002 -size 260g -ostype linux  -class regular
+lun create -path FC5_data_mnt00001_1 -size 1t -ostype linux  -class regular
+lun create -path FC5_data_mnt00001_2 -size 1t -ostype linux  -class regular
+lun create -path FC5_data_mnt00002_1 -size 1t -ostype linux  -class regular
+lun create -path FC5_data_mnt00002_2 -size 1t -ostype linux  -class regular
+lun create -path FC5_log_mnt00001_1 -size 260g -ostype linux  -class regular
+lun create -path FC5_log_mnt00001_2 -size 260g -ostype linux  -class regular
+lun create -path FC5_log_mnt00002_1 -size 260g -ostype linux  -class regular
+lun create -path FC5_log_mnt00002_2 -size 260g -ostype linux  -class regular
 ....
 . Creare il gruppo iniziatore per tutti i server appartenenti al sistema FC5.
 +
@@ -82,13 +47,105 @@ lun igroup create -igroup HANA-FC5 -protocol fcp -ostype linux -initiator 100000
 . Mappare tutti i LUN al gruppo iniziatore creato.
 +
 ....
-lun map -path FC5_data_mnt00001  -igroup HANA-FC5
-lun map -path FC5_data2_mnt00001  -igroup HANA-FC5
-lun map -path FC5_data_mnt00002  -igroup HANA-FC5
-lun map -path FC5_data2_mnt00002  -igroup HANA-FC5
-lun map -path FC5_log_mnt00001  -igroup HANA-FC5
-lun map -path FC5_log2_mnt00001  -igroup HANA-FC5
-lun map -path FC5_log_mnt00002  -igroup HANA-FC5
-lun map -path FC5_log2_mnt00002  -igroup HANA-FC5
+lun map -path FC5_data_mnt00001_1 -igroup HANA-FC5
+lun map -path FC5_data_mnt00001_2 -igroup HANA-FC5
+lun map -path FC5_data_mnt00002_1 -igroup HANA-FC5
+lun map -path FC5_data_mnt00002_2 -igroup HANA-FC5
+lun map -path FC5_log_mnt00001_1 -igroup HANA-FC5
+lun map -path FC5_log_mnt00001_2 -igroup HANA-FC5
+lun map -path FC5_log_mnt00002_1 -igroup HANA-FC5
+lun map -path FC5_log_mnt00002_2 -igroup HANA-FC5
 ....
 
+
+
+
+=== Creazione di LUN e mappatura di LUN su gruppi di iniziatori tramite GUI
+
+Questa sezione mostra un esempio di configurazione utilizzando `ONTAP System Manager` per un sistema host multiplo SAP HANA 2+1 con SID FC5 che utilizza LVM e due LUN per gruppo di volumi LVM:
+
+. Accedi al `ONTAP System Manager` del tuo cluster ONTAP e scegli `Storage` dal menu a sinistra.
++
+.. Premere `Add`
++
+image:saphana_asa_fc_image12.png["ONTAP System Manager - Archiviazione"]
+
+
+
+. Scegliere `More options`
++
+image:saphana_asa_fc_image13.png["ONTAP System Manager - Aggiungi storage"]
+
+. Fornire le informazioni richieste:
++
+.. nome dei LUN dei dati, ad esempio.`FC5_data_mnt00001`
+.. la quantità di LUN da combinare con LVM, ad esempio 2
+.. la dimensione di ogni LUN, ad esempio 1000 GB
+.. scegliere `SCSI (FC or iSCSI)`
+.. scegliere `Linux` COME `Host Operating system`
+.. scegliere `New host` per il `Host mapping` opzione, fornire un nome, ad esempio `FC5_host` , seleziona o aggiungi gli iniziatori desiderati
+.. Mantenere `Schedule snapshots` non selezionato
+.. premere `Add`
++
+image:saphana_asa_fc_image14.png["ONTAP System Manager - Crea LUN dati"]
+
+
+
+. Creare i LUN dati per il prossimo host worker premendo `Add`
++
+image:saphana_asa_fc_image15.png["ONTAP System Manager - Crea LUN dati aggiuntivi"]
+
+. Fornire le informazioni richieste:
++
+.. il nome dei LUN di dati aggiuntivi, ad esempio `FC5_data_mnt00002`
+.. la quantità di LUN da combinare con LVM, ad esempio 2
+.. la dimensione di ogni LUN, ad esempio 1000 GB
+.. scegliere `Linux` COME `Host Operating system`
+.. scegli la mappatura creata in precedenza `FC5_host` per il `Host mapping` opzione
+.. premere `Add`
+
+
++
+image:saphana_asa_fc_image20.png["ONTAP System Manager - Crea LUN dati"]
+
+. Ripetere i passaggi 4 e 5 per ogni host worker aggiuntivo
+. Dopo aver creato correttamente i LUN dei dati, creare i LUN del registro premendo `Add`
++
+image:saphana_asa_fc_image21.png["ONTAP System Manager - Crea LUN di registro"]
+
+. Fornire le informazioni richieste:
++
+.. il nome del registro LUN da combinare con LVM, ad esempio `FC5_log_mnt00001`
+.. la quantità di LUN da combinare con LVM, ad esempio 2
+.. la dimensione di ogni LUN, ad esempio 260 GB
+.. scegliere `Linux` COME `Host Operating system`
+.. scegli la mappatura creata in precedenza `FC5_host` per il `Host mapping` opzione
+.. premere `Add`
++
+image:saphana_asa_fc_image22.png["ONTAP System Manager - Crea LUN di registro"]
+
+
+
+. Creare i LUN di registro per il prossimo host worker premendo `Add`
++
+image:saphana_asa_fc_image23.png["ONTAP System Manager - Crea LUN di registro aggiuntivi"]
+
+. Fornire le informazioni richieste:
++
+.. il nome dei LUN di registro aggiuntivi, ad esempio `FC5_log_mnt00002`
+.. la quantità di LUN da combinare con LVM, ad esempio 2
+.. la dimensione di ogni LUN, ad esempio 260 GB
+.. scegliere `Linux` COME `Host Operating system`
+.. scegli la mappatura creata in precedenza `FC5_host` per il `Host mapping` opzione
+.. premere `Add`
++
+image:saphana_asa_fc_image24.png["ONTAP System Manager - Crea LUN di registro aggiuntivi"]
+
+
+
+. Ripetere i passaggi 9 e 10 per ogni host worker aggiuntivo
+
+
+Sono stati creati tutti i LUN necessari per un sistema SAP HANA multi-host.
+
+image:saphana_asa_fc_image25.png["ONTAP System Manager - Panoramica LUN"]
