@@ -3134,7 +3134,6 @@
   <block id="dd891a45b8606deb4a6fa0a063179e5f" category="paragraph">I plug-in personalizzati di SnapCenter consentono di creare plug-in personalizzati e proteggere l'applicazione utilizzando la stessa interfaccia SnapCenter.</block>
   <block id="85c9db69d08b28f5cf1e67e13162f818" category="paragraph">La figura seguente illustra i componenti di SnapCenter.</block>
   <block id="c54076227bebe4b120f17a0f5a22ce81" category="summary">NetApp dispone di una vasta raccolta di report tecnici, design validati, video, blog e descrizioni delle soluzioni per SAP e SAP HANA.</block>
-  <block id="269e48a148be46c6e5fb065e74629d57" category="doc">SAP Business Application e SAP HANA Database Solutions</block>
   <block id="375187184a6023d3a0c03cb49eac0f2f" category="summary">Serie di blog sulle Best practice per la configurazione SAP</block>
   <block id="926e1400cb4a7cc5855810bdb87175d9" category="paragraph">Panoramica dei blog che evidenziano le Best practice di configurazione SAP.</block>
   <block id="1b957531101399d0f744aec724e69fa1" category="summary">NetApp sta affrontando le sfide legate alla lenta implementazione delle funzionalità, alla mancanza di automazione e alla perdita di produttività fornendo una soluzione per la gestione del ciclo di vita completamente integrata negli strumenti utilizzati dagli amministratori SAP per le operazioni quotidiane, come SAP Landscape Management (SAP lama). L'obiettivo è semplificare il flusso di lavoro di provisioning dalla pre-elaborazione alla post-elaborazione, incluse tutte le attività software e a livello di storage necessarie per creare una copia del sistema di produzione. Con questa soluzione, gli amministratori possono creare un ambiente di sviluppo e test con un paio di clic del mouse, migliorando così la gestione del ciclo di vita.</block>
@@ -3159,9 +3158,7 @@
   <block id="824aec17cb9bd27843cf6addb92b57fc" category="summary">Serie di video e demo che illustrano le soluzioni SAP</block>
   <block id="293e9d744a4c2a3dfc4088f7b8aa25d5" category="doc">Demo e video sulle soluzioni SAP</block>
   <block id="2259bdd472d4d2949e3eea23b5e4ef34" category="paragraph">Panoramica dei video e delle demo che evidenziano le soluzioni SAP.</block>
-  <block id="677f2e7e550075f7bbbdac91e0918f2f" category="sidebar">Soluzioni SAP</block>
   <block id="b45ecd3afcfa865514a59b475de3e93e" category="sidebar">Soluzioni SAP FlexPod</block>
-  <block id="fcf140abed196b8eba71c45f21312bce" category="sidebar">Soluzioni NetApp</block>
   <block id="fa532045e834ec2fac1200964a189516" category="sidebar">Gestione del ciclo di vita</block>
   <block id="cd47dd01745339787e4c7300389401f2" category="sidebar">Best Practice</block>
   <block id="88aa48beec8729be73be99084cd76b79" category="sidebar">Guida alla configurazione di SAP HANA su sistemi NetApp AFF con FCP</block>
@@ -5790,4 +5787,27 @@ Fare riferimento a.<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inlin
   <block id="d9bb80ae32f686bbae368979a76f86d7" category="paragraph">NetApp ha sviluppato un portafoglio completo di tecnologie e strumenti per aiutare le organizzazioni IT a creare o adattare i propri piani di disaster recovery per rispondere a tutte le esigenze aziendali:</block>
   <block id="6a9c098947d8b811552347f2ed990ebd" category="inline-link-macro"><block ref="6a9c098947d8b811552347f2ed990ebd" category="inline-link-rx"></block></block>
   <block id="702c9bfa6d3b8d8b923fbeba4db3625f" category="paragraph"><block ref="702c9bfa6d3b8d8b923fbeba4db3625f" category="inline-link-macro-rx"></block></block>
+  <block id="225b42e7cb6036e97607adda6dcca1c3" category="summary">Registro delle modifiche recenti apportate alle soluzioni NetApp per i materiali collaterali SAP.</block>
+  <block id="4a2fff3ce5a292ada8e788cd34005db8" category="doc">Novità nelle soluzioni di virtualizzazione NetApp</block>
+  <block id="2ca0fa0a322d6c31c3d0906a34c85e6c" category="paragraph">Scopri le novità nelle soluzioni per SAP.</block>
+  <block id="bab52961b58c502c7991d35556c25367" category="section-title">18 agosto 2025</block>
+  <block id="47e26e0d5bbeef43c544dd9ae72e66b0" category="inline-link-macro">Famiglia di soluzioni NetApp</block>
+  <block id="840125a006aee7dc0e8efd313e7b614e" category="paragraph">Il sito NetApp Solutions è ora il<block ref="f083b096ae581e72c5ab727ef8bd5732" category="inline-link-macro-rx"></block> , che comprende i seguenti siti:</block>
+  <block id="e87298059f60b0844dc971f315184cf5" category="inline-link-macro">Soluzioni di intelligenza artificiale NetApp</block>
+  <block id="ac42ca0e1f789a8367b40d9824726778" category="list-text"><block ref="ac42ca0e1f789a8367b40d9824726778" category="inline-link-macro-rx"></block></block>
+  <block id="9cae574c1dc1ca50a949c1e889637ba7" category="inline-link-macro">Soluzioni container NetApp</block>
+  <block id="31d1ae0120af1d791e4320e17eb10687" category="list-text"><block ref="31d1ae0120af1d791e4320e17eb10687" category="inline-link-macro-rx"></block></block>
+  <block id="3947417923606d3599bcba7a82f71f1b" category="inline-link-macro">Soluzioni di gestione dei dati NetApp</block>
+  <block id="56c054d4bb919790ebe189f7a7d11c3c" category="list-text"><block ref="56c054d4bb919790ebe189f7a7d11c3c" category="inline-link-macro-rx"></block></block>
+  <block id="9bb3e58246c5654a6d8e08a7bddd60ec" category="inline-link-macro">Soluzioni di database NetApp</block>
+  <block id="3e2420ab1ec1d6e02b32b017d3ba969a" category="list-text"><block ref="3e2420ab1ec1d6e02b32b017d3ba969a" category="inline-link-macro-rx"></block></block>
+  <block id="a37049a2a78422ac5627c7987db5c337" category="inline-link-macro">Soluzioni cloud pubbliche e ibride NetApp</block>
+  <block id="144417321224efbf0afc2ae665a84a46" category="list-text"><block ref="144417321224efbf0afc2ae665a84a46" category="inline-link-macro-rx"></block></block>
+  <block id="2729aba3baa90aaaed37b282e515f6e4" category="list-text">Soluzioni NetApp per SAP</block>
+  <block id="4ead908c2ca3b4c7156e0e703642415d" category="inline-link-macro">Soluzioni di virtualizzazione NetApp</block>
+  <block id="3100186c9f62cec85ac05309c5d10217" category="list-text"><block ref="3100186c9f62cec85ac05309c5d10217" category="inline-link-macro-rx"></block></block>
+  <block id="a96e55f331afdc0c9a301d1a5ad2c3db" category="sidebar">Soluzioni per applicazioni aziendali SAP e database SAP HANA</block>
+  <block id="7caa0b3fa0fd74ced773a86b62850a8b" category="sidebar">Introduzione a SAP su FlexPod</block>
+  <block id="36211f481e2e2626220b1d9e8a3325bb" category="sidebar">Soluzioni per SAP</block>
+  <block id="33871b6190a8d5adbe8b15282054766c" category="sidebar">Cosa c'è di nuovo</block>
 </blocks>

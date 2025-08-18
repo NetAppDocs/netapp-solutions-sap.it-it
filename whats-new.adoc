@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: whats-new.html 
+keywords: 'netapp, solutions, sap, sap hana, what"s new, updates, change log' 
+summary: Registro delle modifiche recenti apportate alle soluzioni NetApp per i materiali collaterali SAP. 
+---
+= Novità nelle soluzioni di virtualizzazione NetApp
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Scopri le novità nelle soluzioni per SAP.
+
+
+
+== 18 agosto 2025
+
+Il sito NetApp Solutions è ora illink:https://docs.netapp.com/us-en/netapp-solutions-family/index.html["Famiglia di soluzioni NetApp"^] , che comprende i seguenti siti:
+
+* link:https://docs.netapp.com/us-en/netapp-solutions-ai/index.html["Soluzioni di intelligenza artificiale NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-containers/index.html["Soluzioni container NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-dataops/index.html["Soluzioni di gestione dei dati NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-databases/index.html["Soluzioni di database NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/index.html["Soluzioni cloud pubbliche e ibride NetApp"^]
+* Soluzioni NetApp per SAP
+* link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/index.html["Soluzioni di virtualizzazione NetApp"^]
+
