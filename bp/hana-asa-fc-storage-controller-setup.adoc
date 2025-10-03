@@ -55,7 +55,7 @@ Tutto questo è necessario per ogni SVM. Il nome del gruppo di polizia della QoS
 ....
 lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
 ....
-Si consiglia di utilizzare 1000MB GB/s come throughput massimo per un dato LUN. Se un'applicazione richiede maggiore throughput, verranno utilizzati più LUN con striping LUN per fornire la larghezza di banda necessaria. Questa guida fornisce un esempio per SAP HANA basato su Linux LVM nella sezione link:hana-asa-fc-host-setup.html#create-lvm-volume-groups-and-logical-volumes["Host Setup (impostazione host)"].
+Si consiglia di utilizzare 1000 MB/s come velocità massima per una determinata LUN.  Se un'applicazione richiede una maggiore capacità di elaborazione, è necessario utilizzare più LUN con striping LUN per fornire la larghezza di banda necessaria.  Questa guida fornisce un esempio per SAP HANA basato su Linux LVM nella sezionelink:hana-asa-fc-host-setup.html["Host Setup (impostazione host)"] .
 
 
 NOTE: Il limite si applica anche alle letture. Pertanto, utilizza un numero sufficiente di LUN per soddisfare gli SLA richiesti per l'avvio del database SAP HANA e per i backup.

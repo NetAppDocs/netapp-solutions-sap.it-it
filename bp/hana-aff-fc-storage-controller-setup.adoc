@@ -91,7 +91,7 @@ FabricPool è un'ottima opzione per spostare i backup dei log in un altro Tier d
 
 La seguente panoramica riassume i passaggi necessari per la configurazione dello storage. Ogni fase viene descritta in maggiore dettaglio nelle sezioni successive. In questa sezione, si presuppone che l'hardware di storage sia configurato e che il software ONTAP sia già installato. Inoltre, la connessione delle porte FCP dello storage al fabric SAN deve essere già attiva.
 
-. Verificare la corretta configurazione degli shelf di dischi, come descritto in <<Connessione a shelf di dischi>>.
+. Controllare la corretta configurazione dello scaffale del disco, come descritto in<<Collegamenti del ripiano del disco>> .
 . Creare e configurare gli aggregati richiesti, come descritto in <<Configurazione dell'aggregato>>.
 . Creare una Storage Virtual Machine (SVM), come descritto in <<Configurazione della macchina virtuale per lo storage>>.
 . Creare interfacce logiche (LIF), come descritto in <<Configurazione dell'interfaccia logica>>.

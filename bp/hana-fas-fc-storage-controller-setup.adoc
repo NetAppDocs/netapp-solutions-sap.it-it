@@ -69,7 +69,7 @@ Tutto questo è necessario per ogni SVM. Il nome del gruppo di polizia della QoS
 ....
 lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
 ....
-Si consiglia di utilizzare 1000MB GB/s come throughput massimo per un dato LUN. Se un'applicazione richiede maggiore throughput, verranno utilizzati più LUN con striping LUN per fornire la larghezza di banda necessaria. Questa guida fornisce un esempio per SAP HANA basato su Linux LVM nella sezione link:hana-fas-fc-host-setup.html#create-lvm-volume-groups-and-logical-volumes["Host Setup (impostazione host)"].
+Si consiglia di utilizzare 1000 MB/s come velocità massima per una determinata LUN.  Se un'applicazione richiede una maggiore capacità di elaborazione, è necessario utilizzare più LUN con striping LUN per fornire la larghezza di banda necessaria.  Questa guida fornisce un esempio per SAP HANA basato su Linux LVM nella sezionelink:hana-fas-fc-host-setup.html["Host Setup (impostazione host)"] .
 
 
 NOTE: Il limite si applica anche alle letture. Pertanto, utilizza un numero sufficiente di LUN per soddisfare gli SLA richiesti per l'avvio del database SAP HANA e per i backup.
@@ -93,13 +93,17 @@ FabricPool è un'ottima opzione per spostare i backup dei log in un altro Tier d
 
 La seguente panoramica riassume i passaggi necessari per la configurazione dello storage. Ogni fase viene descritta in maggiore dettaglio nelle sezioni successive. Prima di iniziare questa procedura, completare la configurazione dell'hardware dello storage, l'installazione del software ONTAP e la connessione delle porte FCP dello storage al fabric SAN.
 
-. Verificare la corretta configurazione degli shelf di dischi, come descritto in <<Connessione a shelf di dischi>>.
+. Controllare la corretta configurazione dello scaffale del disco, come descritto in<<Collegamenti del ripiano del disco>> .
 . Creare e configurare gli aggregati richiesti, come descritto in <<Configurazione dell'aggregato>>.
 . Creare una Storage Virtual Machine (SVM), come descritto in <<Configurazione della macchina virtuale per lo storage>>.
 . Creare interfacce logiche (LIF), come descritto in <<Configurazione dell'interfaccia logica>>.
 . Creare gruppi iniziatori (igroup) con nomi globali (WWN) dei server HANA come descritto nella sezione link:hana-fas-fc-storage-controller-setup.html#Initiator-groups <<Gruppi di iniziatori>>.
 . Creare e configurare volumi e LUN all'interno degli aggregati come descritto nella sezione link:hana-fas-fc-storage-controller-setup_single_host.html["Configurazione host singolo"] per singoli host o in sezione link:hana-fas-fc-storage-controller-setup_multiple_hosts.html["Configurazione host multipli"] per più host
 
+
+
+
+== Collegamenti del ripiano del disco
 
 Con gli HDD, è possibile collegare un massimo di due shelf di dischi DS2246 o quattro shelf di dischi DS224C a uno stack SAS per fornire le prestazioni richieste per gli host SAP HANA, come mostrato nella figura seguente. I dischi all'interno di ogni shelf devono essere distribuiti in modo uguale a entrambi i controller della coppia ha.
 
