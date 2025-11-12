@@ -15,6 +15,14 @@ Scopri le novità nelle soluzioni per SAP.
 
 
 
+== 12 novembre 2025
+
+Nuova soluzionelink:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/kvm-hana-introduction.html["SAP HANA con SUSE KVM e NetApp Storage"^] :
+
+Distribuisci SAP HANA Single-Host su SUSE KVM utilizzando lo storage NetApp con interfacce di rete SR-IOV e accesso allo storage NFS o FCP.
+
+
+
 == 18 agosto 2025
 
 Il sito NetApp Solutions è ora illink:https://docs.netapp.com/us-en/netapp-solutions-family/index.html["Famiglia di soluzioni NetApp"^] , che comprende i seguenti siti:

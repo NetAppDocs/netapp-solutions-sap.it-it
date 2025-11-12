@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: bp/kvm-hana-network.html 
-keywords: Ethernet,KVM, SAP HANA, tailored data center integration,  NFS 
-summary: Questa guida fornisce informazioni su come configurare SUSE KVM per SAP HANA utilizzando lo storage NetApp . 
+keywords: SR-IOV,KVM, SAP HANA, Mellanox, virtual functions, network configuration, NFS 
+summary: Configurare le interfacce di rete SR-IOV su SUSE KVM per SAP HANA utilizzando le schede di rete Mellanox ConnectX.  Imposta funzioni virtuali, assegnale alle VM e configura connessioni di rete ridondanti per prestazioni ottimali e accesso allo storage. 
 ---
-= Configurazione della rete Ethernet
+= Configurare le interfacce di rete SR-IOV per SAP HANA su SUSE KVM
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,17 +14,22 @@ summary: Questa guida fornisce informazioni su come configurare SUSE KVM per SAP
 
 
 [role="lead"]
-Questa sezione fornisce informazioni su come configurare SR-IOV in SUSE KVM per SAP HANA utilizzando lo storage NetApp .
+Configurare le interfacce di rete SR-IOV su SUSE KVM per SAP HANA.  Imposta funzioni virtuali (VF), assegnale alle VM e configura connessioni di rete ridondanti per prestazioni ottimali e accesso allo storage.
 
 
 
-== Configurazione di SR-IOV
+== Passaggio 1: configurazione di SR-IOV
 
-Questa parte mostra come configurare SR-IOV utilizzando le schede di rete Mellanox Connect-X.  Si basa su https://enterprise-support.nvidia.com/s/article/HowTo-Configure-SR-IOV-for-ConnectX-4-ConnectX-5-ConnectX-6-with-KVM-Ethernet["Portale di supporto aziendale NVIDIA | Come configurare SR-IOV per ConnectX-4/ConnectX-5/ConnectX-6 con KVM (Ethernet)"] .  La guida SUSE SAP HANA KVM descrive questa operazione in base a una scheda di rete INTEL.  + Si consiglia di utilizzare connessioni Ethernet ridondanti combinando due porte fisiche come trunk/bond.  Anche le porte virtuali (VF) assegnate alla VM devono essere raggruppate all'interno della VM.
+Abilitare e configurare la funzionalità SR-IOV nel firmware dell'adattatore per consentire la creazione di funzioni virtuali.
+
+Questa procedura si basa su https://enterprise-support.nvidia.com/s/article/HowTo-Configure-SR-IOV-for-ConnectX-4-ConnectX-5-ConnectX-6-with-KVM-Ethernet["Portale di supporto aziendale NVIDIA | Come configurare SR-IOV per ConnectX-4/ConnectX-5/ConnectX-6 con KVM (Ethernet)"] . La guida SUSE SAP HANA KVM descrive questa operazione in base a una scheda di rete INTEL.
+
+Si consiglia di utilizzare connessioni Ethernet ridondanti combinando due porte fisiche come trunk/bond. Anche le porte virtuali (VF) assegnate alla VM devono essere raggruppate all'interno della VM.
 
 image:kvm-hana-image1.png["larghezza=493, altezza=409"]
 
-Prerequisiti:
+.Prima di iniziare
+Assicurarsi che siano soddisfatti i seguenti prerequisiti:
 
 * KVM è installato
 * SR-IOV è abilitato nel BIOS del server
@@ -33,17 +38,11 @@ Prerequisiti:
 
 
 
+NOTE: Ogni VF assegnato a una VM richiede almeno una larghezza di banda di 10 Gbit/s.  Non creare e assegnare più di due VF per una porta fisica da 25 GbE.
 
-== Abilitazione di SR-IOV e impostazione del numero di VF
-
-In questo capitolo viene abilitata la funzionalità SR-IOV, viene impostata la quantità massima di VF (interfaccia virtuale) per porta fisica nel firmware degli adattatori e viene impostata la quantità di VF utilizzati per porta fisica (100 GbE), quattro in questo esempio.
-
-
-NOTE: Ogni VF assegnato a una VM richiede almeno una larghezza di banda di 10 Gbit/s.  Ad esempio, non creare e assegnare più di due VF per una porta fisica da 25 GbE.
-
+.Passi
 . Eseguire MFT (Mellanox Firmware Tools):
-
-
++
 ....
 # mst start
 Starting MST (Mellanox Software Tools) driver set
@@ -53,8 +52,7 @@ Create devices
 Unloading MST PCI module (unused) – Success
 ....
 . Individuare il dispositivo:
-
-
++
 ....
 # mst status
 MST modules:
@@ -72,22 +70,19 @@ domain:bus:dev.fn=0000:ab:00.0 addr.reg=88 data.reg=92 cr_bar.gw_offset=-1
 Chip revision is: 00
 ....
 . Controllare lo stato del dispositivo:
-
-
++
 ....
 mlxconfig -d /dev/mst/mt4125_pciconf0 q |grep -e SRIOV_EN -e NUM_OF_VFS
 NUM_OF_VFS 8
 SRIOV_EN True(1)_
 ....
 . Se necessario, abilitare SR-IOV:
-
-
++
 ....
 mlxconfig -d /dev/mst/mt4125_pciconf0 set SRIOV_EN=1
 ....
 . Imposta il numero massimo di VF:
-
-
++
 ....
 mlxconfig -d /dev/mst/mt4125_pciconf0 set  NUM_OF_VFS=4
 ....
@@ -96,13 +91,13 @@ mlxconfig -d /dev/mst/mt4125_pciconf0 set  NUM_OF_VFS=4
 
 
 
-=== Creazione di interfacce virtuali
+== Passaggio 2: creare le interfacce virtuali
 
-In questa sezione vengono creati 4 VF per porta fisica.
+Creare funzioni virtuali (VF) sulle porte di rete fisiche per abilitare la funzionalità SR-IOV.  In questa fase vengono creati quattro VF per porta fisica.
 
+.Passi
 . Trova il dispositivo:
-
-
++
 ....
 # ibstat
 
@@ -141,9 +136,10 @@ Capability mask: 0x00010000
 Port GUID: 0xa288c2fffea6f6fd
 Link layer: Ethernet
 ....
-. Se è stato creato un legame, l'output sarà simile al seguente:
++
+Se è stato creato un legame, l'output sarà simile al seguente:
 
-
++
 ....
 # ibstat
 CA 'mlx5_bond_0'
@@ -186,14 +182,14 @@ infinibandmad/ remove vpd
 infinibandverbs/ rescan
 iommu/ reset
 ....
++
 ....
 # ibdev2netdev
 mlx5_0 port 1 ==> eth4 (Up)
 mlx5_1 port 1 ==> eth5 (Up)
 ....
 . Ottieni il totale dei VF consentiti e configurati nel firmware:
-
-
++
 ....
 # cat /sys/class/net/eth4/device/sriov_totalvfs
 4
@@ -201,8 +197,7 @@ mlx5_1 port 1 ==> eth5 (Up)
 4
 ....
 . Ottieni il numero attuale di VF su questo dispositivo:
-
-
++
 ....
 # cat /sys/class/infiniband/mlx5_0/device/sriov_numvfs
 0
@@ -210,21 +205,20 @@ mlx5_1 port 1 ==> eth5 (Up)
 0
 ....
 . Impostare il numero desiderato di VF:
-
-
++
 ....
 # echo 4 > /sys/class/infiniband/mlx5_0/device/sriov_numvfs
 # echo 4 > /sys/class/infiniband/mlx5_1/device/sriov_numvfs
 ....
++
+*Se hai già configurato un legame utilizzando queste due porte*, il primo comando deve essere eseguito sul legame:
 
-NOTE: Se hai già configurato un legame utilizzando queste due porte, il primo comando deve essere eseguito per creare il legame:
-
++
 ....
 # echo 4 > /sys/class/infiniband/mlx5_bond_0/device/sriov_numvfs
 ....
 . Controllare il bus PCI:
-
-
++
 ....
 # lspci -D | grep Mellanox
 
@@ -239,6 +233,7 @@ NOTE: Se hai già configurato un legame utilizzando queste due porte, il primo c
 0000:ab:01.4 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
 0000:ab:01.5 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
 ....
++
 ....
 # ibdev2netdev -v
 
@@ -254,8 +249,7 @@ NOTE: Se hai già configurato un legame utilizzando queste due porte, il primo c
 0000:ab:01.5 mlx5_9 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth13 (Down)
 ....
 . Controllare la configurazione VF tramite lo strumento IP:
-
-
++
 ....
 # ip link show
 …
@@ -284,10 +278,14 @@ altname ens3f1np1
 ....
 
 
-=== Abilitazione dei VF durante l'avvio
 
-La configurazione sopra indicata non sopravvive al riavvio.  + Per renderlo persistente è necessario creare un file di unità _systemd_ _/etc/systemd/system/after.local_ con il seguente contenuto:
 
+== Passaggio 3: abilitare i VF durante l'avvio
+
+Configurare le impostazioni VF in modo che rimangano invariate anche dopo il riavvio del sistema creando servizi systemd e script di avvio.
+
+. Crea un file di unità systemd `/etc/systemd/system/after.local` con il seguente contenuto:
++
 ....
 [Unit]
 Description=/etc/init.d/after.local Compatibility
@@ -301,8 +299,8 @@ RemainAfterExit=true
 [Install]
 WantedBy=multi-user.target
 ....
-Dopodiché, crea lo script _/etc/init.d/after.local_:
-
+. Creare lo script _/etc/init.d/after.local_:
++
 ....
 #! /bin/sh
 #
@@ -311,28 +309,53 @@ Dopodiché, crea lo script _/etc/init.d/after.local_:
 echo 4 > /sys/class/infiniband/mlx5_bond_0/device/sriov_numvfs
 echo 4 > /sys/class/infiniband/mlx5_1/device/sriov_numvfs
 ....
-Una volta creato, assicurati che il file possa essere eseguito:
-
+. Assicurarsi che il file possa essere eseguito:
++
 ....
 # cd /etc/init.d/
 # chmod 750 after.local
 ....
 
 
-== Assegnazione delle interfacce virtuali alla VM
 
-Questo capitolo descrive come assegnare interfacce virtuali alla VM utilizzando _virt-manager_
 
-. Avviare virt-manager. + image:kvm-hana-image2.png["larghezza=601, altezza=385"]
-. Aprire la VM desiderata. + image:kvm-hana-image3.png["larghezza=300, altezza=385"]
-. Premere "Aggiungi hardware". + image:kvm-hana-image4.png["Virtmanager Aggiungi hardware, larghezza=601, altezza=443"]
-. Selezionare la scheda di rete virtuale desiderata dalla prima porta fisica nell'elenco dei dispositivi host PCI e premere Fine.  + In questo esempio 0000.AB:00:2 - 0000.AB:00:4 appartengono alla prima porta fisica e 0000.AB:01:2 - 0000.AB:01:4 appartengono alla seconda porta fisica. + image:kvm-hana-image5.png["larghezza=601, altezza=442"]
-. Selezionare la porta NIC virtuale successiva dall'elenco dei dispositivi host PCI, utilizzare una porta virtuale dalla seconda porta fisica e premere Fine. + image:kvm-hana-image6.png["larghezza=601, altezza=441"]
+== Passaggio 4: assegnare le interfacce virtuali alla VM
+
+Assegnare le funzioni virtuali create alla VM SAP HANA come dispositivi host PCI utilizzando _virt-manager_
+
+. Avviare virt-manager.
++
+image:kvm-hana-image2.png["larghezza=601, altezza=385"]
+
+. Aprire la VM desiderata.
++
+image:kvm-hana-image3.png["larghezza=300, altezza=385"]
+
+. Selezionare *Aggiungi hardware*. + image:kvm-hana-image4.png["Virtmanager Aggiungi hardware, larghezza=601, altezza=443"]
+. Selezionare la scheda di rete virtuale desiderata dalla prima porta fisica nell'elenco dei dispositivi host PCI e premere Fine.
++
+In questo esempio 0000.AB:00:2 - 0000.AB:00:4 appartengono alla prima porta fisica e 0000.AB:01:2 - 0000.AB:01:4 appartengono alla seconda porta fisica.
+
++
+image:kvm-hana-image5.png["larghezza=601, altezza=442"]
+
+. Selezionare la porta NIC virtuale successiva dall'elenco dei dispositivi host PCI, utilizzare una porta virtuale dalla seconda porta fisica e selezionare *Fine*.
++
+image:kvm-hana-image6.png["larghezza=601, altezza=441"]
+
 . Successivamente le interfacce virtuali vengono assegnate alla VM e la VM può essere avviata. + image:kvm-hana-image7.png["larghezza=601, altezza=443"]
 
 
 
 
-== Configurazione delle interfacce di rete all'interno della VM
+== Passaggio 5: configurare le interfacce di rete all'interno della VM
 
-Accedere alla VM e configurare i due VF come bond.  Scegliere la modalità 0 o la modalità 2.  Non utilizzare LACP poiché LACP può essere utilizzato solo su porte fisiche.  La figura seguente mostra una configurazione in modalità 2 utilizzando YAST.  + +image:kvm-hana-image8.png["larghezza=601, altezza=335"]
+Accedere alla VM e configurare i due VF come bond. Scegliere la modalità 0 o la modalità 2. Non utilizzare LACP poiché LACP può essere utilizzato solo su porte fisiche. La figura seguente mostra una configurazione in modalità 2 utilizzando YAST.
+
+image:kvm-hana-image8.png["larghezza=601, altezza=335"]
+
+
+
+== Cosa succederà ora?
+
+Dopo aver configurato le interfacce di rete SR-IOV,link:kvm-hana-fcn.html["configurare la rete Fibre Channel"] se FCP deve essere utilizzato come protocollo di archiviazione.

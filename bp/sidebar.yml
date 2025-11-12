@@ -191,13 +191,13 @@ entries:
     url: "/bp/hana-fas-fc-update-history.html"
 - title: SAP HANA con SUSE KVM e NetApp Storage
   entries:
-  - title: Introduzione
+  - title: Flusso di lavoro di distribuzione
     url: "/bp/kvm-hana-introduction.html"
-  - title: Configurazione della rete Ethernet
+  - title: Requisiti di distribuzione
+    url: "/bp/kvm-hana-requirements.html"
+  - title: Configurare la rete Ethernet
     url: "/bp/kvm-hana-network.html"
-  - title: Configurazione della rete Fibre Channel
+  - title: Configurare la rete Fibre Channel
     url: "/bp/kvm-hana-fcn.html"
-  - title: Collegamento di archiviazione
+  - title: Configurare l'archiviazione
     url: "/bp/kvm-hana-storage.html"
-  - title: Aggiornare la cronologia
-    url: "/bp/kvm-hana-update-history.html"

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: bp/kvm-hana-fcn.html 
-keywords: fibre channel,KVM, SAP HANA, tailored data center integration, FCP 
-summary: Questa guida fornisce informazioni su come configurare SUSE KVM per SAP HANA utilizzando lo storage NetApp . 
+keywords: fibre channel,KVM, SAP HANA, FCP, HBA, PCI passthrough, storage 
+summary: Configurare la rete Fibre Channel per SAP HANA su SUSE KVM assegnando porte HBA fisiche alle VM come dispositivi PCI.  Impostare connessioni FCP ridondanti utilizzando due porte fisiche collegate a switch fabric diversi. 
 ---
-= Configurazione della rete Fibre Channel
+= Configurare la rete Fibre Channel per SAP HANA su SUSE KVM
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,25 +14,49 @@ summary: Questa guida fornisce informazioni su come configurare SUSE KVM per SAP
 
 
 [role="lead"]
-Questa sezione fornisce informazioni su come configurare FCP in SUSE KVM per SAP HANA utilizzando lo storage NetApp .
+Configurare la rete Fibre Channel per SAP HANA su SUSE KVM assegnando porte HBA fisiche alle VM come dispositivi PCI.  Impostare connessioni FCP ridondanti utilizzando due porte fisiche collegate a switch fabric diversi.
+
+
+NOTE: I seguenti passaggi sono necessari solo se si utilizza FCP come protocollo di archiviazione.  SE si utilizza NFS, questi passaggi non sono necessari.
+
+.Informazioni su questo compito
+Poiché non esiste alcuna funzionalità equivalente a SR-IOV per FCP, assegnare le porte HBA fisiche direttamente alla VM.  Utilizzare due porte fisiche collegate a fabric diversi per la ridondanza.
+
+
+NOTE: Una porta fisica può essere assegnata a una sola VM.
+
+.Passi
+. Avvia virt-manager:
++
+image:kvm-hana-image2.png["larghezza=601, altezza=385"]
+
+. Aprire la VM desiderata.image:kvm-hana-image3.png["larghezza=601, altezza=385"]
+. Selezionare *Aggiungi hardware*.
++
+image:kvm-hana-image4.png["Virtmanager Aggiungi hardware, larghezza=601, altezza=443"]
+
+. Selezionare la porta HBA desiderata dall'elenco dei dispositivi host PCI e premere Fine.
++
+In questo esempio 0000.A2:00:0.
+
++
+image:kvm-hana-image9.png["larghezza=601, altezza=441"]
+
+. Selezionare la porta HBA desiderata dall'elenco dei dispositivi host PCI appartenenti al secondo fabric e premere Fine. In questo esempio 0000.A2:00:1.
++
+image:kvm-hana-image10.png["larghezza=601, altezza=441"]
+
+. Successivamente le porte HBA fisiche vengono assegnate alla VM e la VM può essere avviata.
++
+image:kvm-hana-image11.png["larghezza=601, altezza=441"]
+
++
+Le porte fisiche vengono passate alla VM, quindi non è richiesta alcuna preparazione aggiuntiva all'interno della VM.
 
 
 
-== Assegnazione delle porte FCP alla VM
-
-Poiché non esiste una funzionalità simile a SR-IOV per FCP, le porte HBA fisiche devono essere assegnate alla VM.  È necessario utilizzare due porte fisiche collegate a fabric diversi.
 
 
-NOTE: Una porta fisica deve essere assegnata a una sola VM.
+== Cosa succederà ora?
 
-Per farlo, completa i seguenti passaggi:
-
-. Avvia _virt-manager._ +image:kvm-hana-image2.png["larghezza=601, altezza=385"]
-. Aprire la VM desiderata. + image:kvm-hana-image3.png["larghezza=601, altezza=385"]
-. Premere "Aggiungi hardware". + image:kvm-hana-image4.png["Virtmanager Aggiungi hardware, larghezza=601, altezza=443"]
-. Selezionare la porta HBA desiderata dall'elenco dei dispositivi host PCI e premere Fine.  + In questo esempio 0000.A2:00:0. + image:kvm-hana-image9.png["larghezza=601, altezza=441"]
-. Selezionare la porta HBA desiderata dall'elenco dei dispositivi host PCI appartenenti al secondo fabric e premere Fine.  In questo esempio 0000.A2:00:1. + image:kvm-hana-image10.png["larghezza=601, altezza=441"]
-. Successivamente le porte HBA fisiche vengono assegnate alla VM e la VM può essere avviata. + image:kvm-hana-image11.png["larghezza=601, altezza=441"]
-
-
-Poiché le porte fisiche sono state passate alla VM, non è necessario effettuare alcuna ulteriore preparazione.
+Dopo aver configurato la rete Fibre Channel,link:kvm-hana-storage.html["configurare l'archiviazione NetApp per SAP HANA"] .
