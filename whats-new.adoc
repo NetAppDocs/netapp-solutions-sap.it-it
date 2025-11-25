@@ -4,7 +4,7 @@ permalink: whats-new.html
 keywords: 'netapp, solutions, sap, sap hana, what"s new, updates, change log' 
 summary: Registro delle modifiche recenti apportate alle soluzioni NetApp per i materiali collaterali SAP. 
 ---
-= Novità nelle soluzioni di virtualizzazione NetApp
+= Novità nelle soluzioni NetApp per SAP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ./media/
