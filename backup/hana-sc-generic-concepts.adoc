@@ -1,0 +1,290 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-concepts.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Scopri i concetti e le best practice sulla protezione dei dati SnapCenter
+:allow-uri-read: 
+
+
+[role="lead"]
+Scopri le opzioni di distribuzione SnapCenter , le strategie di protezione dei dati e la gestione della conservazione dei backup per gli ambienti SAP HANA. SnapCenter supporta la distribuzione di plug-in su host di database o host centrali, rilevamento automatico e configurazione manuale, controlli di coerenza dei blocchi tramite backup basati su file o hdbpersdiag e gestione completa della conservazione su storage primario e secondario.
+
+
+
+== Opzioni di distribuzione per il plug-in SnapCenter per SAP HANA
+
+La figura seguente mostra la vista logica della comunicazione tra il server SnapCenter , il database SAP HANA e il sistema di archiviazione. Il server SnapCenter sfrutta i plug-in HANA e Linux per comunicare con il database HANA e i sistemi operativi Linux.
+
+image:hana-sc-generic-image-008.png["larghezza=601, altezza=199"]
+
+L'opzione di distribuzione consigliata e predefinita per i plug-in SnapCenter è l'installazione sull'host del database HANA. Con questa opzione di distribuzione, tutte le configurazioni e le funzionalità descritte nel capitolo Configurazione supportata SnapCenter sono valide. Esistono alcune eccezioni in cui i plug-in SnapCenter non possono essere installati sull'host del database HANA, ma devono essere configurati su un host di plug-in centrale, che potrebbe essere il server SnapCenter stesso. Per i sistemi HANA con più host o per i sistemi HANA in esecuzione sulla piattaforma IBM Power è necessario un host plug-in centrale. Entrambe le opzioni di distribuzione possono anche essere combinate, ad esempio utilizzando il server SnapCenter come host di plug-in centrale per un sistema host multiplo e distribuendo i plug-in sugli host del database HANA per tutti gli altri sistemi HANA con host singolo.
+
+In SnapCenter una risorsa HANA può essere rilevata automaticamente o configurata manualmente. Per impostazione predefinita, un sistema HANA viene rilevato automaticamente non appena i plug-in HANA e Linux vengono distribuiti sull'host del database. La rilevazione automatica SnapCenter non supporta più installazioni HANA sullo stesso host. I sistemi HANA gestiti tramite un host plug-in centrale devono essere configurati manualmente in SnapCenter. Inoltre, i volumi non dati sono per impostazione predefinita risorse configurate manualmente.
+
+[cols="29%,34%,37%"]
+|===
+|  | Plug-in distribuito a | Risorsa SnapCenter 
+
+
+| Banca dati HANA | Host del database | Scoperto automaticamente 
+
+
+| Banca dati HANA | Host plug-in centrale | Configurazione manuale 
+
+
+| Volume non dati | N/A. | Configurazione manuale 
+|===
+Sebbene SnapCenter supporti la distribuzione centralizzata di plug-in per i sistemi HANA, vi sono limitazioni nel supporto di piattaforme e funzionalità. Le seguenti configurazioni e operazioni infrastrutturali non sono supportate per i sistemi HANA configurati con un host plug-in centrale:
+
+* VMware con datastore FC
+* Sincronizzazione attiva SnapMirror
+* Alta disponibilità del server SnapCenter se utilizzato come host plug-in centrale
+* Rilevamento automatico del sistema HANA
+* Ripristino automatizzato del database HANA
+* Aggiornamento automatico del sistema SAP
+* Ripristino di un singolo tenant
+
+
+
+
+=== Plug-in SnapCenter per HANA distribuito sull'host del database SAP HANA
+
+Il server SnapCenter comunica tramite il plug-in HANA con i database HANA. Il plug-in HANA utilizza il software client HANA hdbsql per eseguire comandi SQL nei database HANA. L'archivio utenti hdb HANA viene utilizzato per fornire le credenziali utente, il nome host e le informazioni sulla porta per accedere ai database HANA. Il plug-in SnapCenter Linux viene utilizzato per coprire tutte le operazioni del file system host, nonché per il rilevamento automatico del file system e delle risorse di archiviazione.
+
+Quando il plug-in HANA viene distribuito sull'host del database HANA, il sistema HANA viene rilevato automaticamente da SnapCenter e contrassegnato come risorsa rilevata automaticamente in SnapCenter.
+
+image:hana-sc-generic-image-009.png["larghezza=601, altezza=304"]
+
+
+
+=== Server SnapCenter ad alta disponibilità
+
+SnapCenter può essere configurato in una configurazione HA a due nodi. In una configurazione di questo tipo, viene utilizzato un bilanciatore del carico (ad esempio, F5) per accedere agli host SnapCenter . Il repository SnapCenter (il database MySQL) viene replicato da SnapCenter tra i due host in modo che i dati SnapCenter siano sempre sincronizzati.
+
+L'HA del server SnapCenter non è supportato se il plug-in HANA è installato sul server SnapCenter . Maggiori dettagli su SnapCenter HA sono disponibili all'indirizzo https://docs.netapp.com/us-en/snapcenter/install/concept_configure_snapcenter_servers_for_high_availabiity_using_f5.html["Configurare i server SnapCenter per l'alta disponibilità"].
+
+image:hana-sc-generic-image-010.png["larghezza=601, altezza=307"]
+
+
+
+=== Host plug-in centrale
+
+Come discusso nel capitolo precedente, è necessario un plug-in centrale per
+
+* Sistemi host multipli HANA
+* Sistemi HANA in esecuzione su IBM Power
+
+
+Con un host plug-in centrale, il plug-in HANA e il client hdbsql SAP HANA devono essere installati su un host esterno agli host del database HANA. Questo host può essere qualsiasi host Windows o Linux, ad esempio il server SnapCenter .
+
+
+NOTE: Quando esegui il server SnapCenter su Windows, puoi utilizzare il tuo sistema Windows come host plug-in centrale. Quando esegui il tuo server SnapCenter su Linux, devi utilizzare un host diverso come host del plug-in centrale.
+
+Per un sistema HANA con più host, le chiavi di archiviazione utente SAP HANA per tutti gli host worker e standby devono essere configurate nell'host del plug-in centrale. SnapCenter tenta di connettersi al database utilizzando ciascuna delle chiavi fornite e può quindi funzionare indipendentemente da un failover del database di sistema (server dei nomi HANA) su un host diverso.
+
+image:hana-sc-generic-image-011.png["larghezza=601, altezza=314"]
+
+Per più sistemi HANA con host singolo gestiti da un host plug-in centrale, tutte le singole chiavi di archivio utente SAP HANA dei sistemi HANA devono essere configurate nell'host plug-in centrale.
+
+image:hana-sc-generic-image-012.png["larghezza=601, altezza=338"]
+
+
+
+== Controllo di coerenza dei blocchi SAP HANA
+
+SAP consiglia di includere controlli regolari della coerenza dei blocchi HANA nella strategia di backup complessiva. Con i backup tradizionali basati su file, questo controllo viene eseguito a ogni operazione di backup. Con i backup Snapshot, il controllo di coerenza deve essere eseguito oltre alle operazioni di backup Snapshot, ad esempio una volta alla settimana.
+
+Tecnicamente ci sono due opzioni per eseguire il controllo di coerenza dei blocchi.
+
+* Esecuzione di un backup standard basato su file o backint
+* Esecuzione dello strumento HANA hdbpersdiag, vedere anche https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/60e110ea8f9e457095210115487e11a6.html?locale=en-US&state=PRODUCTION&version=2.0.08&q=hdbpersdiag["Controllo della coerenza della persistenza | Portale di assistenza SAP"]
+
+
+Lo strumento HANA hdbpersdiag fa parte dell'installazione di HANA e consente di eseguire operazioni di controllo della coerenza dei blocchi su un database HANA offline. Pertanto è perfetto per essere utilizzato in combinazione con i backup Snapshot, dove i backup Snapshot esistenti possono essere presentati a hdbpersdiag.
+
+Confrontando i due approcci, hdbpersdiag presenta notevoli vantaggi rispetto al backup basato su file per i controlli di coerenza dei blocchi HANA. Una dimensione è la capacità di archiviazione richiesta. Con i backup basati su file, per ogni sistema HANA deve essere disponibile almeno la dimensione di un backup. Ad esempio, se si dispone di 15 sistemi HANA con una dimensione di persistenza di 3 TB, sarebbero necessari altri 45 TB solo per i controlli di coerenza. Con hdbpersdiag non è richiesta alcuna capacità di archiviazione aggiuntiva poiché l'operazione viene eseguita su un backup Snapshot esistente o su un FlexClone di un backup Snapshot esistente. La seconda dimensione è il carico della CPU sull'host HANA durante l'operazione di controllo della coerenza. Un backup basato su file richiederà cicli di CPU sull'host del database HANA, mentre l'elaborazione hdbpersdiag può essere completamente scaricata dall'host HANA se utilizzata in combinazione con un host di verifica centrale. La tabella seguente riassume le caratteristiche principali.
+
+[cols="34%,^33%,^33%"]
+|===
+|  | Capacità di archiviazione richiesta | Carico di CPU e rete sull'host HANA 
+
+
+| Backup basato su file | Dimensione minima del backup dei dati pari a 1 x per ogni sistema HANA | Alto 
+
+
+| hdbpersdiag utilizzando la directory Snapshot sull'host HANA (solo NFS) | Nessuno | Medio 
+
+
+| Host di verifica centrale utilizzato per eseguire hdbpersdiag con volumi FlexClone | Nessuno | Nessuno 
+|===
+NetApp consiglia di utilizzare hdbpersdiag per eseguire i controlli di coerenza dei blocchi HANA. Ulteriori dettagli sull'implementazione sono disponibili nel capitolo link:hana-sc-generic-block-check.html["Controlli di coerenza dei blocchi con SnapCenter"].
+
+
+
+== Strategia di protezione dei dati
+
+Prima di configurare SnapCenter e il plug-in SAP HANA, la strategia di protezione dei dati deve essere definita in base ai requisiti RTO e RPO dei vari sistemi SAP.
+
+Un approccio comune consiste nella definizione di tipi di sistema quali produzione, sviluppo, test o sistemi sandbox. Tutti i sistemi SAP dello stesso tipo di sistema hanno in genere gli stessi parametri di protezione dei dati.
+
+I parametri da definire sono:
+
+* Con quale frequenza deve essere eseguito un backup Snapshot?
+* Per quanto tempo i backup delle copie Snapshot devono essere conservati nel sistema di storage primario?
+* Con quale frequenza deve essere eseguito un controllo dell'integrità dei blocchi?
+* I backup primari devono essere replicati su un sito di backup secondario?
+* Per quanto tempo i backup devono essere conservati nell'archivio di backup secondario?
+
+
+La tabella seguente mostra un esempio di parametri di protezione dei dati per i tipi di sistema produzione, sviluppo e test. Per il sistema di produzione è stata definita un'elevata frequenza di backup e i backup vengono replicati su un sito di backup secondario una volta al giorno. I sistemi di test hanno requisiti inferiori e non richiedono la replica dei backup.
+
+[cols="25%,25%,25%,25%"]
+|===
+| Parametri | Sistemi di produzione | Sistemi di sviluppo | Sistemi di test 
+
+
+| Frequenza di backup | Ogni 6 ore | Ogni 6 ore | Ogni 12 ore 
+
+
+| Conservazione primaria | 3 giorni | 3 giorni | 6 giorni 
+
+
+| Controllo dell'integrità del blocco | Una volta alla settimana | Una volta alla settimana | No 
+
+
+| Replica sul sito di backup secondario | Una volta al giorno | Una volta al giorno | No 
+
+
+| Conservazione del backup secondario | 2 settimane | 2 settimane | No 
+|===
+Nella tabella seguente sono riportati i criteri e le pianificazioni che devono essere configurati per i parametri di protezione dei dati sopra indicati.
+
+[cols="24%,23%,13%,12%,14%,14%"]
+|===
+| Politica | Tipo di backup | Frequenza di pianificazione | Conservazione primaria | Replica SnapVault | Ritenzione secondaria 
+
+
+| LocalSnap | Basato su Snapshot | Ogni 6 ore | Conteggio=12 | No | NA 
+
+
+| LocalSnapAndSnapVault | Basato su Snapshot | Una volta al giorno | Conteggio=2 | Sì | Conteggio=14 
+
+
+| SnapAndCallHdbpersdiag | Basato su Snapshot | Una volta alla settimana | Conteggio=2 | No | NA 
+|===
+
+NOTE: Per il sistema ONTAP o FSx per ONTAP, è necessario configurare una relazione di protezione dei dati in ONTAP per la replica SnapVault , prima che SnapCenter possa eseguire le operazioni di aggiornamento SnapVault . La conservazione secondaria è definita all'interno della policy di protezione ONTAP .
+
+
+NOTE: Per il backup ANF non è richiesta alcuna configurazione aggiuntiva al di fuori di SnapCenter. La conservazione secondaria del backup ANF è gestita da SnapCenter.
+
+
+NOTE: Per questa configurazione di esempio, hdbpersdiag viene utilizzato per l'operazione di controllo dell'integrità del blocco. Maggiori dettagli possono essere trovati nel capitolo link:hana-sc-generic-block-check.html["Controlli di coerenza dei blocchi con SnapCenter"].
+
+La figura seguente riassume le pianificazioni e le conservazioni dei backup. Se si utilizza SnapCenter per gestire la conservazione dei backup dei log, tutti i backup dei log più vecchi del backup Snapshot più vecchio verranno eliminati. In altre parole, i backup del registro vengono conservati per tutto il tempo necessario a consentire il ripristino in tempo utile per ogni backup disponibile.
+
+image:hana-sc-generic-image-013.png["larghezza=601, altezza=192"]
+
+
+
+== Backup delle chiavi radice di crittografia
+
+Quando si utilizza la crittografia persistente HANA, è fondamentale creare backup delle chiavi radice oltre ai backup dei dati standard. I backup della chiave radice sono necessari per ripristinare il database HANA nel caso in cui il volume di dati e il file system di installazione HANA vengano persi. Per maggiori informazioni vedere https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Guida all'amministrazione di SAP HANA"].
+
+
+NOTE: Tieni presente che se una chiave radice viene modificata, la nuova chiave radice non può essere utilizzata per ripristinare i vecchi backup del database HANA creati in precedenza. È sempre necessaria la chiave radice attiva al momento della creazione del backup.
+
+
+
+== Operazioni di backup
+
+SnapCenter supporta le operazioni di backup Snapshot dei sistemi HANA MDC con uno o più tenant. SnapCenter supporta anche due diverse operazioni di ripristino di un sistema HANA MDC. È possibile ripristinare l'intero sistema, il database di sistema e tutti i tenant, oppure ripristinare solo un tenant. Per consentire a SnapCenter di eseguire queste operazioni, sono necessari alcuni prerequisiti.
+
+In un sistema MDC, la configurazione del tenant non è necessariamente statica. È possibile aggiungere o eliminare inquilini. SnapCenter non può basarsi sulla configurazione rilevata quando il database HANA viene aggiunto a SnapCenter. Per abilitare un'operazione di ripristino di un singolo tenant, SnapCenter deve sapere quali tenant sono inclusi in ciascun backup Snapshot. Inoltre, deve sapere quali file e directory appartengono a ciascun tenant incluso nel backup Snapshot.
+
+Pertanto, a ogni operazione di backup, SnapCenter identifica le informazioni sul tenant. Ciò include i nomi dei tenant e le informazioni corrispondenti sui file e sulle directory. Questi dati devono essere archiviati nei metadati del backup Snapshot per poter supportare un'operazione di ripristino di un singolo tenant.
+
+Un altro passaggio del rilevamento automatico dell'applicazione è il rilevamento del nodo primario o secondario di HANA System Replication (HSR). Se un sistema HANA è configurato con HSR, SnapCenter deve identificare il nodo primario con ogni operazione di backup in modo che i comandi SQL di backup vengano eseguiti sul nodo primario HSR. Vedi anche https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sr-scs-system-replication-overview.html["Replica di sistema SAP HANA - backup e recovery con SnapCenter"].
+
+SnapCenter rileva anche la configurazione del volume dati HANA e la mappa al file system e alle risorse di archiviazione. Con questo approccio, SnapCenter può gestire le modifiche alla configurazione del volume HANA, ad esempio più partizioni o modifiche alla configurazione dell'archiviazione come le migrazioni dei volumi.
+
+Il passaggio successivo è l'operazione di backup Snapshot vera e propria. Questo passaggio include il comando SQL per attivare lo snapshot del database HANA, il backup dello snapshot di archiviazione e il comando SQL per chiudere l'operazione di snapshot HANA. Utilizzando il comando close, il database HANA aggiorna il catalogo di backup del DB di sistema e di ciascun tenant.
+
+
+NOTE: SAP non supporta le operazioni di backup Snapshot per i sistemi MDC quando uno o più tenant vengono arrestati.
+
+Per la gestione della conservazione dei backup dei dati e della gestione del catalogo di backup HANA, SnapCenter deve eseguire le operazioni di eliminazione del catalogo per il database di sistema e per tutti i database tenant identificati nella prima fase. Allo stesso modo per i backup dei log, il flusso di lavoro di SnapCenter deve operare su ogni tenant che faceva parte dell'operazione di backup.
+
+La figura seguente mostra una panoramica del flusso di lavoro di backup.
+
+image:hana-sc-generic-image-014.png["larghezza=601, altezza=237"]
+
+
+
+== Gestione della conservazione dei backup
+
+La gestione della conservazione dei backup dei dati e la gestione del backup dei log possono essere suddivise in cinque aree principali, tra cui la gestione della conservazione di:
+
+* Backup locali nello storage primario
+* Backup basati su file
+* Backup su storage secondario (backup SnapVault o ANF)
+* Backup dei dati nel catalogo di backup SAP HANA
+* Backup dei log nel catalogo di backup SAP HANA e sul file system
+
+
+La figura seguente fornisce una panoramica dei diversi flussi di lavoro e delle dipendenze di ciascuna operazione. Le sezioni seguenti descrivono in dettaglio le diverse operazioni.
+
+image:hana-sc-generic-image-015.png["larghezza=601, altezza=309"]
+
+
+
+=== Gestione della conservazione dei backup locali nello storage primario
+
+SnapCenter gestisce la gestione dei backup del database SAP HANA e dei backup dei volumi non dati eliminando le copie Snapshot sullo storage primario e nel repository SnapCenter in base a una conservazione definita nella policy di backup SnapCenter . La gestione della conservazione è inclusa in ogni flusso di lavoro di backup in SnapCenter. I backup locali nell'archivio primario possono anche essere eliminati manualmente in SnapCenter.
+
+
+
+=== Gestione della conservazione dei backup basati su file
+
+SnapCenter gestisce la gestione dei backup basati su file eliminando i backup dal file system in base a una conservazione definita nei criteri di backup SnapCenter . La logica di gestione della conservazione viene eseguita con ogni flusso di lavoro di backup in SnapCenter.
+
+
+
+=== Gestione della conservazione dei backup nello storage secondario (SnapVault)
+
+La gestione della conservazione dei backup nell'archivio secondario (SnapVault) è gestita da ONTAP in base alla conservazione definita nella relazione di protezione ONTAP . Per sincronizzare queste modifiche sullo storage secondario nel repository SnapCenter , SnapCenter utilizza un processo di pulizia pianificato. Questo processo di pulizia sincronizza tutti i backup dell'archiviazione secondaria con il repository SnapCenter per tutti i plug-in SnapCenter e tutte le risorse.
+
+Per impostazione predefinita, il lavoro di pulizia viene programmato una volta alla settimana. Questa pianificazione settimanale comporta un ritardo nell'eliminazione dei backup in SnapCenter e SAP HANA Studio rispetto ai backup già eliminati nell'archivio secondario. Per evitare questa incoerenza, i clienti possono modificare la programmazione impostando una frequenza maggiore, ad esempio una volta al giorno. Per i dettagli su come adattare la pianificazione del lavoro di pulizia o come attivare un aggiornamento manuale, fare riferimento al capitolo link:hana-sc-generic-backup-operations.html#cleanup-of-secondary-backups["Pulizia dei backup secondari"].
+
+
+
+=== Gestione della conservazione dei backup nello storage secondario (backup ANF)
+
+La conservazione dei backup ANF è configurata e gestita da SnapCenter. SnapCenter gestisce la gestione dei backup ANF eliminandoli in base a una conservazione definita nei criteri di backup SnapCenter . La gestione della conservazione è inclusa in ogni flusso di lavoro di backup in SnapCenter.
+
+
+
+=== Gestione della conservazione dei backup dei dati all'interno del catalogo di backup SAP HANA
+
+Quando SnapCenter elimina un backup, uno snapshot locale o basato su file, oppure se SnapCenter identifica l'eliminazione di un backup nell'archivio secondario, questo backup dei dati viene eliminato anche nel catalogo dei backup SAP HANA. Prima di eliminare la voce del catalogo SAP HANA per un backup Snapshot locale nello storage primario, SnapCenter verifica se il backup esiste ancora nello storage secondario.
+
+
+
+=== Gestione della conservazione dei backup dei log
+
+Il database SAP HANA crea automaticamente backup dei log. Queste operazioni creano file di backup per ogni singolo servizio SAP HANA in una directory di backup configurata in SAP HANA. I backup del log più vecchi dell'ultimo backup dei dati non sono più necessari per il ripristino futuro e possono quindi essere eliminati. SnapCenter gestisce la gestione dei backup dei file di registro a livello di file system e nel catalogo di backup SAP HANA eseguendo i seguenti passaggi:
+
+. SnapCenter legge il catalogo di backup SAP HANA per ottenere l'ID del backup dei dati più vecchio eseguito correttamente.
+. SnapCenter elimina tutti i backup dei log nel catalogo SAP HANA e il file system che sono più vecchi di questo ID di backup.
+
+
+
+NOTE: SnapCenter gestisce l'housekeeping solo per i backup creati da SnapCenter. Se vengono creati backup aggiuntivi basati su file al di fuori di SnapCenter, è necessario assicurarsi che i backup basati su file vengano eliminati dal catalogo di backup. Se tale backup dei dati non viene eliminato manualmente dal catalogo di backup, può diventare il backup dei dati meno recente e i backup dei log meno recenti non vengono cancellati fino a quando questo backup basato su file non viene eliminato.
+
+
+NOTE: Anche se la conservazione è definita per i backup su richiesta nella configurazione della policy, la manutenzione viene eseguita solo quando viene eseguito un altro backup su richiesta. Pertanto, i backup on-demand devono in genere essere eliminati manualmente in SnapCenter per assicurarsi che vengano eliminati anche nel catalogo di backup SAP HANA e che la gestione dei backup dei log non si basi su un vecchio backup on-demand.
+
+
+NOTE: La gestione della conservazione del backup del registro è abilitata per impostazione predefinita. Se necessario, è possibile disattivarlo come descritto nella sezione Disattivare la gestione automatica del backup dei log.

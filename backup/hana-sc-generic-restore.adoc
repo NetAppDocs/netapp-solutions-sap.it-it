@@ -1,0 +1,363 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-restore.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Ripristina e recupera i database SAP HANA con SnapCenter
+:allow-uri-read: 
+
+
+[role="lead"]
+Ripristina e recupera i sistemi SAP HANA utilizzando SnapCenter con opzioni di ripristino automatiche o manuali. Ciò include ripristini completi del sistema, ripristini di tenant singoli per database HANA su ONTAP, Azure NetApp Files e FSx per ONTAP.
+
+SnapCenter supporta le seguenti operazioni di ripristino e recupero.
+
+* Sistemi SAP HANA MDC con un singolo tenant
++
+** Ripristino e recupero automatizzati end-to-end
+** Ripristino automatico end-to-end e recupero manuale (selezionabile)
+
+
+* Sistemi SAP HANA MDC con più tenant
++
+** Ripristino automatizzato end-to-end, il ripristino deve essere eseguito manualmente
+
+
+* Ripristino di un singolo tenant
++
+** Ripristino automatizzato end-to-end, il ripristino deve essere eseguito manualmente
+
+
+
+
+
+NOTE: Il ripristino automatico è supportato solo quando il plug-in HANA è distribuito sull'host del database HANA e il sistema HANA è stato rilevato automaticamente da SnapCenter. Con una configurazione host plug-in centrale, il ripristino deve essere eseguito manualmente dopo l'operazione di ripristino con SnapCenter.
+
+
+NOTE: È supportato il ripristino dal volume ANF primario. Il ripristino del backup ANF non è ancora supportato. Un ripristino sul posto o un ripristino su un nuovo volume da un backup ANF deve essere eseguito manualmente tramite il portale di Azure o l'interfaccia della riga di comando.
+
+
+
+== Ripristino e recupero automatizzati per sistemi SAP HANA MDC con un singolo tenant
+
+Un'operazione di ripristino viene avviata selezionando un backup Snapshot nella vista topologia delle risorse e facendo clic su Ripristina.
+
+image:hana-sc-generic-image-098.png["larghezza=601, altezza=294"]
+
+Per i sistemi HANA che utilizzano NFS su ANF, FSx per ONTAP o sistemi di archiviazione ONTAP è possibile selezionare il ripristino completo con o senza un'operazione di ripristino del volume per gli snapshot del volume primario.
+
+* La risorsa completa senza ripristino del volume utilizza Single File SnapRestore (SFSR) per ripristinare tutti i file del database.
+* La risorsa completa con ripristino del volume utilizza un'operazione di ripristino basata sul volume (VBSR) per ripristinare l'intero volume allo stato dello snapshot selezionato.
+
+
+
+NOTE: Il ripristino del volume non può essere utilizzato se è necessario ripristinare uno Snapshot precedente allo SnapVault attivo o SnapMirror Replication Snapshot.
+
+
+NOTE: Un'operazione di ripristino del volume eliminerà tutti i backup Snapshot più recenti dello Snapshot selezionato per l'operazione di ripristino.
+
+
+NOTE: Un ripristino con SFSR è quasi veloce quanto un'operazione di ripristino del volume, ma blocca qualsiasi operazione di snapshot finché il processo in background non ha completato le operazioni sui metadati.
+
+image:hana-sc-generic-image-099.png["larghezza=300"]
+
+Per i sistemi HANA su host bare metal che utilizzano FC SAN, il ripristino del volume (VBSR) non è supportato; al suo posto viene sempre utilizzato SFSR per l'operazione di ripristino. Per i sistemi HANA in esecuzione su VMware con VMFS verrà utilizzata un'operazione di clonazione, montaggio e copia.
+
+image:hana-sc-generic-image-100.png["larghezza=345, altezza=325"]
+
+Per un ripristino da un backup secondario è necessario selezionare la posizione dell'archivio.
+
+image:hana-sc-generic-image-101.png["larghezza=345, altezza=323"]
+
+Con l'ambito di ripristino è possibile selezionare un ripristino "allo stato più recente", "a un punto nel tempo" o un ripristino tramite punto di salvataggio senza utilizzare backup del registro. Se non si seleziona alcun ripristino, SnapCenter esegue solo l'operazione di ripristino e il ripristino deve essere eseguito manualmente come descritto link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Ripristino manuale con HANA Studio"].
+
+
+NOTE: SnapCenter utilizza i percorsi configurati in SAP HANA per le posizioni di backup dei log e dei cataloghi. Se si dispone di backup a livelli in una posizione aggiuntiva, è possibile aggiungere questi percorsi aggiuntivi.
+
+image:hana-sc-generic-image-102.png["larghezza=346, altezza=324"]
+
+Facoltativamente è possibile aggiungere script pre e post ripristino.
+
+image:hana-sc-generic-image-103.png["larghezza=348, altezza=326"]
+
+image:hana-sc-generic-image-104.png["larghezza=359, altezza=335"]
+
+Facendo clic su Fine nella schermata di riepilogo, viene avviata l'operazione di ripristino e recupero.
+
+image:hana-sc-generic-image-105.png["larghezza=361, altezza=336"]
+
+Il flusso di lavoro di ripristino e recupero può essere suddiviso in tre sezioni principali.
+
+* Arresto del sistema HANA
+* Ripristinare l'operazione
++
+** Preparazioni specifiche del file system, ad esempio operazione di smontaggio
+** Operazione di ripristino dello snapshot
+** Operazioni di post-operazioni specifiche del file system, ad esempio operazione di montaggio
+
+
+* Recupero HANA
++
+** Recovery del database di sistema
+** Recovery del database tenant
+
+
+
+
+image:hana-sc-generic-image-106.png["larghezza=357, altezza=439"]
+
+
+
+== Ripristino manuale con HANA Studio
+
+Per ripristinare e recuperare un sistema SAP HANA MDC con uno o più tenant utilizzando SAP HANA Studio e SnapCenter, completare i seguenti passaggi:
+
+. Preparare il processo di ripristino con SAP HANA Studio:
++
+.. Selezionare Recover System Database (Ripristina database di sistema) e confermare l'arresto del sistema SAP HANA.
+.. Selezionare il tipo di ripristino e specificare il percorso del catalogo di backup.
+.. Viene visualizzato l'elenco dei backup dei dati. Selezionare Backup per visualizzare l'ID del backup esterno.
+
+
+. Eseguire il processo di ripristino con SnapCenter:
++
+.. Nella vista topologica della risorsa, selezionare Copie locali per ripristinare dall'archivio primario o Copie Vault se si desidera ripristinare da un archivio di backup secondario.
+.. Selezionare il backup SnapCenter che corrisponde all'ID di backup esterno o al campo del commento di SAP HANA Studio.
+.. Avviare il processo di ripristino.
+
+
+. Eseguire il processo di ripristino del database di sistema con SAP HANA Studio:
++
+.. Fare clic su Refresh (Aggiorna) dall'elenco dei backup e selezionare il backup disponibile per il ripristino (indicato da un'icona verde).
+.. Avviare il processo di ripristino. Al termine del processo di ripristino, viene avviato il database di sistema.
+
+
+. Eseguire il processo di ripristino del database tenant con SAP HANA Studio:
++
+.. Selezionare Recover tenant Database (Ripristina database tenant) e selezionare il tenant da ripristinare.
+.. Selezionare il tipo di ripristino e la posizione di backup del registro.
+.. Viene visualizzato un elenco di backup dei dati. Poiché il volume di dati è già stato ripristinato, il backup del tenant viene indicato come disponibile (in verde).
+.. Selezionare questo backup e avviare il processo di ripristino. Al termine del processo di ripristino, il database del tenant viene avviato automaticamente.
+
+
+. Per un sistema HANA con più tenant, ripetere il passaggio 4 per ciascun tenant.
+
+
+
+NOTE: Un ripristino manuale con SAP HANA Cockpit avviene seguendo gli stessi passaggi.
+
+Nella sezione seguente vengono descritti i passaggi delle operazioni di ripristino e recupero di un sistema SAP HANA MDC con un singolo tenant.
+
+In HANA Studio selezionare Backup e ripristino e Ripristina database di sistema.
+
+image:hana-sc-generic-image-107.png["larghezza=450, altezza=368"]
+
+Conferma l'operazione di spegnimento; richiesta solo se il sistema HANA è ancora in esecuzione.
+
+image:hana-sc-generic-image-108.png["larghezza=349, altezza=83"]
+
+Selezionare l'operazione di ripristino. In questo esempio vogliamo ripristinare lo stato più recente.
+
+image:hana-sc-generic-image-109.png["larghezza=345, altezza=359"]
+
+Fornire la posizione del catalogo di backup.
+
+image:hana-sc-generic-image-110.png["larghezza=343, altezza=356"]
+
+HANA Studio elenca i backup più recenti archiviati nel catalogo dei backup HANA.
+
+Viene visualizzato un elenco dei backup disponibili in base al contenuto del catalogo dei backup. Selezionare il backup richiesto e annotare l'ID del backup esterno: in questo esempio, il backup più recente.
+
+image:hana-sc-generic-image-111.png["larghezza=391, altezza=283"]
+
+Dall'interfaccia utente grafica SnapCenter , selezionare la vista della topologia delle risorse e selezionare il backup da ripristinare, in questo esempio il backup primario più recente. Fare clic sull'icona Ripristina per avviare il ripristino.
+
+image:hana-sc-generic-image-112.png["larghezza=601, altezza=294"]
+
+Viene avviata la procedura guidata di ripristino SnapCenter . Selezionare il tipo di ripristino Risorsa completa e Ripristino volume per utilizzare un ripristino basato sul volume.
+
+image:hana-sc-generic-image-113.png["larghezza=346, altezza=325"]
+
+Selezionare "Nessun ripristino" per escludere le operazioni di ripristino dal flusso di lavoro SnapCenter .
+
+image:hana-sc-generic-image-114.png["larghezza=358, altezza=336"]
+
+Fare clic su Fine per avviare l'operazione di ripristino.
+
+image:hana-sc-generic-image-115.png["larghezza=361, altezza=339"]
+
+SnapCenter sta ora eseguendo l'operazione di ripristino.
+
+* Preparazioni specifiche del file system, ad esempio operazione di smontaggio
+* Operazione di ripristino dello snapshot
+* Operazioni post specifiche del file system, ad esempio operazione di montaggio
+
+
+image:hana-sc-generic-image-116.png["larghezza=322, altezza=398"]
+
+Quando lo Snapshot viene ripristinato da SnapCenter , un file snapshot_databackup_0_1 è disponibile nella sottodirectory del database di sistema e del tenant del volume dati HANA. Questo file è stato creato dal database HANA durante la creazione dello snapshot del database HANA. HANA elimina il file al termine dell'operazione di backup, in modo che i file siano visibili solo all'interno del backup Snapshot. Questi file sono necessari per qualsiasi operazione di recupero. Dopo il ripristino, i file vengono eliminati dal database HANA.
+
+....
+
+hana-1:~ # cd /hana/data/SS1/mnt00001/
+hana-1:/hana/data/SS1/mnt00001 # ls -al *
+-rw-r--r-- 1 ss1adm sapsys 16 Aug 26 06:00 nameserver.lck
+hdb00001:
+total 4992236
+drwxr-x--- 2 ss1adm sapsys 4096 Aug 26 06:00 .
+drwxr-x--- 5 ss1adm sapsys 4096 Aug 26 06:00 ..
+-rw-r----- 1 ss1adm sapsys 0 Nov 3 2020 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r----- 1 ss1adm sapsys 5100273664 Aug 26 06:00 datavolume_0000.dat
+-rw-r----- 1 ss1adm sapsys 36 Aug 25 10:30 landscape.id
+-rw-r----- 1 ss1adm sapsys 163840 Aug 26 06:00 snapshot_databackup_0_1
+hdb00002.00003:
+total 201420
+drwxr-xr-- 2 ss1adm sapsys 4096 Nov 3 2020 .
+drwxr-x--- 5 ss1adm sapsys 4096 Aug 26 06:00 ..
+-rw-r--r-- 1 ss1adm sapsys 0 Nov 3 2020 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r--r-- 1 ss1adm sapsys 335544320 Aug 26 06:00 datavolume_0000.dat
+hdb00003.00003:
+total 4803140
+drwxr-xr-- 2 ss1adm sapsys 4096 Aug 26 06:00 .
+drwxr-x--- 5 ss1adm sapsys 4096 Aug 26 06:00 ..
+-rw-r--r-- 1 ss1adm sapsys 0 Nov 3 2020 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r--r-- 1 ss1adm sapsys 4898947072 Aug 26 06:00 datavolume_0000.dat
+-rw-r----- 1 ss1adm sapsys 159744 Aug 26 06:00 snapshot_databackup_0_1
+hana-1:/hana/data/SS1/mnt00001 #
+
+....
+Vai a SAP HANA Studio e fai clic su Aggiorna per aggiornare l'elenco dei backup disponibili. Il backup ripristinato con SnapCenter viene ora visualizzato con un'icona verde nell'elenco dei backup. Selezionare il backup e fare clic su Avanti.
+
+image:hana-sc-generic-image-117.png["larghezza=400, altezza=290"]
+
+Fornire la posizione dei backup del registro. Fare clic su Avanti.
+
+
+NOTE: SAP HANA Studio utilizza i percorsi configurati in SAP HANA per le posizioni di backup dei log e dei cataloghi. Se si dispone di backup a livelli in una posizione aggiuntiva, è possibile aggiungere questi percorsi aggiuntivi.
+
+image:hana-sc-generic-image-118.png["larghezza=465, altezza=296"]
+
+Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
+
+image:hana-sc-generic-image-119.png["larghezza=466, altezza=296"]
+
+Rivedere le impostazioni di ripristino e fare clic su fine.
+
+Facendo clic su Mostra istruzione SQL, HANA Studio mostra il comando SQL che viene eseguito per l'operazione di ripristino.
+
+image:hana-sc-generic-image-120.png["larghezza=464, altezza=295"]
+
+Inizia il processo di recupero. Attendere il completamento del ripristino del database di sistema.
+
+image:hana-sc-generic-image-121.png["larghezza=376, altezza=239"]
+
+In SAP HANA Studio, selezionare la voce per il database di sistema e avviare Backup Recovery - Recover Tenant Database.
+
+image:hana-sc-generic-image-122.png["larghezza=476, altezza=315"]
+
+Selezionare il tenant da ripristinare e fare clic su Next (Avanti).
+
+image:hana-sc-generic-image-123.png["larghezza=342, altezza=355"]
+
+Specificare il tipo di ripristino e fare clic su Next (Avanti).
+
+image:hana-sc-generic-image-124.png["larghezza=343, altezza=356"]
+
+Confermare la posizione del catalogo di backup e fare clic su Next (Avanti).
+
+image:hana-sc-generic-image-125.png["larghezza=342, altezza=355"]
+
+Confermare l'arresto del database tenant.
+
+image:hana-sc-generic-image-126.png["larghezza=348, altezza=85"]
+
+Poiché il ripristino del volume di dati è stato eseguito prima del ripristino del database di sistema, il backup del tenant è immediatamente disponibile. Selezionare il backup evidenziato in verde e fare clic su Avanti.
+
+image:hana-sc-generic-image-127.png["larghezza=433, altezza=349"]
+
+Fornire la posizione dei backup del registro. Fare clic su Avanti.
+
+
+NOTE: SAP HANA Studio utilizza i percorsi configurati in SAP HANA per le posizioni di backup dei log e dei cataloghi. Se si dispone di backup a livelli in una posizione aggiuntiva, è possibile aggiungere questi percorsi aggiuntivi.
+
+image:hana-sc-generic-image-128.png["larghezza=384, altezza=310"]
+
+Selezionare le altre impostazioni desiderate. Assicurarsi che l'opzione Usa backup delta non sia selezionata. Fare clic su Avanti.
+
+image:hana-sc-generic-image-129.png["larghezza=384, altezza=310"]
+
+Rivedere le impostazioni di ripristino e fare clic su fine.
+
+Facendo clic su Mostra istruzione SQL, HANA Studio mostra il comando SQL che viene eseguito per l'operazione di ripristino.
+
+image:hana-sc-generic-image-130.png["larghezza=380, altezza=307"]
+
+Attendere il completamento del ripristino e l'avvio del database tenant.
+
+image:hana-sc-generic-image-131.png["larghezza=378, altezza=305"]
+
+Una volta completato il ripristino del tenant, il sistema SAP HANA è attivo e funzionante.
+
+
+NOTE: Per un sistema SAP HANA MDC con più tenant, è necessario ripetere il ripristino del tenant per ciascun tenant.
+
+
+
+== Ripristino manuale con comandi SQL
+
+È anche possibile utilizzare istruzioni SQL per il ripristino del sistema HANA.
+
+Per prima cosa è necessario ripristinare il database di sistema.
+
+....
+
+HDBSettings.sh recoverSys.py --command="RECOVER DATABASE UNTIL TIMESTAMP '2026-08-26 10:55:49' USING CATALOG PATH ('mnt/log-backup/SYSTEMDB') USING LOG PATH ('mnt/log-backup/SYSTEMDB') USING SNAPSHOT"
+....
+Come secondo passaggio è necessario connettersi al database di sistema e avviare il ripristino del/i database del tenant. In questo esempio il database tenant è SS1.
+
+....
+
+hdbsql SYSTEMDB=> RECOVER DATABASE FOR SS1 UNTIL TIMESTAMP '2026-08-26 10:55:49' USING CATALOG PATH ('mnt/log-backup/DB_SS1') USING LOG PATH ('mnt/log-backup/DB_SS1') USING SNAPSHOT
+....
+
+
+== Ripristino e recupero di un singolo tenant
+
+Un'operazione di ripristino e recupero di un singolo tenant con SnapCenter è molto simile al flusso di lavoro descritto nell'argomento precedente link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Ripristino manuale con HANA Studio"].
+
+Per ripristinare e ripristinare un sistema single-tenant SAP HANA MDC utilizzando SAP HANA Studio e SnapCenter, attenersi alla seguente procedura:
+
+. Preparare il processo di ripristino con SAP HANA Studio:
++
+.. Selezionare Recupera database tenant e confermare l'arresto del database tenant.
+.. Selezionare il tipo di ripristino e specificare il percorso del catalogo di backup.
+.. Viene visualizzato l'elenco dei backup dei dati. Selezionare Backup per visualizzare l'ID del backup esterno.
+
+
+. Eseguire il processo di ripristino con SnapCenter:
++
+.. Nella vista topologica della risorsa, selezionare Copie locali per ripristinare dall'archivio primario o Copie Vault se si desidera ripristinare da un archivio di backup secondario.
+.. Selezionare il backup SnapCenter che corrisponde all'ID di backup esterno o al campo del commento di SAP HANA Studio.
+.. Avviare il processo di ripristino del tenant.
+
+
+. Eseguire il processo di ripristino del database tenant con SAP HANA Studio:
++
+.. Fare clic su Refresh (Aggiorna) dall'elenco dei backup e selezionare il backup disponibile per il ripristino (indicato da un'icona verde).
+.. Avviare il processo di recupero. Una volta completato il processo di ripristino, viene avviato il database del tenant.
+
+
+
+
+
+
+== Ripristino di volumi non dati
+
+Un'operazione di ripristino per un volume non dati viene avviata selezionando un backup Snapshot nella vista topologica della risorsa del volume non dati e facendo clic su Ripristina.
+
+image:hana-sc-generic-image-132.png["larghezza=601, altezza=294"]
+
+Per i volumi non dati con NFS è possibile selezionare un'operazione di ripristino completa delle risorse (VBSR) o a livello di file (SFSR). Per il ripristino a livello di file è possibile definire per l'operazione di ripristino tutti i file o singoli file.
+
+image:hana-sc-generic-image-133.png["larghezza=369, altezza=344"]

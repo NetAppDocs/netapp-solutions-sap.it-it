@@ -1,0 +1,82 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-sc-backup-solution.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Scopri di più sul backup e ripristino SnapCenter per SAP HANA
+:allow-uri-read: 
+
+
+[role="lead"]
+SnapCenter offre funzionalità complete di backup e ripristino per i database SAP HANA utilizzando copie Snapshot basate sull'archiviazione, gestione automatizzata della conservazione e integrazione con NetApp ONTAP, Azure NetApp Files e FSx per NetApp ONTAP. La soluzione supporta backup di database coerenti con l'applicazione, protezione di volumi non dati, controlli di integrità dei blocchi e replica su storage secondario tramite backup SnapVault o ANF.
+
+La soluzione di backup SnapCenter per SAP HANA copre le seguenti aree:
+
+* Operazioni di backup, pianificazione e gestione della conservazione
+* Backup dei dati SAP HANA con copie Snapshot basate su storage
+* Backup di volumi non dati con copie Snapshot basate su storage (ad esempio, /hana/shared)
+* Operazioni di controllo dell'integrità dei blocchi del database
++
+** utilizzando un backup basato su file
+** utilizzando lo strumento hdbpersdiag di SAP HANA
+
+
+* Replica del backup snapshot in una posizione di backup secondaria
++
+** utilizzando SnapVault/ SnapMirror
+** utilizzando il backup ANF Azure NetApp Files
+
+
+* Manutenzione del catalogo di backup SAP HANA
++
+** per backup dei dati HANA (basati su snapshot e file)
+** per i backup dei log HANA
+
+
+* Operazioni di ripristino e recovery
++
+** Ripristino e ripristino automatici
+** Operazioni di ripristino di un singolo tenant
+
+
+
+
+I backup dei dati del database vengono eseguiti da SnapCenter in combinazione con il plug-in SnapCenter per SAP HANA. Il plug-in attiva uno snapshot del database interno SAP HANA in modo che gli snapshot, creati sul sistema di archiviazione, siano basati su un'immagine coerente con l'applicazione del database SAP HANA.
+
+SnapCenter consente la replica di immagini di database coerenti in una posizione di backup o di ripristino di emergenza secondaria utilizzando SnapVault o la funzionalità SnapMirror^.^. In genere, vengono definite policy di conservazione diverse per i backup nello storage primario e in quello secondario. SnapCenter gestisce la conservazione nello storage primario, mentre ONTAP gestisce la conservazione nello storage di backup secondario.
+
+Per consentire un backup completo di tutte le risorse correlate a SAP HANA, SnapCenter consente inoltre di eseguire il backup di tutti i volumi non dati utilizzando il plug-in SAP HANA con copie Snapshot basate su storage. È possibile pianificare volumi diversi dai dati in modo indipendente dal backup dei dati del database per consentire policy di conservazione e protezione individuali.
+
+SAP consiglia di combinare i backup Snapshot basati sull'archiviazione con un controllo settimanale della coerenza del livello di persistenza. È possibile eseguire il controllo di coerenza dei blocchi da SnapCenter eseguendo un backup basato su file oppure eseguendo lo strumento SAP hdbpersdiag.
+
+In base ai criteri di conservazione configurati, SnapCenter gestisce la manutenzione dei backup dei file di dati nell'archivio primario, dei backup dei file di registro e del catalogo di backup SAP HANA.
+
+SnapCenter gestisce la conservazione dello storage primario, mentre ONTAP gestisce la conservazione del backup secondario.
+
+La figura seguente mostra una panoramica delle operazioni di backup e gestione della conservazione di SnapCenter.
+
+Quando si esegue un backup Snapshot basato su storage del database SAP HANA, SnapCenter esegue le seguenti attività:
+
+* Operazione di backup:
++
+** Attiva uno snapshot del database HANA interno per ottenere un'immagine coerente dell'applicazione sul livello di persistenza
+** Crea un backup Snapshot basato sull'archiviazione del volume di dati
+** Chiude lo snapshot del database HANA interno, conferma o abbandona l'operazione di backup. Questo passaggio registra il backup nel catalogo di backup HANA.
+
+
+* Gestione della fidelizzazione:
++
+** Elimina i backup degli snapshot di archiviazione in base alla conservazione definita
+** Elimina gli snapshot sul livello di archiviazione
+** Elimina le voci del catalogo di backup SAP HANA
+** Elimina tutti i backup del registro più vecchi del backup dei dati più vecchio. I backup del log vengono eliminati nel file system e nel catalogo di backup SAP HANA
+
+
+
+
+image:hana-sc-generic-image-006.png["larghezza=601, altezza=285"]
+
+Se è configurato un backup secondario, con SnapVault/ SnapMirror o con backup ANF, lo Snapshot creato nel volume primario viene replicato nell'archivio di backup secondario. SnapCenter gestisce il catalogo di backup HANA e la conservazione dei backup dei log in base alla disponibilità dei backup secondari.
+
+image:hana-sc-generic-image-007.png["larghezza=601, altezza=278"]

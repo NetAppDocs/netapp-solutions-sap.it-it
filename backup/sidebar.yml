@@ -2,6 +2,40 @@
 section: backup
 title: Backup, ripristino e disaster recovery
 entries:
+- title: Backup e recovery SAP HANA con SnapCenter
+  entries:
+  - title: Panoramica della soluzione
+    url: "/backup/hana-sc-generic-scope.html"
+  - title: Protezione dei dati SAP HANA
+    url: "/backup/hana-sc-generic-overview-dp.html"
+  - title: Architettura SnapCenter
+    url: "/backup/hana-sc-generic-sc-architecture.html"
+  - title: SnapCenter per la soluzione di backup SAP HANA
+    url: "/backup/hana-sc-generic-sc-backup-solution.html"
+  - title: Configurazioni supportate SnapCenter
+    url: "/backup/hana-sc-generic-sc-supported-configs.html"
+  - title: Concetti e buone pratiche
+    url: "/backup/hana-sc-generic-concepts.html"
+  - title: Panoramica della configurazione SnapCenter
+    url: "/backup/hana-sc-generic-sc-config-overview.html"
+  - title: Configurazione iniziale di SnapCenter
+    url: "/backup/hana-sc-generic-sc-initial-config.html"
+  - title: Configurazione specifica delle risorse SnapCenter per i backup dei database
+      SAP HANA
+    url: "/backup/hana-sc-generic-sc-resource-config.html"
+  - title: Configurazione specifica delle risorse SnapCenter per i backup di volumi
+      diversi dai dati
+    url: "/backup/hana-sc-generic-sc-config-non-data-vols.html"
+  - title: Configurazione host del plug-in centrale
+    url: "/backup/hana-sc-generic-central-plugin.html"
+  - title: Operazioni di backup snapshot SAP HANA
+    url: "/backup/hana-sc-generic-backup-operations.html"
+  - title: Controlli di coerenza dei blocchi con SnapCenter
+    url: "/backup/hana-sc-generic-block-check.html"
+  - title: Ripristino e recupero con SnapCenter
+    url: "/backup/hana-sc-generic-restore.html"
+  - title: Configurazione e tuning avanzati
+    url: "/backup/hana-sc-generic-advanced-config.html"
 - title: SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
   entries:
   - title: Panoramica
@@ -34,38 +68,6 @@ entries:
       url: "/backup/fsxn-restore-recover-from-secondary-storage.html"
   - title: Dove trovare ulteriori informazioni
     url: "/backup/fsxn-additional-info.html"
-- title: Backup e recovery SAP HANA con SnapCenter
-  entries:
-  - title: Panoramica
-    url: "/backup/hana-br-scs-overview.html"
-  - title: Architettura SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-architecture.html"
-  - title: Soluzione di backup SAP HANA di SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-backup.html"
-  - title: Concetti e Best practice di SnapCenter
-    url: "/backup/hana-br-scs-concepts-best-practices.html"
-  - title: Setup di laboratorio utilizzato per questo report
-    url: "/backup/hana-br-scs-lab-setup.html"
-  - title: Configurazione di SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-config.html"
-  - title: Configurazione iniziale di SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-initial-config.html"
-  - title: Configurazione specifica delle risorse SnapCenter per i backup dei database
-      SAP HANA
-    url: "/backup/hana-br-scs-resource-config-hana-database-backups.html"
-  - title: Configurazione specifica delle risorse SnapCenter per i backup di volumi
-      diversi dai dati
-    url: "/backup/hana-br-scs-resource-specific-config-non-data-volume-backups.html"
-  - title: Backup del database
-    url: "/backup/hana-br-scs-database-backups.html"
-  - title: Controllo dell'integrità del blocco
-    url: "/backup/hana-br-scs-block-integrity-check.html"
-  - title: Ripristino e ripristino
-    url: "/backup/hana-br-scs-restore-recovery.html"
-  - title: Configurazione e tuning avanzati
-    url: "/backup/hana-br-scs-advanced-config-tuning.html"
-  - title: Dove trovare informazioni aggiuntive e cronologia delle versioni
-    url: "/backup/hana-br-scs-additional-info.html"
 - title: Data Protection e high Availability di SAP HANA con SnapCenter, SnapMirror
     Active Sync e VMware Metro Storage Cluster
   entries:
