@@ -123,7 +123,7 @@ image:amazon-fsx-image69.png["Figura che mostra la finestra di dialogo input/out
 
 . Selezionare l'ambito e il tipo di ripristino.
 +
-Lo scenario standard per i sistemi a singolo tenant HANA MDC consiste nell'utilizzare una risorsa completa con revert di volume. Per un sistema HANA MDC con più tenant, potrebbe essere necessario ripristinare solo un tenant singolo. Per ulteriori informazioni sul ripristino di un singolo tenant, vedere link:hana-br-scs-restore-recovery.html["Ripristino e ripristino (netapp.com)"^].
+Lo scenario standard per i sistemi HANA MDC a tenant singolo è quello di utilizzare risorse complete con ripristino del volume. Per un sistema HANA MDC con più tenant, potrebbe essere opportuno ripristinare solo un singolo tenant. Per ulteriori informazioni sul ripristino del singolo tenant, vedere link:hana-sc-generic-restore.html["Ripristino e ripristino (netapp.com)"^].
 
 +
 image:amazon-fsx-image70.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]

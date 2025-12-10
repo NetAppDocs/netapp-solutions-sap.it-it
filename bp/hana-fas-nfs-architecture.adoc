@@ -58,7 +58,7 @@ I backup Snapshot basati su storage offrono vantaggi significativi rispetto ai b
 * Replica efficiente in termini di spazio e larghezza di banda sullo storage secondario in base alle modifiche dei blocchi
 
 
-Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA con SnapCenter, consultare link:../backup/hana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^].
+Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA tramite SnapCenter, vedere link:../backup/hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^].
 
 
 

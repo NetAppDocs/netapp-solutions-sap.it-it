@@ -17,9 +17,9 @@ summary: Per ulteriori informazioni sulle informazioni descritte in questo docum
 Per ulteriori informazioni sulle informazioni descritte in questo documento, consultare i seguenti documenti e/o siti Web:
 
 * link:../index.html["Soluzioni software SAP HANA"^]
-* link:../backup/hana-dr-sr-pdf-link.html["TR-4646: Disaster recovery SAP HANA con replica dello storage"^]
-* link:../backup/hana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^]
-* link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatizzazione di copie di sistema SAP con il plug-in SAP HANA SnapCenter"^]
+* link:../backup/hana-dr-sr-pdf-link.html["Disaster recovery SAP HANA con replica dello storage"^]
+* link:../backup/hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^]
+* link:../lifecycle/sc-copy-clone-introduction.html["Automazione delle copie del sistema SAP tramite il plug-in SnapCenter SAP HANA"^]
 * Centri di documentazione NetApp
 +
 https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]

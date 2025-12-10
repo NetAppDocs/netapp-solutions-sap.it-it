@@ -22,7 +22,7 @@ SnapCenter 4.6 supporta il rilevamento automatico per i sistemi HANA configurati
 
 La figura seguente mostra la configurazione di laboratorio utilizzata per questo capitolo. Due host HANA, hana-3 e hana-4, sono stati configurati con la replica di sistema HANA.
 
-Un utente di database "SnapCenter" è stato creato per il database del sistema HANA con il Privileges richiesto per eseguire le operazioni di backup e ripristino (vedere link:hana-br-scs-overview.html["Backup e ripristino SAP HANA con SnapCenter"^]). È necessario configurare una chiave di memorizzazione utente HANA su entrambi gli host utilizzando l'utente del database indicato sopra.
+È stato creato un utente del database "SnapCenter" per il database di sistema HANA con i privilegi necessari per eseguire operazioni di backup e ripristino (vedere link:hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^]). È necessario configurare una chiave di archivio utente HANA su entrambi gli host utilizzando l'utente del database sopra indicato.
 
 ....
 ss2adm@hana- 3: / > hdbuserstore set SS2KEY hana- 3:33313 SNAPCENTER <password>
@@ -157,6 +157,6 @@ La figura seguente mostra uno scenario in cui sono stati eseguiti più takeover 
 
 image:saphana-sr-scs-image26.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
-Le operazioni di ripristino e ripristino per una configurazione del gruppo di risorse di SnapCenter 4.6 sono identiche a quelle di una configurazione della replica non di sistema rilevata automaticamente. Sono disponibili tutte le opzioni per il ripristino e il ripristino automatizzato. Per ulteriori informazioni, vedere il rapporto tecnico link:hana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"^].
+Le operazioni di ripristino e recupero per una configurazione di gruppo di risorse SnapCenter 4.6 sono identiche a quelle di una configurazione di replica non di sistema rilevata automaticamente. Sono disponibili tutte le opzioni di ripristino e recupero automatico. Per ulteriori dettagli, consultare la relazione tecnica link:hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^].
 
 Un'operazione di ripristino da un backup creato nell'altro host è descritta nella sezione link:hana-sr-scs-restore-recovery-other-host-backup.html["Ripristino e ripristino da un backup creato sull'altro host"].

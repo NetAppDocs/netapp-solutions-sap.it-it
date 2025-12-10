@@ -104,7 +104,7 @@ Sono state utilizzate le seguenti versioni software:
 * ONTAP 9.14P1
 
 
-Tutti i sistemi SAP HANA devono essere configurati in base alla guida alla configurazione link:../bp/hana-aff-nfs-introduction.html["SAP HANA su sistemi NetApp AFF con NFS"]. SnapCenter e le risorse SAP HANA sono state configurate in base alla guida alle Best practice link:../backup/hana-br-scs-overview.html["Backup e ripristino SAP HANA con SnapCenter"].
+Tutti i sistemi SAP HANA devono essere configurati in base alla guida alla configurazione link:../bp/hana-aff-nfs-introduction.html["SAP HANA su sistemi NetApp AFF con NFS"]. SnapCenter e le risorse SAP HANA sono stati configurati in base alla guida alle best practice link:../backup/hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"].
 
 image:sc-copy-clone-image16.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
@@ -115,7 +115,7 @@ image:sc-copy-clone-image16.png["Figura che mostra la finestra di dialogo input/
 Come passaggio iniziale, è necessario configurare il sistema SAP HANA di destinazione all'interno di SnapCenter.
 
 . Installazione del sistema di destinazione SAP HANA
-. Configurazione del sistema SAP HANA in SnapCenter, come descritto in link:../backup/hana-br-scs-overview.html["TR-4614: Backup e ripristino SAP HANA con SnapCenter"]
+. Configurazione del sistema SAP HANA in SnapCenter come descritto in link:../backup/hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"]
 +
 .. Configurazione dell'utente del database SAP HANA per le operazioni di backup SnapCenter questo utente deve essere identico sul sistema di origine e di destinazione.
 .. Configurazione della chiave hdbuserstore per il server di base <sid> con l'utente di backup sopra indicato. Se lo script di automazione viene utilizzato per il ripristino, il nome della chiave deve essere <SID> 10

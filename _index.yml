@@ -56,7 +56,7 @@ indexpage:
   - title: SnapCenter (indipendente dalla piattaforma)
     links:
     - title: Backup e recovery SAP HANA con SnapCenter
-      url: backup/hana-br-scs-overview.html
+      url: backup/hana-sc-generic-scope.html
     - title: Replica di sistema SAP HANA - backup e recovery con SnapCenter
       url: backup/hana-sr-scs-system-replication-overview.html
     - title: Automazione delle operazioni di copia e clonazione del sistema SAP HANA
