@@ -35,7 +35,10 @@ SnapCenter supporta le seguenti operazioni di ripristino e recupero.
 NOTE: Il ripristino automatico è supportato solo quando il plug-in HANA è distribuito sull'host del database HANA e il sistema HANA è stato rilevato automaticamente da SnapCenter. Con una configurazione host plug-in centrale, il ripristino deve essere eseguito manualmente dopo l'operazione di ripristino con SnapCenter.
 
 
-NOTE: È supportato il ripristino dal volume ANF primario. Il ripristino del backup ANF non è ancora supportato. Un ripristino sul posto o un ripristino su un nuovo volume da un backup ANF deve essere eseguito manualmente tramite il portale di Azure o l'interfaccia della riga di comando.
+NOTE: Con Azure NetApp Files, le operazioni di ripristino sono supportate per volumi ANF primari o backup ANF. Per i volumi ANF primari verrà eseguito un revert del volume, per i backup ANF verrà eseguito un rispristino in-place con ripristino di singoli file. In entrambi i casi le configurazioni dei gruppi di volumi dell'applicazione verranno mantenute.
+
+
+NOTE: Se la crittografia del volume è abilitata e viene utilizzato l'archivio sicuro locale SAP (LSS), un ripristino con SnapCenter è supportato a condizione che la password di backup della chiave radice nell'LSS non sia stata modificata dall'esecuzione del backup. Se la password è stata modificata e un ripristino viene eseguito utilizzando uno Snapshot precedente con una password diversa, il ripristino deve essere eseguito manualmente e la vecchia password deve essere fornita con l'istruzione di ripristino: "RECOVER DATA USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD 'old-password'"
 
 
 

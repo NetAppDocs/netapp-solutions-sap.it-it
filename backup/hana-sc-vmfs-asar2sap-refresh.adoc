@@ -8,7 +8,7 @@ summary:
 :allow-uri-read: 
 
 
-Informazioni dettagliate sulle operazioni di aggiornamento del sistema SAP tramite SnapCenter sono disponibili all'indirizzo  https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"] .
+Informazioni dettagliate sulle operazioni di aggiornamento del sistema SAP utilizzando SnapCenter sono disponibili su  https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"].
 
 Il secondo sistema HANA QFS è stato fornito nello stesso modo descritto nel capitolo link:hana-sc-vmfs-asar2-hana-prov.html["“Provisioning e installazione del sistema HANA”"] .
 
@@ -16,7 +16,7 @@ Il secondo sistema HANA QFS è stato fornito nello stesso modo descritto nel cap
 
 === Prerequisiti
 
-La versione corrente di SnapCenter (6.1P1) presenta alcune limitazioni che si prevede verranno risolte nelle prossime versioni.
+Per le versioni di SnapCenter < 6.2 ci sono delle limitazioni che devono essere prese in considerazione.
 
 . È necessario riavviare il processo spl dopo ogni flusso di lavoro "clone create" e "clone delete" utilizzando il comando "systemctl restart spl" sull'host HANA di destinazione.
 . Le VM HANA utilizzate come origine e destinazione dell'operazione di aggiornamento del sistema SAP devono essere eseguite sullo stesso host ESX.
@@ -174,4 +174,4 @@ La seguente schermata mostra i passaggi del processo eseguiti da SnapCenter.
 
 image:sc-hana-asrr2-vmfs-image39.png["Figura che mostra i contenuti discussi"]
 
-Come menzionato nella sezione "Prerequisiti", il servizio SnapCenter spl sull'host HANA deve essere riavviato utilizzando il comando "systemctl restart spl" per avviare la pulizia corretta.
+Come menzionato nella sezione “Pre-requisites”, per le release di SnapCenter < 6.2 il servizio spl di SnapCenter sull'host HANA deve essere riavviato utilizzando il comando “systemctl restart spl” per avviare la corretta pulizia.

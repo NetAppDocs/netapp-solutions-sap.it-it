@@ -224,25 +224,25 @@ NOTE: Solo la colonna 1 (mount NFS) della tabella sottostante è rilevante per F
 | *Backup e ripristino di volumi non dati* |  |  
 
 
-| Backup snapshot | SÌ (*) | SÌ (*) 
+| Backup snapshot | Sì | SÌ (*) 
 
 
-| Ripristina da snapshot | SFSR del LUN completo (*) | SFSR del LUN completo (*) 
+| Ripristina da snapshot | SFSR del LUN completo | SFSR del LUN completo (*) 
 
 
-| Replica SnapVault | SÌ (*) | SÌ (*) 
+| Replica SnapVault | Sì | SÌ (*) 
 
 
-| Ripristina dalla destinazione SnapVault | SÌ (*) | SÌ (*) 
+| Ripristina dalla destinazione SnapVault | Sì | SÌ (*) 
 
 
 | *Aggiornamento del sistema SAP* |  |  
 
 
-| Dall'istantanea primaria | SÌ (**) | SÌ (**) 
+| Dall'istantanea primaria | Sì | SÌ (**) 
 
 
-| Dal target SnapVault | SÌ (**) | SÌ (**) 
+| Dal target SnapVault | Sì | SÌ (**) 
 
 
 | *HA e DR* |  |  

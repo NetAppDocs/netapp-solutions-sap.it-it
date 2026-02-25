@@ -19,9 +19,9 @@ SnapCenter:
 
 link:hana-sc-generic-scope.html["Backup e recovery SAP HANA con SnapCenter"]
 
-link:hana-sr-scs-system-replication-overview.html["TR-4719: Replica del sistema SAP HANA - Backup e ripristino con SnapCenter"]
+link:hana-sr-scs-system-replication-overview.html["Replica di sistema SAP HANA - backup e recovery con SnapCenter"]
 
-link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"]
+link:../lifecycle/sc-copy-clone-introduction.html["Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"]
 
 https://docs.netapp.com/us-en/snapcenter/index.html["Documentazione del software SnapCenter"]
 

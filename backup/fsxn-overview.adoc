@@ -4,7 +4,7 @@ permalink: backup/fsxn-overview.html
 keywords: tr4926, 4926, introduction, overview 
 summary: Questo report tecnico fornisce le Best practice per la protezione dei dati SAP HANA su Amazon FSX per NetApp ONTAP e NetApp SnapCenter. Questo documento tratta i concetti di SnapCenter, i consigli di configurazione e i flussi di lavoro operativi, tra cui configurazione, operazioni di backup, e operazioni di ripristino e recovery. 
 ---
-= TR-4926: SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
+= SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

@@ -28,7 +28,7 @@ Per maggiori dettagli su questi diversi agenti SnapCenter e sulle opzioni di ins
 
 Le sezioni seguenti evidenziano le differenze tra l'integrazione di LSC con SnapCenter mediante l'installazione standard o l'host centrale di comunicazione. In particolare, tutte le fasi di configurazione non evidenziate sono le stesse indipendentemente dall'opzione di installazione e dal database utilizzato.
 
-Per eseguire un backup automatizzato basato sulla copia di Snapshot dal database di origine e creare un clone per il nuovo database di destinazione, l'integrazione descritta tra LSC e SnapCenter utilizza le opzioni di configurazione e gli script descritti in link:sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"^].
+Per eseguire un backup automatico basato su copia Snapshot dal database di origine e creare un clone per il nuovo database di destinazione, l'integrazione descritta tra LSC e SnapCenter utilizza le opzioni di configurazione e gli script descritti in link:sc-copy-clone-introduction.html["Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"^].
 
 
 
@@ -88,9 +88,9 @@ Il master LSC e il worker LSC devono essere installati nell'ambiente SAP. In que
 Risorse di documentazione:
 
 * https://docs.netapp.com/us-en/snapcenter/["Centro di documentazione SnapCenter"^]
-* https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["TR-4700: Plug-in SnapCenter per database Oracle"^]
+* https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["SnapCenter Plug-In per Oracle Database"^]
 * link:../backup/hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^]
-* link:sc-copy-clone-introduction.html["TR-4667: Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"^]
+* link:sc-copy-clone-introduction.html["Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2880726["Guida di riferimento ai cmdlet di SnapCenter 4.6"^]
 
 

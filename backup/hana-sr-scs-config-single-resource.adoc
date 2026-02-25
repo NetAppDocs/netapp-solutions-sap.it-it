@@ -54,7 +54,7 @@ Nel database HANA è stato creato un utente per eseguire operazioni di backup. U
 ....
 hdbuserstore.exe -u SYSTEM set SSRKEY ssr-vip:31013 SNAPCENTER <password>
 ....
-Ulteriori informazioni sulle opzioni di distribuzione del plug-in SAP HANA e sulla configurazione dell'archivio utenti sono disponibili nel report tecnico TR-4614: link:hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^].
+Puoi trovare ulteriori informazioni sulle opzioni di distribuzione del plug-in SAP HANA e sulla configurazione dello user store in link:hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"^].
 
 In SnapCenter, la risorsa viene configurata come mostrato nella figura seguente utilizzando la chiave di memorizzazione utente, configurata in precedenza, e il server SnapCenter come `hdbsql` host di comunicazione.
 

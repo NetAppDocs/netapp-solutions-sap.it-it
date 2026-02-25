@@ -18,11 +18,11 @@ Per ulteriori informazioni sulle informazioni descritte in questo documento, con
 
 * link:../index.html["Soluzioni per applicazioni aziendali SAP e database SAP HANA (netapp.com)"]
 * link:../backup/hana-sc-generic-scope.html["Backup e ripristino SAP HANA con SnapCenter"]
-* link:../bp/hana-aff-fc-introduction.html["TR-4436: SAP HANA su sistemi NetApp All Flash FAS con protocollo Fibre Channel"]
-* link:../bp/hana-aff-nfs-introduction.html["TR-4435: SAP HANA su sistemi NetApp All Flash FAS con NFS"]
-* link:../backup/fsxn-overview.html["TR-4926: SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter"]
-* link:lama-ansible-introduction.html["TR-4953: Integrazione della gestione del panorama SAP di NetApp con Ansible"]
-* link:libelle-sc-overview.html["TR-4929: Automazione delle operazioni di copia del sistema SAP con libelle SystemCopy (netapp.com)"]
+* link:../bp/hana-aff-fc-introduction.html["SAP HANA su NetApp All Flash FAS Systems con protocollo Fibre Channel"]
+* link:../bp/hana-aff-nfs-introduction.html["SAP HANA su NetApp All Flash FAS Systems con NFS"]
+* link:../backup/fsxn-overview.html["SAP HANA su Amazon FSX per NetApp ONTAP - Backup e recovery con SnapCenter"]
+* link:lama-ansible-introduction.html["NetApp SAP Landscape Management Integration con Ansible"]
+* link:libelle-sc-overview.html["Automazione delle operazioni di copia del sistema SAP con Libelle SystemCopy (netapp.com)"]
 * link:../briefs/sap-alpaca-automation.html["Automazione di copia, refresh e cloning del sistema SAP dei workflow con ALPACA e NetApp SnapCenter"]
 * link:../briefs/sap-avantra-automation.html["Automazione di copia, refresh e cloning dei flussi di lavoro del sistema SAP con Avantra e NetApp SnapCenter"]
 
@@ -46,4 +46,7 @@ Riscrittura completa di SnapCenter 4.3 e script di automazione migliorati. + Nuo
 | Versione 4.0 | Luglio 2024  a| 
 Il documento riguarda i sistemi NetApp on-premise, FSX per ONTAP e Azure NetApp Files + nuove operazioni di SnapCenter 5,0 si montano e sbloccano durante la creazione e l'eliminazione dei cloni + aggiunta di istruzioni specifiche per Fibre Channel SAN + aggiunta di istruzioni specifiche per Azure NetApp Files + script adattato e semplificato `sc-system-refresh` + istruzioni incluse per SAP HANA abilitato crittografia dei volumi
 
+
+
+| Versione 4.1 | Febbraio 2026 | Aggiunti i passaggi obbligatori per la crittografia HANA e SAP local secure store LSS 
 |===

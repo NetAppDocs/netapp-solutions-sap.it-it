@@ -29,15 +29,25 @@ Un'eccezione di questa regola è un sistema SAP HANA con un singolo tenant, con 
 
 NOTE: Non appena qualsiasi operazione di creazione, ridenominazione o abbandono del tenant viene eseguita sul sistema di origine, questo flag di configurazione viene eliminato dal database SAP HANA. Pertanto, anche se la configurazione è stata riportata al tenant = SID, il flag non è più disponibile e l'eccezione relativa al ripristino del tenant con il workflow 3 non è più possibile. In questo caso, l'opzione 2 è il flusso di lavoro richiesto.
 
-image:sc-copy-clone-image10.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:sc-copy-clone-image10.png[""]
 
-image:sc-copy-clone-image11.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:sc-copy-clone-image11.png[""]
 
 
 
 == Workflow di refresh del sistema con crittografia SAP HANA abilitata
 
-Quando la crittografia di persistenza SAP HANA è abilitata, sono necessari ulteriori passaggi prima di poter recuperare il database SAP HANA nel sistema di destinazione.
+Quando la crittografia persistente SAP HANA è abilitata e, a seconda dell'archivio sicuro utilizzato per le chiavi radice di crittografia, instance SFSS o local secure store LSS, sono necessari passaggi aggiuntivi prima di poter ripristinare il database SAP HANA nel sistema di destinazione.
+
+Con SFSS, le chiavi radice vengono archiviate nel file system e devono essere sottoposte a backup separatamente, oltre che nel database HANA. I backup delle chiavi radice devono quindi essere importati nel sistema di destinazione per consentire il ripristino del database HANA. Questa operazione deve essere eseguita una sola volta, se le chiavi radice non vengono modificate.
+
+Con LSS le chiavi radice vengono sottoposte a backup e ripristinate insieme al database HANA in un'unica operazione. Per poter ripristinare il database HANA, è necessario disporre della password utilizzata per il backup delle chiavi radice.
+
+Le operazioni richieste sono descritte in maggior dettaglio nei capitoli seguenti.
+
+
+
+=== Archivio sicuro SFSS
 
 Nel sistema di origine è necessario creare un backup delle chiavi root di crittografia per il database del sistema e per tutti i database tenant. I file di backup devono essere copiati nel sistema di destinazione e le chiavi principali devono essere importate dal backup prima di eseguire l'operazione di ripristino.
 
@@ -45,7 +55,7 @@ Vedere anche https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a1964
 
 
 
-=== Backup delle chiavi principali
+==== Backup delle chiavi principali
 
 Se sono state apportate modifiche alle chiavi principali, è sempre necessario eseguire un backup delle chiavi principali. Il comando di backup richiede dbid come parametro CLI. I dbid possono essere identificati utilizzando l'istruzione SQL riportata di seguito.
 
@@ -96,7 +106,7 @@ done.
 ....
 
 
-=== Importazione delle chiavi principali nel sistema di destinazione
+==== Importazione delle chiavi principali nel sistema di destinazione
 
 L'importazione delle chiavi principali è necessaria inizialmente per la prima operazione di aggiornamento del sistema. Se le chiavi principali non vengono modificate nel sistema di origine, non è necessaria alcuna importazione aggiuntiva. Il comando import richiede dbid come parametro CLI. I dbid possono essere identificati nello stesso modo descritto per il backup della chiave root.
 
@@ -125,10 +135,40 @@ qs1adm@hana-7:/usr/sap/QS1/HDB11>
 ....
 
 
-=== Importazione della chiave principale, se dbid non esiste al target
+==== Importazione della chiave principale, se dbid non esiste al target
 
 Come descritto nel capitolo precedente, il dbid è necessario per importare la chiave root per il sistema e per tutti i database tenant. Mentre il database del sistema è sempre dbid=0, i database tenant possono avere diversi dbid.
 
-image:sc-copy-clone-image13.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+image:sc-copy-clone-image13.png[""]
 
 La produzione sopra riportata mostra due locatari con dbid=3 e dbid=4. Se il sistema di destinazione non ha ancora ospitato un tenant con dbid=4, l'importazione della chiave root non riesce. In tal caso è necessario recuperare prima il database di sistema e quindi importare la chiave per il tenant con dbid=4.
+
+
+
+=== Archivio sicuro LSS
+
+
+NOTE: È necessario utilizzare almeno la versione HANA 2.00.088, altrimenti la procedura descritta non funzionerà, vedere anche la SAP note 3613110.
+
+Per ripristinare un sistema HANA che utilizza la crittografia e LSS, è necessaria la password che è stata utilizzata per eseguire il backup delle chiavi radice.
+
+L'istruzione SQL
+
+....
+alter system set encryption root keys backup password <backup-pw-of-source-system>;
+....
+può essere utilizzato per impostare la password del sistema di origine nella configurazione LSS del sistema di destinazione. La stessa istruzione deve essere utilizzata per il sistema e il tenant database.
+
+Se la password non è stata impostata in anticipo, puoi fornire la password durante l'operazione di ripristino.
+
+database di sistema:
+
+....
+./exe/Python/bin/python /usr/sap/QM1/HDB22/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD '<backup-pw-of-source-system>'"
+....
+Database tenant:
+
+....
+hdbsql SYSTEMDB=> RECOVER DATA for QM1 USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD '<backup-pw-of-source-system>';
+
+....

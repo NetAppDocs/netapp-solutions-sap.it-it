@@ -4,7 +4,7 @@ permalink: backup/hana-commvault-pdf-link.html
 keywords: tr-4711, pdf, sap, hana, backup, recovery, intellisnap, snapshot, data protection 
 summary: TR-4711 descrive la progettazione di una soluzione NetApp e CommVault per SAP HANA, che include la tecnologia di gestione delle snapshot CommVault IntelliSnap e la tecnologia NetApp Snapshot. La soluzione si basa sullo storage NetApp e sulla suite di protezione dei dati CommVault. 
 ---
-= TR-4711: Backup e ripristino SAP HANA con sistemi di storage NetApp e software CommVault
+= Backup e ripristino SAP HANA utilizzando i sistemi di storage NetApp e il software Commvault
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: TR-4711 descrive la progettazione di una soluzione NetApp e CommVault p
 
 
 [role="lead"]
-TR-4711 descrive la progettazione di una soluzione NetApp e CommVault per SAP HANA, che include la tecnologia di gestione delle snapshot CommVault IntelliSnap e la tecnologia NetApp Snapshot. La soluzione si basa sullo storage NetApp e sulla suite di protezione dei dati CommVault.
+Questo documento descrive la progettazione di una soluzione NetApp e Commvault per SAP HANA, che include la tecnologia di gestione degli snapshot Commvault IntelliSnap e la tecnologia Snapshot NetApp. La soluzione si basa sullo storage NetApp e sulla suite di protezione dati Commvault.
 
 Autori: Marco Schoen, NetApp; Dr. Tristan DAUDE, CommVault Systems
 
