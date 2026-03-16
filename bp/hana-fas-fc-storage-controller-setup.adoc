@@ -38,6 +38,14 @@ L'utilizzo di NetApp Volume Encryption (NVE) e NetApp aggregate Encryption (NAE)
 
 
 
+== ONTAP Autonomous Ransomware Protection
+
+Gli snapshot creati da ONTAP Autonomous Ransomware Protection non possono essere utilizzati per il ripristino in avanti del database SAP HANA. Pertanto, non è consigliato utilizzarli per i volumi di dati e di log di SAP HANA e dovrebbero essere disabilitati per questi volumi. Utilizzare la protezione dei dati basata su SnapCenter con Snapshots a prova di manomissione invece per la protezione dal ransomware: link:../backup/hana-sc-generic-scope.html["Backup e recovery SAP HANA con SnapCenter"]. ONTAP Autonomous Ransomware Protection potrebbe essere utile per altri volumi come /hana/shared.
+
+È possibile disabilitare l'attivazione automatica di questa funzionalità durante la creazione di un volume per un ONTAP Cluster, tuttavia si consiglia di mantenere l'impostazione predefinita e di disabilitarla per i volumi in cui questa funzionalità non è necessaria.
+
+
+
 == Qualità del servizio
 
 La qualità del servizio può essere utilizzata per limitare il throughput dello storage per sistemi SAP HANA o applicazioni non SAP specifici su un controller condiviso.

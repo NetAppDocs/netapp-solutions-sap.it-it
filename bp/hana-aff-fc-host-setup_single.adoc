@@ -37,6 +37,9 @@ Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi log
 NOTE: Con la configurazione descritta, il `/usr/sap/FC5` la directory in cui è memorizzata la directory home predefinita dell'utente FC5adm si trova sul disco locale.  In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di `FC5_shared` volume per il `/usr/sap/FC5` directory in modo che tutti i file system siano nella memoria centrale.
 
 
+NOTE: Se si utilizza il servizio SAP Local Secure Store (LSS), la `/lss/shared/SID` directory, ovvero la directory di installazione predefinita di LSS, si trova sul disco locale. In una configurazione di disaster recovery con replica su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno del `SID1_shared` volume per la `/lss/shared/SID` directory, in modo che tutti i file system si trovino sulla memoria centrale.
+
+
 
 === Creare gruppi di volumi LVM e volumi logici
 

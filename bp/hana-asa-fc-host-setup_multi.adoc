@@ -39,10 +39,10 @@ Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi log
 | LV: FC5_log_mnt00002-vol | /hana/log/FC5/mnt00002 | Montato utilizzando un connettore storage 
 
 
-| Condivisione NFS esterna: FC5_shared | /hana/shared | Montato su tutti gli host usando NFS e /etc/fstab entry 
+| Condivisione NFS esterna: + FC5_shared | /hana/shared | Montato su tutti gli host usando NFS e /etc/fstab entry 
 |===
 
-NOTE: I sistemi multi-host SAP HANA richiedono  `/hana/shared` File system connesso a tutti gli host di un sistema. Solitamente si tratta di una condivisione NFS fornita da un server NFS. Si consiglia di utilizzare un server NFS ad alta disponibilità, ad esempio un sistema NetApp FAS o AFF. Un'altra opzione è quella di utilizzare il server NFS integrato di un host LINUX.
+NOTE: I sistemi SAP HANA multi-host richiedono il  `/hana/shared` file system e i  `/lss/shared` file system, nel caso in cui venga utilizzato il servizio SAP Local Secure Store (LSS), connessi a tutti gli host di un sistema. Di solito si tratta di una condivisione NFS fornita da un server NFS. Si consiglia di utilizzare un server NFS ad alta disponibilità, ad esempio un sistema NetApp FAS o AFF. Un'altra opzione è utilizzare il server NFS integrato di un host LINUX per questo.
 
 
 NOTE: Con la configurazione descritta, il  `/usr/sap/FC5` La directory in cui è memorizzata la directory home predefinita dell'utente FC5adm si trova sul disco locale di ciascun host HANA. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di utilizzare quattro LUN aggiuntive per  `/usr/sap/FC5` file system di ciascun host in modo che ogni host del database abbia tutti i suoi file system sullo storage centrale.

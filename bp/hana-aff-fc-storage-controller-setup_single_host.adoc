@@ -61,6 +61,9 @@ La seguente tabella mostra un esempio di configurazione del punto di montaggio p
 NOTE: Con la configurazione descritta, il `/usr/sap/SID1` La directory in cui è memorizzata la home directory predefinita dell'utente SID1adm si trova sul disco locale. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno di `SID1_shared` volume per `/usr/sap/SID1` directory in modo che tutti i file system si trovino nello storage centrale.
 
 
+NOTE: Se si utilizza il servizio SAP Local Secure Store (LSS), la `/lss/shared/SID` directory, ovvero la directory di installazione predefinita di LSS, si trova sul disco locale. In una configurazione di disaster recovery con replica su disco, NetApp consiglia di creare un LUN aggiuntivo all'interno del `SID1_shared` volume per la `/lss/shared/SID` directory, in modo che tutti i file system si trovino sulla memoria centrale.
+
+
 
 == Configurazione di volumi e LUN per sistemi SAP HANA a host singolo che utilizzano Linux LVM
 
@@ -85,11 +88,17 @@ Le opzioni del volume elencate nella tabella seguente devono essere verificate e
 | Azione | ONTAP 9 
 
 
-| Disattivare le copie Snapshot automatiche | vol modify –vserver <vserver-name> -volume <volname> -snapshot-policy none 
+| Disattivare le copie Snapshot automatiche | vol modify -vserver <vserver-name> -volume <volname> -snapshot-policy none 
 
 
 | Disattiva la visibilità della directory Snapshot | vol modify -vserver <vserver-name> -volume <volname> -snapdir-access false 
+
+
+| Disabilita la protezione ransomware, ad eccezione del volume SID_shared | vol modify -vserver <vserver-name> -volume <volname> -anti-ransomware-state disabled 
 |===
+
+NOTE: L'esempio seguente imposta queste opzioni durante la creazione del volume
+
 
 
 === Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori tramite la CLI
@@ -99,11 +108,11 @@ Questa sezione mostra un esempio di configurazione mediante la riga di comando c
 . Creare tutti i volumi necessari.
 +
 ....
-vol create -volume FC5_data_mnt00001 -aggregate aggr1_1 -size 1200g  -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
-vol create -volume FC5_log_mnt00001  -aggregate aggr1_2 -size 280g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_data2_mnt00001 -aggregate aggr1_2 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
-vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -space-guarantee none
+vol create -volume FC5_data_mnt00001 -aggregate aggr1_1 -size 1200g  -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_log_mnt00001  -aggregate aggr1_2 -size 280g -snapshot-policy none -foreground true -encrypt false -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_data2_mnt00001 -aggregate aggr1_2 -size 1200g -snapshot-policy none -foreground true -encrypt false -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false -snapdir-access false -space-guarantee none
 ....
 . Creare tutte le LUN.
 +
@@ -112,6 +121,7 @@ lun create -path  /vol/FC5_data_mnt00001/FC5_data_mnt00001   -size 1t -ostype li
 lun create -path /vol/FC5_data2_mnt00001/FC5_data2_mnt00001 -size 1t -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 lun create -path /vol/FC5_log_mnt00001/FC5_log_mnt00001 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 lun create -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
+lun create -path /vol/FC5_shared/FC5_shared -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 ....
 . Creare il gruppo iniziatore per tutte le porte appartenenti agli host sythe di FC5.
 +
@@ -125,5 +135,6 @@ lun map -path /vol/FC5_data_mnt00001/FC5_data_mnt00001    -igroup HANA-FC5
 lun map -path /vol/FC5_data2_mnt00001/FC5_data2_mnt00001  -igroup HANA-FC5
 lun map -path /vol/FC5_log_mnt00001/FC5_log_mnt00001  -igroup HANA-FC5
 lun map -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001  -igroup HANA-FC5
+lun map -path /vol/FC5_shared/FC5_shared -igroup HANA-FC5
 ....
 

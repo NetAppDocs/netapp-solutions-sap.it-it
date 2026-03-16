@@ -21,7 +21,7 @@ Questa sezione descrive la configurazione del sistema di archiviazione NetApp sp
 
 La figura seguente mostra la configurazione di un volume di un sistema SAP HANA 4+1 multihost. I volumi di dati e i volumi di log di ciascun host SAP HANA vengono distribuiti a diversi storage controller. Ad esempio, il volume `SID_data_mnt00001` È configurato sul controller A e sul volume `SID_log_mnt00001` È configurato sul controller B. Viene configurato un LUN per ciascun volume.
 
-Il `/hana/shared` Il volume deve essere accessibile da tutti gli host HANA e viene quindi esportato utilizzando NFS. Anche se non sono disponibili KPI specifici per le performance per `/hana/shared` File system, NetApp consiglia di utilizzare una connessione Ethernet a 10 GB.
+Il `/hana/shared` volume deve essere accessibile da tutti gli host HANA e viene quindi esportato tramite NFS. Sebbene non esistano KPI di prestazioni specifici per il `/hana/shared` file system, NetApp consiglia di utilizzare una connessione Ethernet da 10Gb.
 
 
 NOTE: Se per il sistema SAP HANA viene utilizzato un solo storage controller di una coppia ha, i volumi di dati e log possono essere memorizzati anche sullo stesso storage controller.
@@ -84,10 +84,15 @@ La tabella seguente mostra la configurazione e i punti di montaggio di un sistem
 NOTE: Con la configurazione descritta, la `/usr/sap/SID` directory in cui è memorizzata la home directory predefinita dell'utente sidadm si trova sul disco locale per ogni host HANA. In una configurazione di disaster recovery con replica basata su disco, NetApp consiglia di creare quattro sottodirectory aggiuntive nel `SID_shared` volume per il `/usr/sap/SID` file system, in modo che ogni host del database abbia tutti i propri file system sullo storage centrale.
 
 
+NOTE: Se si utilizza il servizio SAP Local Secure Store (LSS), la `/lss/shared/SID` directory deve essere accessibile da tutti gli host. NetApp consiglia di creare un volume per la `/lss/shared/SID` directory e montarlo su tutti gli host utilizzando NFS.
+
+
 
 == Configurazione di volumi e LUN per sistemi SAP HANA con host multipli che utilizzano Linux LVM
 
-Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso. La seguente tabella mostra un esempio di due LUN per gruppo di volumi per un sistema host multiplo SAP HANA 2+1.
+Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso.
+
+Le LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregate diverso e su un controller diverso. La tabella seguente mostra un esempio con due LUN per gruppo di volumi per un sistema SAP HANA multiple host 2+1.
 
 
 NOTE: Non è necessario utilizzare LVM per combinare più LUN per soddisfare i KPI di SAP HANA, ma è consigliato.
@@ -118,7 +123,13 @@ Le opzioni del volume elencate nella tabella seguente devono essere verificate e
 
 
 | Disattiva la visibilità della directory Snapshot | vol modify -vserver <vserver-name> -volume <volname> -snapdir-access false 
+
+
+| Disabilita la protezione ransomware, ad eccezione del volume SID_shared | vol modify -vserver <vserver-name> -volume <volname> -anti-ransomware-state disabled 
 |===
+
+NOTE: L'esempio seguente imposta queste opzioni durante la creazione del volume
+
 
 
 == Creazione di LUN, volumi e mappatura delle LUN ai gruppi di iniziatori
@@ -134,15 +145,15 @@ Questa sezione mostra una configurazione di esempio utilizzando la riga di coman
 . Creare tutti i volumi necessari.
 +
 ....
-vol create -volume FC5_data_mnt00001 -aggregate aggr1_1 -size 1200g  -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
-vol create -volume FC5_log_mnt00002  -aggregate aggr2_1 -size 280g  -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
-vol create -volume FC5_log_mnt00001  -aggregate aggr1_2 -size 280g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_data_mnt00002  -aggregate aggr2_2 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_data2_mnt00001 -aggregate aggr1_2 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_log2_mnt00002  -aggregate aggr2_2 -size 280g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-policy none -foreground true -encrypt false  -space-guarantee none
-vol create -volume FC5_data2_mnt00002  -aggregate aggr2_1 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
-vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -space-guarantee none
+vol create -volume FC5_data_mnt00001 -aggregate aggr1_1 -size 1200g  -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_log_mnt00002  -aggregate aggr2_1 -size 280g  -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_log_mnt00001  -aggregate aggr1_2 -size 280g -snapshot-policy none -foreground true -encrypt false -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_data_mnt00002  -aggregate aggr2_2 -size 1200g -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_data2_mnt00001 -aggregate aggr1_2 -size 1200g -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_log2_mnt00002  -aggregate aggr2_2 -size 280g -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none-anti-ransomware-state disabled
+vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_data2_mnt00002  -aggregate aggr2_1 -size 1200g -snapshot-policy none -foreground true -encrypt false  -snapdir-access false -space-guarantee none -anti-ransomware-state disabled
+vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -snapdir-access false -space-guarantee none
 ....
 . Creare tutte le LUN.
 +
