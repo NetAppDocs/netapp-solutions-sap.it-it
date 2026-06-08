@@ -80,7 +80,7 @@ image:saphana_aff_nfs_image1.png["Figura che mostra la finestra di dialogo input
 
 Per ulteriori informazioni sui prerequisiti e sui consigli per i sistemi SAP HANA prodotti, consulta la seguente risorsa:
 
-* http://go.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html["SAP HANA - Domande frequenti sull'integrazione personalizzata del data center"^]
+* https://help.sap.com/docs/SAP_HANA_PLATFORM/eb3777d5495d46c5b2fa773206bbfb46/0b15a92d554c4941a452c9ca127f8c70.html["Integrazione SAP HANA Tailored Data Center"^]
 
 
 
