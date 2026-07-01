@@ -24,5 +24,8 @@ Le seguenti modifiche tecniche sono state apportate a questa soluzione dalla pub
 | Ottobre 2025 | Versione iniziale 
 
 
-| Novembre 2025 | Aggiornamento del layout. 
+| Novembre 2025 | Aggiornamento layout 
+
+
+| Giugno 2026 | Aggiornamento SUSE SLES 15SP7 
 |===
