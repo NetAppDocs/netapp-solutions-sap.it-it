@@ -18,6 +18,7 @@ Configura le interfacce di rete SR-IOV su SUSE KVM per SAP HANA. Configura le fu
 
 
 
+[[step-1-setup-sr-iov]]
 == Passaggio 1: configurazione di SR-IOV
 
 Abilitare e configurare la funzionalità SR-IOV nel firmware dell'adattatore per consentire la creazione di funzioni virtuali.
@@ -91,6 +92,7 @@ mlxconfig -d /dev/mst/mt4125_pciconf0 set  NUM_OF_VFS=4
 
 
 
+[[step-2-create-the-virtual-interfaces]]
 == Passaggio 2: creare le interfacce virtuali
 
 Creare funzioni virtuali (VF) sulle porte di rete fisiche per abilitare la funzionalità SR-IOV.  In questa fase vengono creati quattro VF per porta fisica.
@@ -280,6 +282,7 @@ altname ens3f1np1
 
 
 
+[[step-3-enable-vfs-during-boot]]
 == Passaggio 3: abilitare i VF durante l'avvio
 
 Configurare le impostazioni VF in modo che rimangano invariate anche dopo il riavvio del sistema creando servizi systemd e script di avvio.
@@ -319,6 +322,7 @@ echo 4 > /sys/class/infiniband/mlx5_1/device/sriov_numvfs
 
 
 
+[[step-4-assign-the-virtual-interfaces-to-the-vm]]
 == Passaggio 4: assegnare le interfacce virtuali alla VM
 
 Assegnare le funzioni virtuali create alla VM SAP HANA come dispositivi host PCI utilizzando _virt-manager_
@@ -348,6 +352,7 @@ image:kvm-hana-image6.png["larghezza=601, altezza=441"]
 
 
 
+[[step-5-configure-network-interfaces-within-the-vm]]
 == Passaggio 5: configurare le interfacce di rete all'interno della VM
 
 Accedere alla VM e configurare i due VF come bond. Scegliere la modalità 0 o la modalità 2. Non utilizzare LACP poiché LACP può essere utilizzato solo su porte fisiche. La figura seguente mostra una configurazione in modalità 2 utilizzando YAST.
@@ -356,6 +361,7 @@ image:kvm-hana-image8.png["larghezza=601, altezza=335"]
 
 
 
+[[whats-next]]
 == Cosa succederà ora?
 
 Dopo aver configurato le interfacce di rete SR-IOV,link:kvm-hana-fcn.html["configurare la rete Fibre Channel"] se FCP deve essere utilizzato come protocollo di archiviazione.

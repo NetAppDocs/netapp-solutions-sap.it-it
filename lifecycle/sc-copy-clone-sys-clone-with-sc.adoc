@@ -28,17 +28,29 @@ La figura seguente riassume i passaggi necessari per un'operazione di cloning di
 NOTE: Se è necessario ripristinare il sistema su un backup Snapshot diverso, i passaggi 6 e 4 sono sufficienti. Il volume condiviso di SAP HANA può continuare a essere montato.
 
 +
-Se il sistema non è più necessario, il processo di pulizia viene eseguito con le seguenti operazioni.
+Se il sistema non ti serve più, esegui la procedura di pulizia seguendo questi passaggi:
 
-. Flusso di lavoro di eliminazione dei cloni SnapCenter per il volume di dati SAP HANA, incluso l'arresto del database.
-. Arrestare i servizi SAP HANA.
-. Flusso di lavoro di eliminazione dei cloni SnapCenter per il volume condiviso SAP HANA.
++
+.. Esegui il flusso di lavoro di eliminazione del clone SnapCenter per il volume di dati SAP HANA, incluso l'arresto del database.
++
+[NOTE]
+====
+Il flusso di lavoro di eliminazione del clone di SnapCenter non elimina la voce  `/etc/fstab` per impostazione predefinita.
+
+Affinché la `/etc/fstab` voce venga eliminata automaticamente durante il processo di eliminazione del clone, il clone deve prima essere ripristinato e reso una risorsa rilevata automaticamente. Se questo passaggio non viene eseguito, la `/etc/fstab` voce non viene eliminata automaticamente e deve essere rimossa manualmente.
+
+====
+.. Arrestare i servizi SAP HANA.
+.. Esegui il flusso di lavoro di eliminazione del clone SnapCenter per il volume condiviso SAP HANA.
+
+
 
 
 image:sc-copy-clone-image9.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
 
 
 
+[[prerequisites-and-limitations]]
 == Prerequisiti e limitazioni
 
 I flussi di lavoro descritti nelle sezioni seguenti presentano alcuni prerequisiti e limitazioni relativi all'architettura di sistema SAP HANA e alla configurazione SnapCenter.
@@ -51,6 +63,7 @@ I flussi di lavoro descritti nelle sezioni seguenti presentano alcuni prerequisi
 
 
 
+[[lab-setup]]
 == Setup di laboratorio
 
 La figura riportata di seguito mostra la configurazione di laboratorio utilizzata per il funzionamento dei cloni del sistema.
@@ -69,6 +82,7 @@ image:sc-copy-clone-image41.png["Figura che mostra la finestra di dialogo input/
 
 
 
+[[target-host-preparation]]
 == Preparazione dell'host di destinazione
 
 In questa sezione vengono descritte le fasi di preparazione richieste per un server utilizzato come destinazione di un clone di sistema.
@@ -79,6 +93,7 @@ La preparazione dell'host di destinazione include anche l'arresto del sistema di
 
 
 
+[[target-server-host-name-and-ip-address]]
 === *Nome host e indirizzo IP del server di destinazione*
 
 Il nome host del server di destinazione deve essere identico al nome host del sistema di origine. L'indirizzo IP può essere diverso.
@@ -91,6 +106,7 @@ NOTE: Nella configurazione di laboratorio, abbiamo modificato il nome host del s
 
 
 
+[[install-required-software]]
 === *Installare il software richiesto*
 
 Il software dell'agente host SAP deve essere installato sul server di destinazione. Per informazioni complete, consultare il https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/8b/92b1cf6d5f4a7eac40700295ea687f/content.htm?no_cache=true["Agente host SAP"] portale dell'assistenza SAP.
@@ -99,6 +115,7 @@ Il plug-in SAP HANA di SnapCenter deve essere implementato sull'host di destinaz
 
 
 
+[[configure-users-ports-and-sap-services]]
 === *Configurare utenti, porte e servizi SAP*
 
 Gli utenti e i gruppi richiesti per il database SAP HANA devono essere disponibili sul server di destinazione. In genere, viene utilizzata la gestione centrale degli utenti, pertanto non sono necessarie operazioni di configurazione sul server di destinazione. Le porte richieste per il database SAP HANA devono essere configurate sugli host di destinazione. La configurazione può essere copiata dal sistema di origine copiando il file /etc/Services nel server di destinazione.
@@ -112,6 +129,7 @@ limit.descriptors=1048576
 ....
 
 
+[[prepare-log-and-log-backup-volume]]
 === Preparare il volume di backup del log e del log
 
 Poiché non è necessario clonare il volume di log dal sistema di origine e viene eseguito un ripristino con l'opzione Clear log, è necessario preparare un volume di log vuoto sull'host di destinazione.
@@ -146,6 +164,7 @@ drwxr-xr-- 2 ss1adm sapsys 4096 Dec 1 06:14 SYSTEMDB
 ....
 
 
+[[prepare-file-system-mounts]]
 === *Preparare i montaggi del file system*
 
 È necessario preparare i punti di montaggio per i dati e il volume condiviso.
@@ -154,6 +173,7 @@ Con il nostro esempio, le directory `/hana/data/SS1/mnt00001`, `/hana/shared` e 
 
 
 
+[[prepare-script-execution]]
 === *Preparare l'esecuzione dello script*
 
 È necessario aggiungere gli script che devono essere eseguiti sul sistema di destinazione al file di configurazione dei comandi consentiti da SnapCenter.
@@ -168,6 +188,7 @@ hana-7:/opt/NetApp/snapcenter/scc/etc #
 ....
 
 
+[[cloning-the-hana-shared-volume]]
 == Clonazione del volume condiviso HANA
 
 . Selezionare un backup Snapshot dal volume condiviso SS1 del sistema di origine e fare clic su Clone (Clona).
@@ -247,6 +268,7 @@ hana-1:/mnt/sapcc-share/SAP-System-Refresh #
 ....
 
 
+[[cloning-additional-sap-application-services]]
 == Clonare servizi applicativi SAP aggiuntivi
 
 Vengono clonati altri servizi applicativi SAP nello stesso modo del volume condiviso SAP HANA, come descritto nella sezione "Cloning del volume condiviso SAP HANA". Naturalmente, anche i volumi di storage richiesti dei server applicazioni SAP devono essere protetti con SnapCenter.
@@ -255,6 +277,7 @@ Vengono clonati altri servizi applicativi SAP nello stesso modo del volume condi
 
 
 
+[[cloning-the-data-volume-and-recovery-of-the-hana-database]]
 == Clonazione del volume di dati e ripristino del database HANA
 
 . Seleziona un backup SAP HANA Snapshot dal sistema di origine SS1.

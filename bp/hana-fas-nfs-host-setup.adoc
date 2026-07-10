@@ -18,12 +18,14 @@ Tutti i passaggi descritti in questa sezione sono validi per gli ambienti SAP HA
 
 
 
+[[configuration-parameter-for-suse-linux-enterprise-server]]
 == Parametro di configurazione per SUSE Linux Enterprise Server
 
 I parametri aggiuntivi di kernel e configurazione di ciascun host SAP HANA devono essere regolati in base al carico di lavoro generato da SAP HANA.
 
 
 
+[[suse-linux-enterprise-server-12-and-15]]
 === SUSE Linux Enterprise Server 12 e 15
 
 A partire da SUSE Linux Enterprise Server (SLES) 12 SP1, il parametro kernel deve essere impostato in un file di configurazione in `/etc/sysctl.d` directory. Ad esempio, un file di configurazione con il nome `91-NetApp-HANA.conf` deve essere creato.
@@ -47,6 +49,7 @@ NOTE: Saptune, incluso in SLES per le versioni di SAP OS, può essere utilizzato
 
 
 
+[[configuration-parameter-for-red-hat-enterprise-linux-7-2-or-later]]
 == Parametro di configurazione per Red Hat Enterprise Linux 7.2 o versioni successive
 
 È necessario regolare altri parametri di kernel e configurazione in ogni host SAP HANA per il carico di lavoro generato da SAP HANA.
@@ -72,6 +75,7 @@ NOTE: A partire dalla versione 8.6 di RedHat Enterprise Linux, queste impostazio
 
 
 
+[[create-subdirectories-in-hanashared-volume]]
 == Creare sottodirectory in /hana/volume condiviso
 
 
@@ -110,6 +114,7 @@ sapcc-hana-tst-06:/mnt # umount /mnt/tmp
 ....
 
 
+[[create-mount-points]]
 == Creare punti di montaggio
 
 
@@ -192,6 +197,7 @@ sapcc-hana-tst-08:~ # chmod -R 777 /usr/sap/NF2
 ....
 
 
+[[mount-file-systems]]
 == Montare i file system
 
 A seconda della versione di NFS e della release di ONTAP, vengono utilizzate diverse opzioni di montaggio. I seguenti file system devono essere montati sugli host:

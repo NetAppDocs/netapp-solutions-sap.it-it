@@ -18,6 +18,7 @@ Le soluzioni NetApp per l'ottimizzazione del Lifecycle management SAP sono integ
 
 
 
+[[data-refresh-of-qa-test-sandbox-or-training-systems]]
 == Aggiornamento dei dati di sistemi di QA, test, sandbox o training
 
 Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente. Queste operazioni di refresh del sistema consistono in più attività a livello di infrastruttura, database e applicazioni, che possono richiedere più giorni a seconda del livello di automazione.
@@ -30,6 +31,7 @@ Il flusso di lavoro per le operazioni di aggiornamento del sistema è descritto 
 
 
 
+[[address-logical-corruption]]
 == Risolvere il danneggiamento logico
 
 La corruzione logica può essere causata da errori software, errori umani o sabotaggio. Sfortunatamente, la corruzione logica spesso non può essere affrontata con le soluzioni standard di alta disponibilità e disaster recovery. Di conseguenza, a seconda del livello, dell'applicazione, del file system o dello storage in cui si è verificata la corruzione logica, i requisiti massimi di downtime e perdita di dati talvolta non possono essere soddisfatti.
@@ -46,6 +48,7 @@ Il flusso di lavoro per la creazione del sistema di riparazione è descritto nel
 
 
 
+[[disaster-recovery-testing]]
 == Test di disaster recovery
 
 Una strategia di disaster recovery efficace richiede il test del flusso di lavoro richiesto. I test dimostrano se la strategia funziona e se la documentazione interna è sufficiente. Consente inoltre agli amministratori di addestrare le procedure richieste.

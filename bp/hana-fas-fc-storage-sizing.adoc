@@ -21,6 +21,7 @@ NOTE: Contatta il tuo commerciale NetApp o il tuo partner NetApp per supportare 
 
 
 
+[[performance-considerations]]
 == Considerazioni sulle performance
 
 SAP ha definito un set statico di KPI relativi allo storage. Questi KPI sono validi per tutti gli ambienti SAP HANA in produzione, indipendentemente dalle dimensioni della memoria degli host di database e delle applicazioni che utilizzano il database SAP HANA. Questi KPI sono validi per ambienti a host singolo, host multiplo, Business Suite su HANA, Business Warehouse su HANA, S/4HANA e BW/4HANA. Pertanto, l'attuale approccio al dimensionamento delle performance dipende solo dal numero di host SAP HANA attivi collegati al sistema storage.
@@ -39,6 +40,7 @@ Questo documento descrive il dimensionamento dei dischi rigidi SAS e dei dischi 
 
 
 
+[[hard-disk-drives]]
 === Dischi rigidi
 
 Per soddisfare i KPI relativi alle performance di storage di SAP, è necessario un minimo di 10 dischi dati (SAS a 10.000 rpm) per nodo SAP HANA.
@@ -48,6 +50,7 @@ NOTE: Questo calcolo è indipendente dal controller di storage e dallo shelf di 
 
 
 
+[[solid-state-drives]]
 === Dischi a stato solido
 
 Con i dischi a stato solido (SSD), il numero di dischi dati è determinato dal throughput della connessione SAS dai controller di storage allo shelf SSD.
@@ -73,12 +76,14 @@ NOTE: Questo calcolo è indipendente dal controller di storage utilizzato. L'agg
 
 
 
+[[ns224-nvme-shelf]]
 === Shelf NS224 NVMe
 
 Un SSD NVMe (dati) supporta fino a 2 host SAP HANA. Gli SSD e gli host SAP HANA devono essere equamente distribuiti tra entrambi i controller di storage.
 
 
 
+[[mixed-workloads]]
 == Carichi di lavoro misti
 
 Sono supportati SAP HANA e altri carichi di lavoro applicativi eseguiti sullo stesso storage controller o nello stesso aggregato di storage. Tuttavia, è una Best practice di NetApp separare i workload SAP HANA da tutti gli altri workload delle applicazioni.
@@ -89,6 +94,7 @@ Il tool di test SAP HCMT deve essere utilizzato per verificare se è possibile e
 
 
 
+[[capacity-considerations]]
 == Considerazioni sulla capacità
 
 Una descrizione dettagliata dei requisiti di capacità per SAP HANA è disponibile nella https://launchpad.support.sap.com/#/notes/1900823["Nota SAP 1900823"^] white paper.
@@ -98,6 +104,7 @@ NOTE: Il dimensionamento della capacità del panorama SAP complessivo con più s
 
 
 
+[[configuration-of-performance-test-tool]]
 == Configurazione dello strumento di test delle performance
 
 A partire da SAP HANA 1.0 SPS10, SAP ha introdotto i parametri per regolare il comportamento di i/o e ottimizzare il database per il file e il sistema storage utilizzati. Questi parametri devono essere impostati anche per lo strumento di test delle performance di SAP (fsperf) quando le performance dello storage vengono testate utilizzando lo strumento di test SAP.
@@ -211,6 +218,7 @@ Queste variabili devono essere utilizzate per la configurazione del test. Questo
 ....
 
 
+[[storage-sizing-process-overview]]
 == Panoramica del processo di dimensionamento dello storage
 
 Il numero di dischi per host HANA e la densità host SAP HANA per ciascun modello di storage sono stati determinati con il tool di test SAP HANA.

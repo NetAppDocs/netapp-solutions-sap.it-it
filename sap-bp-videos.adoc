@@ -18,4 +18,5 @@ Panoramica dei video e delle demo che evidenziano le Best practice di configuraz
 
 
 
+[[sap-configuration-best-practices-videos-and-demos]]
 == Demo e video sulle Best practice per la configurazione SAP

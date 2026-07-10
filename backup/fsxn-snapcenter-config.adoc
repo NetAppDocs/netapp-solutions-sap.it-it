@@ -18,6 +18,7 @@ Per la configurazione di base del SnapCenter e la protezione della risorsa HANA,
 
 
 
+[[overview-configuration-steps]]
 == Panoramica delle fasi di configurazione
 
 Per la configurazione SnapCenter di base e la protezione della risorsa HANA, è necessario eseguire le seguenti operazioni. Ogni fase viene descritta in dettaglio nei seguenti capitoli.
@@ -32,6 +33,7 @@ Per la configurazione SnapCenter di base e la protezione della risorsa HANA, è 
 
 
 
+[[sap-hana-backup-user-and-hdbuserstore-configuration]]
 == Configurazione di SAP HANA backup user e hdbuserstore
 
 NetApp consiglia di configurare un utente di database dedicato nel database HANA per eseguire le operazioni di backup con SnapCenter. Nella seconda fase, per questo utente di backup viene configurata una chiave di archivio utente SAP HANA, che viene utilizzata nella configurazione del plug-in SAP HANA di SnapCenter.
@@ -84,6 +86,7 @@ hdbsql SYSTEMDB=>
 ....
 
 
+[[configure-storage]]
 == Configurare lo storage
 
 Per configurare lo storage in SnapCenter, procedere come segue.
@@ -120,6 +123,7 @@ image:amazon-fsx-image14.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[create-credentials-for-plugin-deployment]]
 === Creare le credenziali per la distribuzione del plug-in
 
 Per consentire a SnapCenter di implementare i plug-in richiesti sugli host HANA, è necessario configurare le credenziali utente.
@@ -145,6 +149,7 @@ hana-1:/etc/sudoers.d #
 ....
 
 
+[[add-a-sap-hana-host]]
 == Aggiungere un host SAP HANA
 
 Quando si aggiunge un host SAP HANA, SnapCenter implementa i plug-in richiesti sull'host del database ed esegue le operazioni di rilevamento automatico.
@@ -201,6 +206,7 @@ image:amazon-fsx-image22.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[configure-policies]]
 == Configurare i criteri
 
 Le policy sono in genere configurate indipendentemente dalla risorsa e possono essere utilizzate da più database SAP HANA.
@@ -215,6 +221,7 @@ Le sezioni seguenti descrivono la configurazione di questi criteri.
 
 
 
+[[policy-for-snapshot-backups]]
 === Policy per i backup Snapshot
 
 Per configurare le policy di backup di Snapshot, procedere come segue.
@@ -253,6 +260,7 @@ image:amazon-fsx-image29.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[policy-for-block-integrity-check]]
 === Policy per il controllo dell'integrità del blocco
 
 Per configurare il criterio di controllo dell'integrità del blocco, procedere come segue.
@@ -281,6 +289,7 @@ image:amazon-fsx-image34.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[configure-and-protect-a-hana-resource]]
 == Configurare e proteggere una risorsa HANA
 
 Dopo l'installazione del plug-in, il processo di rilevamento automatico della risorsa HANA viene avviato automaticamente. Nella schermata Resources (risorse) viene creata una nuova risorsa, contrassegnata come bloccata con l'icona del lucchetto rosso. Per configurare e proteggere la nuova risorsa HANA, attenersi alla seguente procedura:

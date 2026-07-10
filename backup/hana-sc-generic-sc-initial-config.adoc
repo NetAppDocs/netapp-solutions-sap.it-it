@@ -45,10 +45,12 @@ Nei capitoli seguenti vengono descritti i passaggi iniziali della configurazione
 
 
 
+[[credentials-configuration]]
 == Configurazione delle credenziali
 
 
 
+[[credentials-for-hana-plug-in-deployment]]
 === Credenziali per la distribuzione del plug-in HANA
 
 Le credenziali vengono configurate nella sezione Impostazioni e selezionando la scheda Credenziali. È possibile aggiungere le credenziali cliccando sull'icona +.
@@ -61,6 +63,7 @@ image:hana-sc-generic-image-019.png["larghezza=287, altezza=247"]
 
 
 
+[[credentials-for-azure-netapp-files]]
 === Credenziali per Azure NetApp Files
 
 È necessario preparare un'entità servizio di Azure che consenta a SnapCenter di eseguire le operazioni richieste per i volumi ANF. L'esempio seguente mostra le autorizzazioni minime richieste che devono essere incluse.
@@ -155,10 +158,12 @@ image:hana-sc-generic-image-021.png["larghezza=252, altezza=246"]
 
 
 
+[[storage-system-configuration]]
 == Configurazione del sistema storage
 
 
 
+[[ontap-systems-and-fsx-for-ontap]]
 === Sistemi ONTAP e FSx per ONTAP
 
 Il sistema ONTAP o FSx per ONTAP può essere aggiunto a SnapCenter fornendo le credenziali del cluster o le credenziali per ogni SVM richiesta. Quando vengono fornite le credenziali del cluster, tutte le SVM del cluster vengono aggiunte a SnapCenter.
@@ -188,6 +193,7 @@ image:hana-sc-generic-image-024.png["larghezza=331, altezza=199"]
 
 
 
+[[azure-netapp-files]]
 === Azure NetApp Files
 
 Dopo aver configurato le credenziali ANF, è possibile aggiungere gli account ANF NetApp a SnapCenter. Gli account NetApp vengono configurati nella sezione Sistemi di archiviazione e selezionando la scheda Azure NetApp Files . Per aggiungere un nuovo account NetApp , fare clic sull'icona +.
@@ -200,12 +206,14 @@ image:hana-sc-generic-image-026.png["larghezza=401, altezza=176"]
 
 
 
+[[storage-configuration-when-using-snapmirror-active-sync]]
 === Configurazione dell'archiviazione quando si utilizza SnapMirror ActiveSync
 
 I passaggi specifici della configurazione dell'archiviazione sono descritti in https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-sc-config.html#add-storage-systems["Configurazione dell'archiviazione con SnapMirror ActiveSync"].
 
 
 
+[[policies-configuration]]
 == Configurazione dei criteri
 
 Come discusso nella sezione, le policy della strategia di protezione dei dati sono solitamente configurate indipendentemente dalla risorsa e possono essere utilizzate per più sistemi SAP HANA.
@@ -232,6 +240,7 @@ image:hana-sc-generic-image-028.png["larghezza=601, altezza=138"]
 
 
 
+[[snapshot-backups-with-ontap-systems-and-fsx-for-ontap]]
 === Backup snapshot con sistemi ONTAP e FSx per ONTAP
 
 I criteri di backup degli snapshot per il sistema ONTAP o FSx per ONTAP possono combinare uno snapshot locale con operazioni di replica o di blocco degli snapshot (snapshot antimanomissione). Questo esempio mostra una policy con replica su un archivio secondario tramite SnapVault.
@@ -263,6 +272,7 @@ image:hana-sc-generic-image-032.png["larghezza=385, altezza=119"]
 
 
 
+[[snapshot-backups-with-azure-netapp-files]]
 === Backup snapshot con Azure NetApp Files
 
 I criteri di backup degli snapshot per Azure NetApp Files possono combinare uno snapshot locale con un backup ANF, che replica i dati dello snapshot nel BLOB di Azure. Questo esempio mostra una policy utilizzata per la replica con backup ANF.
@@ -292,6 +302,7 @@ image:hana-sc-generic-image-036.png["larghezza=376, altezza=138"]
 
 
 
+[[block-integrity-check-operations-for-all-platforms]]
 === Operazioni di controllo dell'integrità dei blocchi per tutte le piattaforme
 
 
@@ -328,6 +339,7 @@ image:hana-sc-generic-image-040.png["larghezza=366, altezza=101"]
 
 
 
+[[policy-configuration-when-using-snapmirror-active-sync]]
 === Configurazione dei criteri quando si utilizza SnapMirror ActiveSync
 
 I passaggi specifici per la configurazione della policy sono descritti nel documento https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-sc-config.html#policy-configuration["Configurazione dei criteri SnapMirror ActiveSync"].

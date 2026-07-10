@@ -20,6 +20,7 @@ La documentazione contiene anche informazioni sulle configurazioni multipath spe
 
 
 
+[[configure-multipathing]]
 === Configurare il multipathing
 
 

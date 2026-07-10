@@ -22,6 +22,7 @@ La preparazione dell'host di destinazione include anche lo spegnimento del siste
 
 
 
+[[target-server-host-name-and-ip-address]]
 == Nome host e indirizzo IP del server di destinazione
 
 Il nome host del server di destinazione deve essere identico al nome host del sistema di origine. L'indirizzo IP può essere diverso.
@@ -31,6 +32,7 @@ NOTE: È necessario stabilire un corretto scherma del server di destinazione in 
 
 
 
+[[install-required-software]]
 == Installare il software richiesto
 
 Il software dell'agente host SAP deve essere installato sul server di destinazione. Per informazioni complete, consultare https://help.sap.com/viewer/9f03f1852ce94582af41bb49e0a667a7/103/en-US["Agente host SAP"^] Nel portale di assistenza SAP.
@@ -40,6 +42,7 @@ NOTE: Se l'host viene utilizzato come sistema di test o QA HANA, il software del
 
 
 
+[[configure-users-ports-and-sap-services]]
 == Configurare utenti, porte e servizi SAP
 
 Gli utenti e i gruppi richiesti per il database SAP HANA devono essere disponibili sul server di destinazione. In genere, viene utilizzata la gestione centrale degli utenti, pertanto non sono necessarie operazioni di configurazione sul server di destinazione. Le porte richieste per il database HANA devono essere configurate sugli host di destinazione. È possibile copiare la configurazione dal sistema di origine copiando `/etc/services` sul server di destinazione.
@@ -54,6 +57,7 @@ limit.descriptors=1048576
 ....
 
 
+[[prepare-hana-log-volume]]
 == Preparare il volume di log HANA
 
 Poiché il volume di log HANA non fa parte della replica, è necessario che nell'host di destinazione esista un volume di log vuoto. Il volume di log deve includere le stesse sottodirectory del sistema HANA di origine.
@@ -70,6 +74,7 @@ vm-pr1:~ #
 ....
 
 
+[[prepare-log-backup-volume]]
 == Preparare il volume di backup del log
 
 Poiché il sistema di origine è configurato con un volume separato per i backup del registro HANA, un volume di backup del registro deve essere disponibile anche sull'host di destinazione. Un volume per i backup del log deve essere configurato e montato sull'host di destinazione.
@@ -78,6 +83,7 @@ Se la replica del volume di backup del registro fa parte della configurazione de
 
 
 
+[[prepare-file-system-mounts]]
 == Preparare i montaggi del file system
 
 La seguente tabella mostra le convenzioni di denominazione utilizzate nella configurazione di laboratorio. I nomi dei volumi nel sito di disaster recovery sono inclusi in `/etc/fstab`.

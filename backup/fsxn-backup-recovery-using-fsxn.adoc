@@ -28,6 +28,7 @@ SnapVault offre vantaggi significativi rispetto ai backup tradizionali. Dopo un 
 
 
 
+[[runtime-of-snapshot-backup-and-restore-operations]]
 == Esecuzione delle operazioni di backup e ripristino Snapshot
 
 La figura seguente mostra HANA Studio di un cliente che utilizza le operazioni di backup Snapshot. L'immagine mostra che il backup del database HANA (di circa 4 TB) viene eseguito in 1 minuto e 20 secondi utilizzando la tecnologia di backup Snapshot e più di 4 ore con un'operazione di backup basata su file.
@@ -38,12 +39,14 @@ image:amazon-fsx-image1.png["Figura che mostra la finestra di dialogo input/outp
 
 
 
+[[recovery-time-objective-comparison]]
 == Confronto degli obiettivi del tempo di ripristino
 
 Questa sezione fornisce un confronto RTO (Recovery Time Objective) dei backup Snapshot basati su file e storage. L'RTO è definito dalla somma del tempo necessario per il ripristino, il ripristino e l'avvio del database.
 
 
 
+[[time-needed-to-restore-database]]
 === Tempo necessario per il ripristino del database
 
 Con un backup basato su file, il tempo di ripristino dipende dalle dimensioni del database e dell'infrastruttura di backup, che definisce la velocità di ripristino in megabyte al secondo. Ad esempio, se l'infrastruttura supporta un'operazione di ripristino a una velocità di 250 MBps, occorrono circa 4.5 ore per ripristinare un database di 4 TB sulla persistenza.
@@ -52,12 +55,14 @@ Con i backup delle copie Snapshot dello storage, il tempo di ripristino è indip
 
 
 
+[[time-needed-to-start-database]]
 === Tempo necessario per avviare il database
 
 L'ora di inizio del database dipende dalle dimensioni del database e dal tempo necessario per caricare i dati in memoria. Negli esempi seguenti, si presuppone che i dati possano essere caricati con 1000 Mbps. Il caricamento di 4 TB in memoria richiede circa 1 ora e 10 minuti. L'ora di inizio è la stessa per le operazioni di ripristino e ripristino basate su file e Snapshot.
 
 
 
+[[time-needed-to-recover-database]]
 === Tempo necessario per il ripristino del database
 
 Il tempo di ripristino dipende dal numero di registri che devono essere applicati dopo il ripristino. Questo numero è determinato dalla frequenza con cui vengono eseguiti i backup dei dati.
@@ -76,6 +81,7 @@ image:amazon-fsx-image2.png["Figura che mostra la finestra di dialogo input/outp
 
 
 
+[[use-cases-and-values-of-accelerated-backup-and-cloning-operations]]
 == Casi di utilizzo e valori delle operazioni di backup e cloning accelerate
 
 L'esecuzione dei backup è una parte fondamentale di qualsiasi strategia di protezione dei dati. I backup vengono pianificati regolarmente per garantire che sia possibile eseguire il ripristino in caso di guasti del sistema. Questo è il caso di utilizzo più ovvio, ma esistono anche altre attività di gestione del ciclo di vita SAP, in cui l'accelerazione delle operazioni di backup e ripristino è fondamentale.

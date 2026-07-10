@@ -20,6 +20,7 @@ image:sc-saphana-vmware-smas-image31.png["Figura che mostra i contenuti discussi
 
 
 
+[[topology-view]]
 == Vista topologia
 
 All'interno della vista della topologia, SnapCenter mostra i backup dei cluster di storage di origine e di destinazione.
@@ -34,6 +35,7 @@ image:sc-saphana-vmware-smas-image34.png["Figura che mostra i contenuti discussi
 
 
 
+[[snapshots-at-storage-systems]]
 == Snapshot nei sistemi di storage
 
 I backup Snapshot creati da SnapCenter sono disponibili per entrambi i volumi di dati HANA in entrambi i sistemi storage. ONTAP crea Snapshot aggiuntive a livello di gruppo di coerenza, disponibili anche per tutti gli altri volumi HANA.

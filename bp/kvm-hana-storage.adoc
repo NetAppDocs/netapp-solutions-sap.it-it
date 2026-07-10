@@ -20,6 +20,7 @@ Dopo aver configurato la VM con interfacce di rete SR-IOV o porte HBA FCP, confi
 
 
 
+[[configure-nfs-storage-for-sap-hana]]
 == Configurare l'archiviazione NFS per SAP HANA
 
 Utilizzare le interfacce di rete SR-IOV create in precedenza se si desidera utilizzare il protocollo NFS per l'archiviazione SAP HANA.
@@ -36,6 +37,7 @@ Considerazioni chiave sulla configurazione per gli ambienti KVM:
 
 
 
+[[configure-fcp-storage-for-sap-hana]]
 == Configurare l'archiviazione FCP per SAP HANA
 
 Utilizzare le porte HBA fisiche assegnate alla VM come dispositivi PCI se si intende utilizzare il protocollo FCP per l'archiviazione SAP HANA.

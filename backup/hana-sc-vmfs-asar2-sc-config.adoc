@@ -15,10 +15,12 @@ summary:
 
 
 
+[[pre-requisites]]
 == Prerequisiti
 
 
 
+[[snapcenter-hana-resource-must-be-auto-discovered]]
 === La risorsa SnapCenter HANA deve essere scoperta automaticamente
 
 Le risorse configurate con VMware VMFS devono essere rilevate automaticamente da SnapCenter per abilitare le operazioni specifiche richieste per queste configurazioni.
@@ -29,12 +31,14 @@ I sistemi host multipli SAP HANA devono essere configurati utilizzando un plugin
 
 
 
+[[snapcenter-for-vmware-vsphere-plugin]]
 === Plug-in SnapCenter per VMware vSphere
 
 Il plug-in di SnapCenter per VMware vSphere deve essere implementato nell'ambiente VMware.
 
 
 
+[[storage-svm-management-ip]]
 === IP di gestione SVM di archiviazione
 
 Le SVM di archiviazione che ospitano le LUN devono avere un'interfaccia di gestione configurata, altrimenti le SVM non verranno elencate in SnapCenter quando si aggiunge l'archiviazione con l'opzione "Aggiungi cluster" e l'operazione di rilevamento automatico fallirà.
@@ -45,6 +49,7 @@ image:sc-hana-asrr2-vmfs-image10.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[vm-disk-parameter]]
 === Parametro del disco VM
 
 Il parametro deve essere impostato come descritto nel capitolo link:hana-sc-vmfs-asar2-hana-prov.html#vm-parameter-disk-enableuuid[""Parametro VM disk.EnableUUID""] , altrimenti il ​​rilevamento automatico del database SnapCenter fallirà.
@@ -53,6 +58,7 @@ image:sc-hana-asrr2-vmfs-image11.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[configure-snapcenter-to-use-rest-apis-for-storage-communication]]
 === Configurare SnapCenter per utilizzare le API REST per la comunicazione di archiviazione
 
 SnapCenter deve essere configurato per utilizzare le API REST per le comunicazioni di storage. In caso contrario, l'operazione di creazione dello Snapshot fallirà e verrà visualizzato il messaggio di errore riportato di seguito.
@@ -71,6 +77,7 @@ image:sc-hana-asrr2-vmfs-image14.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[add-vmware-plugin-to-snapcenter]]
 == Aggiungi il plugin VMware a SnapCenter
 
 Prima di poter aggiungere l'host in SnapCenter, è necessario distribuire il plug-in SnapCenter per VMware vSphere all'interno dell'ambiente VMware. Vedere anche https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere.html["Implementare il plug-in SnapCenter per VMware vSphere"].
@@ -82,6 +89,7 @@ image:sc-hana-asrr2-vmfs-image15.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[add-hana-host]]
 == Aggiungi host HANA
 
 
@@ -95,6 +103,7 @@ image:sc-hana-asrr2-vmfs-image17.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[policy-and-resource-protection-configuration]]
 == Configurazione della protezione delle risorse e delle policy
 
 Niente di specifico per VMware con VMFS.

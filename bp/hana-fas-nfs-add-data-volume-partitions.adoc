@@ -21,6 +21,7 @@ NOTE: L'utilizzo di due o più volumi singoli per il volume di dati è disponibi
 
 
 
+[[enabling-additional-data-volume-partitions]]
 == Attivazione di partizioni di volumi di dati aggiuntive
 
 . Per abilitare ulteriori partizioni del volume di dati, aggiungere la seguente voce all'interno di `global.ini` Utilizzo di SAP HANA Studio o Cockpit nella configurazione di SYSTEMDB.
@@ -35,6 +36,7 @@ NOTE: Aggiunta manuale del parametro a `global.ini` il file richiede il riavvio 
 
 
 
+[[volume-configuration-for-a-single-host-sap-hana-system]]
 == Configurazione del volume per un sistema SAP HANA a host singolo
 
 Il layout dei volumi per un sistema SAP HANA a host singolo con più partizioni è simile al layout per un sistema con una partizione del volume di dati, ma con un volume di dati aggiuntivo memorizzato su un aggregato diverso come il volume di log e l'altro volume di dati. La seguente tabella mostra un esempio di configurazione di un sistema SAP HANA a host singolo con due partizioni del volume di dati.
@@ -66,6 +68,7 @@ Creare il nuovo volume di dati e montarlo nello spazio dei nomi utilizzando Gest
 
 
 
+[[volume-configuration-for-multiple-host-sap-hana-system]]
 == Configurazione dei volumi per sistemi SAP HANA con host multipli
 
 Il layout dei volumi per un sistema SAP HANA con più host e più partizioni è simile al layout di un sistema con una partizione del volume di dati, ma con un volume di dati aggiuntivo memorizzato su un aggregato diverso come il volume di log e l'altro volume di dati. La seguente tabella mostra un esempio di configurazione di un sistema SAP HANA con host multipli con due partizioni di volumi di dati.
@@ -151,6 +154,7 @@ Creare il nuovo volume di dati e montarlo nello spazio dei nomi utilizzando Gest
 
 
 
+[[host-configuration]]
 == Configurazione dell'host
 
 Oltre alle attività descritte nella sezione, link:hana-fas-nfs-host-setup.html[""Host setup" (Configurazione host),"]è necessario creare punti di montaggio aggiuntivi e voci fstab per i nuovi volumi di dati aggiuntivi e montare i nuovi volumi.
@@ -205,6 +209,7 @@ NOTE: Utilizzare un'interfaccia virtuale di storage diversa per la connessione a
 
 
 
+[[adding-an-additional-data-volume-partition]]
 == Aggiunta di una partizione aggiuntiva del volume di dati
 
 Eseguire la seguente istruzione SQL sul database tenant per aggiungere una partizione aggiuntiva del volume di dati al database tenant. Utilizzare il percorso verso volumi aggiuntivi:

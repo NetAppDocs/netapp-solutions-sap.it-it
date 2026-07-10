@@ -38,6 +38,7 @@ image:saphana_fas_fc_image4a.png["Figura che mostra la finestra di dialogo input
 
 
 
+[[sap-hana-backup]]
 == Backup SAP HANA
 
 Il software NetApp ONTAP offre un meccanismo integrato per il backup dei database SAP HANA. Il backup Snapshot basato su storage è una soluzione di backup completamente supportata e integrata disponibile per i sistemi single-container SAP HANA e per i sistemi single-tenant SAP HANA MDC.
@@ -62,6 +63,7 @@ Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA tra
 
 
 
+[[sap-hana-disaster-recovery]]
 == Disaster recovery SAP HANA
 
 Il disaster recovery SAP HANA può essere eseguito a livello di database utilizzando la replica di sistema SAP o a livello di storage utilizzando le tecnologie di replica dello storage. La sezione seguente fornisce una panoramica delle soluzioni di disaster recovery basate sulla replica dello storage.
@@ -70,6 +72,7 @@ Per informazioni dettagliate sulla soluzione di disaster recovery SAP HANA con S
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Replica dello storage basata su SnapMirror
 
 La figura seguente mostra una soluzione di disaster recovery a tre siti che utilizza la replica sincrona di SnapMirror nel data center di DR locale e SnapMirror asincrono per replicare i dati nel data center di DR remoto.
@@ -90,6 +93,7 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 
 
 
+[[storage-replication-based-on-netapp-metrocluster]]
 === Replica dello storage basata su NetApp MetroCluster
 
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito offre alta disponibilità locale e viene utilizzato per i carichi di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.

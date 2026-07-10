@@ -21,6 +21,7 @@ NOTE: Gli script di esempio vengono forniti così come sono e non sono supportat
 
 
 
+[[validated-configurations-and-limitations]]
 == Configurazioni e limitazioni validate
 
 I seguenti principi sono stati applicati all'implementazione di esempio e potrebbero dover essere adattati per soddisfare le esigenze dei clienti:
@@ -37,6 +38,7 @@ I seguenti principi sono stati applicati all'implementazione di esempio e potreb
 
 
 
+[[lab-setup]]
 == Setup di laboratorio
 
 La figura seguente mostra la configurazione di laboratorio utilizzata. Il sistema SAP di origine HN9 utilizzato per l'operazione di clone del sistema era costituito dal database H09, dal SAP CS e dal SAP AS Services in esecuzione sullo stesso host (sap-lnx32) con installato https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e86f8743bdb8d1f6cf4b862c79.html["design adattivo"^] attivato. Un nodo di controllo Ansible è stato preparato secondo la https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Playbook Ansible per NetApp ONTAP"^] documentazione.
@@ -63,10 +65,12 @@ Nella configurazione di laboratorio sono state utilizzate le seguenti versioni s
 
 
 
+[[sap-lama-configuration]]
 == Configurazione di SAP lama
 
 
 
+[[sap-lama-provider-definition]]
 === Definizione del provider SAP lama
 
 La definizione del provider viene eseguita in Automation Studio di SAP lama, come mostrato nella seguente schermata. L'implementazione di esempio utilizza una singola definizione di provider utilizzata per diverse fasi di provisioning personalizzate e per le operazioni hook, come spiegato in precedenza.
@@ -87,6 +91,7 @@ image:lama-ansible-image11.png["Schermata della sezione Parameters (parametri) c
 
 
 
+[[sap-lama-custom-provisioning]]
 === Provisioning personalizzato SAP lama
 
 Nella configurazione di provisioning personalizzata di SAP lama, il provider del cliente descritto in precedenza viene utilizzato per sostituire le fasi del workflow di provisioning *Clone Volumes* e *PostCloneVolumes*.
@@ -95,6 +100,7 @@ image:lama-ansible-image12.png["Schermata della configurazione di Custom Provisi
 
 
 
+[[sap-lama-custom-hook]]
 === Gancio personalizzato SAP lama
 
 Se un sistema viene cancellato con il flusso di lavoro System Destroy, viene utilizzato Hook *Delete NetAppClone* per chiamare la definizione del provider `netapp_clone`. L'hook *Delete NetApp Clone Refresh* viene utilizzato durante il flusso di lavoro di refresh del sistema perché l'istanza viene conservata durante l'esecuzione.
@@ -113,6 +119,7 @@ Ulteriori informazioni sull'utilizzo di ganci personalizzati sono disponibili ne
 
 
 
+[[enable-custom-provisioning-workflow-for-sap-source-system]]
 === Abilitare un workflow di provisioning personalizzato per il sistema di origine SAP
 
 Per abilitare il workflow di provisioning personalizzato per il sistema di origine, è necessario adattarlo nella configurazione. Selezionare la casella di controllo *Usa processo di provisioning personalizzato* con la definizione di provisioning personalizzato corrispondente.

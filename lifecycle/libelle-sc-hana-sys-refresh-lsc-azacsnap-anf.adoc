@@ -34,12 +34,14 @@ image:libelle-sc-image23.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[prerequisites-and-limitations]]
 == Prerequisiti e limitazioni
 
 Devono essere soddisfatti i seguenti prerequisiti.
 
 
 
+[[azacsnap-installed-and-configured-for-the-source-database]]
 === AzAcSnap installato e configurato per il database di origine
 
 In generale, sono disponibili due opzioni di implementazione per AzAcSnap, come illustrato nella figura seguente.
@@ -50,6 +52,7 @@ AzAcSnap può essere installato ed eseguito su una macchina virtuale Linux centr
 
 
 
+[[libelle-systemcopy-installed-and-configured-for-source-and-target-sap-system]]
 === Libelle SystemCopy installato e configurato per il sistema SAP di origine e di destinazione
 
 Le implementazioni di libelle SystemCopy sono costituite dai seguenti componenti:
@@ -71,6 +74,7 @@ image:libelle-sc-image26.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[known-limitations]]
 === Limitazioni note
 
 L'integrazione di AzAcSnap e LSC descritta qui funziona solo per i database SAP HANA a host singolo. È possibile supportare anche le implementazioni di più host (o scale-out) SAP HANA, ma tali implementazioni richiedono alcune modifiche o miglioramenti alle attività personalizzate LSC per la fase di copia e gli script di understing. Tali miglioramenti non sono trattati in questo documento.
@@ -79,6 +83,7 @@ L'integrazione del refresh del sistema SAP utilizza sempre l'ultima copia Snapsh
 
 
 
+[[lab-setup]]
 == Setup di laboratorio
 
 Il setup di laboratorio è costituito da un sistema SAP di origine e da un sistema SAP di destinazione, entrambi eseguiti su database SAP HANA a host singolo.
@@ -103,6 +108,7 @@ Contiene i seguenti sistemi, versioni software e volumi Azure NetApp Files:
 
 
 
+[[initial-one-time-preparation-steps]]
 == Fasi iniziali di preparazione una tantum
 
 Prima di eseguire il primo aggiornamento del sistema SAP, è necessario integrare le operazioni di storage basate su copia e clonazione Snapshot di Azure NetApp Files eseguite da AzAcSnap. È inoltre necessario eseguire uno script ausiliario per avviare e arrestare il database e montare o smontare i volumi Azure NetApp Files. Tutte le attività richieste vengono eseguite come attività personalizzate in LSC come parte della fase di copia. La figura seguente mostra le attività personalizzate nell'elenco di attività LSC.
@@ -116,6 +122,7 @@ NOTE: Lo script di esempio viene fornito così com'è e non è supportato da Net
 
 
 
+[[sc-system-refresh-sh-configuration-file]]
 === Sc-system-refresh.sh file di configurazione
 
 Come accennato in precedenza, viene utilizzato uno script ausiliario per avviare e arrestare il database, per montare e smontare i volumi Azure NetApp Files e per ripristinare il database SAP HANA da una copia Snapshot. Lo script `sc-system-refresh.sh` Viene memorizzato nella condivisione NFS centrale. Lo script richiede un file di configurazione per ogni database di destinazione che deve essere memorizzato nella stessa cartella dello script stesso. Il file di configurazione deve avere il seguente nome: `sc-system-refresh-<target DB SID>.cfg` (ad esempio `sc-system-refresh-QL1.cfg` in questo ambiente di laboratorio). Il file di configurazione utilizzato qui utilizza un SID del DB di origine fisso/con codifica hardware. Con alcune modifiche, lo script e il file di configurazione possono essere migliorati per assumere il SID del DB di origine come parametro di input.
@@ -134,6 +141,7 @@ export CLONED_VOLUMES_MOUNT_PATH=`tail -2 /mnt/software/AZACSNAP/snapshot_tool/l
 ....
 
 
+[[zsccopyshutdown]]
 === ZSCCOPYSHUTDOWN
 
 Questa attività arresta il database SAP HANA di destinazione. La sezione Code di questa attività contiene il seguente testo:
@@ -148,6 +156,7 @@ image:libelle-sc-image29.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[zsccopyumount]]
 === ZSCCOPYUMOUNT
 
 Questa attività disinstalla il vecchio volume di dati Azure NetApp Files dal sistema operativo del DB di destinazione. La sezione code di questa attività contiene il seguente testo:
@@ -160,6 +169,7 @@ Vengono utilizzati gli stessi script dell'attività precedente. I due parametri 
 
 
 
+[[zazacsnaprestore]]
 === ZAZACSNAPRESTORE
 
 Questa attività esegue AzAcSnap per clonare l'ultima copia Snapshot del database di origine in un nuovo volume per il database di destinazione. Questa operazione equivale a un ripristino reindirizzato del backup negli ambienti di backup tradizionali. Tuttavia, la funzionalità di copia e clonazione Snapshot consente di eseguire questa attività in pochi secondi anche per i database più grandi, mentre, con i backup tradizionali, questa attività potrebbe richiedere diverse ore. La sezione code di questa attività contiene il seguente testo:
@@ -179,6 +189,7 @@ image:libelle-sc-image30.png["Figura che mostra la finestra di dialogo input/out
 
 
 
+[[zsccopymount]]
 === ZSCCOPIMOUNT
 
 Questa attività consente di montare il nuovo volume di dati Azure NetApp Files sul sistema operativo del DB di destinazione. La sezione code di questa attività contiene il seguente testo:
@@ -191,6 +202,7 @@ Lo script sc-system-refresh.sh viene nuovamente utilizzato, passando il `mount` 
 
 
 
+[[zsccopyrecover]]
 === ZSCCOPIRECOVER
 
 Questa attività esegue un ripristino del database SAP HANA del database di sistema e del database tenant in base alla copia Snapshot ripristinata (clonata). L'opzione di ripristino utilizzata in questa sezione riguarda il backup specifico del database, ad esempio l'assenza di registri aggiuntivi, che vengono applicati per il ripristino in avanti. Pertanto, il tempo di ripristino è molto breve (al massimo pochi minuti). L'esecuzione di questa operazione è determinata dall'avvio del database SAP HANA che avviene automaticamente dopo il processo di ripristino. Per accelerare il tempo di avvio, è possibile aumentare temporaneamente il throughput del volume di dati Azure NetApp Files, se necessario, come descritto nella presente documentazione: https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-performance-considerations["Aumento o diminuzione dinamica della quota di volume"^]. La sezione code di questa attività contiene il seguente testo:
@@ -203,6 +215,7 @@ Questo script viene utilizzato nuovamente con `recover` E il SID del DB di desti
 
 
 
+[[sap-hana-system-refresh-operation]]
 == Operazione di refresh del sistema SAP HANA
 
 In questa sezione, un esempio di operazione di refresh dei sistemi di laboratorio mostra le fasi principali di questo flusso di lavoro.

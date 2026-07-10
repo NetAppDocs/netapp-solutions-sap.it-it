@@ -40,6 +40,7 @@ link:hana-sr-scs-system-replication-overview.html["Backup e ripristino con SnapC
 
 
 
+[[version-history]]
 == Cronologia delle versioni
 
 |===

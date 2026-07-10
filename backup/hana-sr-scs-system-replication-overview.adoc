@@ -26,6 +26,7 @@ Autore: Nils Bauer, NetApp
 
 
 
+[[high-availability-with-an-rpo-of-zero-and-a-minimal-rto]]
 == Alta disponibilità con un RPO pari a zero e un RTO minimo
 
 La replica di sistema viene configurata con la replica sincrona utilizzando tabelle precaricate in memoria sull'host SAP HANA secondario. Questa soluzione ad alta disponibilità può essere utilizzata per risolvere i guasti hardware o software e per ridurre i downtime pianificati durante gli aggiornamenti del software SAP HANA (operazioni di downtime quasi pari a zero).
@@ -40,6 +41,7 @@ image:saphana-sr-scs-image1.png["Figura che mostra la finestra di dialogo input/
 
 
 
+[[disaster-recovery-over-a-large-distance]]
 == Disaster recovery su larga distanza
 
 La replica del sistema può essere configurata con una replica asincrona senza alcuna tabella precaricata nella memoria dell'host secondario. Questa soluzione viene utilizzata per risolvere i guasti del data center e le operazioni di failover vengono in genere eseguite manualmente.

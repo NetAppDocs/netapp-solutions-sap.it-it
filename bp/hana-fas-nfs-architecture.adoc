@@ -38,6 +38,7 @@ image:saphana-fas-nfs_image5a.png["Aggiunta di una coppia ha aggiuntiva"]
 
 
 
+[[sap-hana-backup]]
 == Backup SAP HANA
 
 Il software ONTAP presente su tutti i controller di storage NetApp offre un meccanismo integrato per eseguire il backup dei database SAP HANA durante il funzionamento senza alcun effetto sulle performance. I backup NetApp Snapshot basati su storage sono una soluzione di backup completamente supportata e integrata disponibile per i singoli container SAP HANA e per i sistemi SAP HANA Multitenant Database Container (MDC) con un singolo tenant o più tenant.
@@ -62,6 +63,7 @@ Per informazioni dettagliate sulla soluzione di backup e ripristino SAP HANA tra
 
 
 
+[[sap-hana-disaster-recovery]]
 == Disaster recovery SAP HANA
 
 Il disaster recovery SAP HANA può essere eseguito a livello di database utilizzando la replica di sistema SAP HANA o a livello di storage utilizzando le tecnologie di replica dello storage. La sezione seguente fornisce una panoramica delle soluzioni di disaster recovery basate sulla replica dello storage.
@@ -70,6 +72,7 @@ Per informazioni dettagliate sulle soluzioni di disaster recovery SAP HANA, vede
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Replica dello storage basata su SnapMirror
 
 La figura seguente mostra una soluzione di disaster recovery a tre siti che utilizza la replica sincrona di SnapMirror nel data center di disaster recovery locale e SnapMirror asincrono per replicare i dati nel data center di disaster recovery remoto.
@@ -90,6 +93,7 @@ La replica sincrona offre la modalità StrictSync. Se la scrittura sullo storage
 
 
 
+[[storage-replication-based-on-metrocluster]]
 === Replica dello storage basata su MetroCluster
 
 La figura seguente mostra una panoramica di alto livello della soluzione. Il cluster di storage di ogni sito fornisce alta disponibilità locale e viene utilizzato per il carico di lavoro di produzione. I dati di ciascun sito vengono replicati in modo sincrono nell'altra posizione e sono disponibili in caso di failover di emergenza.

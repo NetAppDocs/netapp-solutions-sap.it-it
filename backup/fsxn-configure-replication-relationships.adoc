@@ -24,6 +24,7 @@ Per ulteriori informazioni sulle opzioni di configurazione di SnapMirror, consul
 
 
 
+[[peer-fsx-for-ontap-file-systems]]
 == Peer FSX per file system ONTAP
 
 ....
@@ -74,6 +75,7 @@ FsxId05f7f00af49dc7a3e    1-80-000011           Available      ok
 ....
 
 
+[[peer-svms]]
 == SVM peer
 
 ....
@@ -96,6 +98,7 @@ sapcc-backup-target-zone5
 ....
 
 
+[[create-a-target-volume]]
 == Creare un volume di destinazione
 
 È necessario creare il volume di destinazione con il tipo `DP` per contrassegnarlo come destinazione di replica.
@@ -106,6 +109,7 @@ FsxId05f7f00af49dc7a3e::> volume create -vserver sapcc-backup-target-zone5  -vol
 ....
 
 
+[[create-a-snapmirror-policy]]
 == Creare un criterio SnapMirror
 
 Il criterio SnapMirror e la regola aggiunta definiscono la conservazione e l'etichetta SnapMirror per identificare le istantanee da replicare. Quando si crea il criterio SnapCenter in un secondo momento, è necessario utilizzare la stessa etichetta.
@@ -127,6 +131,7 @@ FsxId00fa9e3c784b6abbb
 ....
 
 
+[[create-snapmirror-relationship]]
 == Creare una relazione SnapMirror
 
 Ora viene definita la relazione tra il volume di origine e quello di destinazione, oltre al tipo XDP e alla policy creata in precedenza.
@@ -137,6 +142,7 @@ Operation succeeded: snapmirror create for the relationship with destination "sa
 ....
 
 
+[[initialize-snapmirror]]
 == Inizializzare SnapMirror
 
 Con questo comando, viene avviata la replica iniziale. Si tratta di un trasferimento completo di tutti i dati dal volume di origine al volume di destinazione.

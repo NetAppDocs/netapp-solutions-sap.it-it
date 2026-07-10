@@ -18,6 +18,7 @@ Le soluzioni NetApp per l'ottimizzazione del Lifecycle management SAP sono integ
 
 
 
+[[tenant-names-at-target-system]]
 == Nomi dei tenant nel sistema di destinazione
 
 I passaggi necessari per un refresh del sistema SAP HANA dipendono dalla configurazione del tenant del sistema di origine e dal nome richiesto del tenant nel sistema di destinazione, come mostrato nella figura sotto.
@@ -35,6 +36,7 @@ image:sc-copy-clone-image11.png[""]
 
 
 
+[[system-refresh-workflow-with-enabled-sap-hana-encryption]]
 == Workflow di refresh del sistema con crittografia SAP HANA abilitata
 
 Quando la crittografia persistente SAP HANA è abilitata e, a seconda dell'archivio sicuro utilizzato per le chiavi radice di crittografia, instance SFSS o local secure store LSS, sono necessari passaggi aggiuntivi prima di poter ripristinare il database SAP HANA nel sistema di destinazione.
@@ -47,6 +49,7 @@ Le operazioni richieste sono descritte in maggior dettaglio nei capitoli seguent
 
 
 
+[[secure-store-sfss]]
 === Archivio sicuro SFSS
 
 Nel sistema di origine è necessario creare un backup delle chiavi root di crittografia per il database del sistema e per tutti i database tenant. I file di backup devono essere copiati nel sistema di destinazione e le chiavi principali devono essere importate dal backup prima di eseguire l'operazione di ripristino.
@@ -145,6 +148,7 @@ La produzione sopra riportata mostra due locatari con dbid=3 e dbid=4. Se il sis
 
 
 
+[[secure-store-lss]]
 === Archivio sicuro LSS
 
 

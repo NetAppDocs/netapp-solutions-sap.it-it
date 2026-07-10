@@ -24,6 +24,7 @@ Il backup dei volumi non dati di SnapCenter consente di creare copie Snapshot di
 
 
 
+[[configure-non-data-volume-resources]]
 === Configurare le risorse di volumi diversi dai dati
 
 Per configurare le risorse non relative ai volumi di dati, attenersi alla seguente procedura:

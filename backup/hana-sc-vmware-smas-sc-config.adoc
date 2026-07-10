@@ -24,12 +24,14 @@ link:../lifecycle/sc-copy-clone-introduction.html["Automazione delle operazioni 
 
 
 
+[[pre-requisites]]
 == Prerequisiti
 
 In generale, la sincronizzazione attiva di SnapMirror deve essere configurata prima di aggiungere le risorse protette a SnapCenter. Se i backup sono stati creati prima della configurazione della sincronizzazione attiva di SnapMirror, esisteranno solo nello storage primario originale e non verranno replicati successivamente.
 
 
 
+[[snapcenter-hana-resource-must-be-auto-discovered]]
 === La risorsa SnapCenter HANA deve essere scoperta automaticamente
 
 Le risorse configurate con VMware VMFS o le risorse protette con la sincronizzazione attiva di SnapMirror devono essere rilevate automaticamente da SnapCenter per consentire operazioni specifiche richieste per queste configurazioni.
@@ -40,18 +42,21 @@ I sistemi host multipli SAP HANA devono essere configurati usando un plug-in HAN
 
 
 
+[[snapcenter-for-vmware-vsphere-plugin]]
 === Plug-in SnapCenter per VMware vSphere
 
 Il plug-in di SnapCenter per VMware vSphere deve essere implementato nell'ambiente VMware.
 
 
 
+[[management-ip-address-on-svm-hosting-the-volumes]]
 === Indirizzo IP di gestione su SVM che ospitano i volumi
 
 Anche se i cluster verranno aggiunti a SnapCenter, le SVM che ospitano i volumi di origine e destinazione devono avere configurato un indirizzo IP di gestione.
 
 
 
+[[rest-apis-for-storage-communication]]
 === API REST per la comunicazione dello storage
 
 La gestione e il monitoring della sincronizzazione attiva di SnapMirror richiede l'accesso alle API REST. Pertanto, SnapCenter deve essere configurato per utilizzare le API REST per le comunicazioni dello storage. Il parametro "IsRestEnabledForStorageConnection" nel file di configurazione + C:++\++Program Files++\++NetApp++\++SMCore++\++SMCoreServiceHost.dll.config deve essere impostato su true.
@@ -67,6 +72,7 @@ image:sc-saphana-vmware-smas-image22.png["Figura che mostra i contenuti discussi
 
 
 
+[[add-storage-systems]]
 == Aggiungere sistemi storage
 
 È possibile aggiungere sistemi storage dopo l'abilitazione dell'API REST per SnapCenter. È necessario aggiungere entrambi i cluster di storage, non le singole SVM.
@@ -77,6 +83,7 @@ image:sc-saphana-vmware-smas-image24.png["Figura che mostra i contenuti discussi
 
 
 
+[[add-host-snapcenter-for-vmware-vsphere-plugin]]
 == Add host – plugin SnapCenter per VMware vSphere
 
 Se una risorsa in SnapCenter viene eseguita in un ambiente VMware virtualizzato, SnapCenter sfrutta il plug-in SnapCenter per VMware vSphere per estendere i flussi di lavoro di backup, ripristino e cloning di SnapCenter seguendo i passaggi richiesti a livello VMware.
@@ -97,6 +104,7 @@ NOTE: Non è necessaria alcuna configurazione aggiuntiva nel plug-in SnapCenter 
 
 
 
+[[add-host-hana-system]]
 == Aggiunta di host - sistema HANA
 
 
@@ -113,6 +121,7 @@ image:sc-saphana-vmware-smas-image28.png["Figura che mostra i contenuti discussi
 
 
 
+[[policy-configuration]]
 == Configurazione dei criteri
 
 Il criterio utilizzato per la risorsa protetta con la sincronizzazione attiva di SnapMirror deve essere configurato utilizzando la replica di SnapMirror anche se SnapCenter non attiva alcuna operazione di aggiornamento di SnapMirror.
@@ -123,6 +132,7 @@ image:sc-saphana-vmware-smas-image30.png["Figura che mostra i contenuti discussi
 
 
 
+[[hana-resource-protection-configuration]]
 == Configurazione di protezione delle risorse HANA
 
 Nessun requisito specifico. La configurazione di protezione delle risorse viene eseguita come di consueto.

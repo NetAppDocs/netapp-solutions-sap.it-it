@@ -10,6 +10,7 @@ summary: 'Prima di configurare l"host, le utility host SAN di NetApp devono esse
 
 
 
+[[multiple-hosts-setup]]
 == Configurazione di più host
 
 [role="lead"]
@@ -17,6 +18,7 @@ In questo capitolo viene descritta a titolo di esempio la configurazione di un s
 
 
 
+[[lun-configuration-for-sap-hana-multiple-hosts-systems]]
 == Configurazione LUN per sistemi multi-host SAP HANA
 
 Nell'host SAP HANA, è necessario creare e montare gruppi di volumi e volumi logici, come indicato nella tabella seguente.
@@ -47,6 +49,7 @@ NOTE: Se si utilizza il servizio SAP Local Secure Store (LSS), la `/lss/shared/S
 
 
 
+[[create-lvm-volume-groups-and-logical-volumes]]
 === Creare gruppi di volumi LVM e volumi logici
 
 . Inizializzare tutti i LUN come volume fisico.
@@ -96,6 +99,7 @@ vgchange -a y
 ....
 
 
+[[create-file-systems]]
 === Creare file system
 
 Creare il file system XFS su tutti i volumi logici di dati e log.
@@ -108,6 +112,7 @@ mkfs.xfs /dev/mapper/FC5_log_mnt00002-vol
 ....
 
 
+[[create-mount-points]]
 === Creare punti di montaggio
 
 Crea le directory dei punti di montaggio richiesti e imposta le autorizzazioni su tutti gli host worker e standby:
@@ -124,6 +129,7 @@ sapcc-hana-tst:/ # chmod 777 /hana/shared
 ....
 
 
+[[mount-file-systems]]
 === Montare i file system
 
 Per montare il  `/hana/shared` file system durante l'avvio del sistema utilizzando  `/etc/fstab` file di configurazione, aggiungere il  `/hana/shared` file system al  `/etc/fstab` file di configurazione di ciascun host.

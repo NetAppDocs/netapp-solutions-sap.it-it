@@ -10,6 +10,7 @@ summary: 'Questa sezione descrive la configurazione del sistema storage NetApp. 
 
 
 
+[[single-host]]
 == Host singolo
 
 [role="lead"]
@@ -17,6 +18,7 @@ Questa sezione descrive la configurazione del sistema di archiviazione NetApp sp
 
 
 
+[[volume-and-lun-configuration-for-sap-hana-single-host-systems]]
 == Configurazione di volumi e LUN per sistemi SAP HANA a host singolo
 
 La figura seguente mostra la configurazione dei volumi di quattro sistemi SAP HANA a host singolo. I volumi di dati e log di ciascun sistema SAP HANA vengono distribuiti a diversi storage controller. Ad esempio, volume `SID1_data_mnt00001` È configurato sul controller A e sul volume `SID1_log_mnt00001` È configurato sul controller B. All'interno di ciascun volume viene configurato un singolo LUN.
@@ -65,6 +67,7 @@ NOTE: Se si utilizza il servizio SAP Local Secure Store (LSS), la `/lss/shared/S
 
 
 
+[[volume-and-lun-configuration-for-sap-hana-single-host-systems-using-linux-lvm]]
 == Configurazione di volumi e LUN per sistemi SAP HANA a host singolo che utilizzano Linux LVM
 
 Linux LVM può essere utilizzato per aumentare le performance e risolvere i limiti delle dimensioni del LUN. Le diverse LUN di un gruppo di volumi LVM devono essere memorizzate in un aggregato diverso e in un controller diverso. La seguente tabella mostra un esempio di due LUN per gruppo di volumi.
@@ -80,6 +83,7 @@ NOTE: Non è necessario utilizzare LVM con più LUN per soddisfare i KPI di SAP 
 |===
 
 
+[[volume-options]]
 == Opzioni del volume
 
 Le opzioni del volume elencate nella tabella seguente devono essere verificate e impostate su tutti i volumi utilizzati per SAP HANA.
@@ -101,6 +105,7 @@ NOTE: L'esempio seguente imposta queste opzioni durante la creazione del volume
 
 
 
+[[creating-luns-and-mapping-luns-to-initiator-groups-using-the-cli]]
 === Creazione di LUN e mappatura delle LUN ai gruppi di iniziatori tramite la CLI
 
 Questa sezione mostra un esempio di configurazione mediante la riga di comando con ONTAP 9 per un sistema host singolo SAP HANA con SID FC5 mediante LVM e due LUN per gruppo di volumi LVM:

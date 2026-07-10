@@ -10,6 +10,7 @@ summary: A partire da SAP HANA 1.0 SPS10, SAP ha introdotto i parametri per rego
 
 
 
+[[io-stack-configuration-for-sap-hana]]
 == Configurazione dello stack di i/o per SAP HANA
 
 A partire da SAP HANA 1.0 SPS10, SAP ha introdotto i parametri per regolare il comportamento di i/o e ottimizzare il database per il file e il sistema storage utilizzati.

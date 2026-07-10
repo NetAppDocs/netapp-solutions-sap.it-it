@@ -22,6 +22,7 @@ image:amazon-fsx-image8.png["Figura che mostra la finestra di dialogo input/outp
 
 
 
+[[overview-of-configuration-steps]]
 === Panoramica delle fasi di configurazione
 
 È necessario eseguire un paio di passaggi di configurazione sul layer FSX per ONTAP. Puoi farlo con NetApp Cloud Manager o con la riga di comando FSX per ONTAP.

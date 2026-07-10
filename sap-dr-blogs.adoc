@@ -18,4 +18,5 @@ Panoramica dei blog in cui sono evidenziati i backup, il ripristino e il disaste
 
 
 
+[[sap-backup-restore-and-disaster-recovery-blogs]]
 === Blog su backup, ripristino e disaster recovery SAP

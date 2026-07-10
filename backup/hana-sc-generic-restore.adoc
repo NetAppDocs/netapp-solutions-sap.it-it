@@ -42,6 +42,7 @@ NOTE: Se la crittografia del volume è abilitata e viene utilizzato l'archivio s
 
 
 
+[[automated-restore-and-recovery-for-sap-hana-mdc-systems-with-a-single-tenant]]
 == Ripristino e recupero automatizzati per sistemi SAP HANA MDC con un singolo tenant
 
 Un'operazione di ripristino viene avviata selezionando un backup Snapshot nella vista topologia delle risorse e facendo clic su Ripristina.
@@ -112,6 +113,7 @@ image:hana-sc-generic-image-106.png["larghezza=357, altezza=439"]
 
 
 
+[[manual-recovery-with-hana-studio]]
 == Ripristino manuale con HANA Studio
 
 Per ripristinare e recuperare un sistema SAP HANA MDC con uno o più tenant utilizzando SAP HANA Studio e SnapCenter, completare i seguenti passaggi:
@@ -307,6 +309,7 @@ NOTE: Per un sistema SAP HANA MDC con più tenant, è necessario ripetere il rip
 
 
 
+[[manual-recovery-with-sql-commands]]
 == Ripristino manuale con comandi SQL
 
 È anche possibile utilizzare istruzioni SQL per il ripristino del sistema HANA.
@@ -325,6 +328,7 @@ hdbsql SYSTEMDB=> RECOVER DATABASE FOR SS1 UNTIL TIMESTAMP '2026-08-26 10:55:49'
 ....
 
 
+[[single-tenant-restore-and-recovery]]
 == Ripristino e recupero di un singolo tenant
 
 Un'operazione di ripristino e recupero di un singolo tenant con SnapCenter è molto simile al flusso di lavoro descritto nell'argomento precedente link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Ripristino manuale con HANA Studio"].
@@ -355,6 +359,7 @@ Per ripristinare e ripristinare un sistema single-tenant SAP HANA MDC utilizzand
 
 
 
+[[restore-of-non-data-volumes]]
 == Ripristino di volumi non dati
 
 Un'operazione di ripristino per un volume non dati viene avviata selezionando un backup Snapshot nella vista topologica della risorsa del volume non dati e facendo clic su Ripristina.

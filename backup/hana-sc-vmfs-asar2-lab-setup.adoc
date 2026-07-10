@@ -19,6 +19,7 @@ image:sc-hana-asrr2-vmfs-image1.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[software-versions]]
 === Versioni software
 
 [cols="50%,50%"]

@@ -57,6 +57,7 @@ Le porte fisiche vengono passate alla VM, quindi non è richiesta alcuna prepara
 
 
 
+[[whats-next]]
 == Cosa succederà ora?
 
 Dopo aver configurato la rete Fibre Channel,link:kvm-hana-storage.html["configurare l'archiviazione NetApp per SAP HANA"] .

@@ -18,6 +18,7 @@ In questo articolo vengono descritte le fasi di configurazione necessarie per qu
 
 
 
+[[pre-requisites]]
 == Prerequisiti
 
 È necessario eseguire il peering dei cluster di storage e delle SVM rilevanti.
@@ -30,6 +31,7 @@ image:sc-saphana-vmware-smas-image11.png["Figura che mostra i contenuti discussi
 
 
 
+[[storage-layout-and-consistency-group-configuration]]
 == Configurazione del layout dello storage e del gruppo di coerenza
 
 Nella documentazione di ONTAP https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#key-concepts["Panoramica della sincronizzazione attiva di SnapMirror in ONTAP"], il concetto di gruppi di coerenza con sincronizzazione attiva di SnapMirror viene descritto come segue:
@@ -44,6 +46,7 @@ image:sc-saphana-vmware-smas-image12.png["Figura che mostra i contenuti discussi
 
 
 
+[[initiator-group-configuration]]
 == Configurazione del gruppo iniziatore
 
 Durante il setup in laboratorio è stato creato un gruppo iniziatore che include entrambe le SVM di storage utilizzate per la replica sincrona attiva SnapMirror. Nella configurazione di sincronizzazione attiva di SnapMirror descritta in seguito, verrà definito che il gruppo iniziatore farà parte della replica.
@@ -59,12 +62,14 @@ NOTE: In una configurazione ad accesso non uniforme, il gruppo iniziatore nel cl
 
 
 
+[[configure-protection-with-ontap-system-manager]]
 == Configurare la protezione con ONTAP System Manager
 
 image:sc-saphana-vmware-smas-image15.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[consistency-group-and-initiator-group-replication]]
 === Replica di gruppi di coerenza e gruppi iniziatori
 
 Occorre creare un nuovo gruppo di coerenza e aggiungere tutte e tre le LUN del sistema HANA al gruppo di coerenza.
@@ -84,6 +89,7 @@ image:sc-saphana-vmware-smas-image17.png["Figura che mostra i contenuti discussi
 
 
 
+[[synchronisation]]
 === Sincronizzazione
 
 Nel cluster di storage A700 (origine), viene elencata la nuova relazione.
@@ -96,12 +102,14 @@ image:sc-saphana-vmware-smas-image19.png["Figura che mostra i contenuti discussi
 
 
 
+[[infrastructure-datastore]]
 == Datastore dell'infrastruttura
 
 Il datastore, dove sono memorizzate le immagini del sistema operativo HANA, SnapCenter e il plug-in vSphere, viene replicato nello stesso modo descritto per i datastore del database HANA.
 
 
 
+[[primary-site]]
 == Sede principale
 
 Il comportamento di sincronizzazione attiva di SnapMirror è simmetrico, con una eccezione importante: La configurazione del sito primario.

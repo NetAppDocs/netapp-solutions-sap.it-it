@@ -18,6 +18,7 @@ Questo documento si concentra sull'integrazione delle tecnologie NetApp® Snapsh
 
 
 
+[[solution-overview]]
 == Panoramica della soluzione
 
 Le operazioni dei sistemi e delle soluzioni SAP sono molto complesse. Tuttavia, per le aziende che utilizzano SAP, i sistemi e i servizi sono fondamentali per i loro processi aziendali. Attraverso l'automazione delle attività operative quotidiane ricorrenti, come le operazioni di copia di sistema e refresh, gli amministratori di sistema SAP possono gestire più sistemi con meno sforzo, produrre risultati ripetibili e ridurre l'errore umano.
@@ -32,12 +33,14 @@ In questo documento viene descritto come ALPACA si integra con NetApp SnapCenter
 
 
 
+[[target-audience]]
 === Pubblico di riferimento
 
 Questo documento è rivolto agli amministratori di sistema SAP che hanno eseguito copie di sistema SAP manualmente e desiderano automatizzare questa attività con ALPACA. L'obiettivo della combinazione delle tecnologie Snapshot e FlexClone di NetApp, orchestrata da NetApp SnapCenter e dei workflow di ALPACA, è ridurre la durata delle copie di sistema SAP completamente automatizzate.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === Scenari di cloning, copia e refresh del sistema SAP
 
 Il termine copia del sistema SAP viene spesso utilizzato come sinonimo di tre processi diversi: Clone del sistema SAP, copia del sistema SAP e refresh del sistema SAP. È importante fare una distinzione tra queste operazioni, poiché i flussi di lavoro e i casi di utilizzo sono diversi.
@@ -61,6 +64,7 @@ Anche se si tratta di tre casi d'utilizzo diversi, il processo di gestione dei d
 
 
 
+[[solution-technology]]
 === Tecnologia della soluzione
 
 La soluzione globale è costituita dai seguenti componenti principali:
@@ -90,6 +94,7 @@ image:sap-alpaca-image5.png["Immagine che mostra l'ALPACA server, il server NetA
 
 
 
+[[use-case-summary]]
 === Riepilogo del caso d'utilizzo
 
 Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente. Queste operazioni di refresh del sistema sono costituite da più task a livello di infrastruttura, database e applicazione e possono richiedere diversi giorni, in base al livello di automazione.
@@ -102,12 +107,14 @@ image:sap-alpaca-image6.png["Immagine che mostra possibili miglioramenti dell'ef
 
 
 
+[[integrating-the-technology-components]]
 === Integrazione dei componenti tecnologici
 
 L'effettiva integrazione di SnapCenter in un workflow di ALPACA consiste nell'utilizzo di shell script per accedere all'API REST di NetApp SnapCenter. Questa integrazione REST API-based crea una copia Snapshot del sistema di origine SAP, crea un volume FlexClone e lo monta sul sistema di destinazione SAP. Gli amministratori dello storage e SAP sanno come sviluppare script attivati da SnapCenter ed eseguiti dall'agente SnapCenter per automatizzare le attività quotidiane ricorrenti. Questa architettura accoppiata in modo lasco, che attiva le attività SnapCenter tramite script shell, consente loro di riutilizzare le procedure di automazione esistenti per ottenere i risultati desiderati più rapidamente utilizzando ALPACA come motore del flusso di lavoro per l'automazione end-to-end.
 
 
 
+[[conclusion]]
 == Conclusione
 
 La combinazione di ALPACA e della tecnologia di gestione dei dati NetApp offre una potente soluzione che può ridurre drasticamente il tempo e l'impegno richiesti per i task più complessi e dispendiosi in termini di tempo correlati all'amministrazione del sistema SAP. Questa combinazione può anche aiutare a evitare la deriva di configurazione che l'errore umano può causare tra i sistemi.
@@ -116,6 +123,7 @@ Poiché i refresh del sistema, le copie, i cloni e i test di disaster recovery s
 
 
 
+[[where-to-find-additional-information]]
 == Dove trovare ulteriori informazioni
 
 Per ulteriori informazioni sulle informazioni contenute in questo documento, consultare i seguenti documenti e siti Web:
@@ -127,6 +135,7 @@ Per ulteriori informazioni sulle informazioni contenute in questo documento, con
 
 
 
+[[version-history]]
 == Cronologia delle versioni
 
 [cols="25,25,50"]

@@ -26,6 +26,7 @@ image:lama-ansible-image3.png["Questa immagine mostra un confronto tra il proces
 
 
 
+[[address-logical-corruption]]
 == Risolvere il danneggiamento logico
 
 La corruzione logica può essere causata da errori software, errori umani o sabotaggio. Purtroppo, spesso la corruzione logica non può essere affrontata con soluzioni standard di alta disponibilità e disaster recovery. Di conseguenza, a seconda del livello, dell'applicazione, del file system o dello storage in cui si è verificato il danneggiamento logico, talvolta non è possibile soddisfare requisiti minimi di downtime e perdita di dati accettabili.
@@ -40,6 +41,7 @@ image:lama-ansible-image4.png["Questa immagine mostra il processo passo per pass
 
 
 
+[[disaster-recovery-testing]]
 == Test di disaster recovery
 
 Una strategia di disaster recovery efficace richiede la verifica del flusso di lavoro richiesto. I test dimostrano se la strategia funziona e se la documentazione interna è sufficiente. Consente inoltre agli amministratori di seguire le procedure richieste.

@@ -18,6 +18,7 @@ Questo documento si concentra sull'integrazione dei sistemi di storage NetApp®,
 
 
 
+[[solution-overview]]
 == Panoramica della soluzione
 
 I sistemi SAP sono molto complessi. Tuttavia, per le aziende che utilizzano SAP, questi sistemi sono fondamentali per i loro processi di business. Automatizzando i task operativi quotidiani ricorrenti, gli amministratori di sistema SAP possono gestire più sistemi con meno sforzo, produrre risultati ripetibili e ridurre l'errore umano.
@@ -26,12 +27,14 @@ Questo documento si concentra sull'integrazione dei sistemi di storage NetApp®,
 
 
 
+[[target-audience]]
 === Pubblico di riferimento
 
 Questo documento è rivolto agli amministratori di sistema SAP che non hanno avuto molta (o nessuna) esperienza con l'automazione Ansible. Questo dovrebbe aiutarti a iniziare con Ansible, eseguire i primi playbook e configurare ed eseguire la tua prima operazione di refresh di sistema basato su SAP lama.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === Scenari di cloning, copia e refresh del sistema SAP
 
 Il termine copia del sistema SAP viene spesso utilizzato come sinonimo di tre processi diversi: Clone del sistema SAP, copia del sistema SAP e refresh del sistema SAP. È importante distinguere tra le diverse operazioni, poiché i flussi di lavoro e i casi di utilizzo sono diversi.
@@ -47,6 +50,7 @@ image:sap-lama-image1.png["Immagine che mostra le fasi del workflow lama di clon
 
 
 
+[[solution-technology]]
 === Tecnologia della soluzione
 
 La soluzione globale è costituita dai seguenti componenti principali:
@@ -72,6 +76,7 @@ image:sap-lama-image2.png["Immagine che mostra come i sistemi storage SAP lama e
 
 
 
+[[use-case-summary]]
 === Riepilogo del caso d'utilizzo
 
 Esistono diversi scenari in cui i dati di un sistema di origine devono essere resi disponibili a un sistema di destinazione per scopi di test o formazione. Questi sistemi di test e formazione devono essere aggiornati regolarmente con i dati del sistema di origine per assicurarsi che i test e la formazione vengano eseguiti con il set di dati corrente. Queste operazioni di refresh del sistema sono costituite da più task a livello di infrastruttura, database e applicazione e possono richiedere diversi giorni, in base al livello di automazione.
@@ -84,6 +89,7 @@ image:sap-lama-image3.png["Immagine che mostra possibili miglioramenti dell'effi
 
 
 
+[[integrating-the-different-technology-components]]
 === Integrare i diversi componenti tecnologici
 
 Per integrare SAP lama con i sistemi storage NetApp utilizzando Ansible, hai bisogno di un nodo su cui eseguire i Playbook Ansible. Consigliamo di utilizzare la piattaforma di automazione Ansible. Per eseguire shell script e Playbook Ansible su questo host, avviati da SAP lama, è necessario disporre di un agente host SAP in esecuzione su questo server. SAP host Agent prende il controllo della comunicazione bidirezionale con SAP lama ed esegue script di shell che attiveranno i playbook effettivi.
@@ -92,6 +98,7 @@ Questa architettura accoppiata in modo lasco ti offre la libertà di avviare i w
 
 
 
+[[conclusion]]
 == Conclusione
 
 La combinazione di NetApp, SAP lama e piattaforma di automazione Ansible fornisce una soluzione potente che può ridurre drasticamente il tempo e gli sforzi necessari per i task più complessi e lunghi correlati all'amministrazione del sistema SAP. Questa combinazione può anche aiutare a evitare la deriva di configurazione che l'errore umano può causare tra i sistemi.
@@ -100,6 +107,7 @@ Dato che i refresh del sistema, le copie, i cloni e i test di disaster recovery 
 
 
 
+[[where-to-find-additional-information]]
 == Dove trovare ulteriori informazioni
 
 Per ulteriori informazioni sulle informazioni descritte in questo documento, consultare i seguenti documenti e siti Web:
@@ -112,6 +120,7 @@ Per ulteriori informazioni sulle informazioni descritte in questo documento, con
 
 
 
+[[version-history]]
 == Cronologia delle versioni
 
 [cols="25,25,50"]

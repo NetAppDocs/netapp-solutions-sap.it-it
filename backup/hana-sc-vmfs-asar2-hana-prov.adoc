@@ -17,6 +17,7 @@ Questo capitolo descrive l'installazione e la configurazione del sistema SAP HAN
 
 
 
+[[storage-configuration]]
 == Configurazione dello storage
 
 Per soddisfare i KPI di prestazioni di storage definiti da SAP per i sistemi HANA di produzione, è necessario configurare LUN e datastore dedicati per i file system di dati e log del sistema HANA. I datastore non devono essere condivisi tra più sistemi HANA o altri carichi di lavoro.
@@ -39,6 +40,7 @@ image:sc-hana-asrr2-vmfs-image3.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[vm-disk-configuration]]
 == Configurazione dei dischi delle macchine virtuali
 
 È necessario aggiungere tre nuovi dischi (VMDK) alla VM HANA. Ogni disco deve essere all'interno di uno dei datastore creati in precedenza, come illustrato nell'immagine seguente.
@@ -76,6 +78,7 @@ sr0 11:0 1 17.1G 0 rom
 ....
 
 
+[[vm-parameter-disk-enableuuid]]
 == Parametro VM disk.EnableUUID
 
 Questo parametro deve essere impostato di conseguenza, altrimenti il ​​rilevamento automatico del database SnapCenter fallirà.
@@ -89,10 +92,12 @@ image:sc-hana-asrr2-vmfs-image7.png["Figura che mostra i contenuti discussi"]
 
 
 
+[[file-system-preparation-at-linux-host]]
 == Preparazione del file system all'host Linux
 
 
 
+[[creation-of-xfs-filesystem-on-new-disks]]
 === Creazione del filesystem xfs su nuovi dischi
 
 Su ciascuno dei tre nuovi dischi è stato creato un file system xfs.
@@ -141,6 +146,7 @@ hana-8:~ #
 ....
 
 
+[[creation-of-mount-points]]
 === Creazione di punti di montaggio
 
 ....
@@ -153,6 +159,7 @@ hana-8:/ # chmod -R 777 /hana/shared
 ....
 
 
+[[configuration-of-etcfstab]]
 === Configurazione di /etc/fstab
 
 ....
@@ -213,6 +220,7 @@ hana-8:/ #
 ....
 
 
+[[hana-installation]]
 == Installazione HANA
 
 Ora è possibile eseguire l'installazione HANA.

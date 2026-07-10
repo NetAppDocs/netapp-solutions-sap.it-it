@@ -34,6 +34,7 @@ image:saphana-dr-anf_image16.png["Figura che mostra la finestra di dialogo input
 
 
 
+[[replicated-snapshot-backups]]
 == Backup snapshot replicati
 
 Ogni volta che si aggiorna la replica dal volume di origine al volume di destinazione, tutte le modifiche apportate al blocco tra l'ultimo e l'aggiornamento corrente vengono replicate nel volume di destinazione. Sono incluse anche le snapshot create nel volume di origine. La seguente schermata mostra le snapshot disponibili nel volume di destinazione. Come già discusso, ciascuna snapshot creata dallo strumento AzAcSnap è un'immagine coerente con l'applicazione del database HANA che può essere utilizzata per eseguire un Savepoint o un forward recovery.
