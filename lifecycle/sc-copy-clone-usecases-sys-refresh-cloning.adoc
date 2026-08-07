@@ -59,6 +59,6 @@ I test di disaster recovery per SnapMirror asincrono e sincrono utilizzano i bac
 
 image:sc-copy-clone-image6.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"] Nei rapporti tecnici è disponibile una descrizione dettagliata
 
-https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["Disaster recovery SAP HANA con replica dello storage"]
+https://www.netapp.com/pdf.html?item=/media/8584-tr4646.pdf["Disaster recovery SAP HANA con replica dello storage"]
 
 link:../backup/hana-dr-anf-data-protection-overview.html["Disaster recovery per SAP HANA con Azure NetApp Files"]

@@ -1,0 +1,306 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-bare-metal-asar2-hana-provisioning.html 
+keywords: SAP HANA, SnapCenter, backup and recovery 
+summary:  
+---
+= Provisioning e installazione del sistema HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questo capitolo descrive l'installazione e la configurazione specifiche del sistema SAP HANA BM1 utilizzato per la documentazione di questa soluzione. Il sistema HANA QM1 è stato implementato allo stesso modo.
+
+Ulteriori informazioni generiche sull'implementazione e le best practice sono disponibili https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-asa-fc-introduction.html["SAP HANA su sistemi NetApp ASA con protocollo Fibre Channel"].
+
+
+
+[[storage-configuration]]
+== Configurazione dello storage
+
+Le seguenti screenshot mostrano la creazione della storage unit BM1++_++data++_++mnt00001. Le storage unit per HANA log e shared sono state create allo stesso modo.
+
+image:hana-sc-bare-metal-asar2-image-002.png["larghezza=601, altezza=319"]
+
+Il WWPN degli adattatori FCP dell'host HANA può essere elencato con il comando sanlun, che fa parte delle utilità host NetApp come descritto nel capitolo link:hana-sc-bare-metal-asar2-hana-provisioning.html#hana-host-configuration["Configurazione host HANA"].
+
+....
+sapcc-hana-tst-02:~ # sanlun fcp show adapter
+host20             WWPN:100070b7e40bbadb
+host21             WWPN:100070b7e40bbadc
+....
+image:hana-sc-bare-metal-asar2-image-003.png["larghezza=601,altezza=320"]
+
+Fai clic su "aggiungi" per creare l'unità di archiviazione.
+
+image:hana-sc-bare-metal-asar2-image-004.png["larghezza=601,altezza=320"]
+
+Lo screenshot mostra le tre storage unit create per il sistema HANA BM1.
+
+image:hana-sc-bare-metal-asar2-image-005.png["larghezza=601, altezza=319"]
+
+
+
+[[hana-host-configuration]]
+== Configurazione host HANA
+
+Prima di configurare l'host, è necessario scaricare le utilità host SAN NetApp dal sito  http://mysupport.netapp.com/["Supporto NetApp"] e installarle sui server HANA. La documentazione delle utilità host include informazioni sul software aggiuntivo che devi installare a seconda dell'HBA FCP utilizzato.
+
+Le NetApp SAN host utilities possono essere utilizzate anche per ottenere il WWPN degli adattatori host necessari per configurare la mappatura host sul sistema storage.
+
+....
+sapcc-hana-tst-02:~ # sanlun fcp show adapter
+host20             WWPN:100070b7e40bbadb
+host21             WWPN:100070b7e40bbadc
+....
+
+
+[[multipath-configuration]]
+=== Configurazione multipath
+
+. Esegui il comando Linux rescan-scsi-bus.sh -a su ogni server per rilevare nuove LUN.
+. Esegui il comando sanlun lun show e verifica che tutti i LUN richiesti siano visibili. L'output mostra i LUN e i relativi file di dispositivo che hanno quattro percorsi FC dall'host ai controller di storage.
+
+
+....
+sapcc-hana-tst-02:~ # sanlun lun show | grep BM1
+a30-hana-primary              BM1_shared_1                   /dev/sdx        host21     FCP        250g    cDOT
+a30-hana-primary              BM1_log_mnt00001_1             /dev/sdw        host21     FCP        250g    cDOT
+a30-hana-primary              BM1_data_mnt00001_1            /dev/sdv        host21     FCP        250g    cDOT
+a30-hana-primary              BM1_shared_1                   /dev/sdu        host21     FCP        250g    cDOT
+a30-hana-primary              BM1_log_mnt00001_1             /dev/sdt        host21     FCP        250g    cDOT
+a30-hana-primary              BM1_data_mnt00001_1            /dev/sds        host21     FCP        250g    cDOT
+a30-hana-primary              BM1_shared_1                   /dev/sdh        host20     FCP        250g    cDOT
+a30-hana-primary              BM1_log_mnt00001_1             /dev/sdg        host20     FCP        250g    cDOT
+a30-hana-primary              BM1_shared_1                   /dev/sdk        host20     FCP        250g    cDOT
+a30-hana-primary              BM1_data_mnt00001_1            /dev/sdl        host20     FCP        250g    cDOT
+a30-hana-primary              BM1_log_mnt00001_1             /dev/sdi        host20     FCP        250g    cDOT
+a30-hana-primary              BM1_data_mnt00001_1            /dev/sdj        host20     FCP        250g    cDOT
+sapcc-hana-tst-02:~ #
+....
+. Esegui i comandi multipath -r e multipath -ll per ottenere gli identificatori mondiali (WWID) per i nomi dei file del dispositivo.
+
+
+....
+sapcc-hana-tst-02:~ # multipath -r
+
+sapcc-hana-tst-02:~ # multipath -ll
+3600a0980383235324a245a4749384947 dm-3 NETAPP,LUN C-Mode
+size=250G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 20:0:10:2 sdk 8:160  active ready running
+  |- 20:0:11:2 sdh 8:112  active ready running
+  |- 21:0:9:2  sdu 65:64  active ready running
+  `- 21:0:11:2 sdx 65:112 active ready running
+3600a098038323537342b596e55666737 dm-2 NETAPP,LUN C-Mode
+size=250G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 20:0:10:0 sdj 8:144 active ready running
+  |- 20:0:11:0 sdl 8:176 active ready running
+  |- 21:0:9:0  sds 65:32 active ready running
+  `- 21:0:11:0 sdv 65:80 active ready running
+3600a098038323537342b596e55666738 dm-5 NETAPP,LUN C-Mode
+size=250G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 20:0:10:1 sdi 8:128 active ready running
+  |- 20:0:11:1 sdg 8:96  active ready running
+  |- 21:0:9:1  sdt 65:48 active ready running
+  `- 21:0:11:1 sdw 65:96 active ready running
+sapcc-hana-tst-02:~ #
+....
+. Modifica il file /etc/multipath.conf e aggiungi i WWID e i nomi alias.
+
+
+....
+sapcc-hana-tst-02:~ # cat /etc/multipath.conf
+        multipaths {
+        multipath {
+                wwid    3600a098038323537342b596e55666737
+                alias   a30-hana-primary-BM1-data-mnt00001
+        }
+        multipath {
+                wwid    3600a098038323537342b596e55666738
+                alias   a30-hana-primary-BM1-log-mnt00001
+        }
+        multipath {
+                wwid    3600a0980383235324a245a4749384947
+                alias   a30-hana-primary-BM1-shared
+        }
+}
+....
+. Esegui il comando multipath -r per ricaricare la mappa dei dispositivi.
+. Verifica la configurazione eseguendo il comando multipath -ll per elencare tutte le LUN, i nomi alias e i percorsi dello storage.
+
+
+....
+sapcc-hana-tst-02:~ # multipath -r
+
+sapcc-hana-tst-02:~ # multipath -ll
+a30-hana-primary-BM1-data-mnt00001 (3600a098038323537342b596e55666737) dm-2 NETAPP,LUN C-Mode
+size=250G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 20:0:10:0 sdj 8:144 active ready running
+  |- 20:0:11:0 sdl 8:176 active ready running
+  |- 21:0:9:0  sds 65:32 active ready running
+  `- 21:0:11:0 sdv 65:80 active ready running
+a30-hana-primary-BM1-log-mnt00001 (3600a098038323537342b596e55666738) dm-5 NETAPP,LUN C-Mode
+size=250G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 20:0:10:1 sdi 8:128 active ready running
+  |- 20:0:11:1 sdg 8:96  active ready running
+  |- 21:0:9:1  sdt 65:48 active ready running
+  `- 21:0:11:1 sdw 65:96 active ready running
+a30-hana-primary-BM1-shared (3600a0980383235324a245a4749384947) dm-3 NETAPP,LUN C-Mode
+size=250G features='3 queue_if_no_path pg_init_retries 50' hwhandler='1 alua' wp=rw
+`-+- policy='service-time 0' prio=50 status=active
+  |- 20:0:10:2 sdk 8:160  active ready running
+  |- 20:0:11:2 sdh 8:112  active ready running
+  |- 21:0:9:2  sdu 65:64  active ready running
+  `- 21:0:11:2 sdx 65:112 active ready running
+sapcc-hana-tst-02:~ #
+....
+
+
+[[host-file-system-configuration]]
+=== Configurazione del file system host
+
+
+
+==== Creare file system
+
+....
+sapcc-hana-tst-02:~ # ls -al /dev/mapper
+total 0
+drwxr-xr-x  2 root root     200 Feb  9 10:12 .
+drwxr-xr-x 21 root root    5360 Feb  9 08:53 ..
+lrwxrwxrwx  1 root root       7 Feb  9 10:12 a30-hana-primary-BM1-data-mnt00001 -> ../dm-2
+lrwxrwxrwx  1 root root       7 Feb  9 10:12 a30-hana-primary-BM1-log-mnt00001 -> ../dm-5
+lrwxrwxrwx  1 root root       7 Feb  9 10:12 a30-hana-primary-BM1-shared -> ../dm-3
+crw-------  1 root root 10, 236 Feb  9 08:53 control
+lrwxrwxrwx  1 root root       7 Feb  9 08:53 system-root -> ../dm-0
+lrwxrwxrwx  1 root root       7 Feb  9 08:53 system-swap -> ../dm-1
+sapcc-hana-tst-02:~ #
+
+sapcc-hana-tst-02:~ # mkfs.xfs /dev/mapper/a30-hana-primary-BM1-data-mnt00001
+meta-data=/dev/mapper/a30-hana-primary-BM1-data-mnt00001 isize=512    agcount=4, agsize=16384000 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=0    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=65536000, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=32000, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+Discarding blocks...Done.
+sapcc-hana-tst-02:~ #
+sapcc-hana-tst-02:~ #
+sapcc-hana-tst-02:~ #
+sapcc-hana-tst-02:~ # mkfs.xfs /dev/mapper/a30-hana-primary-BM1-log-mnt00001
+meta-data=/dev/mapper/a30-hana-primary-BM1-log-mnt00001 isize=512    agcount=4, agsize=16384000 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=0    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=65536000, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=32000, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+Discarding blocks...Done.
+sapcc-hana-tst-02:~ # mkfs.xfs /dev/mapper/a30-hana-primary-BM1-shared
+meta-data=/dev/mapper/a30-hana-primary-BM1-shared isize=512    agcount=4, agsize=16384000 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=0    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=65536000, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=32000, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+Discarding blocks...Done.
+sapcc-hana-tst-02:~ #
+....
+
+
+==== Creare punti di montaggio
+
+....
+
+sapcc-hana-tst-02:~ # mkdir -p /hana/data/BM1/mnt00001
+sapcc-hana-tst-02:~ # mkdir -p /hana/log/BM1/mnt00001
+sapcc-hana-tst-02:~ # mkdir -p /hana/shared/BM1
+sapcc-hana-tst-02:~ # chmod -R /hana/data
+sapcc-hana-tst-02:~ # chmod 777 -R /hana/data
+sapcc-hana-tst-02:~ # chmod 777 -R /hana/log
+sapcc-hana-tst-02:~ # chmod 777 -R /hana/shared
+sapcc-hana-tst-02:~ #
+....
+
+
+==== Montare i file system
+
+....
+
+sapcc-hana-tst-02:~ # cat /etc/fstab
+/dev/system/root  /                       btrfs  defaults                      0  0
+/dev/system/root  /var                    btrfs  subvol=/@/var                 0  0
+/dev/system/root  /usr/local              btrfs  subvol=/@/usr/local           0  0
+/dev/system/root  /tmp                    btrfs  subvol=/@/tmp                 0  0
+/dev/system/root  /srv                    btrfs  subvol=/@/srv                 0  0
+/dev/system/root  /root                   btrfs  subvol=/@/root                0  0
+/dev/system/root  /opt                    btrfs  subvol=/@/opt                 0  0
+/dev/system/root  /home                   btrfs  subvol=/@/home                0  0
+/dev/system/root  /boot/grub2/x86_64-efi  btrfs  subvol=/@/boot/grub2/x86_64-efi  0  0
+/dev/system/root  /boot/grub2/i386-pc     btrfs  subvol=/@/boot/grub2/i386-pc  0  0
+/dev/system/swap  swap                    swap   defaults                      0  0
+/dev/system/root  /.snapshots             btrfs  subvol=/@/.snapshots          0  0
+UUID=E88D-60DA    /boot/efi               vfat   utf8                          0  2
+192.168.175.86:/sapcc_share/ /mnt/sapcc-share/ nfs rw,vers=3,hard,timeo=600,rsize=1048576,wsize=1048576,intr,noatime,nolock 0 0
+/dev/mapper/a30-hana-primary-BM1-shared /hana/shared xfs defaults 0 0
+/dev/mapper/a30-hana-primary-BM1-log-mnt00001 /hana/log/BM1/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/a30-hana-primary-BM1-data-mnt00001 /hana/data/BM1/mnt00001 xfs relatime,inode64 0 0
+sapcc-hana-tst-02:~ #
+
+
+sapcc-hana-tst-02:~ # df -h
+Filesystem                                      Size  Used Avail Use% Mounted on
+devtmpfs                                        4.0M     0  4.0M   0% /dev
+tmpfs                                           190G  8.0K  190G   1% /dev/shm
+tmpfs                                            51G   11M   51G   1% /run
+tmpfs                                           4.0M     0  4.0M   0% /sys/fs/cgroup
+/dev/mapper/system-root                          60G   15G   45G  25% /
+/dev/mapper/system-root                          60G   15G   45G  25% /.snapshots
+/dev/mapper/system-root                          60G   15G   45G  25% /boot/grub2/i386-pc
+/dev/mapper/system-root                          60G   15G   45G  25% /boot/grub2/x86_64-efi
+/dev/mapper/system-root                          60G   15G   45G  25% /home
+/dev/mapper/system-root                          60G   15G   45G  25% /opt
+/dev/mapper/system-root                          60G   15G   45G  25% /root
+/dev/mapper/system-root                          60G   15G   45G  25% /srv
+/dev/mapper/system-root                          60G   15G   45G  25% /tmp
+/dev/mapper/system-root                          60G   15G   45G  25% /usr/local
+/dev/mapper/system-root                          60G   15G   45G  25% /var
+/dev/nvme0n1p1                                  253M  5.1M  247M   3% /boot/efi
+192.168.175.86:/sapcc_share/                    1.4T  859G  567G  61% /mnt/sapcc-share
+tmpfs                                            26G   44K   26G   1% /run/user/463
+tmpfs                                            26G   24K   26G   1% /run/user/0
+/dev/mapper/a30-hana-primary-BM1-shared         250G  288M  250G   1% /hana/shared
+/dev/mapper/a30-hana-primary-BM1-log-mnt00001   250G  288M  250G   1% /hana/log/BM1/mnt00001
+/dev/mapper/a30-hana-primary-BM1-data-mnt00001  250G  288M  250G   1% /hana/data/BM1/mnt00001
+sapcc-hana-tst-02:~ #
+....
+
+
+[[hana-installation]]
+=== Installazione HANA
+
+Ora è possibile eseguire l'installazione HANA.
+
+
+NOTE: Con la configurazione descritta, la directory /usr/sap/BM1 verrà memorizzata sul disco del sistema operativo. Se /usr/sap/BM1 deve essere memorizzata su un disco separato, è necessario configurare un LUN aggiuntivo sul sistema storage.

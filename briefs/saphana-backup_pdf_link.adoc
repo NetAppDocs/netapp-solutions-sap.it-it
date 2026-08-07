@@ -27,4 +27,4 @@ Con le operazioni di backup e ripristino di SAP HANA, la tua organizzazione deve
 
 Con le soluzioni di storage NetApp® che utilizzano il software di gestione dati NetApp ONTAP®, in combinazione con il software di protezione dati NetApp SnapCenter®, puoi affrontare tutte queste sfide.  Grazie alla tecnologia NetApp Snapshot™ inclusa nel software ONTAP , è possibile creare backup o eseguire operazioni di ripristino di set di dati di qualsiasi dimensione in pochi secondi.  SAP HANA supporta l'utilizzo di copie Snapshot basate sull'archiviazione come operazione di backup valida.
 
-link:https://www.netapp.com/pdf.html?item=/media/6997-sb-3965pdf.pdf["https://www.netapp.com/pdf.html?item=/media/6997-sb-3965pdf.pdf"]
+link:https://www.netapp.com/pdf.html?item=/media/6997-sb-3965.pdf["https://www.netapp.com/pdf.html?item=/media/6997-sb-3965.pdf"]

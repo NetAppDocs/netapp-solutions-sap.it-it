@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-bare-metal-asar2-lab-setup.html 
+keywords: SAP HANA, SnapCenter, backup and recovery 
+summary:  
+---
+= Configurazione di laboratorio utilizzata per questo documento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+La figura seguente presenta una high-level panoramica della configurazione di laboratorio utilizzata. Per dimostrare le varie operazioni vengono utilizzati due sistemi HANA MDC a host singolo. Il sistema HANA BM1 è designato per eseguire operazioni di backup, ripristino e recovery, mentre il sistema HANA QM1 serve come sistema di destinazione per le operazioni di SAP System Refresh. I sistemi HANA sono distribuiti su due server bare metal e sul lato storage vengono utilizzati due cluster ASA A30 a 2 nodi. Il primo cluster ospita tutte le unità di storage dei sistemi HANA e il secondo cluster viene utilizzato come destinazione per la replica del backup.
+
+image:hana-sc-bare-metal-asar2-image-001.png["larghezza=601, altezza=289"]
+
+Versioni software
+
+[cols="50%,50%"]
+|===
+| ONTAP | 9.19.1 
+
+
+| OS Linux | SLES 15 SP7 
+
+
+| HANA | 2.0 revisione 89 
+
+
+| SnapCenter | 6.2.2 
+|===

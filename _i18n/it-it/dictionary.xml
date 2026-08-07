@@ -1772,10 +1772,8 @@
   <block id="f6f370ad34b914bb9b3188cab95579f6" category="list-text">Definire la pianificazione per la policy Snapshot locale.</block>
   <block id="01d64140a5b79b3220671ec24e5355a7" category="paragraph">In questo esempio, viene impostato ogni 6 ore.</block>
   <block id="91f8b9395cad8e2a4e4239c12d3319b4" category="paragraph">La configurazione delle risorse HANA è stata completata ed è possibile eseguire i backup.</block>
-  <block id="1911e0ada44759ee3994a93b354b6e23" category="inline-link"><block ref="1911e0ada44759ee3994a93b354b6e23" category="inline-link-rx"></block></block>
   <block id="532841fbf704673d5f6dc65db8d8cf66" category="inline-link"><block ref="532841fbf704673d5f6dc65db8d8cf66" category="inline-link-rx"></block></block>
   <block id="1a7acb5247a596ecf14f6381a5824bd7" category="inline-link"><block ref="1a7acb5247a596ecf14f6381a5824bd7" category="inline-link-rx"></block></block>
-  <block id="c79cdf002876c8be8a196f93f344a33f" category="inline-link"><block ref="c79cdf002876c8be8a196f93f344a33f" category="inline-link-rx"></block></block>
   <block id="c50aa3f02a43d1792d7198bd3766142c" category="summary">Questa sezione descrive come eseguire il peer di file system FSX per ONTAP, peer di SVM, creare un volume di destinazione, creare una policy SnapMirror, creare una relazione SnapMirror e inizializzare SnapMirror.</block>
   <block id="dbf9d2787d072a4fd34082b47aacfe77" category="doc">Configurare le relazioni di replica su FSX per i file system ONTAP</block>
   <block id="98651d7cc1c378d485ba8f375d4d7dbd" category="inline-link">Workflow di replica di SnapMirror (netapp.com)</block>
@@ -1950,7 +1948,6 @@
   <block id="1da64551d06b94d7b482063dbb2e35e1" category="paragraph">È necessario aggiungere il nuovo criterio alla configurazione di protezione delle risorse HANA, come mostrato nella figura seguente.</block>
   <block id="8d6efb0dba912228a4f9680328b7569b" category="paragraph">Nella nostra configurazione viene definito un programma giornaliero.</block>
   <block id="8132c1d54d27cf7a67ac0e563e82c329" category="summary">TR-4646 è una panoramica delle opzioni per la protezione del disaster recovery per SAP HANA. Include informazioni dettagliate sull'installazione e una descrizione del caso di utilizzo di una soluzione di disaster recovery a tre siti basata sulla replica sincrona e asincrona dello storage NetApp SnapMirror. La soluzione descritta utilizza NetApp SnapCenter con il plug-in SAP HANA per gestire la coerenza del database.</block>
-  <block id="d925ae253e076ec94fce589bf0750a31" category="paragraph"><block ref="d925ae253e076ec94fce589bf0750a31" category="inline-link-macro-rx"></block></block>
   <block id="243e854b0d7da6e16a4a87f0f9ea87ba" category="paragraph">Per ulteriori informazioni sulle informazioni descritte in questo documento, consultare i seguenti documenti:</block>
   <block id="b1cd4632a9cd8998e7a0017f528fcc5b" category="list-text">Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter</block>
   <block id="de6dd6d03f10c361d7fa2eaeb8b1332b" category="summary">Il backup dei volumi non dati è parte integrante di SnapCenter e del plug-in SAP HANA. La protezione del volume di dati del database è sufficiente per ripristinare e ripristinare il database SAP HANA in un dato momento, a condizione che le risorse di installazione del database e i registri richiesti siano ancora disponibili.</block>
@@ -2259,7 +2256,6 @@
   <block id="17a507a9ef1c4ff633b35e3f95052658" category="paragraph">La SVM è ora disponibile in SnapCenter.</block>
   <block id="2c0b1092a288f5d67050f3fbf404d5f8" category="list-text">Guida utente di FSX per NetApp ONTAP - che cos'è Amazon FSX per NetApp ONTAP?</block>
   <block id="d82c21a48349085e4fd93fb6712e3789" category="paragraph"><block ref="d82c21a48349085e4fd93fb6712e3789" category="inline-link-rx"></block></block>
-  <block id="3306e00cec668497714eaadcd7aa6ac8" category="list-text">Pagina delle risorse SnapCenter</block>
   <block id="7608e75619cff3eeb4e8bce40481b456" category="list-text">Documentazione del software SnapCenter</block>
   <block id="46f7f3d3c0b3afe7e5a1e026b2079c7d" category="summary">In questa sezione viene descritto come configurare un criterio per la replica del backup.</block>
   <block id="b950bdfd30a0ab3d80a5aba7d93af29e" category="doc">Creare un nuovo criterio SnapCenter per la replica del backup</block>
@@ -2433,8 +2429,6 @@
   <block id="926e1400cb4a7cc5855810bdb87175d9" category="paragraph">Panoramica dei blog che evidenziano le Best practice di configurazione SAP.</block>
   <block id="1b957531101399d0f744aec724e69fa1" category="summary">NetApp sta affrontando le sfide legate alla lenta implementazione delle funzionalità, alla mancanza di automazione e alla perdita di produttività fornendo una soluzione per la gestione del ciclo di vita completamente integrata negli strumenti utilizzati dagli amministratori SAP per le operazioni quotidiane, come SAP Landscape Management (SAP lama). L'obiettivo è semplificare il flusso di lavoro di provisioning dalla pre-elaborazione alla post-elaborazione, incluse tutte le attività software e a livello di storage necessarie per creare una copia del sistema di produzione. Con questa soluzione, gli amministratori possono creare un ambiente di sviluppo e test con un paio di clic del mouse, migliorando così la gestione del ciclo di vita.</block>
   <block id="643fa590028dacc026f165afdf4fb795" category="doc">SB-3978: Gestione del ciclo di vita per SAP HANA</block>
-  <block id="2302484597c5b4089c4a24a850b7f489" category="inline-link-macro"><block ref="2302484597c5b4089c4a24a850b7f489" category="inline-link-rx"></block></block>
-  <block id="33876e03541db5898b573e9322b655e7" category="paragraph"><block ref="33876e03541db5898b573e9322b655e7" category="inline-link-macro-rx"></block></block>
   <block id="e9c44bbfd795a5d63d74c6a77afee70d" category="summary">Le note legali forniscono l'accesso a dichiarazioni di copyright, marchi, brevetti e altro ancora.</block>
   <block id="30d965eef5ba25c6b9998ae38270b43e" category="doc">Note legali</block>
   <block id="6016a2b341113bf496b719905398ecd2" category="section-title">Copyright</block>
@@ -2898,7 +2892,6 @@ impostare admin</block>
   <block id="0a961d2cbb588be1d5a93b4774cf6ef1" category="cell">Nuovi sistemi di storage (AFF serie A)</block>
   <block id="f31f11743f1dfba18e9f008e2956d24e" category="cell">Settembre 2024</block>
   <block id="e4a9c264a13e2ec5faac7a73cf8d0e8c" category="cell">Aggiornamenti minori</block>
-  <block id="e5e2a6bf28307550240d9ed91bbb0fa0" category="paragraph"><block ref="e5e2a6bf28307550240d9ed91bbb0fa0" category="inline-link-rx"></block></block>
   <block id="a36cfc2690f8671748f584abb16bdd04" category="cell">Nuovi sistemi di storage</block>
   <block id="0fba9f2a3fbb4cfbaed44806cd9933a2" category="cell">Nuovi sistemi di storage (ASA serie A)</block>
   <block id="5e8f0f670e38fbdf628b0883f946934f" category="inline-image-macro">Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto</block>
@@ -2997,7 +2990,6 @@ impostare admin</block>
   <block id="14397cf778300a82704513944fe2f1ec" category="paragraph"><block ref="14397cf778300a82704513944fe2f1ec" category="inline-image-macro-rx" type="image"></block></block>
   <block id="9e6a6eb10efdb10620a6a3d4bdeb2b88" category="paragraph"><block ref="9e6a6eb10efdb10620a6a3d4bdeb2b88" category="inline-image-macro-rx" type="image"></block></block>
   <block id="5bf509e6d43ff3eb5c07c44c1546ab09" category="paragraph"><block ref="5bf509e6d43ff3eb5c07c44c1546ab09" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="55aab77fa5d7f50b7fbedbf0df160938" category="paragraph"><block ref="55aab77fa5d7f50b7fbedbf0df160938" category="inline-link-rx"></block></block>
   <block id="5455f48dc7894a1b2782bb01cf938a86" category="paragraph"><block ref="5455f48dc7894a1b2782bb01cf938a86" category="inline-link-rx"></block></block>
   <block id="170e3ae89d6261851ff484a8e771649e" category="paragraph">Autori: Marco Schoen, NetApp; Dr. Tristan DAUDE, CommVault Systems</block>
   <block id="477777d7db9a7b53d5e478c5db17b758" category="paragraph">Questo documento tratta la replica ANF in più aree con SAP HANA.</block>
@@ -3370,8 +3362,6 @@ impostare admin</block>
   <block id="ef1fb8d9c97217ef2fbf941299c08adf" category="paragraph">Sincronizzazione attiva SnapMirror:</block>
   <block id="32e3115035ed1831322c88ce03af5c52" category="inline-link">Panoramica della sincronizzazione attiva di SnapMirror in ONTAP</block>
   <block id="9f090056bc76628ad2a8b94b102aa48c" category="paragraph"><block ref="9f090056bc76628ad2a8b94b102aa48c" category="inline-link-rx"></block></block>
-  <block id="e4004172088b034dfe07abe579273b06" category="inline-link">NetApp ONTAP con sincronizzazione attiva NetApp SnapMirror con VMware vSphere Metro Storage Cluster (vMSC).</block>
-  <block id="44d0d1ca42daaecc86f8bb55519f9ec5" category="paragraph"><block ref="44d0d1ca42daaecc86f8bb55519f9ec5" category="inline-link-rx"></block></block>
   <block id="34fd97d0487efaacb8dc98024d287c11" category="inline-link">Cluster di storage VMware vSphere Metro con sincronizzazione attiva SnapMirror</block>
   <block id="d5ad3267276646604ba509767a3d16f2" category="paragraph"><block ref="d5ad3267276646604ba509767a3d16f2" category="inline-link-rx"></block></block>
   <block id="58486898b4fe52f80d7a134d74186a4c" category="inline-link">VMware vSphere Metro Storage Cluster (vMSC)</block>
@@ -4540,7 +4530,6 @@ impostare admin</block>
   <block id="087870f30d860ffeb01eac4f727d6656" category="section-title">Plug-in SnapCenter per VMware vSphere</block>
   <block id="5e9bba71efcdfbbed1dcf18802f8a227" category="sidebar">Operazioni di ripristino e recupero SnapCenter</block>
   <block id="743ac471396f82caf85eeeeac51160f8" category="sidebar">Aggiornamento del sistema SAP</block>
-  <block id="3a499e89a73d22ba78550fb47f2e0c88" category="sidebar">Informazioni aggiuntive e cronologia delle versioni</block>
   <block id="000c450c2b1b3fbe68fc0d1893fb42e7" category="list-text">Configurare il multipathing per i LUN aggiuntivi, come descritto nel capitolo <block ref="5dbefb7618e64c1782ebe16427fe0a08" category="inline-link-macro-rx"></block> .</block>
   <block id="6089175223f03bbb436ea3677ff5d54e" category="paragraph"><block ref="6089175223f03bbb436ea3677ff5d54e" category="inline-image-macro-rx" type="image"></block></block>
   <block id="3082ebb564b0862e5b62f45e9c7f2918" category="paragraph"><block ref="3082ebb564b0862e5b62f45e9c7f2918" category="inline-image-macro-rx" type="image"></block></block>
@@ -4647,14 +4636,10 @@ impostare admin</block>
   <block id="3c4ac70408381221e011d1b8eb9ca8ce" category="paragraph">Con le operazioni di backup e ripristino di SAP HANA, la tua organizzazione deve affrontare le seguenti sfide: • Operazioni di backup prolungate con degrado delle prestazioni sui sistemi SAP di produzione • Tempi di inattività del sistema inaccettabili dovuti a lunghe operazioni di ripristino e recupero • Finestre di backup ridotte a causa della criticità delle applicazioni • La necessità di una soluzione flessibile per mitigare la corruzione logica</block>
   <block id="34e74b1c7f4aad91715567cf698912f6" category="section-title">La soluzione</block>
   <block id="b230779de102682fe4be587788f9b085" category="paragraph">Con le soluzioni di storage NetApp® che utilizzano il software di gestione dati NetApp ONTAP®, in combinazione con il software di protezione dati NetApp SnapCenter®, puoi affrontare tutte queste sfide.  Grazie alla tecnologia NetApp Snapshot™ inclusa nel software ONTAP , è possibile creare backup o eseguire operazioni di ripristino di set di dati di qualsiasi dimensione in pochi secondi.  SAP HANA supporta l'utilizzo di copie Snapshot basate sull'archiviazione come operazione di backup valida.</block>
-  <block id="07d632c80bac8a4755255f5e335d8974" category="inline-link-macro"><block ref="07d632c80bac8a4755255f5e335d8974" category="inline-link-rx"></block></block>
-  <block id="e3d55b357098828096098ba417d3c90c" category="paragraph"><block ref="e3d55b357098828096098ba417d3c90c" category="inline-link-macro-rx"></block></block>
   <block id="9446c7c84986f94f08b68900006bb1e5" category="summary">Questo documento si concentra sul Disaster Recovery per SAP HANA.</block>
   <block id="bf6723a5d293af775d564a8960e50265" category="doc">SB-3968: Disaster Recovery per SAP HANA</block>
   <block id="24226245cbb8f6448d2fc2fad9d6d847" category="paragraph">La continuità aziendale è essenziale nelle organizzazioni IT.  Devono essere in grado di fornire servizi ad alta disponibilità per le applicazioni mission-critical di cui i loro clienti hanno bisogno per gestire le loro attività.  In caso contrario, i loro clienti subiranno un calo di produttività e le aziende di e-commerce potrebbero subire un impatto diretto sui loro ricavi.</block>
   <block id="d9bb80ae32f686bbae368979a76f86d7" category="paragraph">NetApp ha sviluppato un portafoglio completo di tecnologie e strumenti per aiutare le organizzazioni IT a creare o adattare i propri piani di disaster recovery per rispondere a tutte le esigenze aziendali:</block>
-  <block id="6a9c098947d8b811552347f2ed990ebd" category="inline-link-macro"><block ref="6a9c098947d8b811552347f2ed990ebd" category="inline-link-rx"></block></block>
-  <block id="702c9bfa6d3b8d8b923fbeba4db3625f" category="paragraph"><block ref="702c9bfa6d3b8d8b923fbeba4db3625f" category="inline-link-macro-rx"></block></block>
   <block id="225b42e7cb6036e97607adda6dcca1c3" category="summary">Registro delle modifiche recenti apportate alle soluzioni NetApp per i materiali collaterali SAP.</block>
   <block id="2ca0fa0a322d6c31c3d0906a34c85e6c" category="paragraph">Scopri le novità nelle soluzioni per SAP.</block>
   <block id="bab52961b58c502c7991d35556c25367" category="section-title">18 agosto 2025</block>
@@ -5808,7 +5793,6 @@ impostare admin</block>
   <block id="0efcefbaac1272d75fa3f95b9712d630" category="paragraph">database di sistema:</block>
   <block id="8c87d36e58a14d731d3cb35d037718d8" category="paragraph">Database tenant:</block>
   <block id="02fd0d0d93ba9f1705c5a633970698b9" category="paragraph">La corruzione logica può essere causata da errori software, errori umani o sabotaggio. Sfortunatamente, la corruzione logica spesso non può essere affrontata con le soluzioni standard di alta disponibilità e disaster recovery. Di conseguenza, a seconda del livello, dell'applicazione, del file system o dello storage in cui si è verificata la corruzione logica, i requisiti massimi di downtime e perdita di dati talvolta non possono essere soddisfatti.</block>
-  <block id="411b1ca4cfe8073933ca1284bac60213" category="paragraph"><block ref="411b1ca4cfe8073933ca1284bac60213" category="inline-link-rx"></block></block>
   <block id="ea7fdceccfe7d9332d70547a6be7cf72" category="paragraph"><block ref="ea7fdceccfe7d9332d70547a6be7cf72" category="inline-link-macro-rx"></block></block>
   <block id="56a5c925d77740ea69d50272863f3f75" category="section-title">26 febbraio 2026</block>
   <block id="7dad4c0ee446a92530a257db0791c76e" category="paragraph">Soluzione aggiornata<block ref="c3708ebf567e377ab7439ca8121b298b" category="inline-link-rx"></block> per coprire la crittografia del volume SAP HANA con archivio sicuro locale (LSS).</block>
@@ -5902,4 +5886,108 @@ impostare admin</block>
   <block id="caa5de93118549a4fb1b814eeb2f5544" category="paragraph">Il flusso di lavoro di eliminazione del clone di SnapCenter non elimina la voce <block ref="816a3ef77b62ade41c3f936c958aa555" prefix=" " category="inline-code"></block> per impostazione predefinita.</block>
   <block id="8bfab5683aa400a8bc0f218a12d430e9" category="paragraph">Affinché la<block ref="816a3ef77b62ade41c3f936c958aa555" prefix=" " category="inline-code"></block> voce venga eliminata automaticamente durante il processo di eliminazione del clone, il clone deve prima essere ripristinato e reso una risorsa rilevata automaticamente. Se questo passaggio non viene eseguito, la<block ref="816a3ef77b62ade41c3f936c958aa555" prefix=" " category="inline-code"></block> voce non viene eliminata automaticamente e deve essere rimossa manualmente.</block>
   <block id="c18615d685f179944bb9c594c9e6c732" category="list-text">Esegui il flusso di lavoro di eliminazione del clone SnapCenter per il volume condiviso SAP HANA.</block>
+  <block id="9d1408a757e9069797cf7beab6881e23" category="inline-link-macro"><block ref="9d1408a757e9069797cf7beab6881e23" category="inline-link-rx"></block></block>
+  <block id="fbf1e5a8081f7fc23d2d5271b50d8792" category="paragraph"><block ref="fbf1e5a8081f7fc23d2d5271b50d8792" category="inline-link-macro-rx"></block></block>
+  <block id="fba71cc250d7d1a7df4fd50e90fab5e3" category="paragraph">Questo capitolo fornisce collegamenti a risorse aggiuntive pertinenti a questa soluzione.</block>
+  <block id="7912a6ea019693a170bbf40a62a72e9f" category="list-text"><block ref="7912a6ea019693a170bbf40a62a72e9f" category="inline-link-rx"></block></block>
+  <block id="60cfba11af764b91802636a5bffeb222" category="inline-link">Proteggi i sistemi SAP HANA con SnapCenter su ONTAP, Azure NetApp Files e FSx for ONTAP</block>
+  <block id="928d3b07164bc787951a0af9883e6bc3" category="list-text"><block ref="804a70f1f58a8d76d7850abbe1f47e1e" category="inline-link-rx"></block></block>
+  <block id="f754d929fae407f5c8d867af7641e060" category="cell">08/2026</block>
+  <block id="b88081ecae2714a1f990a3844a1ca60d" category="paragraph">Questo capitolo descrive l'installazione e la configurazione specifiche del sistema SAP HANA BM1 utilizzato per la documentazione di questa soluzione. Il sistema HANA QM1 è stato implementato allo stesso modo.</block>
+  <block id="5fe2c5d2c4ab7cedc213ca5c68b05330" category="paragraph">Ulteriori informazioni generiche sull'implementazione e le best practice sono disponibili<block ref="5888c0fcaa90f43e1381a41ee8a6b7b6" category="inline-link-rx"></block>.</block>
+  <block id="6f7e25b2593ffdea51a1764f1fdcef78" category="paragraph">Le seguenti screenshot mostrano la creazione della storage unit BM1++_++data++_++mnt00001. Le storage unit per HANA log e shared sono state create allo stesso modo.</block>
+  <block id="181373e23754fc92ef40c43618103a70" category="paragraph"><block ref="181373e23754fc92ef40c43618103a70" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="2243d8c4509f2941e2d63fedd009f4e0" category="inline-link-macro">Configurazione host HANA</block>
+  <block id="2e626f2495c3cf150ebe609448c25678" category="paragraph">Il WWPN degli adattatori FCP dell'host HANA può essere elencato con il comando sanlun, che fa parte delle utilità host NetApp come descritto nel capitolo <block ref="b77d6bd40a846ccc7ca1a7a06570d692" category="inline-link-macro-rx"></block>.</block>
+  <block id="b34f9895408cab6e676ce498e645ec3d" category="inline-image-macro">larghezza=601,altezza=320</block>
+  <block id="94a650aaa1bb03432a6203a1e23f10fa" category="paragraph"><block ref="94a650aaa1bb03432a6203a1e23f10fa" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="f0f72d91e0604a056769a0193392528b" category="paragraph">Fai clic su "aggiungi" per creare l'unità di archiviazione.</block>
+  <block id="e36f02d14e3a78adbae48b28c37d2692" category="paragraph"><block ref="e36f02d14e3a78adbae48b28c37d2692" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="1eded785990201ae1e7f340804d72ed1" category="paragraph">Lo screenshot mostra le tre storage unit create per il sistema HANA BM1.</block>
+  <block id="89132c66b0273f0a29d9193cf0702f16" category="paragraph"><block ref="89132c66b0273f0a29d9193cf0702f16" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="e026d341645671586b9ce55ee09aa6ff" category="paragraph">Prima di configurare l'host, è necessario scaricare le utilità host SAN NetApp dal sito <block ref="b5521980cacd8acc0482c24b2751e3c6" category="inline-link-rx"></block> e installarle sui server HANA. La documentazione delle utilità host include informazioni sul software aggiuntivo che devi installare a seconda dell'HBA FCP utilizzato.</block>
+  <block id="eab12b4f6e78f007ba9c2c8c7b1a0186" category="paragraph">Le NetApp SAN host utilities possono essere utilizzate anche per ottenere il WWPN degli adattatori host necessari per configurare la mappatura host sul sistema storage.</block>
+  <block id="2be6edbbf8bc654c3c0bfd578455c69d" category="section-title">Configurazione multipath</block>
+  <block id="eb5f11d29c534fdaee78618f730d19fb" category="list-text">Esegui il comando Linux rescan-scsi-bus.sh -a su ogni server per rilevare nuove LUN.</block>
+  <block id="217308982fdfe3d7361a64c05fd7c019" category="list-text">Esegui il comando sanlun lun show e verifica che tutti i LUN richiesti siano visibili. L'output mostra i LUN e i relativi file di dispositivo che hanno quattro percorsi FC dall'host ai controller di storage.</block>
+  <block id="be2a13eb2b54304d53b799418e936343" category="list-text">Esegui i comandi multipath -r e multipath -ll per ottenere gli identificatori mondiali (WWID) per i nomi dei file del dispositivo.</block>
+  <block id="4a5796bc43390ec85030f36cad92be8a" category="list-text">Modifica il file /etc/multipath.conf e aggiungi i WWID e i nomi alias.</block>
+  <block id="d49a21e46543119b2dab3af45da1e584" category="list-text">Esegui il comando multipath -r per ricaricare la mappa dei dispositivi.</block>
+  <block id="2e4b99a5da4c365f80291acf83f25625" category="list-text">Verifica la configurazione eseguendo il comando multipath -ll per elencare tutte le LUN, i nomi alias e i percorsi dello storage.</block>
+  <block id="db5efbe05d05de40804ba94195f74393" category="section-title">Configurazione del file system host</block>
+  <block id="8d4f66e6bde210b4bbcbec584cd88566" category="admonition">Con la configurazione descritta, la directory /usr/sap/BM1 verrà memorizzata sul disco del sistema operativo. Se /usr/sap/BM1 deve essere memorizzata su un disco separato, è necessario configurare un LUN aggiuntivo sul sistema storage.</block>
+  <block id="fd43d830bdb4e388d4c9d3238d8db821" category="paragraph">La figura seguente presenta una high-level panoramica della configurazione di laboratorio utilizzata. Per dimostrare le varie operazioni vengono utilizzati due sistemi HANA MDC a host singolo. Il sistema HANA BM1 è designato per eseguire operazioni di backup, ripristino e recovery, mentre il sistema HANA QM1 serve come sistema di destinazione per le operazioni di SAP System Refresh. I sistemi HANA sono distribuiti su due server bare metal e sul lato storage vengono utilizzati due cluster ASA A30 a 2 nodi. Il primo cluster ospita tutte le unità di storage dei sistemi HANA e il secondo cluster viene utilizzato come destinazione per la replica del backup.</block>
+  <block id="1413de5fa63eb0786c0adaaa425315a9" category="paragraph"><block ref="1413de5fa63eb0786c0adaaa425315a9" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="aaf58e5a5445d876b8f7b0fe22b5afbf" category="cell">9.19.1</block>
+  <block id="b9f16534f2b2bafc42883e1f3157014a" category="cell">SLES 15 SP7</block>
+  <block id="4dd5a41036da7fb1df274a1b9fafae33" category="cell">HANA</block>
+  <block id="268a6971497141d3f068e24521aec931" category="cell">2.0 revisione 89</block>
+  <block id="3e7e96fad5e237fb2d5a081c6cb11212" category="cell">6.2.2</block>
+  <block id="dc9c4db78e29038229eda79cb4fb3a62" category="doc">Operazioni SnapCenter</block>
+  <block id="cf222679af586f2f6fcef36213402eb3" category="paragraph">Questo capitolo riassume le operazioni di backup, ripristino e recovery, refresh del sistema SAP e replica asincrona con SnapCenter.</block>
+  <block id="fc257548c9d0dd5a5cc664774b7e659c" category="paragraph">Le operazioni di backup vengono eseguite nello stesso modo descritto in<block ref="b58105cf256232f10befd13824eb8fbd" category="inline-link-rx"></block>.</block>
+  <block id="6ce0091e478ffaede7916f5983a47e11" category="admonition">Se non è configurato alcun gruppo di coerenza per l'unità di storage, SnapCenter crea un gruppo di coerenza e un gruppo di coerenza figlio con la prima operazione di backup Snapshot. Lo storage dati HANA viene quindi assegnato al gruppo di coerenza figlio. I backup Snapshot di SnapCenter sono elencati all'interno del gruppo di coerenza figlio.</block>
+  <block id="9cf18086f625ef5df5144a31dc5fbea3" category="inline-image-macro">width=601,height=191</block>
+  <block id="79ba06e59598bce5953dac5bf2051a80" category="paragraph"><block ref="79ba06e59598bce5953dac5bf2051a80" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a76982505db7be9c1561069a79abf435" category="inline-image-macro">width=601,height=205</block>
+  <block id="00f6780c2555a0936eb72dcc73e9a806" category="paragraph"><block ref="00f6780c2555a0936eb72dcc73e9a806" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="512011d5b74ed22c82bf2dd87d933b45" category="paragraph">Le operazioni di ripristino e recupero vengono eseguite nello stesso modo descritto<block ref="66e2e60033c47c8fe627c71a834090ce" category="inline-link-rx"></block>.</block>
+  <block id="6b2c568c43233dc04f1da2fa10845e34" category="section-title">Replica storage asincrona</block>
+  <block id="b12bdbebdc2b957e89692a4ac0bfe43a" category="paragraph">Per il volume di dati HANA, è stata configurata una replica storage asincrona.</block>
+  <block id="f1929b21af7705b79eccced6f3001dea" category="paragraph"><block ref="f1929b21af7705b79eccced6f3001dea" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="310400b0b4a3a418d6d86450884f9780" category="paragraph">La replica è stata configurata con la policy MirrorAndVault.</block>
+  <block id="f65d14dd831dcce421764471da054aa6" category="inline-image-macro">width=601,height=206</block>
+  <block id="c4c8c63932d27f8c3250f467fcd26fa6" category="paragraph"><block ref="c4c8c63932d27f8c3250f467fcd26fa6" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="fb0e1e71df602c6e2ed1c6728be93efe" category="paragraph">La policy MirrorAndVault include diverse etichette SnapMirror e retention.</block>
+  <block id="bda6dbadb0f513f5218f10abf7195c62" category="inline-image-macro">width=601,height=235</block>
+  <block id="bf306170d819e7c3313e91938ba23611" category="paragraph"><block ref="bf306170d819e7c3313e91938ba23611" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="59e89217d1f7ec869277e9af1d3ddd18" category="paragraph">In SnapCenter è stata configurata una policy per corrispondere all'etichetta SnapMirror "daily" della policy MirrorAndVault di ONTAP.</block>
+  <block id="f13df62a1916288c276f504297f42831" category="inline-image-macro">width=378,height=354</block>
+  <block id="00f88ef02fe4c0a8c575a513eec00d7e" category="paragraph"><block ref="00f88ef02fe4c0a8c575a513eec00d7e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="5faf148cadf753c102f515fcf70f82f9" category="paragraph">Quando usi la policy MirrorAndVault di ONTAP, SnapCenter mostra copie separate di Vault e Mirror, anche se i backup Snapshot sono disponibili una sola volta nello storage di destinazione.</block>
+  <block id="d8ccdfcfedcf950d141658f96224da27" category="paragraph"><block ref="d8ccdfcfedcf950d141658f96224da27" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="f3fbac44c3d690f9cb32b8c84c98b9bf" category="paragraph">Ulteriori informazioni dettagliate sulle operazioni di aggiornamento e clonazione del sistema SAP utilizzando SnapCenter sono disponibili su <block ref="c3708ebf567e377ab7439ca8121b298b" category="inline-link-rx"></block>.</block>
+  <block id="96b8c3cfc88602d57e00e31f795909a5" category="section-title">Workflow di SnapCenter</block>
+  <block id="884e6feda877b79be06e0b21fb7ba23b" category="paragraph">I dettagli operativi e i prerequisiti sono descritti in<block ref="2997ff14a5f91e8cb6ac3a5e838cbf44" category="inline-link-rx"></block>. In particolare, il sistema di destinazione deve essere aggiunto a SnapCenter prima di poter eseguire la prima operazione di aggiornamento/clonazione.</block>
+  <block id="a44a87fa875df86dc018e5fad20a8969" category="paragraph">Nel primo passaggio del flusso di lavoro di clonazione devi fornire l'host di destinazione e il SID di destinazione.</block>
+  <block id="bf631e62061aadc0780364c8629bf104" category="inline-image-macro">width=333,height=313</block>
+  <block id="4bb56f1b7bfc0841e871324869b2461f" category="paragraph"><block ref="4bb56f1b7bfc0841e871324869b2461f" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="dc844487eb5e6912e10ffcdeb0db6b58" category="paragraph">La selezione del protocollo deve essere "FCP".</block>
+  <block id="18f2a59240825d4c3d3982c7f7c6d210" category="inline-image-macro">width=334,height=312</block>
+  <block id="79459453d7ce4eea71ad3c2500ddf454" category="paragraph"><block ref="79459453d7ce4eea71ad3c2500ddf454" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="144fca8386a43e261ab72b107b422397" category="paragraph">Facoltativamente puoi aggiungere lo script sc-system-refresh.sh per automatizzare l'operazione di ripristino.</block>
+  <block id="6f9579dcced83f5ab7f3fb18d64f963a" category="inline-image-macro">width=352,height=331</block>
+  <block id="47738e1b349d4c4de3f7fa47efb8248d" category="paragraph"><block ref="47738e1b349d4c4de3f7fa47efb8248d" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="4aab671e038be0d155852633c46a2803" category="paragraph">Lo screenshot qui sotto mostra il file di log del workflow di clonazione.</block>
+  <block id="a74716b6cfdeb6de488dc178eb7fab64" category="inline-image-macro">width=379,height=468</block>
+  <block id="1aefc8acecb8ca8d5a4b71e8ada504b8" category="paragraph"><block ref="1aefc8acecb8ca8d5a4b71e8ada504b8" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="8a2ac840f78e7d6f1289a33914b99885" category="paragraph">Il seguente output mostra il file di log dello script sc-system-refresh.sh.</block>
+  <block id="49ea6572c02d426caf6ed4a9d7e1c224" category="section-title">Vista storage</block>
+  <block id="e7203d350029cf0e6540cf4d9593f079" category="paragraph">A livello di storage, il volume FlexClone è stato creato e mappato sull'host di destinazione.</block>
+  <block id="cf29ceec036428af03682ca211e04807" category="inline-image-macro">width=601,height=295</block>
+  <block id="f04e7ed0a367cf04e9044498415aa805" category="paragraph"><block ref="f04e7ed0a367cf04e9044498415aa805" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="4e1a05d9f0bbe4014d12b951157de8ca" category="paragraph"><block ref="4e1a05d9f0bbe4014d12b951157de8ca" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="6de17a2d8dca6c7fc4a6d5b47e8fdd83" category="section-title">Vista host</block>
+  <block id="acf2994852bd4b04e16be66bfa221852" category="paragraph">Sull'host è stato scoperto e montato il nuovo volume FlexClone.</block>
+  <block id="4e1c0112e7e27e6f70e64692bf2a46b3" category="doc">Protezione dei dati SAP HANA con SnapCenter in esecuzione su server bare metal e sistemi NetApp ASA</block>
+  <block id="4f53c8764978efc7e04ccf5eca9a2dff" category="paragraph">Questo documento illustra le migliori pratiche per la protezione dei dati utilizzando SnapCenter per sistemi HANA in esecuzione su server bare metal X64 con dati archiviati su sistemi NetApp ASA.</block>
+  <block id="d2f7d32c4d8c10fa202de66471914177" category="paragraph">Questo documento non è una guida passo-passo per la configurazione dell'intero ambiente, ma si concentra sui dettagli specifici di SnapCenter e HANA con server bare metal connessi a sistemi storage NetApp ASA.</block>
+  <block id="2003f744581b30fdfdc3025618263450" category="list-text">Configurazione dei sistemi SAP HANA</block>
+  <block id="8200552a5d7fa999d46a29d4bc8985d1" category="list-text">Configurazioni specifiche di SnapCenter</block>
+  <block id="5e70357dec520255b41d23b97e3c4d6d" category="list-text">Dettagli specifici per le operazioni di backup, ripristino e recupero di SnapCenter</block>
+  <block id="0f135e62f6cfd5d495df5aec6e12f852" category="list-text">Dettagli specifici per le operazioni di System Refresh SAP di SnapCenter</block>
+  <block id="0f68b904e33d9ac04605aecc958bcf52" category="inline-link-macro">Informazioni aggiuntive</block>
+  <block id="2e0d7bb1690285b33309213b7b97c622" category="paragraph">Per ulteriori informazioni e istruzioni dettagliate sulla configurazione, consulta i documenti elencati nel <block ref="0d570cdc19f454db1ceb6d65aba93fe2" category="inline-link-macro-rx"></block> capitolo.</block>
+  <block id="a61723211ec45014f02ec9920daaef26" category="paragraph"><block ref="a61723211ec45014f02ec9920daaef26" category="inline-link-rx"></block></block>
+  <block id="590403e24af81b2be2c1d9abb8663627" category="inline-link-macro"><block ref="590403e24af81b2be2c1d9abb8663627" category="inline-link-rx"></block></block>
+  <block id="8f790e9f9bdd4ea835cccd0f35081a83" category="paragraph"><block ref="8f790e9f9bdd4ea835cccd0f35081a83" category="inline-link-macro-rx"></block></block>
+  <block id="fa1c65a872b9ca230975b3c2b7de8866" category="inline-link-macro"><block ref="fa1c65a872b9ca230975b3c2b7de8866" category="inline-link-rx"></block></block>
+  <block id="6c52a11ec179c9b0dce7aec85aa5f16b" category="paragraph"><block ref="6c52a11ec179c9b0dce7aec85aa5f16b" category="inline-link-macro-rx"></block></block>
+  <block id="452dc078c2039ad92c2da2058afb9627" category="inline-link-macro"><block ref="452dc078c2039ad92c2da2058afb9627" category="inline-link-rx"></block></block>
+  <block id="9f9b969c1fb521eeb60afd916d299ec9" category="paragraph"><block ref="9f9b969c1fb521eeb60afd916d299ec9" category="inline-link-macro-rx"></block></block>
+  <block id="4b4d55bb27bec5759e7aab4dfc59c7a2" category="paragraph"><block ref="4b4d55bb27bec5759e7aab4dfc59c7a2" category="inline-link-rx"></block></block>
+  <block id="90af59cf899c13071304f737b8b45d68" category="section-title">05 agosto 2026</block>
+  <block id="a8b91b41f89181ec38a97b7e6940398a" category="inline-link">NetApp SnapCenter per SAP HANA su server bare metal con NetApp ASA systems</block>
+  <block id="6c6d709c806fd2c237a28a9dedbceedc" category="paragraph">La nuova soluzione <block ref="87909c917dfc6a157b3191955e2fd2bf" category="inline-link-rx"></block> fornisce le best practice per la protezione dei dati SAP HANA con NetApp SnapCenter, includendo le linee guida di configurazione e operative di SnapCenter per proteggere i sistemi SAP HANA su sistemi ONTAP ASA con server bare metal.</block>
+  <block id="5e8a88c8a8066d604cea2cd759db882b" category="sidebar">Protezione dei dati SAP HANA con SnapCenter con server bare metal e sistemi NetApp ASA</block>
 </blocks>

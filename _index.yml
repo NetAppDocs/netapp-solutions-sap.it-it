@@ -21,6 +21,9 @@ indexpage:
       url: bp/hana-fas-fc-introduction.html
   - title: SAP HANA on-premise
     links:
+    - title: Protezione dei dati SAP HANA con SnapCenter in esecuzione su server bare
+        metal e sistemi NetApp ASA
+      url: backup/hana-sc-bare-metal-asar2-scope.html
     - title: Data Protection e high Availability di SAP HANA con SnapCenter, SnapMirror
         Active Sync e VMware Metro Storage Cluster
       url: backup/hana-sc-vmware-smas-scope.html
