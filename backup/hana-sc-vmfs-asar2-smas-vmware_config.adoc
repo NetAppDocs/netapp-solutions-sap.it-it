@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-vmware_config.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= Configurazione di VMware, creazione di datastore e VM
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[vmware-configuration-datastore-and-vm-creation]]
+== Configurazione di VMware, creazione di datastore e VM
+
+[role="lead"]
+Crea il datastore utilizzando i LUN creati in precedenza per la VM usata per SAP HANA, poi crea la VM utilizzando questi datastore.
+
+Ogni LUN verrà utilizzato per un datastore, quindi verranno creati datastore per dati, log, shared e OS.
+
+
+
+[[datastore-creation]]
+=== Creazione del datastore
+
+. Accedi al client VSphere e vai alla scheda datastore. Scegli "Storage" -++>++ "New Datastore …" dal menu contestuale del tuo datacenter + image:hana-sc-vmfs-asar2-smas-image-024.png["immagine"]
+. Seleziona "VMFS" come tipo di datastore. + image:hana-sc-vmfs-asar2-smas-image-025.png["immagine"]
+. Specifica il nome del datastore che contiene i file di dati SAP HANA e scegli l'unità di storage (LUN) creata in precedenza. +image:hana-sc-vmfs-asar2-smas-image-026.png["immagine"]
+. Scegli la versione più recente di VMFS. +image:hana-sc-vmfs-asar2-smas-image-027.png["immagine"]
+. Utilizza tutto lo spazio disponibile per la partizione. Mantieni le impostazioni predefinite. + image:hana-sc-vmfs-asar2-smas-image-028.png["immagine"]
+. Rivedi il riepilogo e premi "Fine". + image:hana-sc-vmfs-asar2-smas-image-029.png["immagine"]
+. Ripeti i passaggi precedenti per i datastore relativi a log, shared e al sistema operativo. + image:hana-sc-vmfs-asar2-smas-image-030.png["immagine"]
+
+
+
+
+[[vm-creation]]
+=== creazione di VM
+
+. Dopo aver creato tutti i datastore, vai alla scheda "VM e modelli". Scegli "Nuova macchina virtuale..." dal menu contestuale del tuo datacenter. + image:hana-sc-vmfs-asar2-smas-image-031.png["immagine"]
+. Seleziona il metodo per creare una VM. Questo esempio utilizza il workflow "Create a new virtual machine". + image:hana-sc-vmfs-asar2-smas-image-032.png["immagine"]
+. Fornisci un nome per la macchina virtuale e scegli il tuo datacenter. + image:hana-sc-vmfs-asar2-smas-image-033.png["immagine"]
+. Scegli il tuo hardware di calcolo + image:hana-sc-vmfs-asar2-smas-image-034.png["immagine"]
+. Seleziona il datastore del sistema operativo creato in precedenza. + image:hana-sc-vmfs-asar2-smas-image-035.png["immagine"]
+. Seleziona la macchina virtuale desiderata. + image:hana-sc-vmfs-asar2-smas-image-036.png["immagine"]
+. Seleziona la versione del sistema operativo utilizzata per il sistema SAP HANA. Questo esempio usa SUSE Linux Enterprise (SLES) 15. + image:hana-sc-vmfs-asar2-smas-image-037.png["immagine"]
+. Configura la VM con la CPU e la memoria richieste. Oltre al disco rigido per il sistema operativo, aggiungi dischi aggiuntivi per i dati, i log e le condivisioni utilizzando i datastore creati in precedenza. + image:hana-sc-vmfs-asar2-smas-image-038.png["immagine"]
+. Collega un file ISO per l'installazione del sistema operativo come unità DVD e seleziona "Connetti all'accensione". + image:hana-sc-vmfs-asar2-smas-image-039.png["immagine"]
+. Nella scheda "Parametri avanzati" aggiungi l'attributo "disk.EnableUUID" con valore "True". Questo consente a SnapCenter di rilevare i dettagli del disco in un secondo momento. + image:hana-sc-vmfs-asar2-smas-image-040.png["immagine"]
+. Rivedi le impostazioni e premi "Fine" per creare la nuova macchina virtuale. + image:hana-sc-vmfs-asar2-smas-image-041.png["immagine"]
+. Accendi la nuova macchina virtuale. + image:hana-sc-vmfs-asar2-smas-image-042.png["immagine"]
+. Connettiti alla console e installa il sistema operativo seguendo le linee guida di SAP. + image:hana-sc-vmfs-asar2-smas-image-043.png["immagine"]
+. Installa il sistema SAP HANA dopo l'installazione del sistema operativo. Usa i dischi dedicati per le directory /hana/data, /hana/log e /hana/shared.
+

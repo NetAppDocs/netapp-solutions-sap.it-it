@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-sc-br-syscopy.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, system copy 
+summary:  
+---
+= SnapCenter Backup e ripristino e copia del sistema SAP HANA
+:allow-uri-read: 
+
+
+
+
+[[snapcenter-backup-recovery-and-sap-hana-system-copy]]
+== SnapCenter Backup e ripristino e copia del sistema SAP HANA
+
+[role="lead"]
+NetApp SnapCenter ottimizza le attività del ciclo di vita di SAP HANA come Backup & Recovery e SAP HANA System Copy, ed è integrato negli strumenti di gestione del database e del ciclo di vita di SAP HANA, combinando un'efficiente protezione dei dati integrata con l'applicazione con il provisioning flessibile dei sistemi di test SAP, come mostrato nella figura seguente.
+
+image:hana-sc-vmfs-asar2-smas-image-080.png["Figura che mostra la finestra di dialogo input/output o rappresenta il contenuto scritto"]
+
+Questo capitolo fornisce informazioni su dove reperire ulteriori informazioni su SnapCenter Backup & Recovery e sulle operazioni di copia del sistema SAP HANA.
+
+
+
+[[backup-operations]]
+=== Operazioni di backup
+
+Le operazioni di backup vengono eseguite nello stesso modo descritto in https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-backup-operations.html["Scopri di più sulle operazioni di backup per SAP HANA Snapshot in SnapCenter"].
+
+
+
+[[restore-and-recovery]]
+=== Ripristino e ripristino
+
+Le operazioni di ripristino e recupero vengono eseguite nello stesso modo descritto https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-restore.html["Ripristina e recupera i database SAP HANA con SnapCenter"].
+
+
+
+[[sap-system-refresh]]
+=== Aggiornamento del sistema SAP
+
+Ulteriori informazioni dettagliate sulle operazioni di aggiornamento e clonazione del sistema SAP utilizzando SnapCenter sono disponibili su  https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automazione delle operazioni di copia e clonazione del sistema SAP HANA con SnapCenter"].
