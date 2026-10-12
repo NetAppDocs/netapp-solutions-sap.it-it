@@ -13,6 +13,7 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
 La figura seguente presenta una high-level panoramica della configurazione di laboratorio utilizzata. Per dimostrare le varie operazioni vengono utilizzati due sistemi HANA MDC a host singolo. Il sistema HANA BM1 è designato per eseguire operazioni di backup, ripristino e recovery, mentre il sistema HANA QM1 serve come sistema di destinazione per le operazioni di SAP System Refresh. I sistemi HANA sono distribuiti su due server bare metal e sul lato storage vengono utilizzati due cluster ASA A30 a 2 nodi. Il primo cluster ospita tutte le unità di storage dei sistemi HANA e il secondo cluster viene utilizzato come destinazione per la replica del backup.
 
 image:hana-sc-bare-metal-asar2-image-001.png["larghezza=601, altezza=289"]

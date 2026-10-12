@@ -13,6 +13,9 @@ summary: Questo documento si concentra sul Disaster Recovery per SAP HANA.
 :imagesdir: ../media/
 
 
+[role="lead"]
+Usa il portafoglio di tecnologie e strumenti NetApp per creare o adattare piani di disaster recovery che mantengano disponibili le applicazioni SAP HANA mission-critical.
+
 
 
 [[the-challenge]]

@@ -13,6 +13,9 @@ summary: Questo documento si concentra sul backup e sul ripristino per SAP HANA.
 :imagesdir: ../media/
 
 
+[role="lead"]
+Utilizza lo storage ONTAP di NetApp, la tecnologia Snapshot e il software SnapCenter per eseguire il backup e il ripristino dei database SAP HANA di qualsiasi dimensione in pochi secondi senza compromettere le prestazioni di produzione.
+
 
 
 [[the-challenge]]

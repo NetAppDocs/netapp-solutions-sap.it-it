@@ -13,6 +13,9 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
+Esamina i prerequisiti e configura SnapCenter per proteggere i sistemi SAP HANA che utilizzano datastore VMware VMFS.
+
 
 
 [[pre-requisites]]

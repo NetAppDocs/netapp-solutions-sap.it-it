@@ -13,6 +13,7 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
 La figura seguente presenta una panoramica generale della configurazione di laboratorio utilizzata. Due sistemi MDC HANA a host singolo vengono utilizzati per dimostrare le varie operazioni. Il VFS del sistema HANA è destinato all'esecuzione di operazioni di backup, ripristino e ripristino, mentre il QFS del sistema HANA funge da sistema di destinazione per le operazioni di aggiornamento del sistema SAP. Il plug-in SnapCenter per VMware è essenziale per consentire a SnapCenter di gestire le risorse HANA configurate con VMware VMFS. Sebbene siano stati utilizzati strumenti ONTAP per VMware per il provisioning delle unità di storage per i sistemi HANA, questi non sono un componente obbligatorio.
 
 image:sc-hana-asrr2-vmfs-image1.png["Figura che mostra i contenuti discussi"]
